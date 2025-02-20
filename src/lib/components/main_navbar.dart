@@ -14,7 +14,7 @@ class _NavigationScaffoldState extends State<NavigationScaffold> {
   int _selectedIndex = 1;
 
   // Pre-load all three screens.
-  final List<Widget> _screens = const [
+  final List<Widget> _screens = [
     LessonScreen(), // index 0
     HomeScreen(), // index 1
     PracticeScreen(), // index 2

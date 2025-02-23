@@ -27,6 +27,8 @@ class _NavigationScaffoldState extends State<NavigationScaffold> {
       body: IndexedStack(index: _selectedIndex, children: _screens),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
+        selectedItemColor: Colors.green,
+        unselectedItemColor: Colors.grey,
         onTap: (index) {
           setState(() {
             _selectedIndex = index;
@@ -37,8 +39,14 @@ class _NavigationScaffoldState extends State<NavigationScaffold> {
             icon: Icon(Icons.menu_book),
             label: 'Lessons',
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.kitchen), label: 'Practice'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home'
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.kitchen),
+            label: 'Practice'
+          ),
         ],
       ),
     );

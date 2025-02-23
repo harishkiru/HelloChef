@@ -13,6 +13,9 @@ class DBHelper {
   // SQLite Database instance
   static Database? _sqliteDatabase;
 
+  // Cached user details
+  Map<String, dynamic>? _cachedUserDetails;
+
   // Initialize SQLite Database
   Future<Database> get sqliteDatabase async {
     if (_sqliteDatabase != null) return _sqliteDatabase!;
@@ -24,7 +27,7 @@ class DBHelper {
   // Initialize SQLite Database
   Future<Database> _initSQLiteDB() async {
     final dbPath = await getDatabasesPath();
-    final path = join(dbPath, 'brainwave.db');
+    final path = join(dbPath, 'hellochef.db');
 
     return await openDatabase(
       path,
@@ -117,5 +120,28 @@ class DBHelper {
   Future close() async {
     final db = await sqliteDatabase;
     db.close();
+  }
+  
+  // ********** Supabase User Operations **********
+  Future<Map<String, dynamic>?> getUserDetails() async {
+    // Return cached data if present.
+    if (_cachedUserDetails != null) {
+      return _cachedUserDetails;
+    }
+
+    final user = supabase.auth.currentUser;
+    if (user != null) {
+      final response = await supabase
+          .from('users')
+          .select('first_name, last_name')
+          .eq('auth_id', user.id)
+          .maybeSingle();
+
+      _cachedUserDetails = response;
+      return _cachedUserDetails;
+    }
+    else {
+      throw Exception('User not authenticated');
+    }
   }
 }

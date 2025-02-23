@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:src/components/main_navbar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key); 
@@ -49,11 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           (route) => false,
                         );
                       },
-                      child: const Text('Yes'),
+                      child: const Text('Yes', style: TextStyle(color: Colors.green)),
                     ),
                     TextButton(
                       onPressed: () => Navigator.pop(context),
-                      child: const Text('No'),
+                      child: const Text('No', style: TextStyle(color: Colors.green)),
                     ),
                   ],
                 ),
@@ -64,8 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: const Center(
         child: Text('Hello Chef Home Content'),
-      ),
-      bottomNavigationBar: const BottomNavBar(currentIndex: 1),
+      )
     );
   }
 }

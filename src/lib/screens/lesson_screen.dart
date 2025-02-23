@@ -4,32 +4,41 @@ import 'package:src/classes/level_section.dart';
 import 'package:src/classes/level.dart';
 import 'package:src/components/lesson_level_card.dart';
 import 'package:src/screens/test_screen.dart';
-import 'package:src/components/main_navbar.dart';
-import 'package:src/screens/home_screen.dart';
 
 class LessonScreen extends StatelessWidget {
-  const LessonScreen({Key? key}) : super(key: key);
+  List<Level> levels = [
+    Level(
+      level: 0,
+      title: "Level 0",
+      subtitle: "Kitchen Foundations",
+      imagePath: "assets/images/level_images/level_0.png",
+      sections: List.empty(),
+    ),
+  ];
+
+  LessonScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Lessons'),
-        // Always show back button here that navigates to Home.
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
-            );
-          },
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+            itemCount: levels.length,
+            itemBuilder: (context, index) {
+              return LessonLevelCard(
+                level: levels[index],
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TestScreen()),
+                  );
+                },
+              );
+            },
+          ),
         ),
-      ),
-      body: const Center(
-        child: Text('Lesson Screen Content'),
-      ),
-      bottomNavigationBar: const BottomNavBar(currentIndex: 0),
+      ],
     );
   }
 }

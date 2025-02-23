@@ -1,12 +1,69 @@
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key); 
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  // Check user authentication
+  void checkAuth() {
+    final user = Supabase.instance.client.auth.currentUser;
+    if (user == null) {
+      Navigator.pushNamed(context, '/');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkAuth();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Home Screen'),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Hello Chef Home', style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.green,
+        automaticallyImplyLeading: false, // Remove back button on home screen
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout, color: Colors.white),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text('Logout'),
+                  content: const Text('Are you sure you want to log out?'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Supabase.instance.client.auth.signOut();
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          '/',
+                          (route) => false,
+                        );
+                      },
+                      child: const Text('Yes', style: TextStyle(color: Colors.green)),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text('No', style: TextStyle(color: Colors.green)),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+      body: const Center(
+        child: Text('Hello Chef Home Content'),
+      )
     );
   }
 }

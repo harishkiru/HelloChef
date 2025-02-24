@@ -20,29 +20,15 @@ class _NavigationScaffoldState extends State<NavigationScaffold> {
     PracticeScreen(), // index 2
   ];
 
-  String get _appBarTitle {
-    switch (_selectedIndex) {
-      case 0:
-        return 'Lessons';
-      case 1:
-        return 'Hello Chef Home';
-      case 2:
-        return 'Practice';
-      default:
-        return '';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(_appBarTitle),
-        automaticallyImplyLeading: false,
-      ),
+      // Removed the appBar so that individual screens (like HomeScreen) can define their own.
       body: IndexedStack(index: _selectedIndex, children: _screens),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
+        selectedItemColor: Colors.green,
+        unselectedItemColor: Colors.grey,
         onTap: (index) {
           setState(() {
             _selectedIndex = index;
@@ -53,8 +39,14 @@ class _NavigationScaffoldState extends State<NavigationScaffold> {
             icon: Icon(Icons.menu_book),
             label: 'Lessons',
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.kitchen), label: 'Practice'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home'
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.kitchen),
+            label: 'Practice'
+          ),
         ],
       ),
     );

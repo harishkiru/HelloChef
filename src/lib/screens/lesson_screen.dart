@@ -5,6 +5,8 @@ import 'package:src/screens/level_section_screen.dart';
 import 'package:src/classes/level.dart';
 import 'package:src/components/lesson_level_card.dart';
 import 'package:src/screens/test_screen.dart';
+import 'package:src/components/user_profile.dart';
+
 
 class LessonScreen extends StatefulWidget {
   const LessonScreen({super.key});
@@ -112,28 +114,39 @@ class _LessonScreenState extends State<LessonScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: ListView.builder(
-            itemCount: levels.length,
-            itemBuilder: (context, index) {
-              return LessonLevelCard(
-                level: levels[index],
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder:
-                          (context) => LevelSectionScreen(level: levels[index]),
-                    ),
-                  );
-                },
-              );
-            },
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Lessons',
+          style: TextStyle(color: Colors.white),
         ),
-      ],
+        backgroundColor: Colors.green,
+        automaticallyImplyLeading: false,
+        actions: const [
+          UserProfileIcon(),
+        ],
+      ),
+      endDrawer: const UserProfileDrawer(),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: levels.length,
+              itemBuilder: (context, index) {
+                return LessonLevelCard(
+                  level: levels[index],
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => TestScreen()),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

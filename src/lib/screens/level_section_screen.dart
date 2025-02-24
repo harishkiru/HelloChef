@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:src/classes/level.dart';
 import 'package:src/components/lesson_section_card.dart';
+import 'package:src/screens/level_section_overview_screen.dart';
 
 class LevelSectionScreen extends StatefulWidget {
   final Level level;
@@ -38,7 +39,15 @@ class _LevelSectionScreenState extends State<LevelSectionScreen> {
                 return LessonSectionCard(
                   section: widget.level.sections[index],
                   onTap: () {
-                    // Navigate to the lesson screen.
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (context) => LevelSectionOverviewScreen(
+                              section: widget.level.sections[index],
+                            ),
+                      ),
+                    );
                   },
                 );
               },

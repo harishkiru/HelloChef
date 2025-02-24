@@ -29,7 +29,32 @@ class _LessonScreenState extends State<LessonScreen> {
           title: "Before You Start",
           subtitle: "Learn common tools, equipment, and ingredients.",
           imagePath: "assets/images/level_section_images/level_0_section_0.png",
-          lessons: List.empty(),
+          lessons: [
+            LessonItem(
+              id: 0,
+              title: "Common Kitchen Tools",
+              type: 0,
+              imagePath:
+                  "assets/images/lesson_images/level_0_section_0_lesson_0.png",
+              isCompleted: true,
+            ),
+            LessonItem(
+              id: 1,
+              title: "Common Kitchen Equipment",
+              type: 0,
+              imagePath:
+                  "assets/images/lesson_images/level_0_section_0_lesson_1.png",
+              isCompleted: false,
+            ),
+            LessonItem(
+              id: 2,
+              title: "Common Ingredients",
+              type: 0,
+              imagePath:
+                  "assets/images/lesson_images/level_0_section_0_lesson_2.png",
+              isCompleted: false,
+            ),
+          ],
         ),
         LevelSection(
           id: 1,

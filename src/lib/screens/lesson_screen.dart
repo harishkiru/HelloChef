@@ -7,7 +7,6 @@ import 'package:src/components/lesson_level_card.dart';
 import 'package:src/screens/test_screen.dart';
 import 'package:src/components/user_profile.dart';
 
-
 class LessonScreen extends StatefulWidget {
   const LessonScreen({super.key});
 
@@ -116,15 +115,10 @@ class _LessonScreenState extends State<LessonScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Lessons',
-          style: TextStyle(color: Colors.white),
-        ),
+        title: const Text('Lessons', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.green,
         automaticallyImplyLeading: false,
-        actions: const [
-          UserProfileIcon(),
-        ],
+        actions: const [UserProfileIcon()],
       ),
       endDrawer: const UserProfileDrawer(),
       body: Column(
@@ -138,7 +132,11 @@ class _LessonScreenState extends State<LessonScreen> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => TestScreen()),
+                      MaterialPageRoute(
+                        builder:
+                            (context) =>
+                                LevelSectionScreen(level: levels[index]),
+                      ),
                     );
                   },
                 );

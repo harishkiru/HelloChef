@@ -27,7 +27,7 @@ class _LessonLevelCardState extends State<LessonLevelCard> {
           20,
         ),
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 43, 43, 43),
+          color: Colors.green,
           borderRadius: BorderRadius.circular(8.0),
           border: Border.all(color: Colors.black, width: 1.0),
           boxShadow: const [
@@ -89,7 +89,7 @@ class _LessonLevelCardState extends State<LessonLevelCard> {
                     : Icons.circle_outlined,
                 color:
                     widget.level.isCompleted
-                        ? const Color.fromARGB(255, 3, 184, 64)
+                        ? const Color.fromARGB(255, 0, 247, 255)
                         : Colors.white,
                 size: 40.0,
               ),

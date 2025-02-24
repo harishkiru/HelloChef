@@ -31,7 +31,7 @@ class _LessonSectionCardState extends State<LessonSectionCard> {
           20,
         ),
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 43, 43, 43),
+          color: Colors.green,
           borderRadius: BorderRadius.circular(8.0),
           border: Border.all(color: Colors.black, width: 1.0),
           boxShadow: const [
@@ -64,7 +64,7 @@ class _LessonSectionCardState extends State<LessonSectionCard> {
                         Text(
                           widget.section.title,
                           style: const TextStyle(
-                            fontSize: 18,
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
@@ -73,7 +73,7 @@ class _LessonSectionCardState extends State<LessonSectionCard> {
                         Text(
                           widget.section.subtitle,
                           style: const TextStyle(
-                            fontSize: 12,
+                            fontSize: 14,
                             color: Colors.white,
                           ),
                           softWrap: true,
@@ -93,7 +93,7 @@ class _LessonSectionCardState extends State<LessonSectionCard> {
                                   : 0.25,
                           backgroundColor: Colors.grey,
                           valueColor: AlwaysStoppedAnimation<Color>(
-                            const Color.fromARGB(255, 50, 255, 57),
+                            const Color.fromARGB(255, 0, 247, 255),
                           ),
                         ),
                       ],

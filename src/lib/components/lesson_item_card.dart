@@ -16,7 +16,7 @@ class _LessonItemCardState extends State<LessonItemCard> {
     return Container(
       margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
       child: ListTile(
-        contentPadding: EdgeInsets.all(4),
+        contentPadding: EdgeInsets.fromLTRB(5, 5, 10, 5),
 
         leading: Icon(
           widget.lessonItem.type == 0 ? Icons.article : Icons.video_library,
@@ -29,9 +29,12 @@ class _LessonItemCardState extends State<LessonItemCard> {
         ),
         trailing:
             widget.lessonItem.isCompleted
-                ? const Icon(Icons.check_circle, color: Colors.green)
+                ? const Icon(
+                  Icons.check_circle,
+                  color: const Color.fromARGB(255, 0, 247, 255),
+                )
                 : const Icon(Icons.circle, color: Colors.grey),
-        tileColor: const Color.fromARGB(255, 43, 43, 43),
+        tileColor: Colors.green,
         onTap: () {
           // Navigate to the lesson screen
         },

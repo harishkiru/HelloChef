@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:src/components/user_profile.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key); 
@@ -8,7 +9,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // Check user authentication
   void checkAuth() {
     final user = Supabase.instance.client.auth.currentUser;
     if (user == null) {
@@ -26,44 +26,20 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Hello Chef Home', style: TextStyle(color: Colors.white)),
+        title: const Text(
+          'Hello Chef Home', 
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.green,
-        automaticallyImplyLeading: false, // Remove back button on home screen
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout, color: Colors.white),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  title: const Text('Logout'),
-                  content: const Text('Are you sure you want to log out?'),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Supabase.instance.client.auth.signOut();
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          '/',
-                          (route) => false,
-                        );
-                      },
-                      child: const Text('Yes', style: TextStyle(color: Colors.green)),
-                    ),
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text('No', style: TextStyle(color: Colors.green)),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
+        automaticallyImplyLeading: false,
+        actions: const [
+          UserProfileIcon(),
         ],
       ),
+      endDrawer: const UserProfileDrawer(),
       body: const Center(
         child: Text('Hello Chef Home Content'),
-      )
+      ),
     );
   }
 }

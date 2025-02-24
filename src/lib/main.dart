@@ -3,10 +3,8 @@ import 'components/main_navbar.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:src/screens/login_screen.dart';
-import 'package:src/screens/home_screen.dart';
 import 'package:src/screens/signup_screen.dart';
 import 'package:src/components/constant.dart' as utils;
-import 'dart:io';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

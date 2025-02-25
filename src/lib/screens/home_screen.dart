@@ -3,7 +3,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:src/components/user_profile.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key); 
+  const HomeScreen({super.key});
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -27,19 +27,15 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Hello Chef Home', 
+          'Hello Chef Home',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.green,
         automaticallyImplyLeading: false,
-        actions: const [
-          UserProfileIcon(),
-        ],
+        actions: const [UserProfileIcon()],
       ),
       endDrawer: const UserProfileDrawer(),
-      body: const Center(
-        child: Text('Hello Chef Home Content'),
-      ),
+      body: const Center(child: Text('Hello Chef Home Content')),
     );
   }
 }

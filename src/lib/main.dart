@@ -29,16 +29,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Supabase Flutter',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       initialRoute: // Check if the user is authenticated
-        utils.client.auth.currentSession != null ? '/home' : '/',
-      routes: { // Define the routes
+          utils.client.auth.currentSession != null ? '/home' : '/',
+      routes: {
+        // Define the routes
         '/': (context) => const LoginPage(),
         '/signup': (context) => const SignUpPage(),
         '/login': (context) => const LoginPage(),
         '/home': (context) => const NavigationScaffold(),
-      });
+      },
+    );
   }
 }

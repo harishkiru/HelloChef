@@ -15,6 +15,6 @@ class LevelSection {
     required this.imagePath,
     required this.lessons,
   }) {
-    this.totalLessons = lessons.length;
+    totalLessons = lessons.length;
   }
 }

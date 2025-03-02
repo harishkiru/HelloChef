@@ -116,53 +116,57 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
-        child: Transform.scale(
-          scale: scaleFactor,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.kitchen,
-                size: logosize,
-                color: Colors.green,
-              ),
-              const Text(
-                'Hello Chef',
-                style: TextStyle(
-                  fontSize: 50,
-                  fontWeight: FontWeight.bold,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Transform.scale(
+            scale: scaleFactor,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: screenHeight * 0.1), // Add some top padding
+                Icon(
+                  Icons.kitchen,
+                  size: logosize,
                   color: Colors.green,
                 ),
-              ),
-              MyTextFormField(
-                controller: _emailController,
-                label: const Text('Email Address'),
-                obscureText: false,
-              ),
-              MyTextFormField(
-                controller: _passwordController,
-                label: const Text('Password'),
-                obscureText: true,
-              ),
-              MyButton(
-                onTap: isLoading ? null : _handleLogin,
-                child: isLoading
-                    ? const CircularProgressIndicator(color: Colors.white)
-                    : const Text('Login'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/signup');
-                },
-                child: const Text(
-                  "Don't have an account? Sign Up",
-                  style: TextStyle(color: Colors.green),
+                const Text(
+                  'Hello Chef',
+                  style: TextStyle(
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                  ),
                 ),
-              ),
-            ],
+                MyTextFormField(
+                  controller: _emailController,
+                  label: const Text('Email Address'),
+                  obscureText: false,
+                ),
+                MyTextFormField(
+                  controller: _passwordController,
+                  label: const Text('Password'),
+                  obscureText: true,
+                ),
+                MyButton(
+                  onTap: isLoading ? null : _handleLogin,
+                  child: isLoading
+                      ? const CircularProgressIndicator(color: Colors.white)
+                      : const Text('Login'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/signup');
+                  },
+                  child: const Text(
+                    "Don't have an account? Sign Up",
+                    style: TextStyle(color: Colors.green),
+                  ),
+                ),
+                SizedBox(height: screenHeight * 0.1), // Add some bottom padding
+              ],
+            ),
           ),
         ),
       ),

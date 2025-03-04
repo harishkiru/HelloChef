@@ -8,32 +8,32 @@ final List<PracticeTile> practiceTile = [
       difficulty: Difficulty.easy
   ),
   PracticeTile(
-      imageUrl: 'https://static.wikia.nocookie.net/peppapig/images/a/a4/DaddyPigPajamas.png/revision/latest/scale-to-width/360?cb=20241206171828',
-      title: 'Pork chops',
+      imageUrl: 'https://static.wikia.nocookie.net/peppapig/images/9/97/Mummy_Pig_as_a_Child.png/revision/latest/scale-to-width/360?cb=20241111164046',
+      title: 'Pork Stew',
       subtitle: 'Easy',
       difficulty: Difficulty.easy
   ),
   PracticeTile(
-      imageUrl: 'https://static.wikia.nocookie.net/peppapig/images/9/97/Mummy_Pig_as_a_Child.png/revision/latest/scale-to-width/360?cb=20241111164046',
-      title: 'Braised Pork',
-      subtitle: 'Medium',
-      difficulty: Difficulty.medium
-  ),
-  PracticeTile(
-      imageUrl: 'https://assets-us-01.kc-usercontent.com/500e0a65-283d-00ef-33b2-7f1f20488fe2/dd90e2ef-e780-459a-8e28-c496b2d2cd65/george.jpg',
-      title: 'Pulled Pork',
-      subtitle: 'Medium',
-      difficulty: Difficulty.medium
-  ),
-  PracticeTile(
-      imageUrl: 'https://cdn.shopify.com/s/files/1/0899/1470/files/banner-family-hub-grandpa-pig.png',
+      imageUrl: 'https://cdn.shopify.com/s/files/1/0899/1470/files/banner-family-hub-granny-pig_99f4a195-35ce-4a43-8d87-031970252b96.png',
       title: 'Pork Stir Fry',
+      subtitle: 'Medium',
+      difficulty: Difficulty.medium
+  ),
+  PracticeTile(
+      imageUrl: 'https://static.wikia.nocookie.net/recast-and-roleswap/images/9/94/George_Pig.png/revision/latest?cb=20221216021225',
+      title: 'Pork Chops',
+      subtitle: 'Medium',
+      difficulty: Difficulty.medium
+  ),
+  PracticeTile(
+      imageUrl: 'https://static.wikia.nocookie.net/peppapig/images/a/a4/DaddyPigPajamas.png/revision/latest/scale-to-width/360?cb=20241206171828',
+      title: 'Pulled Pork',
       subtitle: 'Hard',
       difficulty: Difficulty.hard
   ),
   PracticeTile(
-      imageUrl: 'https://cdn.shopify.com/s/files/1/0899/1470/files/banner-family-hub-granny-pig_99f4a195-35ce-4a43-8d87-031970252b96.png',
-      title: 'Pork Stew',
+      imageUrl: 'https://cdn.shopify.com/s/files/1/0899/1470/files/banner-family-hub-grandpa-pig.png',
+      title: 'Braised Pork',
       subtitle: 'Hard',
       difficulty: Difficulty.hard
   ),

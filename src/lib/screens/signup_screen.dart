@@ -4,7 +4,6 @@ import 'package:src/components/button.dart';
 import 'package:src/components/constant.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-// Define a StatefulWidget for the Sign-Up Page
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
@@ -12,7 +11,6 @@ class SignUpPage extends StatefulWidget {
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
-// State class for managing the SignUpPage's state
 class _SignUpPageState extends State<SignUpPage> {
   // Controllers for managing text input in form fields
   final TextEditingController _firstNameController = TextEditingController();

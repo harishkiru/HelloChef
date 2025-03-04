@@ -38,13 +38,16 @@ class _LessonScreenState extends State<LessonScreen> {
               imagePath:
                   "assets/images/lesson_images/level_0_section_0_lesson_0.png",
               isCompleted: true,
+              content:
+                  "# Heading 1\n![Photo](assets/images/level_images/level_1.jpg)\nThis is **bold** text and this is *italic* text.\n\n- Item 1\n- Item 2\n- Item 3\n\n[Click here](https://flutter.dev) to visit Flutter's website.",
             ),
             LessonItem(
               id: 1,
               title: "Common Kitchen Equipment",
-              type: 0,
+              type: 1,
               imagePath:
                   "assets/images/lesson_images/level_0_section_0_lesson_1.png",
+              videoPath: "assets/videos/test.mp4",
               isCompleted: false,
             ),
             LessonItem(

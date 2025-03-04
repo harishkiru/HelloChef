@@ -47,12 +47,10 @@ class _LessonSectionCardState extends State<LessonSectionCard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
-                  child: Image.asset(
-                    widget.section.imagePath,
-                    height: screenHeight * 0.150,
-                    fit: BoxFit.cover,
-                  ),
+                Image.asset(
+                  widget.section.imagePath,
+                  height: screenHeight * 0.150,
+                  fit: BoxFit.cover,
                 ),
                 SizedBox(width: 10),
                 Expanded(

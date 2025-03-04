@@ -6,7 +6,7 @@ class PracticeTile {
   final String subtitle;
   final Difficulty difficulty;
 
-  // Constructor [if data migrated to DB]
+  // Constructor [if data ported to DB]
   PracticeTile({
     required this.imageUrl,
     required this.title,

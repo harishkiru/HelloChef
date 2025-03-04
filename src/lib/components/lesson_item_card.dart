@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:src/classes/lesson_item.dart';
+import 'package:src/screens/markdown_viewer_screen.dart';
+import 'package:src/screens/videoplayer_screen.dart';
 
 class LessonItemCard extends StatefulWidget {
   final LessonItem lessonItem;
@@ -31,12 +33,35 @@ class _LessonItemCardState extends State<LessonItemCard> {
             widget.lessonItem.isCompleted
                 ? const Icon(
                   Icons.check_circle,
-                  color: const Color.fromARGB(255, 0, 247, 255),
+                  color: Color.fromARGB(255, 0, 247, 255),
                 )
                 : const Icon(Icons.circle, color: Colors.grey),
         tileColor: Colors.green,
         onTap: () {
-          // Navigate to the lesson screen
+          switch (widget.lessonItem.type) {
+            case 0:
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (context) => MarkdownViewerScreen(
+                        markdown: widget.lessonItem.content!,
+                      ),
+                ),
+              );
+              break;
+            case 1:
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (context) => VideoPlayerScreen(
+                        videoUrl: widget.lessonItem.videoPath!,
+                      ),
+                ),
+              );
+              break;
+          }
         },
       ),
     );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:src/screens/practice/practice_recipe.dart';
+import 'package:src/screens/practice/practice_meal.dart';
 import '../practice/practice_tile.dart';
 
 class TileMaker extends StatelessWidget {
@@ -15,8 +15,6 @@ class TileMaker extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(10),
         onTap: () {
-          print("Tile tapped!");
-
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -44,7 +42,7 @@ class TileMaker extends StatelessWidget {
                 children: [
                   Text(
                     item.title,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                   SizedBox(height: 4),
                   Text(

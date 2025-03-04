@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import '../components/user_profile.dart';
 import 'practice/practice_tile.dart';
-import 'practice/practice_filter.dart';
-import 'practice/practice_grid.dart';
 import 'practice/practice_data.dart';
-import 'package:src/components/user_profile.dart';
+import 'practice/practice_grid.dart';
 
 class PracticeScreen extends StatefulWidget {
   const PracticeScreen({super.key});
@@ -13,36 +12,37 @@ class PracticeScreen extends StatefulWidget {
 }
 
 class _PracticeScreenState extends State<PracticeScreen> {
-  Difficulty selectedDifficulty = Difficulty.all;
+  late Future<List<PracticeTile>> _practiceTilesFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _practiceTilesFuture = fetchPracticeTiles();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final filteredItems = selectedDifficulty == Difficulty.all
-        ? practiceTile
-        : practiceTile.where((item) => item.difficulty == selectedDifficulty).toList();
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Practice', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.green,
         automaticallyImplyLeading: false,
-        actions: const [
-          UserProfileIcon(),
-        ],
+        actions: const [UserProfileIcon()],
       ),
       endDrawer: const UserProfileDrawer(),
-      body: Column(
-        children: [
-          FilterOptions(
-            selectedDifficulty: selectedDifficulty,
-            onDifficultySelected: (difficulty) {
-              setState(() {
-                selectedDifficulty = difficulty;
-              });
-            },
-          ),
-          Expanded(child: PracticeGrid(items: filteredItems)),
-        ],
+      body: FutureBuilder<List<PracticeTile>>(
+        future: _practiceTilesFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Failed to load data'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text('No categories available'));
+          }
+
+          return PracticeGrid(items: snapshot.data!);
+        },
       ),
     );
   }

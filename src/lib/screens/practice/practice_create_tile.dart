@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:src/screens/practice/practice_recipe.dart';
 import '../practice/practice_tile.dart';
 
 class TileMaker extends StatelessWidget {
@@ -11,37 +12,50 @@ class TileMaker extends StatelessWidget {
       color: Colors.green,
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: ClipRRect(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
-              child: Image.network(
-                item.imageUrl,
-                fit: BoxFit.cover,
-                width: double.infinity,
-                errorBuilder: (context, error, stackTrace) => Icon(Icons.error),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(10),
+        onTap: () {
+          print("Tile tapped!");
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PracticeRecipe(item: item),
+            ),
+          );
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: ClipRRect(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+                child: Image.network(
+                  item.imageUrl,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  errorBuilder: (context, error, stackTrace) => Icon(Icons.error),
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Text(
-                  item.title,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white), // White text for contrast
-                ),
-                SizedBox(height: 4),
-                Text(
-                  item.subtitle,
-                  style: TextStyle(fontSize: 13, color: Colors.white),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Text(
+                    item.title,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    item.subtitle,
+                    style: TextStyle(fontSize: 13, color: Colors.white),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

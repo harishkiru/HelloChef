@@ -5,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:src/screens/login_screen.dart';
 import 'package:src/screens/signup_screen.dart';
 import 'package:src/components/constant.dart' as utils;
+import 'package:media_kit/media_kit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +16,8 @@ void main() async {
     url: dotenv.env['SUPABASE_URL']!,
     anonKey: dotenv.env['SUPABASE_API_KEY']!,
   );
+
+  MediaKit.ensureInitialized();
 
   runApp(const MyApp());
 }

@@ -1,8 +1,12 @@
-import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
+import 'package:media_kit/media_kit.dart';
+import 'package:media_kit_video/media_kit_video.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:src/services/copy_asset.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
-  final String videoUrl;
+  final String videoUrl; // pass asset path like "assets/videos/video.mp4"
 
   const VideoPlayerScreen({super.key, required this.videoUrl});
 
@@ -11,103 +15,57 @@ class VideoPlayerScreen extends StatefulWidget {
 }
 
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
-  late VideoPlayerController _controller;
-  bool _isFullScreen = false; // new flag for full screen mode
+  late final player = Player();
+  late final controller = VideoController(player);
+  bool _playerInitialized = false;
 
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.asset(widget.videoUrl)
-      ..initialize()
-          .then((_) {
-            setState(() {});
-          })
-          .catchError((e) {
-            print("Error initializing video player: $e");
-          });
+    _initPlayer();
+  }
+
+  Future<void> _initPlayer() async {
+    final filePath = await copyAsset(widget.videoUrl, 'video.mp4');
+    player.open(Media(filePath));
+    setState(() {
+      _playerInitialized = true;
+    });
+  }
+
+  //   Future<bool> _requestPermission() async {
+  //   // Video permissions.
+  //   if (await Permission.videos.isDenied ||
+  //       await Permission.videos.isPermanentlyDenied) {
+  //     final state = await Permission.videos.request();
+  //     if (!state.isGranted) {
+  //       return true;
+  //     }
+  //   }
+  //   // Audio permissions.
+  //   if (await Permission.audio.isDenied ||
+  //       await Permission.audio.isPermanentlyDenied) {
+  //     final state = await Permission.audio.request();
+  //     if (!state.isGranted) {
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+  // }
+
+  @override
+  void dispose() {
+    player.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_isFullScreen) {
-      final Size screenSize = MediaQuery.of(context).size;
-      return Scaffold(
-        backgroundColor: Colors.black,
-        body: GestureDetector(
-          onTap: () {
-            setState(() {
-              _controller.value.isPlaying
-                  ? _controller.pause()
-                  : _controller.play();
-            });
-          },
-          child:
-              _controller.value.isInitialized
-                  ? Container(
-                    width: screenSize.width,
-                    height: screenSize.height,
-                    child: FittedBox(
-                      fit: BoxFit.contain,
-                      child: SizedBox(
-                        width: _controller.value.size.width,
-                        height: _controller.value.size.height,
-                        child: VideoPlayer(_controller),
-                      ),
-                    ),
-                  )
-                  : const Center(child: CircularProgressIndicator()),
-        ),
-      );
-    } else {
-      // Windowed mode: white background with AppBar and progress bar
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text("Video Player"),
-          backgroundColor: Colors.green,
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.fullscreen),
-              onPressed: () {
-                setState(() {
-                  _isFullScreen = true;
-                });
-              },
-            ),
-          ],
-        ),
-        backgroundColor: Colors.white,
-        body: Column(
-          children: [
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _controller.value.isPlaying
-                        ? _controller.pause()
-                        : _controller.play();
-                  });
-                },
-                child: Center(
-                  child:
-                      _controller.value.isInitialized
-                          ? AspectRatio(
-                            aspectRatio: _controller.value.aspectRatio,
-                            child: VideoPlayer(_controller),
-                          )
-                          : const CircularProgressIndicator(),
-                ),
-              ),
-            ),
-            // Progress bar
-          ],
-        ),
-      );
-    }
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
+    return Center(
+      child: AspectRatio(
+        aspectRatio: 16 / 9,
+        child: Video(controller: controller),
+      ),
+    );
   }
 }

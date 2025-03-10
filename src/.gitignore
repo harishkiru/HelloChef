@@ -4,6 +4,7 @@
 *.pyc
 *.swp
 .DS_Store
+src/.pubspec.lock
 .atom/
 .build/
 .buildlog/
@@ -33,6 +34,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+pubspec.lock
 
 # Symbolication related
 app.*.symbols

@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'practice_create_tile.dart';
 import 'practice_tile.dart';
 
-
 class PracticeGrid extends StatelessWidget {
   final List<PracticeTile> items;
   const PracticeGrid({Key? key, required this.items}) : super(key: key);
 
-  // Display all tiles in 3 x ? grid
   @override
   Widget build(BuildContext context) {
     if (items.isEmpty) {
@@ -24,7 +22,10 @@ class PracticeGrid extends StatelessWidget {
       ),
       itemCount: items.length,
       itemBuilder: (context, index) {
-        return TileMaker(item: items[index]);
+        return Container(
+          color: Colors.transparent,
+          child: TileMaker(item: items[index]),
+        );
       },
     );
   }

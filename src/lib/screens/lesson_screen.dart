@@ -6,6 +6,7 @@ import 'package:src/classes/level.dart';
 import 'package:src/components/lesson_level_card.dart';
 import 'package:src/screens/test_screen.dart';
 import 'package:src/components/user_profile.dart';
+import 'package:src/classes/quiz.dart';
 
 class LessonScreen extends StatefulWidget {
   const LessonScreen({super.key});
@@ -57,6 +58,40 @@ class _LessonScreenState extends State<LessonScreen> {
               imagePath:
                   "assets/images/lesson_images/level_0_section_0_lesson_2.png",
               isCompleted: false,
+            ),
+            LessonItem(
+              id: 3,
+              title: "Common Quiz",
+              type: 2,
+              imagePath: "assets/images/lesson_images/level_0_section_0_lesson_2.png",
+              isCompleted: false,
+              quiz: Quiz(
+                title: "Kitchen Basics Quiz",
+                description: "Test your knowledge of kitchen basics!",
+                questions: [
+                  QuizQuestion(
+                    question: "Which of the following is NOT a common kitchen tool?",
+                    options: ["Spatula", "Whisk", "Blender", "Power drill"],
+                    correctAnswerIndex: 3,
+                  ),
+                  QuizQuestion(
+                    question: "What is the primary use of a colander?",
+                    options: ["Mixing ingredients", "Draining liquids", "Measuring ingredients", "Cutting vegetables"],
+                    correctAnswerIndex: 1,
+                  ),
+                  QuizQuestion(
+                    question: "Which knife is best for chopping vegetables?",
+                    imagePath: "assets/images/quiz/chef_knife.png",
+                    options: ["Paring knife", "Chef's knife", "Bread knife", "Butter knife"],
+                    correctAnswerIndex: 1,
+                  ),
+                  QuizQuestion(
+                    question: "What is the main purpose of a food processor?",
+                    options: ["Brewing coffee", "Blending smoothies", "Chopping and mixing ingredients", "Toasting bread"],
+                    correctAnswerIndex: 2,
+                  ),
+                ],
+              ),
             ),
           ],
         ),

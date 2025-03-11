@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../practice/practice_tile.dart';
+import '../practice/recipe_detail_screen.dart';
 
 class TileMaker extends StatelessWidget {
   final PracticeTile item;
@@ -11,37 +12,56 @@ class TileMaker extends StatelessWidget {
       color: Colors.green,
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: ClipRRect(
+      child: InkWell(
+        borderRadius: BorderRadius.circular(10),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => RecipeDetailScreen(item: item),
+            ),
+          );
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ClipRRect(
               borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
-              child: Image.network(
-                item.imageUrl,
-                fit: BoxFit.cover,
-                width: double.infinity,
-                errorBuilder: (context, error, stackTrace) => Icon(Icons.error),
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
+                child: Image.network(
+                  item.imageUrl,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  errorBuilder: (context, error, stackTrace) =>
+                      Icon(Icons.error, size: 60, color: Colors.white),
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Text(
-                  item.title,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white), // White text for contrast
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        item.title,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
+                        softWrap: true,
+                      ),
+                    ],
+                  ),
                 ),
-                SizedBox(height: 4),
-                Text(
-                  item.subtitle,
-                  style: TextStyle(fontSize: 13, color: Colors.white),
-                ),
-              ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:src/classes/lesson_item.dart';
 import 'package:src/screens/markdown_viewer_screen.dart';
 import 'package:src/screens/videoplayer_screen.dart';
+import 'package:src/screens/quiz_screen.dart';
 
 class LessonItemCard extends StatefulWidget {
   final LessonItem lessonItem;
@@ -18,16 +19,10 @@ class _LessonItemCardState extends State<LessonItemCard> {
     return Container(
       margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
       child: ListTile(
-        contentPadding: EdgeInsets.fromLTRB(5, 5, 10, 5),
+        contentPadding: const EdgeInsets.fromLTRB(5, 5, 10, 5),
 
         leading: Icon(
-          widget.lessonItem.type == 0
-              ? Icons.article
-              : widget.lessonItem.type == 1
-              ? Icons.video_library
-              : widget.lessonItem.type == 2
-              ? Icons.transcribe
-              : Icons.error,
+          _getIconForLessonType(widget.lessonItem.type),
           color: Colors.white,
           size: 40,
         ),
@@ -47,6 +42,7 @@ class _LessonItemCardState extends State<LessonItemCard> {
         tileColor: Colors.green,
         onTap: () {
           switch (widget.lessonItem.type) {
+
             case 0:
               final response = Navigator.push(
                 context,
@@ -104,10 +100,30 @@ class _LessonItemCardState extends State<LessonItemCard> {
                   });
                 }
               });
-              break;
-          }
-        },
-      ),
-    );
+             case 3: // Quiz
+              if (widget.lessonItem.quiz != null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => QuizScreen(
+                      quiz: widget.lessonItem.quiz!,
+                    ),
+                  ),
+                );
+              }
+  
+  IconData _getIconForLessonType(int type) {
+    switch (type) {
+      case 0:
+        return Icons.article;
+      case 1:
+        return Icons.video_library;
+      case 2:
+        return Icons.transcribe;
+      case 3:
+        return Icons.quiz;
+      default:
+        return Icons.article;
+    }
   }
 }

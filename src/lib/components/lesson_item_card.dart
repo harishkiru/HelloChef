@@ -14,6 +14,21 @@ class LessonItemCard extends StatefulWidget {
 }
 
 class _LessonItemCardState extends State<LessonItemCard> {
+  IconData _getIconForLessonType(int type) {
+    switch (type) {
+      case 0:
+        return Icons.article;
+      case 1:
+        return Icons.video_library;
+      case 2:
+        return Icons.transcribe;
+      case 3:
+        return Icons.quiz;
+      default:
+        return Icons.article;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,7 +57,6 @@ class _LessonItemCardState extends State<LessonItemCard> {
         tileColor: Colors.green,
         onTap: () {
           switch (widget.lessonItem.type) {
-
             case 0:
               final response = Navigator.push(
                 context,
@@ -100,30 +114,19 @@ class _LessonItemCardState extends State<LessonItemCard> {
                   });
                 }
               });
-             case 3: // Quiz
+            case 3: // Quiz
               if (widget.lessonItem.quiz != null) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => QuizScreen(
-                      quiz: widget.lessonItem.quiz!,
-                    ),
+                    builder:
+                        (context) => QuizScreen(quiz: widget.lessonItem.quiz!),
                   ),
                 );
               }
-  
-  IconData _getIconForLessonType(int type) {
-    switch (type) {
-      case 0:
-        return Icons.article;
-      case 1:
-        return Icons.video_library;
-      case 2:
-        return Icons.transcribe;
-      case 3:
-        return Icons.quiz;
-      default:
-        return Icons.article;
-    }
+          }
+        },
+      ),
+    );
   }
 }

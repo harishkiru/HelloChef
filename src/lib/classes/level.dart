@@ -1,4 +1,5 @@
 import 'package:src/classes/level_section.dart';
+import 'dart:convert';
 
 class Level {
   final int id;
@@ -9,8 +10,6 @@ class Level {
   final List<LevelSection> sections;
   bool isCompleted;
 
-  int completedSections = 0;
-
   Level({
     required this.id,
     required this.level,
@@ -20,4 +19,19 @@ class Level {
     required this.sections,
     this.isCompleted = false,
   });
+
+  factory Level.fromJson(Map<String, dynamic> json) {
+    return Level(
+      id: json['id'],
+      level: json['level'],
+      title: json['title'],
+      subtitle: json['subtitle'],
+      imagePath: json['imagePath'],
+      isCompleted: json['isCompleted'],
+      sections:
+          (json['sections'] as List)
+              .map((section) => LevelSection.fromJson(section))
+              .toList(),
+    );
+  }
 }

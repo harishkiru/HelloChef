@@ -21,7 +21,13 @@ class _LessonItemCardState extends State<LessonItemCard> {
         contentPadding: EdgeInsets.fromLTRB(5, 5, 10, 5),
 
         leading: Icon(
-          widget.lessonItem.type == 0 ? Icons.article : Icons.video_library,
+          widget.lessonItem.type == 0
+              ? Icons.article
+              : widget.lessonItem.type == 1
+              ? Icons.video_library
+              : widget.lessonItem.type == 2
+              ? Icons.transcribe
+              : Icons.error,
           color: Colors.white,
           size: 40,
         ),
@@ -30,36 +36,74 @@ class _LessonItemCardState extends State<LessonItemCard> {
           style: const TextStyle(fontSize: 18, color: Colors.white),
         ),
         trailing:
-            widget.lessonItem.isCompleted
+            (widget.lessonItem.isCompleted)
                 ? const Icon(
                   Icons.check_circle,
                   color: Color.fromARGB(255, 0, 247, 255),
                 )
-                : const Icon(Icons.circle, color: Colors.grey),
+                : (!widget.lessonItem.isCompleted)
+                ? const Icon(Icons.circle, color: Colors.grey)
+                : null,
         tileColor: Colors.green,
         onTap: () {
           switch (widget.lessonItem.type) {
             case 0:
-              Navigator.push(
+              final response = Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder:
                       (context) => MarkdownViewerScreen(
                         markdown: widget.lessonItem.content!,
+                        lessonItem: widget.lessonItem,
                       ),
                 ),
               );
+              response.then((value) {
+                if (value != null && value) {
+                  setState(() {
+                    widget.lessonItem.isCompleted = true;
+                  });
+                }
+              });
               break;
             case 1:
-              Navigator.push(
+              final response = Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder:
                       (context) => VideoPlayerScreen(
                         videoUrl: widget.lessonItem.videoPath!,
+                        lessonItem: widget.lessonItem,
                       ),
                 ),
               );
+              response.then((value) {
+                if (value != null && value) {
+                  setState(() {
+                    widget.lessonItem.isCompleted = true;
+                  });
+                }
+              });
+              break;
+
+            case 2:
+              final response = Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (context) => MarkdownViewerScreen(
+                        markdown: widget.lessonItem.content!,
+                        lessonItem: widget.lessonItem,
+                      ),
+                ),
+              );
+              response.then((value) {
+                if (value != null && value) {
+                  setState(() {
+                    widget.lessonItem.isCompleted = true;
+                  });
+                }
+              });
               break;
           }
         },

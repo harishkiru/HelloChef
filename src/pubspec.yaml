@@ -81,6 +81,8 @@ flutter:
     - assets/images/lesson_images/level_0_section_0_lesson_0.png
     - assets/images/lesson_images/level_0_section_0_lesson_1.png
     - assets/images/lesson_images/level_0_section_0_lesson_2.png
+
+    - assets/images/quiz/chef_knife.png
     
     - assets/images/profile_placeholder.png
 

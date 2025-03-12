@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:src/classes/lesson_item.dart';
 import 'package:src/screens/markdown_viewer_screen.dart';
 import 'package:src/screens/videoplayer_screen.dart';
+import 'package:src/screens/quiz_screen.dart';
 
 class LessonItemCard extends StatefulWidget {
   final LessonItem lessonItem;
@@ -18,10 +19,10 @@ class _LessonItemCardState extends State<LessonItemCard> {
     return Container(
       margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
       child: ListTile(
-        contentPadding: EdgeInsets.fromLTRB(5, 5, 10, 5),
+        contentPadding: const EdgeInsets.fromLTRB(5, 5, 10, 5),
 
         leading: Icon(
-          widget.lessonItem.type == 0 ? Icons.article : Icons.video_library,
+          _getIconForLessonType(widget.lessonItem.type),
           color: Colors.white,
           size: 40,
         ),
@@ -39,31 +40,58 @@ class _LessonItemCardState extends State<LessonItemCard> {
         tileColor: Colors.green,
         onTap: () {
           switch (widget.lessonItem.type) {
-            case 0:
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder:
-                      (context) => MarkdownViewerScreen(
-                        markdown: widget.lessonItem.content!,
-                      ),
-                ),
-              );
+            case 0: // Content
+              if (widget.lessonItem.content != null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MarkdownViewerScreen(
+                      markdown: widget.lessonItem.content!,
+                    ),
+                  ),
+                );
+              }
               break;
-            case 1:
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder:
-                      (context) => VideoPlayerScreen(
-                        videoUrl: widget.lessonItem.videoPath!,
-                      ),
-                ),
-              );
+            case 1: // Video
+              if (widget.lessonItem.videoPath != null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => VideoPlayerScreen(
+                      videoUrl: widget.lessonItem.videoPath!,
+                    ),
+                  ),
+                );
+              }
+              break;
+            case 2: // Quiz
+              if (widget.lessonItem.quiz != null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => QuizScreen(
+                      quiz: widget.lessonItem.quiz!,
+                    ),
+                  ),
+                );
+              }
               break;
           }
         },
       ),
     );
+  }
+  
+  IconData _getIconForLessonType(int type) {
+    switch (type) {
+      case 0:
+        return Icons.article;
+      case 1:
+        return Icons.video_library;
+      case 2:
+        return Icons.quiz;
+      default:
+        return Icons.article;
+    }
   }
 }

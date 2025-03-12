@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:src/classes/level_section.dart';
-import 'package:src/classes/lesson_item.dart';
-import 'package:src/screens/markdown_viewer_screen.dart';
-import 'package:src/screens/videoplayer_screen.dart';
-import 'package:src/screens/quiz_screen.dart';
-import 'package:src/components/user_profile.dart';
+import 'package:src/components/lesson_item_card.dart';
 
 class LevelSectionOverviewScreen extends StatefulWidget {
   final LevelSection section;
@@ -24,114 +20,32 @@ class _LevelSectionOverviewScreenState
       appBar: AppBar(
         title: Text(
           widget.section.title,
-          style: const TextStyle(color: Colors.white),
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 24),
         ),
-        backgroundColor: Colors.green,
-        actions: const [UserProfileIcon()],
+        centerTitle: true,
       ),
-      endDrawer: const UserProfileDrawer(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Section header
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              widget.section.subtitle,
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey[700],
-              ),
-            ),
+          Text(
+            widget.section.subtitle,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 18),
           ),
-          const Divider(),
-          // Lessons list
           Expanded(
             child: ListView.builder(
               itemCount: widget.section.lessons.length,
+              padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
               itemBuilder: (context, index) {
-                return _buildLessonListItem(widget.section.lessons[index]);
+                return LessonItemCard(
+                  lessonItem: widget.section.lessons[index],
+                );
               },
             ),
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildLessonListItem(LessonItem lesson) {
-    // Choose icon based on lesson type
-    IconData iconData;
-    String typeText;
-    
-    switch (lesson.type) {
-      case 0:
-        iconData = Icons.article;
-        typeText = 'Reading';
-        break;
-      case 1:
-        iconData = Icons.play_circle_filled;
-        typeText = 'Video';
-        break;
-      case 2:
-        iconData = Icons.quiz;
-        typeText = 'Quiz';
-        break;
-      default:
-        iconData = Icons.article;
-        typeText = 'Reading';
-    }
-    
-    return ListTile(
-      leading: Icon(iconData, color: Colors.green),
-      title: Text(lesson.title),
-      subtitle: Text(typeText),
-      trailing: lesson.isCompleted
-          ? const Icon(Icons.check_circle, color: Colors.green)
-          : null,
-      onTap: () {
-        // Navigate to appropriate screen based on lesson type
-        switch (lesson.type) {
-          case 0: // Content
-            if (lesson.content != null) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MarkdownViewerScreen(
-                    //title: lesson.title,
-                    markdown: lesson.content!,
-                  ),
-                ),
-              );
-            }
-            break;
-          case 1: // Video
-            if (lesson.videoPath != null) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => VideoPlayerScreen(
-                    //title: lesson.title,
-                    videoUrl: lesson.videoPath!,
-                  ),
-                ),
-              );
-            }
-            break;
-          case 2: // Quiz
-            if (lesson.quiz != null) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => QuizScreen(
-                    quiz: lesson.quiz!,
-                  ),
-                ),
-              );
-            }
-            break;
-        }
-      },
     );
   }
 }

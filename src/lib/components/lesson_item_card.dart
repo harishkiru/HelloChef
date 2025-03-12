@@ -16,13 +16,28 @@ class LessonItemCard extends StatefulWidget {
 class _LessonItemCardState extends State<LessonItemCard> {
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: InkWell(
+    return Container(
+      margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+      child: ListTile(
+        contentPadding: const EdgeInsets.fromLTRB(5, 5, 10, 5),
+
+        leading: Icon(
+          _getIconForLessonType(widget.lessonItem.type),
+          color: Colors.white,
+          size: 40,
+        ),
+        title: Text(
+          widget.lessonItem.title,
+          style: const TextStyle(fontSize: 18, color: Colors.white),
+        ),
+        trailing:
+            widget.lessonItem.isCompleted
+                ? const Icon(
+                  Icons.check_circle,
+                  color: Color.fromARGB(255, 0, 247, 255),
+                )
+                : const Icon(Icons.circle, color: Colors.grey),
+        tileColor: Colors.green,
         onTap: () {
           switch (widget.lessonItem.type) {
             case 0: // Content
@@ -31,7 +46,6 @@ class _LessonItemCardState extends State<LessonItemCard> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => MarkdownViewerScreen(
-                      // title: widget.lessonItem.title!,
                       markdown: widget.lessonItem.content!,
                     ),
                   ),
@@ -44,7 +58,6 @@ class _LessonItemCardState extends State<LessonItemCard> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => VideoPlayerScreen(
-                      // title: widget.lessonItem.title,
                       videoUrl: widget.lessonItem.videoPath!,
                     ),
                   ),
@@ -65,76 +78,20 @@ class _LessonItemCardState extends State<LessonItemCard> {
               break;
           }
         },
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Image
-            ClipRRect(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-              child: Image.asset(
-                widget.lessonItem.imagePath,
-                height: 150,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-            ),
-            
-            // Content
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Title
-                  Text(
-                    widget.lessonItem.title,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  
-                  const SizedBox(height: 8),
-                  
-                  // Type indicator
-                  Row(
-                    children: [
-                      Icon(
-                        widget.lessonItem.type == 0 
-                            ? Icons.article 
-                            : widget.lessonItem.type == 1 
-                                ? Icons.play_circle_fill 
-                                : Icons.quiz,
-                        size: 16,
-                        color: Colors.grey[600],
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        widget.lessonItem.type == 0 
-                            ? 'Reading' 
-                            : widget.lessonItem.type == 1 
-                                ? 'Video' 
-                                : 'Quiz',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey[600],
-                        ),
-                      ),
-                      const Spacer(),
-                      if (widget.lessonItem.isCompleted)
-                        const Icon(
-                          Icons.check_circle,
-                          color: Colors.green,
-                          size: 20,
-                        ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
       ),
     );
+  }
+  
+  IconData _getIconForLessonType(int type) {
+    switch (type) {
+      case 0:
+        return Icons.article;
+      case 1:
+        return Icons.video_library;
+      case 2:
+        return Icons.quiz;
+      default:
+        return Icons.article;
+    }
   }
 }

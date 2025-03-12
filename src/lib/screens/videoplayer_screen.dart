@@ -3,12 +3,18 @@ import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:src/classes/lesson_item.dart';
 import 'package:src/services/copy_asset.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
   final String videoUrl; // pass asset path like "assets/videos/video.mp4"
+  final LessonItem lessonItem;
 
-  const VideoPlayerScreen({super.key, required this.videoUrl});
+  const VideoPlayerScreen({
+    super.key,
+    required this.videoUrl,
+    required this.lessonItem,
+  });
 
   @override
   _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
@@ -18,6 +24,10 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   late final player = Player();
   late final controller = VideoController(player);
   bool _playerInitialized = false;
+
+  void _onComplete(context) {
+    Navigator.pop(context, true);
+  }
 
   @override
   void initState() {
@@ -61,10 +71,43 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: AspectRatio(
-        aspectRatio: 16 / 9,
-        child: Video(controller: controller),
+    return Scaffold(
+      appBar: AppBar(
+        actions: [
+          ElevatedButton(
+            onPressed: () => _onComplete(context),
+            child: Text('Complete', style: TextStyle(color: Colors.green)),
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+          ),
+        ],
+        backgroundColor: Colors.green,
+        centerTitle: true,
+      ),
+
+      extendBody: true,
+      extendBodyBehindAppBar: true,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              widget.lessonItem.title,
+              style: TextStyle(
+                fontSize: 26,
+                color: const Color.fromARGB(255, 26, 23, 23),
+              ),
+            ),
+            SizedBox(height: 10),
+            Center(
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
+                child: Video(controller: controller),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -14,6 +14,21 @@ class LessonItemCard extends StatefulWidget {
 }
 
 class _LessonItemCardState extends State<LessonItemCard> {
+  IconData _getIconForLessonType(int type) {
+    switch (type) {
+      case 0:
+        return Icons.article;
+      case 1:
+        return Icons.video_library;
+      case 2:
+        return Icons.transcribe;
+      case 3:
+        return Icons.quiz;
+      default:
+        return Icons.article;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,67 +46,87 @@ class _LessonItemCardState extends State<LessonItemCard> {
           style: const TextStyle(fontSize: 18, color: Colors.white),
         ),
         trailing:
-            widget.lessonItem.isCompleted
+            (widget.lessonItem.isCompleted)
                 ? const Icon(
                   Icons.check_circle,
                   color: Color.fromARGB(255, 0, 247, 255),
                 )
-                : const Icon(Icons.circle, color: Colors.grey),
+                : (!widget.lessonItem.isCompleted)
+                ? const Icon(Icons.circle, color: Colors.grey)
+                : null,
         tileColor: Colors.green,
         onTap: () {
           switch (widget.lessonItem.type) {
-            case 0: // Content
-              if (widget.lessonItem.content != null) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MarkdownViewerScreen(
-                      markdown: widget.lessonItem.content!,
-                    ),
-                  ),
-                );
-              }
+            case 0:
+              final response = Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (context) => MarkdownViewerScreen(
+                        markdown: widget.lessonItem.content!,
+                        lessonItem: widget.lessonItem,
+                      ),
+                ),
+              );
+              response.then((value) {
+                if (value != null && value) {
+                  setState(() {
+                    widget.lessonItem.isCompleted = true;
+                  });
+                }
+              });
               break;
-            case 1: // Video
-              if (widget.lessonItem.videoPath != null) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => VideoPlayerScreen(
-                      videoUrl: widget.lessonItem.videoPath!,
-                    ),
-                  ),
-                );
-              }
+            case 1:
+              final response = Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (context) => VideoPlayerScreen(
+                        videoUrl: widget.lessonItem.videoPath!,
+                        lessonItem: widget.lessonItem,
+                      ),
+                ),
+              );
+              response.then((value) {
+                if (value != null && value) {
+                  setState(() {
+                    widget.lessonItem.isCompleted = true;
+                  });
+                }
+              });
               break;
-            case 2: // Quiz
+
+            case 2:
+              final response = Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (context) => MarkdownViewerScreen(
+                        markdown: widget.lessonItem.content!,
+                        lessonItem: widget.lessonItem,
+                      ),
+                ),
+              );
+              response.then((value) {
+                if (value != null && value) {
+                  setState(() {
+                    widget.lessonItem.isCompleted = true;
+                  });
+                }
+              });
+            case 3: // Quiz
               if (widget.lessonItem.quiz != null) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => QuizScreen(
-                      quiz: widget.lessonItem.quiz!,
-                    ),
+                    builder:
+                        (context) => QuizScreen(quiz: widget.lessonItem.quiz!),
                   ),
                 );
               }
-              break;
           }
         },
       ),
     );
-  }
-  
-  IconData _getIconForLessonType(int type) {
-    switch (type) {
-      case 0:
-        return Icons.article;
-      case 1:
-        return Icons.video_library;
-      case 2:
-        return Icons.quiz;
-      default:
-        return Icons.article;
-    }
   }
 }

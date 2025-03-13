@@ -39,6 +39,7 @@ class MarkdownViewerScreen extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
+              margin: EdgeInsets.fromLTRB(8, 8, 8, 40),
               child: ElevatedButton(
                 onPressed: () => _onComplete(context),
                 child: Text('Complete', style: TextStyle(color: Colors.white)),

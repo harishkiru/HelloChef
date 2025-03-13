@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:src/classes/level_section.dart';
-import 'package:src/components/lesson_item_card.dart';
+import 'package:src/components/lesson_components/lesson_item_card.dart';
 
 class LevelSectionOverviewScreen extends StatefulWidget {
   final LevelSection section;

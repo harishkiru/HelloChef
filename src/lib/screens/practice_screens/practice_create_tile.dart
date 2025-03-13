@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../practice/practice_tile.dart';
-import '../practice/recipe_detail_screen.dart';
+import 'practice_tile.dart';
+import 'recipe_detail_screen.dart';
 
 class TileMaker extends StatelessWidget {
   final PracticeTile item;

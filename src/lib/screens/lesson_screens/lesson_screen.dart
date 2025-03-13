@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:src/classes/lesson_item.dart';
 import 'package:src/classes/level_section.dart';
-import 'package:src/screens/level_section_screen.dart';
+import 'package:src/screens/lesson_screens/level_section_screen.dart';
 import 'package:src/classes/level.dart';
-import 'package:src/components/lesson_level_card.dart';
-import 'package:src/screens/test_screen.dart';
-import 'package:src/components/user_profile.dart';
+import 'package:src/components/lesson_components/lesson_level_card.dart';
+import 'package:src/screens/lesson_screens/test_screen.dart';
+import 'package:src/components/home_components/user_profile.dart';
 import 'package:src/classes/quiz.dart';
 
 class LessonScreen extends StatefulWidget {

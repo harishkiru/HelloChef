@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../practice/practice_tile.dart';
+import 'practice_tile.dart';
 
 class RecipeDetailScreen extends StatelessWidget {
   final PracticeTile item;

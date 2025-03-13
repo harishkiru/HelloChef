@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:src/components/textbox.dart';
-import 'package:src/components/button.dart';
-import 'package:src/components/constant.dart';
+import 'package:src/components/authentication_components/textbox.dart';
+import 'package:src/components/authentication_components/button.dart';
+import 'package:src/components/authentication_components/constant.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SignUpPage extends StatefulWidget {

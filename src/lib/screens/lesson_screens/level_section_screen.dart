@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:src/classes/level.dart';
-import 'package:src/components/lesson_section_card.dart';
-import 'package:src/screens/level_section_overview_screen.dart';
+import 'package:src/components/lesson_components/lesson_section_card.dart';
+import 'package:src/screens/lesson_screens/level_section_overview_screen.dart';
 
 class LevelSectionScreen extends StatefulWidget {
   final Level level;

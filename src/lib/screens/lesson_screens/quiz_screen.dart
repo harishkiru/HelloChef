@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:src/classes/quiz.dart';
-import 'package:src/components/user_profile.dart';
+import 'package:src/components/home_components/user_profile.dart';
 
 class QuizScreen extends StatefulWidget {
   final Quiz quiz;

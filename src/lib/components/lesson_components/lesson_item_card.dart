@@ -3,6 +3,7 @@ import 'package:src/classes/lesson_item.dart';
 import 'package:src/screens/lesson_screens/markdown_viewer_screen.dart';
 import 'package:src/screens/lesson_screens/videoplayer_screen.dart';
 import 'package:src/screens/lesson_screens/quiz_screen.dart';
+import 'package:src/screens/lesson_screens/interactive_image_screen.dart';
 
 class LessonItemCard extends StatefulWidget {
   final LessonItem lessonItem;
@@ -24,6 +25,8 @@ class _LessonItemCardState extends State<LessonItemCard> {
         return Icons.transcribe;
       case 3:
         return Icons.quiz;
+      case 4:
+        return Icons.image;
       default:
         return Icons.article;
     }
@@ -124,6 +127,25 @@ class _LessonItemCardState extends State<LessonItemCard> {
                   ),
                 );
               }
+            case 4:
+              final response = Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (context) => InteractiveImageScreen(
+                        imagePath: widget.lessonItem.imagePath!,
+                        buttonDetails: widget.lessonItem.buttonDetails!,
+                      ),
+                ),
+              );
+              response.then((value) {
+                if (value != null && value) {
+                  setState(() {
+                    widget.lessonItem.isCompleted = true;
+                  });
+                }
+              });
+              break;
           }
         },
       ),

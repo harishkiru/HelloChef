@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'components/main_navbar.dart';
+import 'components/home_components/main_navbar.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:src/screens/login_screen.dart';
-import 'package:src/screens/signup_screen.dart';
-import 'package:src/components/constant.dart' as utils;
+import 'package:src/screens/authentication_screens/login_screen.dart';
+import 'package:src/screens/authentication_screens/signup_screen.dart';
+import 'package:src/components/authentication_components/constant.dart' as utils;
 import 'package:media_kit/media_kit.dart';
 
 void main() async {

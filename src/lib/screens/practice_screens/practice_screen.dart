@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'practice/practice_tile.dart' as tile;
-import 'practice/practice_filter.dart' as filter;
-import 'practice/practice_grid.dart';
-import 'practice/practice_data.dart';
-import 'package:src/components/user_profile.dart';
+import 'practice_tile.dart' as tile;
+import 'practice_filter.dart' as filter;
+import 'practice_grid.dart';
+import 'practice_data.dart';
+import 'package:src/components/home_components/user_profile.dart';
 
 class PracticeScreen extends StatefulWidget {
   const PracticeScreen({super.key});

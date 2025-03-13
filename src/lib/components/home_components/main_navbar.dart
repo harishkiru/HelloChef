@@ -1,7 +1,9 @@
+//// filepath: c:/Users/Harsh/4080finalproject/src/lib/components/main_navbar.dart
 import 'package:flutter/material.dart';
 import 'package:src/screens/home_screen.dart';
-import 'package:src/screens/lesson_screen.dart';
-import 'package:src/screens/practice_screen.dart';
+import 'package:src/screens/lesson_screens/lesson_screen.dart';
+import 'package:src/screens/practice_screens/practice_screen.dart';
+import 'package:src/services/navigation_service.dart';
 
 class NavigationScaffold extends StatefulWidget {
   const NavigationScaffold({super.key});
@@ -19,11 +21,21 @@ class _NavigationScaffoldState extends State<NavigationScaffold> {
     HomeScreen(), // index 1
     PracticeScreen(), // index 2
   ];
+  
+  @override
+  void initState() {
+    super.initState();
+    // Register the callback with NavigationService
+    NavigationService().changeTabCallback = (index) {
+      setState(() {
+        _selectedIndex = index;
+      });
+    };
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Removed the appBar so that individual screens (like HomeScreen) can define their own.
       body: IndexedStack(index: _selectedIndex, children: _screens),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,

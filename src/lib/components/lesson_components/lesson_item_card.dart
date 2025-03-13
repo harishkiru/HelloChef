@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:src/classes/lesson_item.dart';
-import 'package:src/screens/markdown_viewer_screen.dart';
-import 'package:src/screens/videoplayer_screen.dart';
-import 'package:src/screens/quiz_screen.dart';
+import 'package:src/screens/lesson_screens/markdown_viewer_screen.dart';
+import 'package:src/screens/lesson_screens/videoplayer_screen.dart';
+import 'package:src/screens/lesson_screens/quiz_screen.dart';
 
 class LessonItemCard extends StatefulWidget {
   final LessonItem lessonItem;

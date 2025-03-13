@@ -71,25 +71,17 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          ElevatedButton(
-            onPressed: () => _onComplete(context),
-            child: Text('Complete', style: TextStyle(color: Colors.green)),
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-          ),
-        ],
-        backgroundColor: Colors.green,
-        centerTitle: true,
-      ),
+      appBar: AppBar(backgroundColor: Colors.green, centerTitle: true),
 
       extendBody: true,
       extendBodyBehindAppBar: true,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
@@ -104,6 +96,22 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               child: AspectRatio(
                 aspectRatio: 16 / 9,
                 child: Video(controller: controller),
+              ),
+            ),
+            SizedBox(height: screenHeight * 0.3),
+            Container(
+              width: double.infinity,
+              height: screenHeight * 0.075,
+
+              child: ElevatedButton(
+                onPressed: () => _onComplete(context),
+                child: Text('Complete', style: TextStyle(color: Colors.white)),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
               ),
             ),
           ],

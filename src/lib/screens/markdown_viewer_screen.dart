@@ -19,14 +19,8 @@ class MarkdownViewerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.green,
-        actions: [
-          ElevatedButton(
-            onPressed: () => _onComplete(context),
-            child: Text('Complete', style: TextStyle(color: Colors.green)),
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-          ),
+      appBar: AppBar(backgroundColor: Colors.green, actions: [
+          
         ],
       ),
       body: Padding(
@@ -41,6 +35,19 @@ class MarkdownViewerScreen extends StatelessWidget {
                 imageBuilder: (uri, title, alt) {
                   return Image.asset(uri.toString());
                 },
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => _onComplete(context),
+                child: Text('Complete', style: TextStyle(color: Colors.white)),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
               ),
             ),
           ],

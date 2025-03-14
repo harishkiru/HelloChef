@@ -24,7 +24,7 @@ class _LessonScreenState extends State<LessonScreen> {
       title: "Level 0",
       subtitle: "Kitchen Foundations",
       imagePath: "assets/images/level_images/level_0.png",
-      isCompleted: true,
+      isCompleted: false,
       sections: [
         LevelSection(
           id: 0,
@@ -38,7 +38,7 @@ class _LessonScreenState extends State<LessonScreen> {
               type: 0,
               imagePath:
                   "assets/images/level_section_images/level_0/section_0.png",
-              isCompleted: true,
+              isCompleted: false,
               content: '''
 # Common Kitchen Tools
 ![Photo](assets/images/lesson_markdown_images/level_0/section_0/lesson_0/0.png)
@@ -153,7 +153,7 @@ These ingredients are commonly used in recipes and are recommended to have on ha
             ),
             LessonItem(
               id: 3,
-              title: "Video Transcript",
+              title: "Kitchen Setup & Cleanup Transcript",
               type: 2,
               imagePath:
                   "assets/images/lesson_images/level_0/section_0/lesson_1.png",
@@ -208,59 +208,115 @@ With that, the kitchen is clean. Good stuff
               isCompleted: false,
             ),
             LessonItem(
-              id: 3,
-              title: "Common Quiz",
-              type: 3,
+              id: 4,
+              title: "The Kitchen",
+              type: 4,
               imagePath:
-                  "assets/images/lesson_images/level_0_section_0_lesson_2.png",
+                  "assets/images/interactive_images/level_0/section_0/interactive_0/0.png",
+              buttonDetails: [
+                {
+                  'name': 'Fridge',
+                  'position_x': 0,
+                  'position_y': 0.125,
+                  'width': 0.14,
+                  'height': 0.275,
+                  'onPressed': "Used to store food meant to be kept cold",
+                },
+                {
+                  'name': 'Pantry',
+                  'position_x': 0.15,
+                  'position_y': 0.090,
+                  'width': 0.1,
+                  'height': 0.20,
+                  'onPressed': "Used to store food that is shelf-stable",
+                },
+                {
+                  'name': 'Mixer',
+                  'position_x': 0.28,
+                  'position_y': 0.155,
+                  'width': 0.045,
+                  'height': 0.04,
+                  'onPressed': "Used to mix baking ingredients together",
+                },
+                {
+                  'name': 'Coffee Maker',
+                  'position_x': 0.33,
+                  'position_y': 0.155,
+                  'width': 0.045,
+                  'height': 0.04,
+                  'onPressed': "Used to make coffee",
+                },
+                {
+                  'name': 'Toaster',
+                  'position_x': 0.37,
+                  'position_y': 0.16,
+                  'width': 0.04,
+                  'height': 0.04,
+                  'onPressed': "Used to toast bread",
+                },
+                {
+                  'name': 'Stove/Oven',
+                  'position_x': 0.415,
+                  'position_y': 0.19,
+                  'width': 0.14,
+                  'height': 0.05,
+                  'onPressed': "Used to cook fry and bake food",
+                },
+                {
+                  'name': 'Toaster Oven',
+                  'position_x': 0.525,
+                  'position_y': 0.165,
+                  'width': 0.09,
+                  'height': 0.033,
+                  'onPressed': "Used to bake and toast food",
+                },
+                {
+                  'name': 'Kettle',
+                  'position_x': 0.64,
+                  'position_y': 0.160,
+                  'width': 0.04,
+                  'height': 0.035,
+                  'onPressed': "Used to boil water for beverages",
+                },
+                {
+                  'name': 'Sink',
+                  'position_x': 0.7,
+                  'position_y': 0.16,
+                  'width': 0.1,
+                  'height': 0.06,
+                  'onPressed': "Used to wash dishes and hands",
+                },
+                {
+                  'name': 'Dishwasher',
+                  'position_x': 0.77,
+                  'position_y': 0.22,
+                  'width': 0.1,
+                  'height': 0.08,
+                  'onPressed': "Used to wash dishes",
+                },
+                {
+                  'name': 'Blender',
+                  'position_x': 0.835,
+                  'position_y': 0.15,
+                  'width': 0.05,
+                  'height': 0.05,
+                  'onPressed': "Used to blend food and drinks",
+                },
+                {
+                  'name': 'Microwave',
+                  'position_x': 0.4,
+                  'position_y': 0.125,
+                  'width': 0.15,
+                  'height': 0.035,
+                  'onPressed': "Used to heat food quickly",
+                },
+              ],
               isCompleted: false,
-              quiz: Quiz(
-                title: "Kitchen Basics Quiz",
-                description: "Test your knowledge of kitchen basics!",
-                questions: [
-                  QuizQuestion(
-                    question:
-                        "Which of the following is NOT a common kitchen tool?",
-                    options: ["Spatula", "Whisk", "Blender", "Power drill"],
-                    correctAnswerIndex: 3,
-                  ),
-                  QuizQuestion(
-                    question: "What is the primary use of a colander?",
-                    options: [
-                      "Mixing ingredients",
-                      "Draining liquids",
-                      "Measuring ingredients",
-                      "Cutting vegetables",
-                    ],
-                    correctAnswerIndex: 1,
-                  ),
-                  QuizQuestion(
-                    question: "Which knife is best for chopping vegetables?",
-                    imagePath: "assets/images/quiz/chef_knife.png",
-                    options: [
-                      "Paring knife",
-                      "Chef's knife",
-                      "Bread knife",
-                      "Butter knife",
-                    ],
-                    correctAnswerIndex: 1,
-                  ),
-                  QuizQuestion(
-                    question: "What is the main purpose of a food processor?",
-                    options: [
-                      "Brewing coffee",
-                      "Blending smoothies",
-                      "Chopping and mixing ingredients",
-                      "Toasting bread",
-                    ],
-                    correctAnswerIndex: 2,
-                  ),
-                ],
-              ),
             ),
           ],
           completedLessons: 0,
         ),
+
         LevelSection(
           id: 1,
           title: "Kitchen Safety",
@@ -382,7 +438,112 @@ By following these precautions, you can safely handle hot kitchen appliances and
           title: "Knowledge Section",
           subtitle: "Test what you've learned.",
           imagePath: "assets/images/level_section_images/level_0/section_2.png",
-          lessons: List.empty(),
+          lessons: [
+            LessonItem(
+              id: 0,
+              title: "Kitchen Safety Quiz",
+              type: 3,
+              imagePath:
+                  "assets/images/lesson_images/level_0_section_0_lesson_2.png",
+              isCompleted: false,
+              quiz: Quiz(
+                title: "Kitchen Basics Quiz",
+                description: "Test your knowledge of kitchen basics!",
+                questions: [
+                  QuizQuestion(
+                    question:
+                        "When should you refrigerate leftovers after cooking?",
+                    options: [
+                      "Within 24 hours",
+                      "Within 4 hours",
+                      "Immediately ",
+                      "You don't need to refridgerate leftovers",
+                    ],
+                    correctAnswerIndex: 2,
+                  ),
+                  QuizQuestion(
+                    question:
+                        "Why should you use a separate cutting board for raw meat?",
+                    options: [
+                      "To make cleaning up easier",
+                      "To prevent cross contamination",
+                      "To make the meat taste better",
+                      "To make the meat cook faster",
+                    ],
+                    correctAnswerIndex: 1,
+                  ),
+                  QuizQuestion(
+                    question:
+                        "What food safety infraction is displayed in the image?",
+                    imagePath:
+                        "assets/images/quiz_images/level_0/section_2/quiz_0/0.png",
+                    options: [
+                      "Using a wooden cutting board for raw meat",
+                      "Using the same cutting board for raw meat and vegetables",
+                      "Not seasoning the meat",
+                      "Using a dirty table to rest ingredients on",
+                    ],
+                    correctAnswerIndex: 1,
+                  ),
+                  QuizQuestion(
+                    question:
+                        "Why should you not use a damp cloth to remove hot items from the oven?",
+                    options: [
+                      "The moisture can conduct heat",
+                      "The moisture can turn into steam and burn you",
+                      "The moisture can cause the cloth to catch fire",
+                      "Both A and B",
+                    ],
+                    correctAnswerIndex: 3,
+                  ),
+                  QuizQuestion(
+                    question:
+                        "Why should you stand to the side when straining boiling water?",
+                    options: [
+                      "To avoid water burns",
+                      "To avoid spilling the water",
+                      "To avoid steam burns",
+                      "To avoid getting wet",
+                    ],
+                    correctAnswerIndex: 2,
+                  ),
+                  QuizQuestion(
+                    question:
+                        "What is the safest way to determine if meat is cooked?",
+                    options: [
+                      "By cutting it open",
+                      "By smelling it",
+                      "By checking the internal temperature",
+                      "By looking at the color",
+                    ],
+                    correctAnswerIndex: 2,
+                  ),
+                  QuizQuestion(
+                    question:
+                        "What should you do if something becomes stuck in the toaster?",
+                    options: [
+                      "Immediately remove it with your hands to avoid a fire",
+                      "Unplug the toaster and use a wooden or plastic utensil",
+                      "Use a damp cloth to remove it",
+                      "Use WD-40 to lubricate the toaster, Toaster Maintenance is important for preventing jams",
+                    ],
+                    correctAnswerIndex: 1,
+                  ),
+                  QuizQuestion(
+                    question:
+                        "What reference should you use to determine the shelf life of raw meat?",
+                    options: [
+                      "The best before date provided on the packaging",
+                      "The one week rule",
+                      "The touch test",
+                      "The estimated time provided by the FDA",
+                    ],
+                    correctAnswerIndex: 0,
+                  ),
+                ],
+              ),
+            ),
+          ],
           completedLessons: 0,
         ),
       ],

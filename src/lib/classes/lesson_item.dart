@@ -8,6 +8,7 @@ class LessonItem {
   final String? videoPath;
   final String? content;
   final Quiz? quiz;
+  final List<Map<String, dynamic>>? buttonDetails;
 
   bool isCompleted;
 
@@ -20,6 +21,7 @@ class LessonItem {
     this.videoPath,
     this.content,
     this.quiz,
+    this.buttonDetails,
   });
 
   factory LessonItem.fromJson(Map<String, dynamic> json) {

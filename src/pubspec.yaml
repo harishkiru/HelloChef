@@ -95,6 +95,7 @@ flutter:
     - assets/images/profile_placeholder.png
 
     - assets/data/recipes.json
+    - assets/data/recipes_simulation.json
     - assets/levels/levels.json
     
     - assets/videos/level_0/section_0/video_0.mp4
@@ -121,6 +122,27 @@ flutter:
     - assets/images/lesson_transcript_images/level_0/section_1/transcript_1/3.png
     - assets/images/lesson_transcript_images/level_0/section_1/transcript_1/4.png
     - assets/images/lesson_transcript_images/level_0/section_1/transcript_1/5.png
+
+    - assets/images/simulation_images/newbg2.png
+    - assets/images/simulation_images/corn_flour.png
+    - assets/images/simulation_images/sake.png
+    - assets/images/simulation_images/sesame_seed_oil.png
+    - assets/images/simulation_images/soy_sauce.png
+    - assets/images/simulation_images/water.png
+    - assets/images/simulation_images/chicken.png
+    - assets/images/simulation_images/chilli_powder.png
+    - assets/images/simulation_images/rice_vinegar.png
+    - assets/images/simulation_images/brown_sugar.png
+    - assets/images/simulation_images/spring_onions.png
+    - assets/images/simulation_images/garlic_clove.png
+    - assets/images/simulation_images/water_chestnut.png
+    - assets/images/simulation_images/peanuts.png
+    - assets/images/simulation_images/newbg.png
+    - assets/images/simulation_images/newbg2.png
+    - assets/images/simulation_images/background.png
+    - assets/images/simulation_images/pan.png
+
+
 
     - assets/images/interactive_images/level_0/section_0/interactive_0/0.png
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'practice_tile.dart';
 
-
 class RecipeDetailScreen extends StatelessWidget {
   final PracticeTile item;
   const RecipeDetailScreen({Key? key, required this.item}) : super(key: key);
@@ -33,8 +32,9 @@ class RecipeDetailScreen extends StatelessWidget {
                     fit: BoxFit.cover,
                     width: double.infinity,
                     height: 250,
-                    errorBuilder: (context, error, stackTrace) =>
-                        Icon(Icons.error, size: 60, color: Colors.grey),
+                    errorBuilder:
+                        (context, error, stackTrace) =>
+                            Icon(Icons.error, size: 60, color: Colors.grey),
                   ),
                 ),
                 SizedBox(height: 20),
@@ -53,15 +53,16 @@ class RecipeDetailScreen extends StatelessWidget {
                 _buildCard(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: item.ingredients.map((ingredient) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: Text(
-                          "• ${ingredient['name']} - ${ingredient['quantity']}",
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      );
-                    }).toList(),
+                    children:
+                        item.ingredients.map((ingredient) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            child: Text(
+                              "• ${ingredient['name']} - ${ingredient['quantity']}",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          );
+                        }).toList(),
                   ),
                 ),
 
@@ -71,36 +72,46 @@ class RecipeDetailScreen extends StatelessWidget {
                 _buildCard(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: item.instructions
-                        .split("\n")
-                        .where((step) => step.trim().isNotEmpty)
-                        .map((step) => step.replaceFirst(RegExp(r'^\d+\.\s*'), ''))
-                        .toList()
-                        .asMap()
-                        .entries
-                        .map((entry) {
-                      int stepIndex = entry.key + 1;
-                      String stepText = entry.value.trim();
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: RichText(
-                          text: TextSpan(
-                            style: TextStyle(fontSize: 16, color: Colors.black),
-                            children: [
-                              TextSpan(
-                                text: "Step $stepIndex \n",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                  color: Colors.green[800],
+                    children:
+                        item.instructions
+                            .split("\n")
+                            .where((step) => step.trim().isNotEmpty)
+                            .map(
+                              (step) =>
+                                  step.replaceFirst(RegExp(r'^\d+\.\s*'), ''),
+                            )
+                            .toList()
+                            .asMap()
+                            .entries
+                            .map((entry) {
+                              int stepIndex = entry.key + 1;
+                              String stepText = entry.value.trim();
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 8.0,
                                 ),
-                              ),
-                              TextSpan(text: stepText),
-                            ],
-                          ),
-                        ),
-                      );
-                    }).toList(),
+                                child: RichText(
+                                  text: TextSpan(
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.black,
+                                    ),
+                                    children: [
+                                      TextSpan(
+                                        text: "Step $stepIndex \n",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                          color: Colors.green[800],
+                                        ),
+                                      ),
+                                      TextSpan(text: stepText),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            })
+                            .toList(),
                   ),
                 ),
 
@@ -109,7 +120,6 @@ class RecipeDetailScreen extends StatelessWidget {
             ),
           ),
         ),
-
 
         bottomNavigationBar: Container(
           height: kToolbarHeight,
@@ -160,7 +170,7 @@ class RecipeDetailScreen extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.redAccent,
+                      backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -169,9 +179,9 @@ class RecipeDetailScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.arrow_back, color: Colors.white),
+                        Icon(Icons.arrow_back, color: Colors.green),
                         SizedBox(width: 8),
-                        Text("Back", style: TextStyle(color: Colors.white)),
+                        Text("Back", style: TextStyle(color: Colors.green)),
                       ],
                     ),
                   ),

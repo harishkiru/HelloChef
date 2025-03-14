@@ -396,11 +396,10 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
             Container(
               width: double.infinity,
               height: screenHeight * 0.075,
-              padding: EdgeInsets.all(8),
+              margin: EdgeInsets.fromLTRB(8, 8, 8, 30),
 
               child: ElevatedButton(
                 onPressed: () => _onComplete(context),

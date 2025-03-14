@@ -102,6 +102,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
             Container(
               width: double.infinity,
               height: screenHeight * 0.075,
+              margin: EdgeInsets.fromLTRB(8, 8, 8, 40),
 
               child: ElevatedButton(
                 onPressed: () => _onComplete(context),

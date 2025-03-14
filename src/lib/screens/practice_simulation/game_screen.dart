@@ -1,4 +1,4 @@
-import  'package:confetti/confetti.dart';
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
 import '../practice_screens/practice_screen.dart';
@@ -142,10 +142,9 @@ class _GameScreenState extends State<GameScreen> {
                 child: Text(
                   game.currentStepText,
                   style: TextStyle(
-                    fontSize: screenWidth * 0.05,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                      fontSize: screenWidth * 0.05,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -162,7 +161,6 @@ class _GameScreenState extends State<GameScreen> {
               minHeight: screenHeight * 0.01,
             ),
           ),
-
 
           Positioned(
             bottom: screenHeight * 0.35,
@@ -208,16 +206,25 @@ class _GameScreenState extends State<GameScreen> {
             ),
 
           if (gameCompleted)
+
             Positioned(
               bottom: screenHeight * 0.12,
               left: screenWidth * 0.05,
               right: screenWidth * 0.05,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                      MaterialPageRoute(builder: (context) => const PracticeScreen())                  );
+                  setState(() {
+                    stepsCompleted = (stepsCompleted + 1).clamp(0, totalSteps);
+                  });
+
+                  Future.delayed(const Duration(milliseconds: 500), () {
+                    Navigator.pop(context);
+                  });
                 },
+
+
+
+
                 child: Text(
                   "Back to Menu",
                   style: TextStyle(fontSize: screenWidth * 0.05, fontWeight: FontWeight.bold),

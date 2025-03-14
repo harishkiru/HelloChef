@@ -4,7 +4,6 @@ import 'practice_tile.dart';
 class FilterOptions extends StatelessWidget {
   final Difficulty selectedDifficulty;
   final Function(Difficulty) onDifficultySelected;
-
   final Category selectedCategory;
   final Function(Category) onCategorySelected;
 
@@ -18,83 +17,101 @@ class FilterOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Stack(
-              clipBehavior: Clip.none,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Stack(
               children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: Difficulty.values.map((difficulty) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                        child: ChoiceChip(
-                          label: Text(difficulty == Difficulty.all ? "All" : difficulty.name.toUpperCase()),
-                          selected: selectedDifficulty == difficulty,
-                          onSelected: (bool isSelected) {
-                            onDifficultySelected(isSelected ? difficulty : Difficulty.all);
-                          },
-                        ),
-                      );
-                    }).toList(),
-                  ),
+                _buildDropdownBox<Difficulty>(
+                  value: selectedDifficulty,
+                  items: Difficulty.values,
+                  onChanged: (newValue) {
+                    onDifficultySelected(newValue!);
+                  },
                 ),
-                Positioned(
-                  top: -10,
-                  left: 12,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
-                    color: Colors.white,
-                    child: Text(
-                      "Difficulty",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey[700],
-                      ),
-                    ),
-                  ),
-                ),
+                _buildFloatingLabel("Difficulty"),
               ],
             ),
-
-            SizedBox(width: 10),
-            SizedBox(
-              width: 150,
-              child: DropdownButtonFormField<Category>(
-                value: selectedCategory,
-                decoration: InputDecoration(
-                  labelText: "Category",
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          ),
+          SizedBox(width: 12),
+          Expanded(
+            child: Stack(
+              children: [
+                _buildDropdownBox<Category>(
+                  value: selectedCategory,
+                  items: Category.values,
+                  onChanged: (newValue) {
+                    onCategorySelected(newValue!);
+                  },
                 ),
-                items: Category.values.map((Category category) {
-                  return DropdownMenuItem<Category>(
-                    value: category,
-                    child: Text(category.name.toUpperCase(), style: TextStyle(fontSize: 14)),
-                  );
-                }).toList(),
-                onChanged: (Category? newCategory) {
-                  if (newCategory != null) {
-                    onCategorySelected(newCategory);
-                  }
-                },
-              ),
+                _buildFloatingLabel("Category"),
+              ],
             ),
-          ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFloatingLabel(String label) {
+    return Positioned(
+      left: 14,
+      top: 4,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 4),
+        color: Colors.white,
+        child: Text(
+          label,
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+            color: Colors.grey[700],
+          ),
         ),
       ),
     );
+  }
+
+  Widget _buildDropdownBox<T>({
+    required T value,
+    required List<T> items,
+    required ValueChanged<T?> onChanged,
+  }) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 12),
+      margin: EdgeInsets.only(top: 12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.grey[400]!, width: 1.5),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<T>(
+          value: value,
+          isExpanded: true,
+          icon: Icon(Icons.arrow_drop_down, color: Colors.green[700]),
+          onChanged: onChanged,
+          items: items.map((T item) {
+            return DropdownMenuItem<T>(
+              value: item,
+              child: Text(
+                _capitalize(item.toString().split('.').last),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            );
+          }).toList(),
+        ),
+      ),
+    );
+  }
+
+  String _capitalize(String text) {
+    return text.replaceAll("_", " ").split(" ").map((word) {
+      if (word.isEmpty) return "";
+      return word[0].toUpperCase() + word.substring(1).toLowerCase();
+    }).join(" ");
   }
 }

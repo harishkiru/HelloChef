@@ -1,0 +1,2478 @@
+[
+    {
+        "idMeal": "52785",
+        "strMeal": "Dal fry",
+        "steps": [
+            {
+                "action": "prepare",
+                "ingredient": "Toor_dal",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Water",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Salt",
+                "interaction": "rotate"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Turmeric",
+                "interaction": "rotate"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Ghee",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Chopped_tomatoes",
+                "interaction": "rotate"
+            },
+            {
+                "action": "serve",
+                "ingredient": "Cumin_seeds",
+                "interaction": "swipe"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Mustard_Seeds",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Bay_Leaf",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Green_Chilli",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Ginger",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Red_Pepper",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Cilantro",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Sugar",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Garam_Masala",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52802",
+        "strMeal": "Fish pie",
+        "steps": [
+            {
+                "action": "cook",
+                "ingredient": "Floury_Potatoes",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Olive_Oil",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Semi-skimmed_Milk",
+                "interaction": "rotate"
+            },
+            {
+                "action": "stir",
+                "ingredient": "White_Fish_Fillets",
+                "interaction": "rotate"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Plain_flour",
+                "interaction": "rotate"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Nutmeg",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Double_Cream",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Jerusalem_Artichokes",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Leek",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Prawns",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Parsley",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Dill",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Lemon",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Gruyère",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52906",
+        "strMeal": "Flamiche",
+        "steps": [
+            {
+                "action": "stir",
+                "ingredient": "Butter",
+                "interaction": "rotate"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Leek",
+                "interaction": "rotate"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Salt",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Creme_Fraiche",
+                "interaction": "rotate"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Egg",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Egg_Yolks",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Nutmeg",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Plain_Flour",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Lard",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Cheddar_Cheese",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Water",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "53071",
+        "strMeal": "Beef Asado",
+        "steps": [
+            {
+                "action": "stir",
+                "ingredient": "Beef",
+                "interaction": "rotate"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Beef_Stock_Concentrate",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Tomato_Puree",
+                "interaction": "rotate"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Water",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Soy_Sauce",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "White_Wine_Vinegar",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Pepper",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Bay_Leaf",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Lemon",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Tomato_Sauce",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Butter",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Olive_Oil",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Onion",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Garlic",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "53043",
+        "strMeal": "Fish fofos",
+        "steps": [
+            {
+                "action": "prepare",
+                "ingredient": "Haddock",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Potatoes",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Green_Chilli",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Coriander",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Cumin_Seeds",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Pepper",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Garlic",
+                "interaction": "rotate"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Ginger",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Flour",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Eggs",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Breadcrumbs",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Vegetable_Oil",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52935",
+        "strMeal": "Steak Diane",
+        "steps": [
+            {
+                "action": "cook",
+                "ingredient": "Canola_Oil",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Beef_Fillet",
+                "interaction": "rotate"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Beef_Stock",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Butter",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Garlic",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Challots",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Mushrooms",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Brandy",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Heavy_Cream",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Dijon_Mustard",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Worcestershire_Sauce",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Tabasco_Sauce",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Parsley",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Chives",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Salt",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Pepper",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52952",
+        "strMeal": "Beef Lo Mein",
+        "steps": [
+            {
+                "action": "prepare",
+                "ingredient": "Beef",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Salt",
+                "interaction": "rotate"
+            },
+            {
+                "action": "boil",
+                "ingredient": "Pepper",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Sesame_Seed_Oil",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Egg",
+                "interaction": "rotate"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Starch",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Oil",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Noodles",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Onion",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Minced_Garlic",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Ginger",
+                "interaction": "rotate"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Bean_Sprouts",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Mushrooms",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Water",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Oyster_Sauce",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Sugar",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Soy_Sauce",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52955",
+        "strMeal": "Egg Drop Soup",
+        "steps": [
+            {
+                "action": "boil",
+                "ingredient": "Chicken_Stock",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Salt",
+                "interaction": "tap"
+            },
+            {
+                "action": "boil",
+                "ingredient": "Sugar",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Pepper",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Sesame_Seed_Oil",
+                "interaction": "rotate"
+            },
+            {
+                "action": "serve",
+                "ingredient": "Peas",
+                "interaction": "swipe"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Mushrooms",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Cornstarch",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Water",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Spring_Onions",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "53070",
+        "strMeal": "Beef Caldereta",
+        "steps": [
+            {
+                "action": "cook",
+                "ingredient": "Beef",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Beef_Stock",
+                "interaction": "tap"
+            },
+            {
+                "action": "boil",
+                "ingredient": "Soy_Sauce",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Water",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Green_Pepper",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Red_Pepper",
+                "interaction": "rotate"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Potatoes",
+                "interaction": "tap"
+            },
+            {
+                "action": "serve",
+                "ingredient": "Carrots",
+                "interaction": "swipe"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Tomato_Puree",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Peanut_Butter",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Chilli_Powder",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Onion",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Garlic",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Olive_Oil",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52944",
+        "strMeal": "Escovitch Fish",
+        "steps": [
+            {
+                "action": "prepare",
+                "ingredient": "Red_Snapper",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Vegetable_Oil",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Garlic",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Ginger",
+                "interaction": "rotate"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Thyme",
+                "interaction": "rotate"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Bay_Leaf",
+                "interaction": "tap"
+            },
+            {
+                "action": "serve",
+                "ingredient": "Red_Pepper",
+                "interaction": "swipe"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Yellow_Pepper",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Onion",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Carrots",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Sugar",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Allspice",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Worcestershire_Sauce",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Scotch_Bonnet",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Lime",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Malt_Vinegar",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Pepper",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52807",
+        "strMeal": "Baingan Bharta",
+        "steps": [
+            {
+                "action": "prepare",
+                "ingredient": "Aubergine",
+                "interaction": "tap"
+            },
+            {
+                "action": "bake",
+                "ingredient": "Onion",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Tomatoes",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Garlic",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Green_Chilli",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Red_Chilli_Powder",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Oil",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Coriander_Leaves",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "salt",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "53073",
+        "strMeal": "Eggplant Adobo",
+        "steps": [
+            {
+                "action": "chop",
+                "ingredient": "Egg_Plants",
+                "interaction": "drag"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Sugar",
+                "interaction": "rotate"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Salt",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Pepper",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Garlic",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Olive_Oil",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Ground_Pork",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Rice_Vinegar",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Soy_Sauce",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Bay_Leaf",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "53072",
+        "strMeal": "Crispy Eggplant",
+        "steps": [
+            {
+                "action": "prepare",
+                "ingredient": "Egg_Plants",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Breadcrumbs",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Sesame_Seed",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Eggs",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Salt",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Pepper",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Vegetable_Oil",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52945",
+        "strMeal": "Kung Pao Chicken",
+        "steps": [
+            {
+                "action": "stir",
+                "ingredient": "Sake",
+                "interaction": "rotate"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Soy_Sauce",
+                "interaction": "rotate"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Sesame_Seed_Oil",
+                "interaction": "rotate"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Corn_Flour",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Water",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Chicken",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Chilli_Powder",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Rice_Vinegar",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Brown_Sugar",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Spring_Onions",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Garlic_Clove",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Water_Chestnut",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Peanuts",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52806",
+        "strMeal": "Tandoori chicken",
+        "steps": [
+            {
+                "action": "stir",
+                "ingredient": "lemons",
+                "interaction": "rotate"
+            },
+            {
+                "action": "stir",
+                "ingredient": "paprika",
+                "interaction": "rotate"
+            },
+            {
+                "action": "cook",
+                "ingredient": "red_onions",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "chicken_thighs",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "vegetable_oil",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Greek_yogurt",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "ginger",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "garlic_clove",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "garam_masala",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "ground_cumin",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "chilli_powder",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "turmeric",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52904",
+        "strMeal": "Beef Bourguignon",
+        "steps": [
+            {
+                "action": "cook",
+                "ingredient": "Goose_Fat",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Beef_Shin",
+                "interaction": "rotate"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Bacon",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Challots",
+                "interaction": "tap"
+            },
+            {
+                "action": "chop",
+                "ingredient": "Chestnut_Mushroom",
+                "interaction": "drag"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Garlic_Clove",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Bouquet_Garni",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Tomato_Puree",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Red_Wine",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Celeriac",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Olive_Oil",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Thyme",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Rosemary",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Bay_Leaf",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Cardamom",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "53079",
+        "strMeal": "Fish Soup (Ukha)",
+        "steps": [
+            {
+                "action": "stir",
+                "ingredient": "Olive_Oil",
+                "interaction": "rotate"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Onion",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Carrots",
+                "interaction": "rotate"
+            },
+            {
+                "action": "chop",
+                "ingredient": "Fish_Stock",
+                "interaction": "drag"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Water",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Potatoes",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Bay_Leaf",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Cod",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Salmon",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52764",
+        "strMeal": "Garides Saganaki",
+        "steps": [
+            {
+                "action": "boil",
+                "ingredient": "Raw_king_prawns",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Olive_oil",
+                "interaction": "rotate"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Chopped_onion",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Freshly_chopped_parsley",
+                "interaction": "rotate"
+            },
+            {
+                "action": "serve",
+                "ingredient": "White_wine",
+                "interaction": "swipe"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Chopped_tomatoes",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Minced_garlic",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Cubed_Feta_cheese",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52870",
+        "strMeal": "Chickpea Fajitas",
+        "steps": [
+            {
+                "action": "cook",
+                "ingredient": "Chickpeas",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Olive_Oil",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Paprika",
+                "interaction": "rotate"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Tomatoes",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Red_Onions",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Red_Wine_Vinegar",
+                "interaction": "tap"
+            },
+            {
+                "action": "bake",
+                "ingredient": "Avocado",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Lime",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Sour_Cream",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Harissa_Spice",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Corn_Tortillas",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Coriander",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52940",
+        "strMeal": "Brown Stew Chicken",
+        "steps": [
+            {
+                "action": "prepare",
+                "ingredient": "Chicken",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Tomato",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Onions",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Garlic_Clove",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Red_Pepper",
+                "interaction": "rotate"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Carrots",
+                "interaction": "rotate"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Lime",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Thyme",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Allspice",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Soy_Sauce",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Cornstarch",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Coconut_Milk",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Vegetable_Oil",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52873",
+        "strMeal": "Beef Dumpling Stew",
+        "steps": [
+            {
+                "action": "cook",
+                "ingredient": "Olive_Oil",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Butter",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Beef",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Plain_Flour",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Garlic",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Onions",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Celery",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Carrots",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Leek",
+                "interaction": "rotate"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Swede",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Red_Wine",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Beef_Stock",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Bay_Leaf",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Thyme",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Parsley",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Baking_Powder",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Suet",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Water",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52878",
+        "strMeal": "Beef and Oyster pie",
+        "steps": [
+            {
+                "action": "cook",
+                "ingredient": "Beef",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Olive_Oil",
+                "interaction": "rotate"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Shallots",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Garlic",
+                "interaction": "rotate"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Bacon",
+                "interaction": "rotate"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Thyme",
+                "interaction": "rotate"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Bay_Leaf",
+                "interaction": "tap"
+            },
+            {
+                "action": "bake",
+                "ingredient": "Stout",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Beef_Stock",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Corn_Flour",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Oysters",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Plain_Flour",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Salt",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Butter",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Eggs",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "53016",
+        "strMeal": "Chick-Fil-A Sandwich",
+        "steps": [
+            {
+                "action": "prepare",
+                "ingredient": "Chicken_Breast",
+                "interaction": "tap"
+            },
+            {
+                "action": "chop",
+                "ingredient": "Pickle_Juice",
+                "interaction": "drag"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Egg",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Milk",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Flour",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Icing_Sugar",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Paprika",
+                "interaction": "tap"
+            },
+            {
+                "action": "chop",
+                "ingredient": "Salt",
+                "interaction": "drag"
+            },
+            {
+                "action": "serve",
+                "ingredient": "Black_Pepper",
+                "interaction": "swipe"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Garlic_Powder",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Celery_Salt",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Cayenne_Pepper",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Olive_Oil",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Sesame_Seed_Burger_Buns",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52951",
+        "strMeal": "General Tsos Chicken",
+        "steps": [
+            {
+                "action": "prepare",
+                "ingredient": "Chicken_Breast",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Plain_Flour",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Egg",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Starch",
+                "interaction": "rotate"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Baking_Powder",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Salt",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Onion_Salt",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Garlic_Powder",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Water",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Chicken_Stock",
+                "interaction": "rotate"
+            },
+            {
+                "action": "boil",
+                "ingredient": "Duck_Sauce",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Soy_Sauce",
+                "interaction": "rotate"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Honey",
+                "interaction": "rotate"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Rice_Vinegar",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Sesame_Seed_Oil",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Gochujang",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Garlic",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Spring_Onions",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Ginger",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52874",
+        "strMeal": "Beef and Mustard Pie",
+        "steps": [
+            {
+                "action": "cook",
+                "ingredient": "Beef",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Plain_Flour",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Rapeseed_Oil",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Red_Wine",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Beef_Stock",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Onion",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Carrots",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Thyme",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Mustard",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Egg_Yolks",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Puff_Pastry",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Green_Beans",
+                "interaction": "tap"
+            },
+            {
+                "action": "serve",
+                "ingredient": "Butter",
+                "interaction": "swipe"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Salt",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Pepper",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "53077",
+        "strMeal": "Cabbage Soup (Shchi)",
+        "steps": [
+            {
+                "action": "cook",
+                "ingredient": "Unsalted_Butter",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Onion",
+                "interaction": "rotate"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Cabbage",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Carrots",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Celery",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Bay_Leaf",
+                "interaction": "tap"
+            },
+            {
+                "action": "serve",
+                "ingredient": "Vegetable_Stock",
+                "interaction": "swipe"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Potatoes",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Tomatoes",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Sour_Cream",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Dill",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52813",
+        "strMeal": "Kentucky Fried Chicken",
+        "steps": [
+            {
+                "action": "stir",
+                "ingredient": "Chicken",
+                "interaction": "rotate"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Oil",
+                "interaction": "rotate"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Egg_White",
+                "interaction": "rotate"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Flour",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Brown_Sugar",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Salt",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "paprika",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "onion_salt",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "chili_powder",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "black_pepper",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "celery_salt",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "sage",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "garlic_powder",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "allspice",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "oregano",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "basil",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "marjoram",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52812",
+        "strMeal": "Beef Brisket Pot Roast",
+        "steps": [
+            {
+                "action": "chop",
+                "ingredient": "Beef_Brisket",
+                "interaction": "drag"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Salt",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Onion",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Garlic",
+                "interaction": "tap"
+            },
+            {
+                "action": "bake",
+                "ingredient": "Thyme",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Rosemary",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Bay_Leaves",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "beef_stock",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Carrots",
+                "interaction": "tap"
+            },
+            {
+                "action": "chop",
+                "ingredient": "Mustard",
+                "interaction": "drag"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Potatoes",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52918",
+        "strMeal": "Fish Stew with Rouille",
+        "steps": [
+            {
+                "action": "cook",
+                "ingredient": "Prawns",
+                "interaction": "tap"
+            },
+            {
+                "action": "chop",
+                "ingredient": "Olive_Oil",
+                "interaction": "drag"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Dry_White_Wine",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Fish_Stock",
+                "interaction": "rotate"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Fennel",
+                "interaction": "rotate"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Onion",
+                "interaction": "rotate"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Garlic",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Potatoes",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Orange",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Star_Anise",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Bay_Leaf",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Harissa_Spice",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Tomato_Puree",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Chopped_Tomatoes",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Mussels",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "White_Fish",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Thyme",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Bread",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52819",
+        "strMeal": "Cajun spiced fish tacos",
+        "steps": [
+            {
+                "action": "cook",
+                "ingredient": "cajun",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "cayenne_pepper",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "white_fish",
+                "interaction": "rotate"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "vegetable_oil",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "flour_tortilla",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "avocado",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "little_gem_lettuce",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Spring_Onions",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "salsa",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "sour_cream",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "lemon",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "garlic",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "53078",
+        "strMeal": "Beetroot Soup (Borscht)",
+        "steps": [
+            {
+                "action": "chop",
+                "ingredient": "Beetroot",
+                "interaction": "drag"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Olive_Oil",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Chicken_Stock_Cube",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Water",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Potatoes",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Cannellini_Beans",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Dill",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52959",
+        "strMeal": "Baked salmon with fennel",
+        "steps": [
+            {
+                "action": "chop",
+                "ingredient": "Fennel",
+                "interaction": "drag"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Parsley",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Lemon",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Cherry_Tomatoes",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Olive_Oil",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Salmon",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Black_Olives",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52796",
+        "strMeal": "Chicken Alfredo Primavera",
+        "steps": [
+            {
+                "action": "chop",
+                "ingredient": "Butter",
+                "interaction": "drag"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Olive_Oil",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Chicken",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Salt",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Squash",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Broccoli",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "mushrooms",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Pepper",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "onion",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "garlic",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "red_pepper_flakes",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "white_wine",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "milk",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "heavy_cream",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Parmesan_cheese",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "bowtie_pasta",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Parsley",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52765",
+        "strMeal": "Chicken Enchilada Casserole",
+        "steps": [
+            {
+                "action": "chop",
+                "ingredient": "Enchilada_sauce",
+                "interaction": "drag"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "shredded_Monterey_Jack_cheese",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "corn_tortillas",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "chicken_breasts",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "53041",
+        "strMeal": "Grilled Portuguese sardines",
+        "steps": [
+            {
+                "action": "prepare",
+                "ingredient": "Sardines",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Olive_Oil",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "Garlic",
+                "interaction": "rotate"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Paprika",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Lemon",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "Rosemary",
+                "interaction": "tap"
+            },
+            {
+                "action": "cook",
+                "ingredient": "Red_Chilli",
+                "interaction": "tap"
+            }
+        ]
+    },
+    {
+        "idMeal": "52818",
+        "strMeal": "Chicken Fajita Mac and Cheese",
+        "steps": [
+            {
+                "action": "cook",
+                "ingredient": "macaroni",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "chicken_stock",
+                "interaction": "tap"
+            },
+            {
+                "action": "stir",
+                "ingredient": "heavy_cream",
+                "interaction": "rotate"
+            },
+            {
+                "action": "bake",
+                "ingredient": "fajita_seasoning",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "salt",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "chicken_breast",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "olive_oil",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "onion",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "red_pepper",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "garlic",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "cheddar_cheese",
+                "interaction": "tap"
+            },
+            {
+                "action": "prepare",
+                "ingredient": "parsley",
+                "interaction": "tap"
+            }
+        ]
+    }
+]

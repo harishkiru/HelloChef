@@ -24,9 +24,8 @@ class CookingGame extends FlameGame {
     if (currentStepIndex >= 0 && currentStepIndex < steps.length) {
       return steps[currentStepIndex].ingredient.replaceAll("_", " ");
     }
-    return "";
+    return "Get ready to start cooking!";
   }
-
 
   @override
   Future<void> onLoad() async {
@@ -53,19 +52,19 @@ class CookingGame extends FlameGame {
     }
 
     final List<dynamic> stepList = recipe["steps"];
-    int totalSteps = stepList.length;
-
     steps = stepList.map((step) {
       return GameStep.fromJson(
         step as Map<String, dynamic>,
         onStepComplete,
-        totalSteps,
+        stepList.length,
       );
     }).toList();
 
     print("Loaded ${steps.length} steps for $recipeName");
     _isLoaded = true;
-    nextStep();
+    currentStepIndex = 0;
+    add(steps[currentStepIndex]);
+    onStepChanged?.call();
   }
 
   void nextStep() {
@@ -81,16 +80,14 @@ class CookingGame extends FlameGame {
       onStepChanged?.call();
     } else {
       print("All steps completed for $recipeName!");
-
-
       if (currentStepIndex >= 0 && contains(steps[currentStepIndex])) {
         remove(steps[currentStepIndex]);
       }
 
+      onStepComplete(10, steps.length);
       onGameComplete();
       onStepChanged?.call();
     }
   }
-
 
 }

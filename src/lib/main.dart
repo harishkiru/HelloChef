@@ -20,14 +20,20 @@ void main() async {
     anonKey: dotenv.env['SUPABASE_API_KEY']!,
   );
 
-  final dbHelper = DBHelper.instance();
-  await dbHelper.sqliteDatabase;
+  try {
+    final dbHelper = DBHelper.instance();
+    // Force all tables to be created before proceeding
+    await dbHelper.ensureTablesExist();
 
-  await AppFirstRun();
+    // Only now try to insert app first run data
+    await AppFirstRun();
 
-  MediaKit.ensureInitialized();
-
-  runApp(const MyApp());
+    MediaKit.ensureInitialized();
+    runApp(const MyApp());
+  } catch (e) {
+    print('Fatal database initialization error: $e');
+    // Add appropriate error handling
+  }
 }
 
 final supabase = Supabase.instance.client;

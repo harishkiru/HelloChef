@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:src/classes/level.dart';
 import 'package:src/components/lesson_components/lesson_section_card.dart';
 import 'package:src/screens/lesson_screens/level_section_overview_screen.dart';
+import 'package:src/services/db_helper.dart';
+import 'package:src/classes/level_section.dart';
 
 class LevelSectionScreen extends StatefulWidget {
   final Level level;
@@ -13,6 +15,26 @@ class LevelSectionScreen extends StatefulWidget {
 }
 
 class _LevelSectionScreenState extends State<LevelSectionScreen> {
+  final dbHelper = DBHelper.instance();
+
+  Future<List<LevelSection>> getAllSectionsFromLevel(int levelId) async {
+    List<Map<String, dynamic>> sections = await dbHelper
+        .getAllSectionsFromLevel(levelId);
+    List<LevelSection> levelSections =
+        sections.map((section) {
+          return LevelSection(
+            id: section['id'],
+            title: section['title'],
+            subtitle: section['subtitle'],
+            imagePath: section['imagePath'],
+            completedLessons: section['completedLessons'],
+            totalLessons: section['totalLessons'],
+          );
+        }).toList();
+
+    return levelSections;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,23 +55,37 @@ class _LevelSectionScreenState extends State<LevelSectionScreen> {
             style: const TextStyle(fontSize: 18),
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: widget.level.sections.length,
-              itemBuilder: (context, index) {
-                return LessonSectionCard(
-                  section: widget.level.sections[index],
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder:
-                            (context) => LevelSectionOverviewScreen(
-                              section: widget.level.sections[index],
+            child: FutureBuilder(
+              future: getAllSectionsFromLevel(widget.level.id),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Center(child: Text('No sections available.'));
+                } else {
+                  List<LevelSection> sections = snapshot.data!;
+                  return ListView.builder(
+                    itemCount: sections.length,
+                    itemBuilder: (context, index) {
+                      return LessonSectionCard(
+                        section: sections[index],
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder:
+                                  (context) => LevelSectionOverviewScreen(
+                                    section: sections[index],
+                                  ),
                             ),
-                      ),
-                    );
-                  },
-                );
+                          );
+                        },
+                      );
+                    },
+                  );
+                }
               },
             ),
           ),

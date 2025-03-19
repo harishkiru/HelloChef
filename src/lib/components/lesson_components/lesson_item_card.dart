@@ -134,6 +134,7 @@ class _LessonItemCardState extends State<LessonItemCard> {
                   setState(() {
                     widget.lessonItem.isCompleted = true;
                   });
+                  dbHelper.completeLesson(widget.lessonItem.id);
                 }
               });
               break;
@@ -153,6 +154,7 @@ class _LessonItemCardState extends State<LessonItemCard> {
                   setState(() {
                     widget.lessonItem.isCompleted = true;
                   });
+                  dbHelper.completeLesson(widget.lessonItem.id);
                 }
               });
               break;
@@ -173,6 +175,7 @@ class _LessonItemCardState extends State<LessonItemCard> {
                   setState(() {
                     widget.lessonItem.isCompleted = true;
                   });
+                  dbHelper.completeLesson(widget.lessonItem.id);
                 }
               });
           }
@@ -232,6 +235,7 @@ class _LessonItemCardState extends State<LessonItemCard> {
                     setState(() {
                       widget.lessonItem.isCompleted = true;
                     });
+                    dbHelper.completeLesson(widget.lessonItem.id);
                   }
                 });
               },
@@ -294,6 +298,7 @@ class _LessonItemCardState extends State<LessonItemCard> {
                     setState(() {
                       widget.lessonItem.isCompleted = true;
                     });
+                    dbHelper.completeLesson(widget.lessonItem.id);
                   }
                 });
               },

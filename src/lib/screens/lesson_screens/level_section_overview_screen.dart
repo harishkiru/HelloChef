@@ -30,6 +30,7 @@ class _LevelSectionOverviewScreenState
             content: lesson['content'],
             videoPath: lesson['videoPath'],
             imagePath: lesson['imagePath'],
+            quizId: lesson['quizId'],
             isCompleted: lesson['isCompleted'] == 1,
           );
         }).toList();

@@ -8,6 +8,7 @@ class LessonItem {
   final String? videoPath;
   final String? content;
   final Quiz? quiz;
+  final int? quizId; // Used for quiz type
   final List<Map<String, dynamic>>? buttonDetails;
 
   bool isCompleted;
@@ -21,6 +22,7 @@ class LessonItem {
     this.videoPath,
     this.content,
     this.quiz,
+    this.quizId,
     this.buttonDetails,
   });
 }

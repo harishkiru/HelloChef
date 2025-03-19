@@ -341,6 +341,41 @@ class DBHelper {
     return result;
   }
 
+  Future<List<Map<String, dynamic>>> getQuizQuestionsFromQuizId(
+    int quizId,
+  ) async {
+    final db = await sqliteDatabase;
+    final result = await db.query(
+      'QuizQuestions',
+      where: 'quizId = ?',
+      whereArgs: [quizId],
+    );
+    return result;
+  }
+
+  Future<List<Map<String, dynamic>>> getInteractiveButtonsFromLessonId(
+    int lessonId,
+  ) async {
+    final db = await sqliteDatabase;
+    final result = await db.query(
+      'InteractiveButtons',
+      where: 'lessonId = ?',
+      whereArgs: [lessonId],
+    );
+    return result;
+  }
+
+  Future<List<Map<String, dynamic>>> getQuizFromQuizId(int quizId) async {
+    final db = await sqliteDatabase;
+    final result = await db.query(
+      'Quizzes',
+      where: 'id = ?',
+      whereArgs: [quizId],
+      limit: 1,
+    );
+    return result;
+  }
+
   // ********** Supabase User Operations **********
   Future<Map<String, dynamic>?> getUserDetails() async {
     // Return cached data if present.

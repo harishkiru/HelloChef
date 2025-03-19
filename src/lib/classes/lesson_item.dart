@@ -23,16 +23,4 @@ class LessonItem {
     this.quiz,
     this.buttonDetails,
   });
-
-  factory LessonItem.fromJson(Map<String, dynamic> json) {
-    return LessonItem(
-      id: json['id'],
-      title: json['title'],
-      type: json['type'],
-      imagePath: json['imagePath'],
-      isCompleted: json['isCompleted'],
-      content: json['content'],
-      videoPath: json['videoPath'],
-    );
-  }
 }

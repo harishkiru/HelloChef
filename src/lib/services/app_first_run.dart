@@ -5,6 +5,13 @@ Future<void> insertInitialData(
   Database db,
   List<Map<String, dynamic>> levels,
 ) async {
+  // Add marker to first run table to signify that the app has been run before
+
+  await db.execute('''
+      INSERT INTO FirstRun (isFirstRun)
+      VALUES (0)
+    ''');
+
   for (var level in levels) {
     // Insert Level
     await db.execute(
@@ -29,8 +36,8 @@ Future<void> insertInitialData(
       // Insert Section
       await db.execute(
         '''
-        INSERT INTO Sections (levelId, title, subtitle, imagePath, completedLessons)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO Sections (levelId, title, subtitle, imagePath, completedLessons, totalLessons)
+        VALUES (?, ?, ?, ?, ?, ?)
       ''',
         [
           levelId,
@@ -38,6 +45,7 @@ Future<void> insertInitialData(
           section['subtitle'],
           section['imagePath'],
           section['completedLessons'],
+          section['totalLessons'],
         ],
       );
 
@@ -134,6 +142,24 @@ Future<void> insertInitialData(
         }
       }
     }
+  }
+}
+
+Future<bool> checkIfFirstRun(Database db) async {
+  // Check if the FirstRun table exists
+  List<Map<String, dynamic>> result = await db.rawQuery(
+    'SELECT name FROM sqlite_master WHERE type = "table" AND name = "FirstRun"',
+  );
+
+  if (result.isEmpty) {
+    // If the table doesn't exist, it means this is the first run
+    return true;
+  } else {
+    // If the table exists, check if it's empty
+    List<Map<String, dynamic>> firstRunResult = await db.rawQuery(
+      'SELECT * FROM FirstRun',
+    );
+    return firstRunResult.isEmpty;
   }
 }
 
@@ -309,6 +335,7 @@ Future<void> AppFirstRun() async {
             },
           ],
           "completedLessons": 0,
+          "totalLessons": 5,
         },
         {
           "id": 1,
@@ -357,6 +384,7 @@ Future<void> AppFirstRun() async {
             },
           ],
           "completedLessons": 0,
+          "totalLessons": 4,
         },
         {
           "id": 2,
@@ -471,6 +499,7 @@ Future<void> AppFirstRun() async {
             },
           ],
           "completedLessons": 0,
+          "totalLessons": 1,
         },
       ],
     },
@@ -515,8 +544,15 @@ Future<void> AppFirstRun() async {
   // Call the function to insert data
 
   try {
-    await insertInitialData(db, levels);
-    print("Data was inserted successfully");
+    // Check if this is the first run
+    if (await checkIfFirstRun(db)) {
+      print("This is the first run of the app");
+      await insertInitialData(db, levels);
+      print("Data was inserted successfully");
+    } else {
+      print("This is not the first run of the app");
+      return;
+    }
   } catch (e) {
     print('Error inserting data: $e');
   }

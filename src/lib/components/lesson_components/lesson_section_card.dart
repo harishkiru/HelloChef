@@ -85,9 +85,9 @@ class _LessonSectionCardState extends State<LessonSectionCard> {
                         SizedBox(height: 10),
                         LinearProgressIndicator(
                           value:
-                              widget.section.lessons.isNotEmpty
+                              widget.section.totalLessons > 0
                                   ? widget.section.completedLessons /
-                                      widget.section.lessons.length
+                                      widget.section.totalLessons
                                   : 0.25,
                           backgroundColor: Colors.grey,
                           valueColor: AlwaysStoppedAnimation<Color>(

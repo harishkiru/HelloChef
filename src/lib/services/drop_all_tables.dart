@@ -1,4 +1,6 @@
 import 'package:sqflite/sqflite.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:src/services/db_helper.dart';
 
 Future<void> dropAllTables(Database db) async {
@@ -30,7 +32,14 @@ Future<void> verifyTableDeletion(Database db) async {
   }
 }
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
+
+  await Supabase.initialize(
+    url: dotenv.env['SUPABASE_URL']!,
+    anonKey: dotenv.env['SUPABASE_API_KEY']!,
+  );
+
   final db = DBHelper.instance();
   db.sqliteDatabase.then((database) async {
     await dropAllTables(database!);

@@ -31,7 +31,7 @@ class DBHelper {
 
     return await openDatabase(
       path,
-      version: 3, // Incremented version for migration
+      version: 4, // Incremented version for migration
       onCreate: _createDB,
       onUpgrade: _upgradeDB,
     );
@@ -69,6 +69,7 @@ class DBHelper {
           subtitle TEXT,
           imagePath TEXT,
           completedLessons INTEGER DEFAULT 0,
+          totalLessons INTEGER DEFAULT 0,
           FOREIGN KEY (levelId) REFERENCES Levels (id) ON DELETE CASCADE
         )
       ''');
@@ -126,6 +127,14 @@ class DBHelper {
         )
       ''');
 
+      // Create FirstRun table
+      await db.execute('''
+        CREATE TABLE FirstRun (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          isFirstRun INTEGER DEFAULT 1
+        )
+      ''');
+
       print('Credentials table created.');
     } catch (e) {
       print('Error creating credentials table: $e');
@@ -134,7 +143,7 @@ class DBHelper {
 
   // Upgrade the SQLite Database
   Future _upgradeDB(Database db, int oldVersion, int newVersion) async {
-    if (oldVersion < 3) {
+    if (oldVersion < 4) {
       try {
         await db.execute('''
           CREATE TABLE IF NOT EXISTS credentials (
@@ -165,6 +174,7 @@ class DBHelper {
           subtitle TEXT,
           imagePath TEXT,
           completedLessons INTEGER DEFAULT 0,
+          totalLessons INTEGER DEFAULT 0,
           FOREIGN KEY (levelId) REFERENCES Levels (id) ON DELETE CASCADE
         )
       ''');
@@ -221,6 +231,14 @@ class DBHelper {
           FOREIGN KEY (lessonId) REFERENCES Lessons (id) ON DELETE CASCADE
         )
       ''');
+
+        // Create FirstRun table
+        await db.execute('''
+        CREATE TABLE IF NOT EXISTS FirstRun (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          isFirstRun INTEGER DEFAULT 1
+        )
+      ''');
         print('Credentials table upgraded/created.');
       } catch (e) {
         print('Error upgrading/creating credentials table: $e');
@@ -267,6 +285,60 @@ class DBHelper {
   Future close() async {
     final db = await sqliteDatabase;
     db.close();
+  }
+
+  // ********** Lessons SQlite Operations **********
+
+  Future<void> ensureTablesExist() async {
+    final db = await sqliteDatabase;
+
+    try {
+      // Check if key tables exist
+      final tables = await db.rawQuery(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='FirstRun'",
+      );
+
+      if (tables.isEmpty) {
+        print('Tables not found, creating them now...');
+        await _createDB(db, 4);
+      } else {
+        print('Database tables already exist');
+      }
+    } catch (e) {
+      print('Error checking/creating tables: $e');
+      rethrow;
+    }
+  }
+
+  // Fetch all levels from SQLite
+  Future<List<Map<String, dynamic>>> getAllLevels() async {
+    final db = await sqliteDatabase;
+    final result = await db.query('Levels');
+    return result;
+  }
+
+  Future<List<Map<String, dynamic>>> getAllSectionsFromLevel(
+    int levelId,
+  ) async {
+    final db = await sqliteDatabase;
+    final result = await db.query(
+      'Sections',
+      where: 'levelId = ?',
+      whereArgs: [levelId],
+    );
+    return result;
+  }
+
+  Future<List<Map<String, dynamic>>> getAllLessonsFromSection(
+    int sectionId,
+  ) async {
+    final db = await sqliteDatabase;
+    final result = await db.query(
+      'Lessons',
+      where: 'sectionId = ?',
+      whereArgs: [sectionId],
+    );
+    return result;
   }
 
   // ********** Supabase User Operations **********

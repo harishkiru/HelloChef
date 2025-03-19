@@ -1,0 +1,311 @@
+[
+    {
+        "id": 0,
+        "level": 0,
+        "title": "Level 0",
+        "subtitle": "Kitchen Foundations",
+        "imagePath": "assets/images/level_images/level_0.png",
+        "isCompleted": false,
+        "sections": [
+            {
+                "id": 0,
+                "title": "Before You Start",
+                "subtitle": "Learn common tools, equipment, and ingredients.",
+                "imagePath": "assets/images/level_section_images/level_0/section_0.png",
+                "lessons": [
+                    {
+                        "id": 0,
+                        "title": "Common Kitchen Tools",
+                        "type": 0,
+                        "imagePath": "assets/images/level_section_images/level_0/section_0.png",
+                        "isCompleted": false,
+                        "content": "Placeholder"
+                    },
+                    {
+                        "id": 1,
+                        "title": "Common Ingredients",
+                        "type": 0,
+                        "imagePath": "assets/images/lesson_images/level_0/section_0/lesson_2.png",
+                        "isCompleted": false,
+                        "content": "Placeholder"                    
+                    },
+                    {
+                        "id": 2,
+                        "title": "Kitchen Setup & Cleanup",
+                        "type": 1,
+                        "imagePath": "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+                        "isCompleted": false,
+                        "videoPath": "assets/videos/level_0/section_0/video_0.mp4"
+                    },
+                    {
+                        "id": 3,
+                        "title": "Kitchen Setup & Cleanup Transcript",
+                        "type": 2,
+                        "imagePath": "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+                        "isCompleted": false,
+                        "content": "Placeholder"                    
+                    },
+                    {
+                        "id": 4,
+                        "title": "The Kitchen",
+                        "type": 4,
+                        "imagePath": "assets/images/interactive_images/level_0/section_0/interactive_0/0.png",
+                        "isCompleted": false,
+                        "buttonDetails": [
+                            {
+                                "name": "Fridge",
+                                "position_x": 0,
+                                "position_y": 0.125,
+                                "width": 0.14,
+                                "height": 0.275,
+                                "onPressed": "Used to store food meant to be kept cold"
+                            },
+                            {
+                                "name": "Pantry",
+                                "position_x": 0.15,
+                                "position_y": 0.09,
+                                "width": 0.1,
+                                "height": 0.2,
+                                "onPressed": "Used to store food that is shelf-stable"
+                            },
+                            {
+                                "name": "Mixer",
+                                "position_x": 0.28,
+                                "position_y": 0.155,
+                                "width": 0.045,
+                                "height": 0.04,
+                                "onPressed": "Used to mix baking ingredients together"
+                            },
+                            {
+                                "name": "Coffee Maker",
+                                "position_x": 0.33,
+                                "position_y": 0.155,
+                                "width": 0.045,
+                                "height": 0.04,
+                                "onPressed": "Used to make coffee"
+                            },
+                            {
+                                "name": "Toaster",
+                                "position_x": 0.37,
+                                "position_y": 0.16,
+                                "width": 0.04,
+                                "height": 0.04,
+                                "onPressed": "Used to toast bread"
+                            },
+                            {
+                                "name": "Stove/Oven",
+                                "position_x": 0.415,
+                                "position_y": 0.19,
+                                "width": 0.14,
+                                "height": 0.05,
+                                "onPressed": "Used to cook fry and bake food"
+                            },
+                            {
+                                "name": "Toaster Oven",
+                                "position_x": 0.525,
+                                "position_y": 0.165,
+                                "width": 0.09,
+                                "height": 0.033,
+                                "onPressed": "Used to bake and toast food"
+                            },
+                            {
+                                "name": "Kettle",
+                                "position_x": 0.64,
+                                "position_y": 0.16,
+                                "width": 0.04,
+                                "height": 0.035,
+                                "onPressed": "Used to boil water for beverages"
+                            },
+                            {
+                                "name": "Sink",
+                                "position_x": 0.7,
+                                "position_y": 0.16,
+                                "width": 0.1,
+                                "height": 0.06,
+                                "onPressed": "Used to wash dishes and hands"
+                            },
+                            {
+                                "name": "Dishwasher",
+                                "position_x": 0.77,
+                                "position_y": 0.22,
+                                "width": 0.1,
+                                "height": 0.08,
+                                "onPressed": "Used to wash dishes"
+                            },
+                            {
+                                "name": "Blender",
+                                "position_x": 0.835,
+                                "position_y": 0.15,
+                                "width": 0.05,
+                                "height": 0.05,
+                                "onPressed": "Used to blend food and drinks"
+                            },
+                            {
+                                "name": "Microwave",
+                                "position_x": 0.4,
+                                "position_y": 0.125,
+                                "width": 0.15,
+                                "height": 0.035,
+                                "onPressed": "Used to heat food quickly"
+                            }
+                        ]
+                    }
+                ],
+                "completedLessons": 0
+            },
+            {
+                "id": 1,
+                "title": "Kitchen Safety",
+                "subtitle": "Learn how to safely use kitchen tools and equipment.",
+                "imagePath": "assets/images/level_section_images/level_0/section_1.png",
+                "lessons": [
+                    {
+                        "id": 0,
+                        "title": "Food Safety",
+                        "type": 1,
+                        "imagePath": "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+                        "isCompleted": false,
+                        "videoPath": "assets/videos/level_0/section_1/video_0.mp4"
+                    },
+                    {
+                        "id": 1,
+                        "title": "Video Transcript",
+                        "type": 2,
+                        "imagePath": "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+                        "isCompleted": false,
+                        "content": "Placeholder"                    
+                    },
+                    {
+                        "id": 2,
+                        "title": "Heat Safety",
+                        "type": 1,
+                        "imagePath": "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+                        "isCompleted": false,
+                        "videoPath": "assets/videos/level_0/section_1/video_1.mp4"
+                    },
+                    {
+                        "id": 3,
+                        "title": "Video Transcript",
+                        "type": 2,
+                        "imagePath": "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+                        "isCompleted": false,
+                        "content": "Placeholder"                    
+                    }
+                ],
+                "completedLessons": 0
+            },
+            {
+                "id": 2,
+                "title": "Knowledge Section",
+                "subtitle": "Test what you've learned.",
+                "imagePath": "assets/images/level_section_images/level_0/section_2.png",
+                "lessons": [
+                    {
+                        "id": 0,
+                        "title": "Kitchen Safety Quiz",
+                        "type": 3,
+                        "imagePath": "assets/images/lesson_images/level_0_section_0_lesson_2.png",
+                        "isCompleted": false,
+                        "quiz": {
+                            "title": "Kitchen Basics Quiz",
+                            "description": "Test your knowledge of kitchen basics!",
+                            "questions": [
+                                {
+                                    "question": "When should you refrigerate leftovers after cooking?",
+                                    "options": [
+                                        "Within 24 hours",
+                                        "Within 4 hours",
+                                        "Immediately ",
+                                        "You don't need to refridgerate leftovers"
+                                    ],
+                                    "correctAnswerIndex": 2
+                                },
+                                {
+                                    "question": "Why should you use a separate cutting board for raw meat?",
+                                    "options": [
+                                        "To make cleaning up easier",
+                                        "To prevent cross contamination",
+                                        "To make the meat taste better",
+                                        "To make the meat cook faster"
+                                    ],
+                                    "correctAnswerIndex": 1
+                                },
+                                {
+                                    "question": "What food safety infraction is displayed in the image?",
+                                    "options": [
+                                        "Using a wooden cutting board for raw meat",
+                                        "Using the same cutting board for raw meat and vegetables",
+                                        "Not seasoning the meat",
+                                        "Using a dirty table to rest ingredients on"
+                                    ],
+                                    "correctAnswerIndex": 1,
+                                    "imagePath": "assets/images/quiz_images/level_0/section_2/quiz_0/0.png"
+                                },
+                                {
+                                    "question": "Why should you not use a damp cloth to remove hot items from the oven?",
+                                    "options": [
+                                        "The moisture can conduct heat",
+                                        "The moisture can turn into steam and burn you",
+                                        "The moisture can cause the cloth to catch fire",
+                                        "Both A and B"
+                                    ],
+                                    "correctAnswerIndex": 3
+                                },
+                                {
+                                    "question": "Why should you stand to the side when straining boiling water?",
+                                    "options": [
+                                        "To avoid water burns",
+                                        "To avoid spilling the water",
+                                        "To avoid steam burns",
+                                        "To avoid getting wet"
+                                    ],
+                                    "correctAnswerIndex": 2
+                                },
+                                {
+                                    "question": "What is the safest way to determine if meat is cooked?",
+                                    "options": [
+                                        "By cutting it open",
+                                        "By smelling it",
+                                        "By checking the internal temperature",
+                                        "By looking at the color"
+                                    ],
+                                    "correctAnswerIndex": 2
+                                },
+                                {
+                                    "question": "What should you do if something becomes stuck in the toaster?",
+                                    "options": [
+                                        "Immediately remove it with your hands to avoid a fire",
+                                        "Unplug the toaster and use a wooden or plastic utensil",
+                                        "Use a damp cloth to remove it",
+                                        "Use WD-40 to lubricate the toaster, Toaster Maintenance is important for preventing jams"
+                                    ],
+                                    "correctAnswerIndex": 1
+                                },
+                                {
+                                    "question": "What reference should you use to determine the shelf life of raw meat?",
+                                    "options": [
+                                        "The best before date provided on the packaging",
+                                        "The one week rule",
+                                        "The touch test",
+                                        "The estimated time provided by the FDA"
+                                    ],
+                                    "correctAnswerIndex": 0
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "completedLessons": 0
+            }
+        ]
+    },
+    {
+        "id": 1,
+        "level": 1,
+        "title": "Level 1",
+        "subtitle": "Kitchen Something",
+        "imagePath": "assets/images/level_images/level_1.jpg",
+        "isCompleted": false,
+        "sections": []
+    }
+]

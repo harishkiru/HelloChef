@@ -4,8 +4,11 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:src/screens/authentication_screens/login_screen.dart';
 import 'package:src/screens/authentication_screens/signup_screen.dart';
-import 'package:src/components/authentication_components/constant.dart' as utils;
+import 'package:src/components/authentication_components/constant.dart'
+    as utils;
 import 'package:media_kit/media_kit.dart';
+import 'package:src/services/app_first_run.dart';
+import 'package:src/services/db_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,6 +19,11 @@ void main() async {
     url: dotenv.env['SUPABASE_URL']!,
     anonKey: dotenv.env['SUPABASE_API_KEY']!,
   );
+
+  final dbHelper = DBHelper.instance();
+  await dbHelper.sqliteDatabase;
+
+  await AppFirstRun();
 
   MediaKit.ensureInitialized();
 

@@ -758,4 +758,25 @@ By following these precautions, you can safely handle hot kitchen appliances and
 
   // Write the JSON output to a file
   File('output.json').writeAsStringSync(jsonString);
+
+  // Read the JSON file
+  String fileContent = File('output.json').readAsStringSync();
+
+  // Convert the JSON to a list
+  List<dynamic> json = jsonDecode(fileContent);
+
+  // Convert the list to a list of Level objects
+  List<Level> levelsFromJson =
+      json.map((level) => Level.fromJson(level)).toList();
+
+  // Print the levels
+  for (var level in levelsFromJson) {
+    print(level.title);
+    for (var section in level.sections) {
+      print(section.title);
+      for (var lesson in section.lessons) {
+        print(lesson.title);
+      }
+    }
+  }
 }

@@ -376,6 +376,78 @@ class DBHelper {
     return result;
   }
 
+  Future<void> completeLesson(int lessonId) async {
+    final db = await sqliteDatabase;
+    await db.update(
+      'Lessons',
+      {'isCompleted': 1},
+      where: 'id = ?',
+      whereArgs: [lessonId],
+    );
+    await addCompletedLessonToSection(lessonId);
+  }
+
+  Future<void> addCompletedLessonToSection(int lessonId) async {
+    final db = await sqliteDatabase;
+
+    // Get the sectionId of the completed lesson
+    final lesson = await db.query(
+      'Lessons',
+      where: 'id = ?',
+      whereArgs: [lessonId],
+      limit: 1,
+    );
+    if (lesson.isNotEmpty) {
+      final sectionId = lesson.first['sectionId'] as int;
+
+      // Update the completedLessons count in the Sections table
+      await db.rawUpdate(
+        'UPDATE Sections SET completedLessons = completedLessons + 1 WHERE id = ?',
+        [sectionId],
+      );
+
+      // Check if the level is completed
+      final section = await db.query(
+        'Sections',
+        where: 'id = ?',
+        whereArgs: [sectionId],
+        limit: 1,
+      );
+      if (section.isNotEmpty) {
+        final levelId = section.first['levelId'] as int;
+        await checkIfLevelCompleted(levelId);
+      }
+    }
+  }
+
+  Future<void> checkIfLevelCompleted(int levelId) async {
+    final db = await sqliteDatabase;
+
+    // Get the total number of sections in the level
+    final sections = await db.query(
+      'Sections',
+      where: 'levelId = ?',
+      whereArgs: [levelId],
+    );
+
+    // Get the number of completed sections
+    final completedSections = await db.rawQuery(
+      'SELECT COUNT(*) as count FROM Sections WHERE levelId = ? AND completedLessons = totalLessons',
+      [levelId],
+    );
+
+    if (completedSections.isNotEmpty &&
+        completedSections.first['count'] == sections.length) {
+      // Update the level as completed
+      await db.update(
+        'Levels',
+        {'isCompleted': 1},
+        where: 'id = ?',
+        whereArgs: [levelId],
+      );
+    }
+  }
+
   // ********** Supabase User Operations **********
   Future<Map<String, dynamic>?> getUserDetails() async {
     // Return cached data if present.

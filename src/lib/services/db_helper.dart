@@ -107,6 +107,8 @@ class DBHelper {
           quizId INTEGER NOT NULL,
           question TEXT NOT NULL,
           options TEXT NOT NULL,
+          imagePath TEXT,
+          videoPath TEXT,
           correctAnswerIndex INTEGER NOT NULL,
           FOREIGN KEY (quizId) REFERENCES Quizzes (id) ON DELETE CASCADE
         )
@@ -212,6 +214,8 @@ class DBHelper {
           quizId INTEGER NOT NULL,
           question TEXT NOT NULL,
           options TEXT NOT NULL,
+          imagePath TEXT,
+          videoPath TEXT,
           correctAnswerIndex INTEGER NOT NULL,
           FOREIGN KEY (quizId) REFERENCES Quizzes (id) ON DELETE CASCADE
         )

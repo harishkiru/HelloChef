@@ -126,8 +126,8 @@ Future<void> insertInitialData(
           for (var question in quiz['questions']) {
             await db.execute(
               '''
-              INSERT INTO QuizQuestions (quizId, question, options, correctAnswerIndex)
-              VALUES (?, ?, ?, ?)
+              INSERT INTO QuizQuestions (quizId, question, options, imagePath, videoPath, correctAnswerIndex)
+              VALUES (?, ?, ?, ?, ?, ?)
             ''',
               [
                 quizId,
@@ -135,6 +135,8 @@ Future<void> insertInitialData(
                 question['options'].join(
                   ',',
                 ), // Convert list to comma-separated string
+                question['imagePath'],
+                question['videoPath'],
                 question['correctAnswerIndex'],
               ],
             );
@@ -479,7 +481,7 @@ Future<void> AppFirstRun() async {
                       "Immediately remove it with your hands to avoid a fire",
                       "Unplug the toaster and use a wooden or plastic utensil",
                       "Use a damp cloth to remove it",
-                      "Use WD-40 to lubricate the toaster, Toaster Maintenance is important for preventing jams",
+                      "Use WD-40 to lubricate the toaster; toaster maintenance is important for preventing jams",
                     ],
                     "correctAnswerIndex": 1,
                   },

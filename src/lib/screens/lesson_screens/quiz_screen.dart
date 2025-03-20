@@ -212,6 +212,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                             ); // Close dialog
                                             Navigator.pop(
                                               context,
+                                              true,
                                             ); // Go back to lessons
                                           },
                                           child: const Text(

@@ -45,6 +45,12 @@ class _LevelSectionScreenState extends State<LevelSectionScreen> {
           style: const TextStyle(fontSize: 24),
         ),
         centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context, true);
+          },
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -80,7 +86,11 @@ class _LevelSectionScreenState extends State<LevelSectionScreen> {
                                     section: sections[index],
                                   ),
                             ),
-                          );
+                          ).then((value) {
+                            if (value != null && value) {
+                              setState(() {});
+                            }
+                          });
                         },
                       );
                     },

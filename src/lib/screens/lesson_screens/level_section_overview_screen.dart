@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:src/classes/level_section.dart';
 import 'package:src/components/lesson_components/lesson_item_card.dart';
@@ -48,6 +50,12 @@ class _LevelSectionOverviewScreenState
           style: const TextStyle(fontSize: 24),
         ),
         centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context, true);
+          },
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -82,6 +90,14 @@ class _LevelSectionOverviewScreenState
           ),
         ],
       ),
+      // bottomNavigationBar: BottomAppBar(
+      //   child: ElevatedButton(
+      //     onPressed: () {
+      //       Navigator.pop(context, true);
+      //     },
+      //     child: const Text('Back'),
+      //   ),
+      // ),
     );
   }
 }

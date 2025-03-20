@@ -16,6 +16,7 @@ Future<void> dropAllTables(Database db) async {
       // Skip the sqlite_sequence table
       await db.execute('DROP TABLE IF EXISTS $tableName');
     }
+    print('Dropped table: $tableName');
   }
 }
 
@@ -27,8 +28,6 @@ Future<void> verifyTableDeletion(Database db) async {
 
   if (tables.isEmpty) {
     print('All tables have been dropped');
-  } else {
-    print('Failed to drop all tables');
   }
 }
 

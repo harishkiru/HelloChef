@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:src/classes/lesson_item.dart';
 
 // void main(List<String> args) {
 //   runApp(MaterialApp(home: InteractiveImageScreen()));
@@ -6,12 +7,14 @@ import 'package:flutter/material.dart';
 
 class InteractiveImageScreen extends StatefulWidget {
   final String imagePath;
+  final LessonItem lessonItem;
   List<Map<String, dynamic>> buttonDetails;
 
   InteractiveImageScreen({
     super.key,
     required this.imagePath,
     required this.buttonDetails,
+    required this.lessonItem,
   });
 
   @override

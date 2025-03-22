@@ -37,7 +37,13 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   Future<void> _initPlayer() async {
     final filePath = await copyAsset(widget.videoUrl, 'video.mp4');
-    player.open(Media(filePath));
+
+    try {
+      await player.open(Media(filePath));
+    } catch (e) {
+      print('Error opening video: $e');
+    }
+
     setState(() {
       _playerInitialized = true;
     });

@@ -16,6 +16,20 @@ class LevelSectionScreen extends StatefulWidget {
 
 class _LevelSectionScreenState extends State<LevelSectionScreen> {
   final dbHelper = DBHelper.instance();
+  late Future<List<LevelSection>> _sectionsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _refreshSections();
+  }
+
+  // Function to refresh sections data
+  void _refreshSections() {
+    setState(() {
+      _sectionsFuture = getAllSectionsFromLevel(widget.level.id);
+    });
+  }
 
   Future<List<LevelSection>> getAllSectionsFromLevel(int levelId) async {
     List<Map<String, dynamic>> sections = await dbHelper
@@ -42,11 +56,15 @@ class _LevelSectionScreenState extends State<LevelSectionScreen> {
         title: Text(
           widget.level.title,
           textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 24),
+          style: const TextStyle(
+            fontSize: 24,
+            color: Colors.white,
+          ),
         ),
+        backgroundColor: Colors.green,
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context, true);
           },
@@ -55,14 +73,21 @@ class _LevelSectionScreenState extends State<LevelSectionScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            widget.level.subtitle,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 18),
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            color: Colors.green.shade50,
+            child: Text(
+              widget.level.subtitle,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.green.shade800,
+              ),
+            ),
           ),
           Expanded(
             child: FutureBuilder(
-              future: getAllSectionsFromLevel(widget.level.id),
+              future: _sectionsFuture,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
@@ -86,10 +111,9 @@ class _LevelSectionScreenState extends State<LevelSectionScreen> {
                                     section: sections[index],
                                   ),
                             ),
-                          ).then((value) {
-                            if (value != null && value) {
-                              setState(() {});
-                            }
+                          ).then((_) {
+                            // Always refresh when returning from lesson section
+                            _refreshSections();
                           });
                         },
                       );

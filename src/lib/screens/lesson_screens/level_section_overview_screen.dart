@@ -19,6 +19,20 @@ class LevelSectionOverviewScreen extends StatefulWidget {
 class _LevelSectionOverviewScreenState
     extends State<LevelSectionOverviewScreen> {
   final dbHelper = DBHelper.instance();
+  late Future<List<LessonItem>> _lessonsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _refreshLessons();
+  }
+
+  // Function to refresh lessons data
+  void _refreshLessons() {
+    setState(() {
+      _lessonsFuture = getAllLessonsFromSection(widget.section.id);
+    });
+  }
 
   Future<List<LessonItem>> getAllLessonsFromSection(int sectionId) async {
     List<Map<String, dynamic>> lessons = await dbHelper
@@ -47,11 +61,15 @@ class _LevelSectionOverviewScreenState
         title: Text(
           widget.section.title,
           textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 24),
+          style: const TextStyle(
+            fontSize: 24,
+            color: Colors.white,
+          ),
         ),
+        backgroundColor: Colors.green,
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context, true);
           },
@@ -60,14 +78,21 @@ class _LevelSectionOverviewScreenState
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            widget.section.subtitle,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 18),
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            color: Colors.green.shade50,
+            child: Text(
+              widget.section.subtitle,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.green.shade800,
+              ),
+            ),
           ),
           Expanded(
             child: FutureBuilder(
-              future: getAllLessonsFromSection(widget.section.id),
+              future: _lessonsFuture,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
@@ -81,7 +106,10 @@ class _LevelSectionOverviewScreenState
                     itemCount: lessons.length,
                     padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                     itemBuilder: (context, index) {
-                      return LessonItemCard(lessonItem: lessons[index]);
+                      return LessonItemCard(
+                        lessonItem: lessons[index],
+                        onCompleted: _refreshLessons,
+                      );
                     },
                   );
                 }
@@ -90,14 +118,6 @@ class _LevelSectionOverviewScreenState
           ),
         ],
       ),
-      // bottomNavigationBar: BottomAppBar(
-      //   child: ElevatedButton(
-      //     onPressed: () {
-      //       Navigator.pop(context, true);
-      //     },
-      //     child: const Text('Back'),
-      //   ),
-      // ),
     );
   }
 }

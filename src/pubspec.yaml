@@ -98,6 +98,7 @@ flutter:
     - assets/data/recipes_simulation.json
     - assets/levels/levels.json
     - assets/data/recipes_simulation.json
+    - assets/data/tips.json
     
     - assets/videos/level_0/section_0/video_0.mp4
     - assets/videos/level_0/section_1/video_0.mp4

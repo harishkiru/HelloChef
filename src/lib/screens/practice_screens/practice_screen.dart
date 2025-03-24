@@ -5,6 +5,7 @@ import 'practice_grid.dart';
 import 'practice_data.dart';
 import 'package:src/components/home_components/user_profile.dart';
 import '../practice_simulation/start_menu.dart';
+import 'package:src/components/common/safe_bottom_padding.dart'; // Add this import
 
 class PracticeScreen extends StatefulWidget {
   const PracticeScreen({super.key});
@@ -57,47 +58,54 @@ class _PracticeScreenState extends State<PracticeScreen> {
         ],
       ),
       endDrawer: const UserProfileDrawer(),
-      body: FutureBuilder<List<tile.PracticeTile>>(
-        future: _practiceTilesFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No recipes available.'));
-          }
+      body: SafeArea(  // Added SafeArea
+        child: FutureBuilder<List<tile.PracticeTile>>(
+          future: _practiceTilesFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Center(child: Text('No recipes available.'));
+            }
 
-          final practiceTile = snapshot.data!;
+            final practiceTile = snapshot.data!;
 
-          final filteredItems = practiceTile.where((item) {
-            final matchesDifficulty =
-                selectedDifficulty == tile.Difficulty.all || item.difficulty == selectedDifficulty;
-            final matchesCategory =
-                selectedCategory == tile.Category.all || item.category == selectedCategory;
-            return matchesDifficulty && matchesCategory;
-          }).toList();
+            final filteredItems = practiceTile.where((item) {
+              final matchesDifficulty =
+                  selectedDifficulty == tile.Difficulty.all || item.difficulty == selectedDifficulty;
+              final matchesCategory =
+                  selectedCategory == tile.Category.all || item.category == selectedCategory;
+              return matchesDifficulty && matchesCategory;
+            }).toList();
 
-          return Column(
-            children: [
-              filter.FilterOptions(
-                selectedDifficulty: selectedDifficulty,
-                onDifficultySelected: (difficulty) {
-                  setState(() {
-                    selectedDifficulty = difficulty;
-                  });
-                },
-                selectedCategory: selectedCategory,
-                onCategorySelected: (category) {
-                  setState(() {
-                    selectedCategory = category;
-                  });
-                },
-              ),
-              Expanded(child: PracticeGrid(items: filteredItems)),
-            ],
-          );
-        },
+            return Column(
+              children: [
+                filter.FilterOptions(
+                  selectedDifficulty: selectedDifficulty,
+                  onDifficultySelected: (difficulty) {
+                    setState(() {
+                      selectedDifficulty = difficulty;
+                    });
+                  },
+                  selectedCategory: selectedCategory,
+                  onCategorySelected: (category) {
+                    setState(() {
+                      selectedCategory = category;
+                    });
+                  },
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+                    child: PracticeGrid(items: filteredItems),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

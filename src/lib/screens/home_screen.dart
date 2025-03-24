@@ -3,6 +3,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:src/components/home_components/user_profile.dart';
 import 'package:src/services/db_helper.dart';
 import 'package:src/services/navigation_service.dart';
+import 'package:src/components/common/safe_bottom_padding.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 
@@ -379,7 +380,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 }
               ),
               
-              const SizedBox(height: 24),
+              // Add SafeBottomPadding at the end of the SingleChildScrollView content
+              SafeBottomPadding(
+                extraPadding: 8.0,
+                child: SizedBox(height: 16), // Smaller SizedBox instead of the const SizedBox(height: 24)
+              ),
             ],
           ),
         ),

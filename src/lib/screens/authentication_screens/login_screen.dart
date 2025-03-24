@@ -58,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
 
       // Navigate to home screen
       if (mounted) {
-        Navigator.pushNamed(context, '/home');
+        Navigator.pushReplacementNamed(context, '/home');  // Changed from pushNamed to pushReplacementNamed
       }
     } on AuthException catch (error) {
       if (!mounted) return;

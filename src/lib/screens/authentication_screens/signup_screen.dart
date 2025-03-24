@@ -142,7 +142,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     lastName: _lastNameController.text,
                   );
                   if (success && mounted) {
-                    Navigator.pushNamed(context, '/home');
+                    Navigator.pushReplacementNamed(context, '/home');  // Changed from pushNamed to pushReplacementNamed
                   }
                 },
           child: isLoading

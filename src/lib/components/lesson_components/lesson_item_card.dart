@@ -161,89 +161,95 @@ class _LessonItemCardState extends State<LessonItemCard> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // Image section (reduced height)
-            Stack(
-              alignment: Alignment.bottomRight,
-              children: [
-                Container(
-                  height: 100.0, // Reduced image height
-                  decoration: BoxDecoration(
-                    color: _getCardColor(widget.lessonItem.type),
-                    image: widget.lessonItem.imagePath != null && widget.lessonItem.imagePath!.isNotEmpty
-                        ? DecorationImage(
-                            image: AssetImage(widget.lessonItem.imagePath!),
-                            fit: BoxFit.cover,
-                            colorFilter: ColorFilter.mode(
-                              Colors.black.withOpacity(0.3),
-                              BlendMode.darken,
-                            ),
-                          )
-                        : null,
-                  ),
-                  child: widget.lessonItem.imagePath == null || widget.lessonItem.imagePath!.isEmpty
-                      ? Center(
-                          child: Icon(
-                            _getIconForLessonType(widget.lessonItem.type),
-                            size: 40.0, // Reduced placeholder icon size
-                            color: Colors.white,
-                          ),
-                        )
-                      : null,
-                ),
-                if (widget.lessonItem.isCompleted)
-                  Container(
-                    padding: const EdgeInsets.all(6.0),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.6),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(12.0),
-                      ),
-                    ),
-                    child: const Icon(
-                      Icons.check_circle,
-                      color: Colors.green,
-                      size: 28.0,
-                    ),
-                  ),
-              ],
-            ),
-            
-            // Content section with green background (increased text and icon sizes)
             Container(
-              color: Colors.green.shade600,
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.lessonItem.title,
-                    style: const TextStyle(
-                      fontSize: 14.0, // Increased title font size from 12.0
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 4.0),
-                  Row(
-                    children: [
-                      Icon(
+              height: 100.0, // Reduced image height
+              decoration: BoxDecoration(
+                color: _getCardColor(widget.lessonItem.type),
+                image: widget.lessonItem.imagePath != null && widget.lessonItem.imagePath!.isNotEmpty
+                    ? DecorationImage(
+                        image: AssetImage(widget.lessonItem.imagePath!),
+                        fit: BoxFit.cover,
+                        colorFilter: ColorFilter.mode(
+                          Colors.black.withOpacity(0.3),
+                          BlendMode.darken,
+                        ),
+                      )
+                    : null,
+              ),
+              child: widget.lessonItem.imagePath == null || widget.lessonItem.imagePath!.isEmpty
+                  ? Center(
+                      child: Icon(
                         _getIconForLessonType(widget.lessonItem.type),
-                        size: 16.0, // Increased type icon size from 14.0
+                        size: 40.0,
                         color: Colors.white,
                       ),
-                      const SizedBox(width: 6.0),
+                    )
+                  : null,
+            ),
+            
+            // Content section with green background
+            Stack(
+              children: [
+                Container(
+                  color: Colors.green.shade600,
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                       Text(
-                        _getLessonTypeText(widget.lessonItem.type),
+                        widget.lessonItem.title,
                         style: const TextStyle(
-                          fontSize: 12.0, // Increased lesson type font size from 10.0
-                          color: Colors.white70,
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
+                      const SizedBox(height: 4.0),
+                      Row(
+                        children: [
+                          Icon(
+                            _getIconForLessonType(widget.lessonItem.type),
+                            size: 16.0,
+                            color: Colors.white,
+                          ),
+                          const SizedBox(width: 6.0),
+                          Text(
+                            _getLessonTypeText(widget.lessonItem.type),
+                            style: const TextStyle(
+                              fontSize: 12.0,
+                              color: Colors.white70,
+                            ),
+                          ),
+                        ],
+                      ),
+                      // Added extra space at bottom for the icon
+                      const SizedBox(height: 6.0),
                     ],
                   ),
-                ],
-              ),
+                ),
+                
+                // Completion status indicator in bottom right corner
+                Positioned(
+                  bottom: 8.0,
+                  right: 8.0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white.withOpacity(0.2),
+                    ),
+                    padding: const EdgeInsets.all(2.0),
+                    child: Icon(
+                      widget.lessonItem.isCompleted
+                          ? Icons.check_circle  // Checkmark in circle for completed
+                          : Icons.circle_outlined,  // Just a circle for incomplete
+                      color: Colors.white,
+                      size: 22.0,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

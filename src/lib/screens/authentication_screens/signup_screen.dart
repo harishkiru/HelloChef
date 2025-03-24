@@ -41,8 +41,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     try {
       // Sign up the user using Supabase authentication
-      final response =
-          await client.auth.signUp(email: email, password: password);
+      final response = await client.auth.signUp(email: email, password: password);
 
       // Retrieve the user's ID after successful sign-up
       final userId = response.user!.id;
@@ -57,8 +56,8 @@ class _SignUpPageState extends State<SignUpPage> {
 
       return true; // Return true if sign-up is successful
     } catch (e) {
-      // Display an error message if sign-up fails
-      context.showErrorMessage('Sign up failed: $e');
+      // Display a user friendly error message if sign-up fails
+      context.showErrorMessage('Sign up failed. Please try again.');
       return false; // Return false on failure
     }
   }

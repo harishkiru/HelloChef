@@ -9,8 +9,13 @@ import 'package:src/classes/quiz.dart';
 
 class LessonItemCard extends StatefulWidget {
   final LessonItem lessonItem;
+  final VoidCallback? onCompleted;
 
-  const LessonItemCard({super.key, required this.lessonItem});
+  const LessonItemCard({
+    super.key, 
+    required this.lessonItem,
+    this.onCompleted,
+  });
 
   @override
   State<LessonItemCard> createState() => _LessonItemCardState();
@@ -80,6 +85,53 @@ class _LessonItemCardState extends State<LessonItemCard> {
     }
   }
 
+  String _getLessonTypeText(int type) {
+    switch (type) {
+      case 0:
+        return 'Reading Material';
+      case 1:
+        return 'Video Lesson';
+      case 2:
+        return 'Transcription';
+      case 3:
+        return 'Interactive Quiz';
+      case 4:
+        return 'Interactive Image';
+      default:
+        return 'Lesson';
+    }
+  }
+
+  Color _getCardColor(int type) {
+    switch (type) {
+      case 0:
+        return Colors.green.shade700;
+      case 1:
+        return Colors.blue.shade700;
+      case 2:
+        return Colors.orange.shade700;
+      case 3:
+        return Colors.purple.shade700;
+      case 4:
+        return Colors.teal.shade700;
+      default:
+        return Colors.green.shade700;
+    }
+  }
+
+  // Update lesson completion state and notify parent
+  void _markLessonCompleted() {
+    setState(() {
+      widget.lessonItem.isCompleted = true;
+    });
+    dbHelper.completeLesson(widget.lessonItem.id);
+    
+    // Notify parent to refresh progress
+    if (widget.onCompleted != null) {
+      widget.onCompleted!();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     if (widget.lessonItem.type < 3) {
@@ -91,96 +143,174 @@ class _LessonItemCardState extends State<LessonItemCard> {
     }
   }
 
-  Widget textVideoandImageContent() {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-      child: ListTile(
-        contentPadding: const EdgeInsets.fromLTRB(5, 5, 10, 5),
-
-        leading: Icon(
-          _getIconForLessonType(widget.lessonItem.type),
-          color: Colors.white,
-          size: 40,
+  Widget _buildCardContent(BuildContext context, {VoidCallback? onTap}) {
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 3.0), // Reduced vertical margin
+      elevation: 4.0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.0),
+        side: BorderSide(
+          color: widget.lessonItem.isCompleted ? Colors.green.shade300 : Colors.transparent,
+          width: widget.lessonItem.isCompleted ? 2.0 : 0,
         ),
-        title: Text(
-          widget.lessonItem.title,
-          style: const TextStyle(fontSize: 18, color: Colors.white),
-        ),
-        trailing:
-            (widget.lessonItem.isCompleted)
-                ? const Icon(
-                  Icons.check_circle,
-                  color: Color.fromARGB(255, 0, 247, 255),
-                )
-                : (!widget.lessonItem.isCompleted)
-                ? const Icon(Icons.circle, color: Colors.grey)
-                : null,
-        tileColor: Colors.green,
-        onTap: () {
-          switch (widget.lessonItem.type) {
-            case 0:
-              final response = Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder:
-                      (context) => MarkdownViewerScreen(
-                        markdown: widget.lessonItem.content!,
-                        lessonItem: widget.lessonItem,
-                      ),
-                ),
-              );
-              response.then((value) {
-                if (value != null && value) {
-                  setState(() {
-                    widget.lessonItem.isCompleted = true;
-                  });
-                  dbHelper.completeLesson(widget.lessonItem.id);
-                }
-              });
-              break;
-            case 1:
-              final response = Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder:
-                      (context) => VideoPlayerScreen(
-                        videoUrl: widget.lessonItem.videoPath!,
-                        lessonItem: widget.lessonItem,
-                      ),
-                ),
-              );
-              response.then((value) {
-                if (value != null && value) {
-                  setState(() {
-                    widget.lessonItem.isCompleted = true;
-                  });
-                  dbHelper.completeLesson(widget.lessonItem.id);
-                }
-              });
-              break;
-
-            case 2:
-              final response = Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder:
-                      (context) => MarkdownViewerScreen(
-                        markdown: widget.lessonItem.content!,
-                        lessonItem: widget.lessonItem,
-                      ),
-                ),
-              );
-              response.then((value) {
-                if (value != null && value) {
-                  setState(() {
-                    widget.lessonItem.isCompleted = true;
-                  });
-                  dbHelper.completeLesson(widget.lessonItem.id);
-                }
-              });
-          }
-        },
       ),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onTap,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Image section (reduced height)
+            Container(
+              height: 100.0, // Reduced image height
+              decoration: BoxDecoration(
+                color: _getCardColor(widget.lessonItem.type),
+                image: widget.lessonItem.imagePath != null && widget.lessonItem.imagePath!.isNotEmpty
+                    ? DecorationImage(
+                        image: AssetImage(widget.lessonItem.imagePath!),
+                        fit: BoxFit.cover,
+                        colorFilter: ColorFilter.mode(
+                          Colors.black.withOpacity(0.3),
+                          BlendMode.darken,
+                        ),
+                      )
+                    : null,
+              ),
+              child: widget.lessonItem.imagePath == null || widget.lessonItem.imagePath!.isEmpty
+                  ? Center(
+                      child: Icon(
+                        _getIconForLessonType(widget.lessonItem.type),
+                        size: 40.0,
+                        color: Colors.white,
+                      ),
+                    )
+                  : null,
+            ),
+            
+            // Content section with green background
+            Stack(
+              children: [
+                Container(
+                  color: Colors.green.shade600,
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.lessonItem.title,
+                        style: const TextStyle(
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 4.0),
+                      Row(
+                        children: [
+                          Icon(
+                            _getIconForLessonType(widget.lessonItem.type),
+                            size: 16.0,
+                            color: Colors.white,
+                          ),
+                          const SizedBox(width: 6.0),
+                          Text(
+                            _getLessonTypeText(widget.lessonItem.type),
+                            style: const TextStyle(
+                              fontSize: 12.0,
+                              color: Colors.white70,
+                            ),
+                          ),
+                        ],
+                      ),
+                      // Added extra space at bottom for the icon
+                      const SizedBox(height: 6.0),
+                    ],
+                  ),
+                ),
+                
+                // Completion status indicator in bottom right corner
+                Positioned(
+                  bottom: 8.0,
+                  right: 8.0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white.withOpacity(0.2),
+                    ),
+                    padding: const EdgeInsets.all(2.0),
+                    child: Icon(
+                      widget.lessonItem.isCompleted
+                          ? Icons.check_circle  // Checkmark in circle for completed
+                          : Icons.circle_outlined,  // Just a circle for incomplete
+                      color: Colors.white,
+                      size: 22.0,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget textVideoandImageContent() {
+    return _buildCardContent(
+      context,
+      onTap: () {
+        switch (widget.lessonItem.type) {
+          case 0:
+            final response = Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MarkdownViewerScreen(
+                  markdown: widget.lessonItem.content!,
+                  lessonItem: widget.lessonItem,
+                ),
+              ),
+            );
+            response.then((value) {
+              if (value != null && value) {
+                _markLessonCompleted();
+              }
+            });
+            break;
+          case 1:
+            final response = Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => VideoPlayerScreen(
+                  videoUrl: widget.lessonItem.videoPath!,
+                  lessonItem: widget.lessonItem,
+                ),
+              ),
+            );
+            response.then((value) {
+              if (value != null && value) {
+                _markLessonCompleted();
+              }
+            });
+            break;
+          case 2:
+            final response = Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MarkdownViewerScreen(
+                  markdown: widget.lessonItem.content!,
+                  lessonItem: widget.lessonItem,
+                ),
+              ),
+            );
+            response.then((value) {
+              if (value != null && value) {
+                _markLessonCompleted();
+              }
+            });
+        }
+      },
     );
   }
 
@@ -196,50 +326,24 @@ class _LessonItemCardState extends State<LessonItemCard> {
           return const Center(child: Text('No quiz available'));
         } else {
           Quiz quiz = snapshot.data!;
-          return Container(
-            margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-            child: ListTile(
-              contentPadding: const EdgeInsets.fromLTRB(5, 5, 10, 5),
-              leading: Icon(
-                _getIconForLessonType(widget.lessonItem.type),
-                color: Colors.white,
-                size: 40,
-              ),
-              title: Text(
-                widget.lessonItem.title,
-                style: const TextStyle(fontSize: 18, color: Colors.white),
-              ),
-              trailing:
-                  (widget.lessonItem.isCompleted)
-                      ? const Icon(
-                        Icons.check_circle,
-                        color: Color.fromARGB(255, 0, 247, 255),
-                      )
-                      : (!widget.lessonItem.isCompleted)
-                      ? const Icon(Icons.circle, color: Colors.grey)
-                      : null,
-              tileColor: Colors.green,
-              onTap: () {
-                final response = Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder:
-                        (context) => QuizScreen(
-                          quiz: quiz,
-                          lessonItem: widget.lessonItem,
-                        ),
+          return _buildCardContent(
+            context,
+            onTap: () {
+              final response = Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => QuizScreen(
+                    quiz: quiz,
+                    lessonItem: widget.lessonItem,
                   ),
-                );
-                response.then((value) {
-                  if (value != null && value) {
-                    setState(() {
-                      widget.lessonItem.isCompleted = true;
-                    });
-                    dbHelper.completeLesson(widget.lessonItem.id);
-                  }
-                });
-              },
-            ),
+                ),
+              );
+              response.then((value) {
+                if (value != null && value) {
+                  _markLessonCompleted();
+                }
+              });
+            },
           );
         }
       },
@@ -258,51 +362,25 @@ class _LessonItemCardState extends State<LessonItemCard> {
           return const Center(child: Text('No interactive image available'));
         } else {
           List<Map<String, dynamic>> buttonDetails = snapshot.data!;
-          return Container(
-            margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-            child: ListTile(
-              contentPadding: const EdgeInsets.fromLTRB(5, 5, 10, 5),
-              leading: Icon(
-                _getIconForLessonType(widget.lessonItem.type),
-                color: Colors.white,
-                size: 40,
-              ),
-              title: Text(
-                widget.lessonItem.title,
-                style: const TextStyle(fontSize: 18, color: Colors.white),
-              ),
-              trailing:
-                  (widget.lessonItem.isCompleted)
-                      ? const Icon(
-                        Icons.check_circle,
-                        color: Color.fromARGB(255, 0, 247, 255),
-                      )
-                      : (!widget.lessonItem.isCompleted)
-                      ? const Icon(Icons.circle, color: Colors.grey)
-                      : null,
-              tileColor: Colors.green,
-              onTap: () {
-                final response = Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder:
-                        (context) => InteractiveImageScreen(
-                          imagePath: widget.lessonItem.imagePath,
-                          buttonDetails: buttonDetails,
-                          lessonItem: widget.lessonItem,
-                        ),
+          return _buildCardContent(
+            context,
+            onTap: () {
+              final response = Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => InteractiveImageScreen(
+                    imagePath: widget.lessonItem.imagePath,
+                    buttonDetails: buttonDetails,
+                    lessonItem: widget.lessonItem,
                   ),
-                );
-                response.then((value) {
-                  if (value != null && value) {
-                    setState(() {
-                      widget.lessonItem.isCompleted = true;
-                    });
-                    dbHelper.completeLesson(widget.lessonItem.id);
-                  }
-                });
-              },
-            ),
+                ),
+              );
+              response.then((value) {
+                if (value != null && value) {
+                  _markLessonCompleted();
+                }
+              });
+            },
           );
         }
       },

@@ -27,9 +27,7 @@ class _QuizScreenState extends State<QuizScreen> {
       appBar: AppBar(
         title: Text(widget.quiz.title),
         backgroundColor: Colors.green,
-        actions: const [UserProfileIcon()],
       ),
-      endDrawer: const UserProfileDrawer(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),

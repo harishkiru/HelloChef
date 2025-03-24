@@ -3,6 +3,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:src/components/home_components/user_profile.dart';
 import 'package:src/services/db_helper.dart';
 import 'package:src/services/navigation_service.dart';
+import 'dart:convert';
+import 'package:flutter/services.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,10 +20,45 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  late Future<String> _tipOfTheWeek;
+
   @override
   void initState() {
     super.initState();
     checkAuth();
+    _tipOfTheWeek = _getTipOfTheWeek();
+  }
+
+  // Function to get the current week number (1-52)
+  int _getCurrentWeekNumber() {
+    final now = DateTime.now();
+    final startOfYear = DateTime(now.year, 1, 1);
+    final firstMonday = startOfYear.weekday == DateTime.monday
+        ? startOfYear
+        : startOfYear.add(Duration(days: (8 - startOfYear.weekday) % 7));
+    
+    final daysDifference = now.difference(firstMonday).inDays;
+    final weekNumber = (daysDifference / 7).floor() + 1;
+    
+    // Ensure the week number is between 1 and 52
+    return (weekNumber > 0 && weekNumber <= 52) ? weekNumber : 1;
+  }
+
+  // Function to load the appropriate tip based on week number
+  Future<String> _getTipOfTheWeek() async {
+    try {
+      // Load the tips from the JSON file
+      final String response = await rootBundle.loadString('assets/data/tips.json');
+      final List<dynamic> tips = json.decode(response);
+      
+      // Get current week number (0-based index for the array)
+      final int weekIndex = _getCurrentWeekNumber() - 1;
+      
+      // Return the tip for this week
+      return tips[weekIndex];
+    } catch (e) {
+      return "Always taste your food as you cook and adjust seasoning as needed.";
+    }
   }
 
   @override
@@ -275,41 +312,71 @@ class _HomeScreenState extends State<HomeScreen> {
               
               const SizedBox(height: 24),
               
-              // Tip of the day
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                elevation: 4,
-                color: Colors.green.shade50,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
+              // Tip of the Week (updated from Tip of the Day)
+              FutureBuilder<String>(
+                future: _tipOfTheWeek,
+                builder: (context, snapshot) {
+                  String tip = "Always taste your food as you cook!";
+                  if (snapshot.hasData && snapshot.data != null) {
+                    tip = snapshot.data!;
+                  }
+                  
+                  return Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    elevation: 4,
+                    color: Colors.green.shade50,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(Icons.lightbulb, color: Colors.amber.shade700),
-                          const SizedBox(width: 8),
-                          const Text(
-                            'Tip of the Day',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                          Row(
+                            children: [
+                              Icon(Icons.lightbulb, color: Colors.amber.shade700),
+                              const SizedBox(width: 8),
+                              Row(
+                                children: [
+                                  const Text(
+                                    'Tip of the Week',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                    decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Text(
+                                      'Week ${_getCurrentWeekNumber()}',
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          Text(
+                            tip,
+                            style: const TextStyle(
+                              fontSize: 16,
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 12),
-                      const Text(
-                        'Always make sure your knife is sharp! A dull knife requires more force and is actually more dangerous.',
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                    ),
+                  );
+                }
               ),
               
               const SizedBox(height: 24),

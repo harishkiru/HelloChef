@@ -63,8 +63,8 @@ class _LoginPageState extends State<LoginPage> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-            error.message,
+          content: const Text(
+            'Authentication failed. Please check your credentials.',
             style: TextStyle(color: Colors.white),
           ),
           backgroundColor: Colors.green,
@@ -78,8 +78,8 @@ class _LoginPageState extends State<LoginPage> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-            'Unexpected error',
+          content: const Text(
+            'Unexpected error occurred. Please try again later.',
             style: TextStyle(color: Colors.white),
           ),
           backgroundColor: Colors.green,

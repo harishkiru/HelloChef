@@ -5,6 +5,7 @@ import 'package:src/classes/level_section.dart';
 import 'package:src/components/lesson_components/lesson_item_card.dart';
 import 'package:src/services/db_helper.dart';
 import 'package:src/classes/lesson_item.dart';
+import 'package:src/components/common/safe_bottom_padding.dart';
 
 class LevelSectionOverviewScreen extends StatefulWidget {
   final LevelSection section;
@@ -75,48 +76,50 @@ class _LevelSectionOverviewScreenState
           },
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 10.0),
-            color: Colors.green.shade50,
-            child: Text(
-              widget.section.subtitle,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.green.shade800,
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              color: Colors.green.shade50,
+              child: Text(
+                widget.section.subtitle,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.green.shade800,
+                ),
               ),
             ),
-          ),
-          Expanded(
-            child: FutureBuilder(
-              future: _lessonsFuture,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return const Center(child: Text('Error loading lessons'));
-                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(child: Text('No lessons available'));
-                } else {
-                  List<LessonItem> lessons = snapshot.data!;
-                  return ListView.builder(
-                    itemCount: lessons.length,
-                    padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
-                    itemBuilder: (context, index) {
-                      return LessonItemCard(
-                        lessonItem: lessons[index],
-                        onCompleted: _refreshLessons,
-                      );
-                    },
-                  );
-                }
-              },
+            Expanded(
+              child: FutureBuilder(
+                future: _lessonsFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return const Center(child: Text('Error loading lessons'));
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return const Center(child: Text('No lessons available'));
+                  } else {
+                    List<LessonItem> lessons = snapshot.data!;
+                    return ListView.builder(
+                      itemCount: lessons.length,
+                      padding: EdgeInsets.fromLTRB(10, 20, 10, 20 + MediaQuery.of(context).padding.bottom),
+                      itemBuilder: (context, index) {
+                        return LessonItemCard(
+                          lessonItem: lessons[index],
+                          onCompleted: _refreshLessons,
+                        );
+                      },
+                    );
+                  }
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

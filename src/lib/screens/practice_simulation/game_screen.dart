@@ -4,6 +4,7 @@ import 'package:flame/game.dart';
 import '../practice_screens/practice_screen.dart';
 import 'cooking_game.dart';
 import 'start_menu.dart';
+import 'package:src/components/common/safe_bottom_padding.dart'; // Add this import
 
 class GameScreen extends StatefulWidget {
   final String recipeName;
@@ -127,111 +128,119 @@ class _GameScreenState extends State<GameScreen> {
           ),
         ],
       ),
-      body: Stack(
-        children: [
-          GameWidget(game: game),
-
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03, vertical: screenHeight * 0.005),
-              color: Colors.black.withOpacity(0.5),
-              child: Center(
-                child: Text(
-                  game.currentStepText,
-                  style: TextStyle(
-                      fontSize: screenWidth * 0.05,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-          ),
-
-          Positioned(
-            top: screenHeight * 0.05,
-            left: screenWidth * 0.05,
-            right: screenWidth * 0.05,
-            child: LinearProgressIndicator(
-              value: progress.clamp(0.0, 1.0),
-              backgroundColor: Colors.grey[700],
-              valueColor: const AlwaysStoppedAnimation<Color>(Colors.green),
-              minHeight: screenHeight * 0.01,
-            ),
-          ),
-
-          Positioned(
-            bottom: screenHeight * 0.35,
-            left: screenWidth * 0.30,
-            child: DragTarget<String>(
-              onWillAccept: (ingredient) {
-                setState(() {});
-                return true;
-              },
-              onLeave: (ingredient) {
-                setState(() {});
-              },
-              onAccept: (ingredient) {
-                if (game.currentStepIndex >= 0 && game.steps.isNotEmpty) {
-                  game.steps[game.currentStepIndex].completeStep();
-                }
-              },
-              builder: (context, candidateData, rejectedData) {
-                return Container(
-                  height: screenHeight * 0.10,
-                  width: screenWidth * 0.20,
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.transparent, width: 0),
-                  ),
-                );
-              },
-            ),
-          ),
-
-          if (gameCompleted)
-            Align(
-              alignment: Alignment.topCenter,
-              child: ConfettiWidget(
-                confettiController: _confettiController,
-                blastDirectionality: BlastDirectionality.explosive,
-                numberOfParticles: 80,
-                gravity: 0.1,
-                minBlastForce: 10,
-                maxBlastForce: 40,
-              ),
-            ),
-
-          if (gameCompleted)
+      body: SafeArea(  // Added SafeArea
+        child: Stack(
+          children: [
+            GameWidget(game: game),
 
             Positioned(
-              bottom: screenHeight * 0.12,
-              left: screenWidth * 0.05,
-              right: screenWidth * 0.05,
-              child: ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    stepsCompleted = (stepsCompleted + 1).clamp(0, totalSteps);
-                  });
-
-                  Future.delayed(const Duration(milliseconds: 500), () {
-                    Navigator.pop(context);
-                  });
-                },
-
-
-
-
-                child: Text(
-                  "Back to Menu",
-                  style: TextStyle(fontSize: screenWidth * 0.05, fontWeight: FontWeight.bold),
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03, vertical: screenHeight * 0.005),
+                color: Colors.black.withOpacity(0.5),
+                child: Center(
+                  child: Text(
+                    game.currentStepText,
+                    style: TextStyle(
+                        fontSize: screenWidth * 0.05,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
             ),
-        ],
+
+            Positioned(
+              top: screenHeight * 0.05,
+              left: screenWidth * 0.05,
+              right: screenWidth * 0.05,
+              child: LinearProgressIndicator(
+                value: progress.clamp(0.0, 1.0),
+                backgroundColor: Colors.grey[700],
+                valueColor: const AlwaysStoppedAnimation<Color>(Colors.green),
+                minHeight: screenHeight * 0.01,
+              ),
+            ),
+
+            Positioned(
+              bottom: screenHeight * 0.35,
+              left: screenWidth * 0.30,
+              child: DragTarget<String>(
+                onWillAccept: (ingredient) {
+                  setState(() {});
+                  return true;
+                },
+                onLeave: (ingredient) {
+                  setState(() {});
+                },
+                onAccept: (ingredient) {
+                  if (game.currentStepIndex >= 0 && game.steps.isNotEmpty) {
+                    game.steps[game.currentStepIndex].completeStep();
+                  }
+                },
+                builder: (context, candidateData, rejectedData) {
+                  return Container(
+                    height: screenHeight * 0.10,
+                    width: screenWidth * 0.20,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.transparent, width: 0),
+                    ),
+                  );
+                },
+              ),
+            ),
+
+            if (gameCompleted)
+              Align(
+                alignment: Alignment.topCenter,
+                child: ConfettiWidget(
+                  confettiController: _confettiController,
+                  blastDirectionality: BlastDirectionality.explosive,
+                  numberOfParticles: 80,
+                  gravity: 0.1,
+                  minBlastForce: 10,
+                  maxBlastForce: 40,
+                ),
+              ),
+
+            if (gameCompleted)
+              // Replace Positioned with SafeBottomPadding
+              Positioned(
+                bottom: MediaQuery.of(context).padding.bottom + screenHeight * 0.05,
+                left: screenWidth * 0.05,
+                right: screenWidth * 0.05,
+                child: SafeBottomPadding(
+                  extraPadding: 12.0,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        stepsCompleted = (stepsCompleted + 1).clamp(0, totalSteps);
+                      });
+
+                      Future.delayed(const Duration(milliseconds: 500), () {
+                        Navigator.pop(context);
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Text(
+                      "Back to Menu",
+                      style: TextStyle(fontSize: screenWidth * 0.05, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

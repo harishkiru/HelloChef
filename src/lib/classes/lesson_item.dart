@@ -10,6 +10,7 @@ class LessonItem {
   final Quiz? quiz;
   final int? quizId; // Used for quiz type
   final List<Map<String, dynamic>>? buttonDetails;
+  final String? description;
 
   bool isCompleted;
 
@@ -24,5 +25,6 @@ class LessonItem {
     this.quiz,
     this.quizId,
     this.buttonDetails,
+    this.description,
   });
 }

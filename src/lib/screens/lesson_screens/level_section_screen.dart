@@ -4,6 +4,7 @@ import 'package:src/components/lesson_components/lesson_section_card.dart';
 import 'package:src/screens/lesson_screens/level_section_overview_screen.dart';
 import 'package:src/services/db_helper.dart';
 import 'package:src/classes/level_section.dart';
+import 'package:src/components/common/safe_bottom_padding.dart';
 
 class LevelSectionScreen extends StatefulWidget {
   final Level level;
@@ -16,6 +17,20 @@ class LevelSectionScreen extends StatefulWidget {
 
 class _LevelSectionScreenState extends State<LevelSectionScreen> {
   final dbHelper = DBHelper.instance();
+  late Future<List<LevelSection>> _sectionsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _refreshSections();
+  }
+
+  // Function to refresh sections data
+  void _refreshSections() {
+    setState(() {
+      _sectionsFuture = getAllSectionsFromLevel(widget.level.id);
+    });
+  }
 
   Future<List<LevelSection>> getAllSectionsFromLevel(int levelId) async {
     List<Map<String, dynamic>> sections = await dbHelper
@@ -42,64 +57,76 @@ class _LevelSectionScreenState extends State<LevelSectionScreen> {
         title: Text(
           widget.level.title,
           textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 24),
+          style: const TextStyle(
+            fontSize: 24,
+            color: Colors.white,
+          ),
         ),
+        backgroundColor: Colors.green,
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context, true);
           },
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            widget.level.subtitle,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 18),
-          ),
-          Expanded(
-            child: FutureBuilder(
-              future: getAllSectionsFromLevel(widget.level.id),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(child: Text('No sections available.'));
-                } else {
-                  List<LevelSection> sections = snapshot.data!;
-                  return ListView.builder(
-                    itemCount: sections.length,
-                    itemBuilder: (context, index) {
-                      return LessonSectionCard(
-                        section: sections[index],
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder:
-                                  (context) => LevelSectionOverviewScreen(
-                                    section: sections[index],
-                                  ),
-                            ),
-                          ).then((value) {
-                            if (value != null && value) {
-                              setState(() {});
-                            }
-                          });
-                        },
-                      );
-                    },
-                  );
-                }
-              },
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              color: Colors.green.shade50,
+              child: Text(
+                widget.level.subtitle,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.green.shade800,
+                ),
+              ),
             ),
-          ),
-        ],
+            Expanded(
+              child: FutureBuilder(
+                future: _sectionsFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return const Center(child: Text('No sections available.'));
+                  } else {
+                    List<LevelSection> sections = snapshot.data!;
+                    return ListView.builder(
+                      itemCount: sections.length,
+                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+                      itemBuilder: (context, index) {
+                        return LessonSectionCard(
+                          section: sections[index],
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LevelSectionOverviewScreen(
+                                  section: sections[index],
+                                ),
+                              ),
+                            ).then((_) {
+                              // Always refresh when returning from lesson section
+                              _refreshSections();
+                            });
+                          },
+                        );
+                      },
+                    );
+                  }
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

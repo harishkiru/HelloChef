@@ -13,7 +13,12 @@ class StartMenuScreen extends StatelessWidget {
           'Cooking Simulator',
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
         ),
-        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         elevation: 3,
@@ -97,18 +102,7 @@ class StartMenuScreen extends StatelessWidget {
           ],
         ),
       ),
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          if (Navigator.canPop(context)) {
-            Navigator.pop(context);
-          }
-        },
-
-        backgroundColor: Colors.green,
-        child: const Icon(Icons.arrow_back, color: Colors.white),
-        tooltip: "Go Back",
-      ),
+      // Removed the floating action button
     );
   }
 }

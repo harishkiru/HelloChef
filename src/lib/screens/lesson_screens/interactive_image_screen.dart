@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:src/classes/lesson_item.dart';
-
-// void main(List<String> args) {
-//   runApp(MaterialApp(home: InteractiveImageScreen()));
-// }
+import 'package:src/components/common/safe_bottom_padding.dart';
 
 class InteractiveImageScreen extends StatefulWidget {
   final String imagePath;
@@ -311,6 +308,12 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
       appBar: AppBar(
         title: Text('The Kitchen', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.green,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white), // Changed to white
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         actions: [
           // Help button
           IconButton(
@@ -399,18 +402,20 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
                 ),
               ),
             ),
-            Container(
-              width: double.infinity,
-              height: screenHeight * 0.075,
-              margin: EdgeInsets.fromLTRB(8, 8, 8, 30),
-
-              child: ElevatedButton(
-                onPressed: () => _onComplete(context),
-                child: Text('Complete', style: TextStyle(color: Colors.white)),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+            SafeBottomPadding(
+              extraPadding: 8.0,
+              child: Container(
+                width: double.infinity,
+                height: screenHeight * 0.075,
+                margin: EdgeInsets.fromLTRB(8, 8, 8, 0), // Changed bottom margin from 30 to 0
+                child: ElevatedButton(
+                  onPressed: () => _onComplete(context),
+                  child: Text('Complete', style: TextStyle(color: Colors.white)),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                 ),
               ),

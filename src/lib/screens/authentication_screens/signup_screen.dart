@@ -3,6 +3,7 @@ import 'package:src/components/authentication_components/textbox.dart';
 import 'package:src/components/authentication_components/button.dart';
 import 'package:src/components/authentication_components/constant.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:src/components/common/safe_bottom_padding.dart'; // Add this import
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -33,16 +34,19 @@ class _SignUpPageState extends State<SignUpPage> {
     required final String firstName,
     required final String lastName,
   }) async {
-    // Check if password and confirmation password match
-    if (password != ConfirmPassword) {
-      context.showErrorMessage("Passwords do not match");
-      return false;
-    }
-
+    setState(() {
+      isLoading = true;
+    });
+    
     try {
+      // Check if password and confirmation password match
+      if (password != ConfirmPassword) {
+        context.showErrorMessage("Passwords do not match");
+        return false;
+      }
+
       // Sign up the user using Supabase authentication
-      final response =
-          await client.auth.signUp(email: email, password: password);
+      final response = await client.auth.signUp(email: email, password: password);
 
       // Retrieve the user's ID after successful sign-up
       final userId = response.user!.id;
@@ -57,9 +61,13 @@ class _SignUpPageState extends State<SignUpPage> {
 
       return true; // Return true if sign-up is successful
     } catch (e) {
-      // Display an error message if sign-up fails
-      context.showErrorMessage('Sign up failed: $e');
+      // Display a user friendly error message if sign-up fails
+      context.showErrorMessage('Sign up failed. Please try again.');
       return false; // Return false on failure
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -123,28 +131,35 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
         // Button to trigger sign-up
         MyButton(
-          onTap: () async {
-            bool success = await createUser(
-              email: _emailController.text,
-              password: _passwordController.text,
-              ConfirmPassword: _confirmPasswordController.text,
-              firstName: _firstNameController.text,
-              lastName: _lastNameController.text,
-            );
-            if (success) {
-              Navigator.pushNamed(context, '/home');
-            }
-          },
-          child: const Text('Sign Up'),
+          onTap: isLoading 
+              ? null 
+              : () async {
+                  bool success = await createUser(
+                    email: _emailController.text,
+                    password: _passwordController.text,
+                    ConfirmPassword: _confirmPasswordController.text,
+                    firstName: _firstNameController.text,
+                    lastName: _lastNameController.text,
+                  );
+                  if (success && mounted) {
+                    Navigator.pushNamed(context, '/home');
+                  }
+                },
+          child: isLoading
+              ? const CircularProgressIndicator(color: Colors.white)
+              : const Text('Sign Up'),
         ),
-        // Text button to navigate to the login page
-        TextButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/login');
-          },
-          child: const Text(
-            'Already have an account? Log in',
-            style: TextStyle(color: Colors.green),
+        // Wrap the TextButton in SafeBottomPadding
+        SafeBottomPadding(
+          extraPadding: screenHeight * 0.05, // Dynamic padding based on screen height
+          child: TextButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/login');
+            },
+            child: const Text(
+              'Already have an account? Log in',
+              style: TextStyle(color: Colors.green),
+            ),
           ),
         ),
       ],
@@ -154,7 +169,10 @@ class _SignUpPageState extends State<SignUpPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0), // Slight vertical padding
+            padding: const EdgeInsets.symmetric(
+              vertical: 20.0,
+              horizontal: 24.0, // Added horizontal padding for consistency
+            ),
             child: Transform.scale(
               scale: scaleFactor,
               child: content,

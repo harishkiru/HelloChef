@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'practice_tile.dart';
+import 'package:src/components/common/safe_bottom_padding.dart'; // Add this import
 
 class RecipeDetailScreen extends StatelessWidget {
   final PracticeTile item;
@@ -7,19 +8,21 @@ class RecipeDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        Navigator.pop(context);
-        return false;
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text(item.title, style: TextStyle(color: Colors.white)),
-          backgroundColor: Colors.green,
+    return Scaffold(
+      appBar: AppBar(
+        // Add back button with standard behavior
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
-        backgroundColor: Colors.grey[100],
-        body: SingleChildScrollView(
+        title: Text(item.title, style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.green,
+      ),
+      backgroundColor: Colors.grey[100],
+      body: SafeArea(  // Added SafeArea
+        child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -115,79 +118,13 @@ class RecipeDetailScreen extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(height: 30),
+                // Replace fixed SizedBox with SafeBottomPadding
+                SafeBottomPadding(
+                  extraPadding: 16.0,
+                  child: SizedBox(height: 16),  // Reduced from height: 30
+                ),
               ],
             ),
-          ),
-        ),
-
-        bottomNavigationBar: Container(
-          height: kToolbarHeight,
-          color: Colors.green,
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: SizedBox(
-                  height: 48,
-                  child: TextButton(
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("Coming Soon"),
-                          duration: Duration(seconds: 2),
-                          behavior: SnackBarBehavior.floating,
-                        ),
-                      );
-                    },
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.green[400],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                    ),
-                    child: Text(
-                      "Simulate",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-
-              SizedBox(width: 16),
-
-              Expanded(
-                child: SizedBox(
-                  height: 48,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.arrow_back, color: Colors.green),
-                        SizedBox(width: 8),
-                        Text("Back", style: TextStyle(color: Colors.green)),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
           ),
         ),
       ),

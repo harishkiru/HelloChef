@@ -3,7 +3,8 @@ import 'package:src/components/authentication_components/textbox.dart';
 import 'package:src/components/authentication_components/button.dart';
 import 'package:src/components/authentication_components/constant.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:src/services/db_helper.dart'; // Import the updated DBHelper class
+import 'package:src/services/db_helper.dart';
+import 'package:src/components/common/safe_bottom_padding.dart'; // Add this import
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -63,8 +64,8 @@ class _LoginPageState extends State<LoginPage> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-            error.message,
+          content: const Text(
+            'Authentication failed. Please check your credentials.',
             style: TextStyle(color: Colors.white),
           ),
           backgroundColor: Colors.green,
@@ -78,8 +79,8 @@ class _LoginPageState extends State<LoginPage> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-            'Unexpected error',
+          content: const Text(
+            'Unexpected error occurred. Please try again later.',
             style: TextStyle(color: Colors.white),
           ),
           backgroundColor: Colors.green,
@@ -116,56 +117,62 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Transform.scale(
-            scale: scaleFactor,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: screenHeight * 0.1), // Add some top padding
-                Icon(
-                  Icons.kitchen,
-                  size: logosize,
-                  color: Colors.green,
-                ),
-                const Text(
-                  'Hello Chef',
-                  style: TextStyle(
-                    fontSize: 50,
-                    fontWeight: FontWeight.bold,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Transform.scale(
+              scale: scaleFactor,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: screenHeight * 0.1), // Add some top padding
+                  Icon(
+                    Icons.kitchen,
+                    size: logosize,
                     color: Colors.green,
                   ),
-                ),
-                MyTextFormField(
-                  controller: _emailController,
-                  label: const Text('Email Address'),
-                  obscureText: false,
-                ),
-                MyTextFormField(
-                  controller: _passwordController,
-                  label: const Text('Password'),
-                  obscureText: true,
-                ),
-                MyButton(
-                  onTap: isLoading ? null : _handleLogin,
-                  child: isLoading
-                      ? const CircularProgressIndicator(color: Colors.white)
-                      : const Text('Login'),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/signup');
-                  },
-                  child: const Text(
-                    "Don't have an account? Sign Up",
-                    style: TextStyle(color: Colors.green),
+                  const Text(
+                    'Hello Chef',
+                    style: TextStyle(
+                      fontSize: 50,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                    ),
                   ),
-                ),
-                SizedBox(height: screenHeight * 0.1), // Add some bottom padding
-              ],
+                  MyTextFormField(
+                    controller: _emailController,
+                    label: const Text('Email Address'),
+                    obscureText: false,
+                  ),
+                  MyTextFormField(
+                    controller: _passwordController,
+                    label: const Text('Password'),
+                    obscureText: true,
+                  ),
+                  MyButton(
+                    onTap: isLoading ? null : _handleLogin,
+                    child: isLoading
+                        ? const CircularProgressIndicator(color: Colors.white)
+                        : const Text('Login'),
+                  ),
+                  // Wrap the TextButton in SafeBottomPadding
+                  SafeBottomPadding(
+                    extraPadding: screenHeight * 0.05, // Dynamic padding based on screen height
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/signup');
+                      },
+                      child: const Text(
+                        "Don't have an account? Sign Up",
+                        style: TextStyle(color: Colors.green),
+                      ),
+                    ),
+                  ),
+                  // Remove the fixed SizedBox at the bottom
+                ],
+              ),
             ),
           ),
         ),

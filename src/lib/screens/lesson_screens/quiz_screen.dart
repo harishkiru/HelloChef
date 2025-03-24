@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:src/classes/quiz.dart';
-import 'package:src/components/home_components/user_profile.dart';
 import 'package:src/classes/lesson_item.dart';
+import 'package:src/components/common/safe_bottom_padding.dart'; // Add this import
 
 class QuizScreen extends StatefulWidget {
   final Quiz quiz;
@@ -25,8 +25,17 @@ class _QuizScreenState extends State<QuizScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.quiz.title),
+        title: Text(
+          widget.quiz.title,
+          style: TextStyle(color: Colors.white), // Changed to white
+        ),
         backgroundColor: Colors.green,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white), // Changed to white
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -170,76 +179,76 @@ class _QuizScreenState extends State<QuizScreen> {
               const SizedBox(height: 24),
 
               // Submit button or Next button
-              ElevatedButton(
-                onPressed:
-                    selectedAnswerIndex == null
-                        ? null
-                        : () {
-                          if (!answered) {
-                            setState(() {
-                              answered = true;
-                              if (selectedAnswerIndex ==
-                                  question.correctAnswerIndex) {
-                                score++;
-                              }
-                            });
-                          } else {
-                            if (currentQuestionIndex <
-                                widget.quiz.questions.length - 1) {
-                              setState(() {
-                                currentQuestionIndex++;
-                                answered = false;
-                                selectedAnswerIndex = null;
-                              });
-                            } else {
-                              // Quiz finished
-                              showDialog(
-                                context: context,
-                                builder:
-                                    (context) => AlertDialog(
-                                      title: const Text('Quiz Completed'),
-                                      content: Text(
-                                        'Your score: $score/${widget.quiz.questions.length}',
-                                        style: const TextStyle(fontSize: 18),
+              SafeBottomPadding(
+                extraPadding: 16.0,
+                child: ElevatedButton(
+                  onPressed: selectedAnswerIndex == null ? null : () {
+                    if (!answered) {
+                      setState(() {
+                        answered = true;
+                        if (selectedAnswerIndex ==
+                            question.correctAnswerIndex) {
+                          score++;
+                        }
+                      });
+                    } else {
+                      if (currentQuestionIndex <
+                          widget.quiz.questions.length - 1) {
+                        setState(() {
+                          currentQuestionIndex++;
+                          answered = false;
+                          selectedAnswerIndex = null;
+                        });
+                      } else {
+                        // Quiz finished
+                        showDialog(
+                          context: context,
+                          builder:
+                              (context) => AlertDialog(
+                                title: const Text('Quiz Completed'),
+                                content: Text(
+                                  'Your score: $score/${widget.quiz.questions.length}',
+                                  style: const TextStyle(fontSize: 18),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(
+                                        context,
+                                      ); // Close dialog
+                                      Navigator.pop(
+                                        context,
+                                        true,
+                                      ); // Go back to lessons
+                                    },
+                                    child: const Text(
+                                      'Finish',
+                                      style: TextStyle(
+                                        color: Colors.green,
                                       ),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.pop(
-                                              context,
-                                            ); // Close dialog
-                                            Navigator.pop(
-                                              context,
-                                              true,
-                                            ); // Go back to lessons
-                                          },
-                                          child: const Text(
-                                            'Finish',
-                                            style: TextStyle(
-                                              color: Colors.green,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
                                     ),
-                              );
-                            }
-                          }
-                        },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ],
+                              ),
+                        );
+                      }
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
-                ),
-                child: Text(
-                  answered
-                      ? (currentQuestionIndex < widget.quiz.questions.length - 1
-                          ? 'Next Question'
-                          : 'Finish Quiz')
-                      : 'Submit Answer',
-                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                  child: Text(
+                    answered
+                        ? (currentQuestionIndex < widget.quiz.questions.length - 1
+                            ? 'Next Question'
+                            : 'Finish Quiz')
+                        : 'Submit Answer',
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
+                  ),
                 ),
               ),
             ],

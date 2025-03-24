@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'practice_tile.dart';
+import 'package:src/components/common/safe_bottom_padding.dart'; // Add this import
 
 class RecipeDetailScreen extends StatelessWidget {
   final PracticeTile item;
@@ -20,108 +21,113 @@ class RecipeDetailScreen extends StatelessWidget {
         backgroundColor: Colors.green,
       ),
       backgroundColor: Colors.grey[100],
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Image.network(
-                  item.imageUrl,
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: 250,
-                  errorBuilder:
-                      (context, error, stackTrace) =>
-                          Icon(Icons.error, size: 60, color: Colors.grey),
+      body: SafeArea(  // Added SafeArea
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.network(
+                    item.imageUrl,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: 250,
+                    errorBuilder:
+                        (context, error, stackTrace) =>
+                            Icon(Icons.error, size: 60, color: Colors.grey),
+                  ),
                 ),
-              ),
-              SizedBox(height: 20),
+                SizedBox(height: 20),
 
-              Text(
-                item.title,
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green[800],
+                Text(
+                  item.title,
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green[800],
+                  ),
                 ),
-              ),
-              SizedBox(height: 10),
+                SizedBox(height: 10),
 
-              _buildSectionHeader("Ingredients"),
-              _buildCard(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children:
-                      item.ingredients.map((ingredient) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4),
-                          child: Text(
-                            "• ${ingredient['name']} - ${ingredient['quantity']}",
-                            style: TextStyle(fontSize: 16),
-                          ),
-                        );
-                      }).toList(),
+                _buildSectionHeader("Ingredients"),
+                _buildCard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:
+                        item.ingredients.map((ingredient) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            child: Text(
+                              "• ${ingredient['name']} - ${ingredient['quantity']}",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          );
+                        }).toList(),
+                  ),
                 ),
-              ),
 
-              SizedBox(height: 20),
+                SizedBox(height: 20),
 
-              _buildSectionHeader("Instructions"),
-              _buildCard(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children:
-                      item.instructions
-                          .split("\n")
-                          .where((step) => step.trim().isNotEmpty)
-                          .map(
-                            (step) =>
-                                step.replaceFirst(RegExp(r'^\d+\.\s*'), ''),
-                          )
-                          .toList()
-                          .asMap()
-                          .entries
-                          .map((entry) {
-                            int stepIndex = entry.key + 1;
-                            String stepText = entry.value.trim();
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 8.0,
-                              ),
-                              child: RichText(
-                                text: TextSpan(
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black,
-                                  ),
-                                  children: [
-                                    TextSpan(
-                                      text: "Step $stepIndex \n",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
-                                        color: Colors.green[800],
-                                      ),
-                                    ),
-                                    TextSpan(text: stepText),
-                                  ],
+                _buildSectionHeader("Instructions"),
+                _buildCard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:
+                        item.instructions
+                            .split("\n")
+                            .where((step) => step.trim().isNotEmpty)
+                            .map(
+                              (step) =>
+                                  step.replaceFirst(RegExp(r'^\d+\.\s*'), ''),
+                            )
+                            .toList()
+                            .asMap()
+                            .entries
+                            .map((entry) {
+                              int stepIndex = entry.key + 1;
+                              String stepText = entry.value.trim();
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 8.0,
                                 ),
-                              ),
-                            );
-                          })
-                          .toList(),
+                                child: RichText(
+                                  text: TextSpan(
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.black,
+                                    ),
+                                    children: [
+                                      TextSpan(
+                                        text: "Step $stepIndex \n",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                          color: Colors.green[800],
+                                        ),
+                                      ),
+                                      TextSpan(text: stepText),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            })
+                            .toList(),
+                  ),
                 ),
-              ),
 
-              SizedBox(height: 30),
-            ],
+                // Replace fixed SizedBox with SafeBottomPadding
+                SafeBottomPadding(
+                  extraPadding: 16.0,
+                  child: SizedBox(height: 16),  // Reduced from height: 30
+                ),
+              ],
+            ),
           ),
         ),
       ),
-      // Bottom navigation bar removed as requested
     );
   }
 

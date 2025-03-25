@@ -10,9 +10,9 @@ android {
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "27.0.12077973"
 
-    // Add this signingConfigs block
+    // Modify existing debug signingConfig instead of creating a new one
     signingConfigs {
-        create("debug") {
+        named("debug") {
             storeFile = file("keystore/debug.keystore")
             storePassword = "android"
             keyAlias = "androiddebugkey"

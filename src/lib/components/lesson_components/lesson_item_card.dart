@@ -11,11 +11,7 @@ class LessonItemCard extends StatefulWidget {
   final LessonItem lessonItem;
   final VoidCallback? onCompleted;
 
-  const LessonItemCard({
-    super.key, 
-    required this.lessonItem,
-    this.onCompleted,
-  });
+  const LessonItemCard({super.key, required this.lessonItem, this.onCompleted});
 
   @override
   State<LessonItemCard> createState() => _LessonItemCardState();
@@ -23,6 +19,27 @@ class LessonItemCard extends StatefulWidget {
 
 class _LessonItemCardState extends State<LessonItemCard> {
   final dbHelper = DBHelper.instance();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (widget.lessonItem.type < 3) {
+      return textVideoandImageContent();
+    } else if (widget.lessonItem.type == 3) {
+      return quizContent();
+    } else {
+      return interactiveImageContent();
+    }
+  }
 
   Future<Quiz> getQuizFromLesson() async {
     List<Map<String, dynamic>> quizDetails = await dbHelper.getQuizFromQuizId(
@@ -121,36 +138,38 @@ class _LessonItemCardState extends State<LessonItemCard> {
 
   // Update lesson completion state and notify parent
   void _markLessonCompleted() {
+    if (widget.lessonItem.isCompleted) {
+      return; // Lesson already completed
+    }
+
+    dbHelper.completeLesson(widget.lessonItem.id);
+
     setState(() {
       widget.lessonItem.isCompleted = true;
     });
-    dbHelper.completeLesson(widget.lessonItem.id);
-    
+
     // Notify parent to refresh progress
     if (widget.onCompleted != null) {
       widget.onCompleted!();
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    if (widget.lessonItem.type < 3) {
-      return textVideoandImageContent();
-    } else if (widget.lessonItem.type == 3) {
-      return quizContent();
-    } else {
-      return interactiveImageContent();
-    }
-  }
-
   Widget _buildCardContent(BuildContext context, {VoidCallback? onTap}) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+
     return Card(
-      margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 3.0), // Reduced vertical margin
+      margin: const EdgeInsets.symmetric(
+        vertical: 10.0,
+        horizontal: 30.0,
+      ), // Reduced vertical margin
       elevation: 4.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
         side: BorderSide(
-          color: widget.lessonItem.isCompleted ? Colors.green.shade300 : Colors.transparent,
+          color:
+              widget.lessonItem.isCompleted
+                  ? Colors.green.shade300
+                  : Colors.transparent,
           width: widget.lessonItem.isCompleted ? 2.0 : 0,
         ),
       ),
@@ -162,31 +181,35 @@ class _LessonItemCardState extends State<LessonItemCard> {
           children: [
             // Image section (reduced height)
             Container(
-              height: 100.0, // Reduced image height
+              height: screenHeight * 0.15,
               decoration: BoxDecoration(
                 color: _getCardColor(widget.lessonItem.type),
-                image: widget.lessonItem.imagePath != null && widget.lessonItem.imagePath!.isNotEmpty
-                    ? DecorationImage(
-                        image: AssetImage(widget.lessonItem.imagePath!),
-                        fit: BoxFit.cover,
-                        colorFilter: ColorFilter.mode(
-                          Colors.black.withOpacity(0.3),
-                          BlendMode.darken,
+                image:
+                    widget.lessonItem.imagePath != null &&
+                            widget.lessonItem.imagePath!.isNotEmpty
+                        ? DecorationImage(
+                          image: AssetImage(widget.lessonItem.imagePath!),
+                          fit: BoxFit.cover,
+                          colorFilter: ColorFilter.mode(
+                            Colors.black.withOpacity(0.3),
+                            BlendMode.darken,
+                          ),
+                        )
+                        : null,
+              ),
+              child:
+                  widget.lessonItem.imagePath == null ||
+                          widget.lessonItem.imagePath!.isEmpty
+                      ? Center(
+                        child: Icon(
+                          _getIconForLessonType(widget.lessonItem.type),
+                          size: 40.0,
+                          color: Colors.white,
                         ),
                       )
-                    : null,
-              ),
-              child: widget.lessonItem.imagePath == null || widget.lessonItem.imagePath!.isEmpty
-                  ? Center(
-                      child: Icon(
-                        _getIconForLessonType(widget.lessonItem.type),
-                        size: 40.0,
-                        color: Colors.white,
-                      ),
-                    )
-                  : null,
+                      : null,
             ),
-            
+
             // Content section with green background
             Stack(
               children: [
@@ -229,7 +252,7 @@ class _LessonItemCardState extends State<LessonItemCard> {
                     ],
                   ),
                 ),
-                
+
                 // Completion status indicator in bottom right corner
                 Positioned(
                   bottom: 8.0,
@@ -242,8 +265,10 @@ class _LessonItemCardState extends State<LessonItemCard> {
                     padding: const EdgeInsets.all(2.0),
                     child: Icon(
                       widget.lessonItem.isCompleted
-                          ? Icons.check_circle  // Checkmark in circle for completed
-                          : Icons.circle_outlined,  // Just a circle for incomplete
+                          ? Icons
+                              .check_circle // Checkmark in circle for completed
+                          : Icons
+                              .circle_outlined, // Just a circle for incomplete
                       color: Colors.white,
                       size: 22.0,
                     ),
@@ -266,10 +291,11 @@ class _LessonItemCardState extends State<LessonItemCard> {
             final response = Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => MarkdownViewerScreen(
-                  markdown: widget.lessonItem.content!,
-                  lessonItem: widget.lessonItem,
-                ),
+                builder:
+                    (context) => MarkdownViewerScreen(
+                      markdown: widget.lessonItem.content!,
+                      lessonItem: widget.lessonItem,
+                    ),
               ),
             );
             response.then((value) {
@@ -282,10 +308,11 @@ class _LessonItemCardState extends State<LessonItemCard> {
             final response = Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => VideoPlayerScreen(
-                  videoUrl: widget.lessonItem.videoPath!,
-                  lessonItem: widget.lessonItem,
-                ),
+                builder:
+                    (context) => VideoPlayerScreen(
+                      videoUrl: widget.lessonItem.videoPath!,
+                      lessonItem: widget.lessonItem,
+                    ),
               ),
             );
             response.then((value) {
@@ -298,10 +325,11 @@ class _LessonItemCardState extends State<LessonItemCard> {
             final response = Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => MarkdownViewerScreen(
-                  markdown: widget.lessonItem.content!,
-                  lessonItem: widget.lessonItem,
-                ),
+                builder:
+                    (context) => MarkdownViewerScreen(
+                      markdown: widget.lessonItem.content!,
+                      lessonItem: widget.lessonItem,
+                    ),
               ),
             );
             response.then((value) {
@@ -332,10 +360,9 @@ class _LessonItemCardState extends State<LessonItemCard> {
               final response = Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => QuizScreen(
-                    quiz: quiz,
-                    lessonItem: widget.lessonItem,
-                  ),
+                  builder:
+                      (context) =>
+                          QuizScreen(quiz: quiz, lessonItem: widget.lessonItem),
                 ),
               );
               response.then((value) {
@@ -368,11 +395,12 @@ class _LessonItemCardState extends State<LessonItemCard> {
               final response = Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => InteractiveImageScreen(
-                    imagePath: widget.lessonItem.imagePath,
-                    buttonDetails: buttonDetails,
-                    lessonItem: widget.lessonItem,
-                  ),
+                  builder:
+                      (context) => InteractiveImageScreen(
+                        imagePath: widget.lessonItem.imagePath,
+                        buttonDetails: buttonDetails,
+                        lessonItem: widget.lessonItem,
+                      ),
                 ),
               );
               response.then((value) {

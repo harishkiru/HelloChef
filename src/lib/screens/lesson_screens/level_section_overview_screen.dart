@@ -62,10 +62,7 @@ class _LevelSectionOverviewScreenState
         title: Text(
           widget.section.title,
           textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontSize: 24,
-            color: Colors.white,
-          ),
+          style: const TextStyle(fontSize: 24, color: Colors.white),
         ),
         backgroundColor: Colors.green,
         centerTitle: true,
@@ -86,10 +83,7 @@ class _LevelSectionOverviewScreenState
               child: Text(
                 widget.section.subtitle,
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.green.shade800,
-                ),
+                style: TextStyle(fontSize: 15, color: Colors.green.shade800),
               ),
             ),
             Expanded(
@@ -106,11 +100,20 @@ class _LevelSectionOverviewScreenState
                     List<LessonItem> lessons = snapshot.data!;
                     return ListView.builder(
                       itemCount: lessons.length,
-                      padding: EdgeInsets.fromLTRB(10, 20, 10, 20 + MediaQuery.of(context).padding.bottom),
+                      padding: EdgeInsets.fromLTRB(
+                        10,
+                        20,
+                        10,
+                        20 + MediaQuery.of(context).padding.bottom,
+                      ),
                       itemBuilder: (context, index) {
-                        return LessonItemCard(
-                          lessonItem: lessons[index],
-                          onCompleted: _refreshLessons,
+                        return AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                          child: LessonItemCard(
+                            lessonItem: lessons[index],
+                            onCompleted: _refreshLessons,
+                          ),
                         );
                       },
                     );

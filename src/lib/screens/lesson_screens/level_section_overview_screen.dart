@@ -104,13 +104,9 @@ class _LevelSectionOverviewScreenState
                         20 + MediaQuery.of(context).padding.bottom,
                       ),
                       itemBuilder: (context, index) {
-                        return AnimatedContainer(
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                          child: LessonItemCard(
-                            lessonItem: lessons[index],
-                            onCompleted: _refreshLessons,
-                          ),
+                        return LessonItemCard(
+                          lessonItem: lessons[index],
+                          onCompleted: _refreshLessons,
                         );
                       },
                     );

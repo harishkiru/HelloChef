@@ -57,10 +57,7 @@ class _LevelSectionScreenState extends State<LevelSectionScreen> {
         title: Text(
           widget.level.title,
           textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontSize: 24,
-            color: Colors.white,
-          ),
+          style: const TextStyle(fontSize: 24, color: Colors.white),
         ),
         backgroundColor: Colors.green,
         centerTitle: true,
@@ -81,10 +78,7 @@ class _LevelSectionScreenState extends State<LevelSectionScreen> {
               child: Text(
                 widget.level.subtitle,
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.green.shade800,
-                ),
+                style: TextStyle(fontSize: 18, color: Colors.green.shade800),
               ),
             ),
             Expanded(
@@ -101,23 +95,30 @@ class _LevelSectionScreenState extends State<LevelSectionScreen> {
                     List<LevelSection> sections = snapshot.data!;
                     return ListView.builder(
                       itemCount: sections.length,
-                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+                      padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).padding.bottom,
+                      ),
                       itemBuilder: (context, index) {
-                        return LessonSectionCard(
-                          section: sections[index],
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => LevelSectionOverviewScreen(
-                                  section: sections[index],
+                        return AnimatedContainer(
+                          duration: const Duration(milliseconds: 1300),
+                          curve: Curves.easeIn,
+                          child: LessonSectionCard(
+                            section: sections[index],
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => LevelSectionOverviewScreen(
+                                        section: sections[index],
+                                      ),
                                 ),
-                              ),
-                            ).then((_) {
-                              // Always refresh when returning from lesson section
-                              _refreshSections();
-                            });
-                          },
+                              ).then((_) {
+                                // Always refresh when returning from lesson section
+                                _refreshSections();
+                              });
+                            },
+                          ),
                         );
                       },
                     );

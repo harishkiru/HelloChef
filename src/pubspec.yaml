@@ -41,6 +41,7 @@ dependencies:
   media_kit_libs_video: ^1.0.5
   permission_handler: any
   google_sign_in: any
+  shimmer: any
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons

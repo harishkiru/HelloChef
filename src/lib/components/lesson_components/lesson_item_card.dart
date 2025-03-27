@@ -258,10 +258,6 @@ class _LessonItemCardState extends State<LessonItemCard> {
                   bottom: 8.0,
                   right: 8.0,
                   child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white.withOpacity(0.2),
-                    ),
                     padding: const EdgeInsets.all(2.0),
                     child: Icon(
                       widget.lessonItem.isCompleted
@@ -270,7 +266,7 @@ class _LessonItemCardState extends State<LessonItemCard> {
                           : Icons
                               .circle_outlined, // Just a circle for incomplete
                       color: Colors.white,
-                      size: 22.0,
+                      size: 30.0,
                     ),
                   ),
                 ),

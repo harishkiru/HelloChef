@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:src/classes/lesson_item.dart';
 import 'package:src/components/common/safe_bottom_padding.dart';
+import 'package:confetti/confetti.dart';
 
 class InteractiveImageScreen extends StatefulWidget {
   final String imagePath;
@@ -22,14 +23,44 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
   // Track the highlighted button
   String? highlightedButton;
   bool showHints = false;
+  late ConfettiController _confettiController;
 
   @override
   void initState() {
     super.initState();
+    _confettiController = ConfettiController(
+      duration: const Duration(seconds: 3),
+    );
+  }
+
+  @override
+  void dispose() {
+    _confettiController.dispose();
+    super.dispose();
   }
 
   void _onComplete(context) {
-    Navigator.pop(context, true);
+    // Show confetti when the user completes the task
+    _confettiController.play();
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Congratulations!'),
+          content: Text('You have completed the task!'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.pop(context, true);
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+    //Navigator.pop(context, true);
   }
 
   List<Widget> makeButtons() {
@@ -396,6 +427,17 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
                       children: [
                         Image.asset(widget.imagePath),
                         ...makeButtons(),
+                        Align(
+                          alignment: Alignment.topCenter,
+                          child: ConfettiWidget(
+                            confettiController: _confettiController,
+                            blastDirectionality: BlastDirectionality.explosive,
+                            numberOfParticles: 180,
+                            gravity: 0.1,
+                            minBlastForce: 10,
+                            maxBlastForce: 40,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -407,10 +449,18 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
               child: Container(
                 width: double.infinity,
                 height: screenHeight * 0.075,
-                margin: EdgeInsets.fromLTRB(8, 8, 8, 0), // Changed bottom margin from 30 to 0
+                margin: EdgeInsets.fromLTRB(
+                  8,
+                  8,
+                  8,
+                  0,
+                ), // Changed bottom margin from 30 to 0
                 child: ElevatedButton(
                   onPressed: () => _onComplete(context),
-                  child: Text('Complete', style: TextStyle(color: Colors.white)),
+                  child: Text(
+                    'Complete',
+                    style: TextStyle(color: Colors.white),
+                  ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
                     shape: RoundedRectangleBorder(

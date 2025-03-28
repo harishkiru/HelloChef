@@ -912,67 +912,67 @@
         "strMeal": "Kung Pao Chicken",
         "steps": [
             {
-                "action": "stir",
+                "action": "pour",
                 "ingredient": "Sake",
-                "interaction": "rotate"
+                "interaction": "pour"
             },
             {
-                "action": "stir",
+                "action": "pour",
                 "ingredient": "Soy_Sauce",
-                "interaction": "rotate"
+                "interaction": "pour"
             },
             {
-                "action": "stir",
+                "action": "pour",
                 "ingredient": "Sesame_Seed_Oil",
-                "interaction": "rotate"
+                "interaction": "pour"
             },
             {
-                "action": "cook",
+                "action": "sprinkle",
                 "ingredient": "Corn_Flour",
                 "interaction": "tap"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Water",
-                "interaction": "tap"
+                "interaction": "pour"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Chicken",
-                "interaction": "tap"
+                "interaction": "chop"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Chilli_Powder",
                 "interaction": "tap"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Rice_Vinegar",
                 "interaction": "tap"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Brown_Sugar",
                 "interaction": "tap"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Spring_Onions",
                 "interaction": "tap"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Garlic_Clove",
                 "interaction": "tap"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Water_Chestnut",
                 "interaction": "tap"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Peanuts",
                 "interaction": "tap"
             }

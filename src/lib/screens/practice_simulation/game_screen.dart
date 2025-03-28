@@ -4,7 +4,8 @@ import 'package:flame/game.dart';
 import '../practice_screens/practice_screen.dart';
 import 'cooking_game.dart';
 import 'start_menu.dart';
-import 'package:src/components/common/safe_bottom_padding.dart'; // Add this import
+import 'package:src/components/common/safe_bottom_padding.dart';
+
 
 class GameScreen extends StatefulWidget {
   final String recipeName;
@@ -90,10 +91,12 @@ class _GameScreenState extends State<GameScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("1. Drag ingredients to the cooking pot."),
-              Text("2. Follow the instructions at the top."),
-              Text("3. Complete all steps to finish the recipe!"),
-              Text("4. Have fun and learn to cook!"),
+              Text("1. Tilt to pour liquids."),
+              Text("2. Drag to add dry ingredients."),
+              Text("3. Swipe to chop/slice."),
+              Text("4. Tap to sprinkle or stir."),
+              Text("5. Flip or tap-hold to cook."),
+              Text("6. Drag and drop to complete steps!"),
             ],
           ),
           actions: [
@@ -128,6 +131,7 @@ class _GameScreenState extends State<GameScreen> {
           ),
         ],
       ),
+
       body: SafeArea(  // Added SafeArea
         child: Stack(
           children: [
@@ -208,7 +212,6 @@ class _GameScreenState extends State<GameScreen> {
               ),
 
             if (gameCompleted)
-              // Replace Positioned with SafeBottomPadding
               Positioned(
                 bottom: MediaQuery.of(context).padding.bottom + screenHeight * 0.05,
                 left: screenWidth * 0.05,

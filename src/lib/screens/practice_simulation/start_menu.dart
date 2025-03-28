@@ -102,7 +102,6 @@ class StartMenuScreen extends StatelessWidget {
           ],
         ),
       ),
-      // Removed the floating action button
     );
   }
 }

@@ -476,4 +476,27 @@ class DBHelper {
   }
 
   // ********* Supabase XP and Badge Operations **********
+
+  Future<void> updateUserXP(int xp) async {
+    final user = supabase.auth.currentUser;
+    if (user != null) {
+      // Fetch the current XP of the user
+      final response =
+          await supabase
+              .from('users')
+              .select('xp')
+              .eq('auth_id', user.id)
+              .maybeSingle();
+      if (response == null) {
+        throw Exception('User not found in database');
+      }
+      final currentXP = response['xp'] as int? ?? 0;
+
+      // Update the XP in the database
+      final newXP = currentXP + xp;
+      await supabase.from('users').update({'xp': newXP}).eq('auth_id', user.id);
+    } else {
+      throw Exception('User not authenticated');
+    }
+  }
 }

@@ -1,6 +1,3 @@
-import 'package:src/classes/level_section.dart';
-import 'dart:convert';
-
 class Level {
   final int id;
   final int level;

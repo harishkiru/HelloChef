@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'game_screen.dart';
-import 'main.dart';
+import 'demo_game.dart';
 
 class StartMenuScreen extends StatelessWidget {
   const StartMenuScreen({super.key});
@@ -46,14 +46,18 @@ class StartMenuScreen extends StatelessWidget {
                 children: const [
                   Text(
                     "How to Play",
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black87),
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
                   ),
                   SizedBox(height: 12),
                   Text(
                     "1. Drag ingredients to the cooking pot.\n"
-                        "2. Follow the instructions at the top.\n"
-                        "3. Complete all steps to finish the recipe!\n"
-                        "4. Have fun and learn to cook!",
+                    "2. Follow the instructions at the top.\n"
+                    "3. Complete all steps to finish the recipe!\n"
+                    "4. Have fun and learn to cook!",
                     style: TextStyle(fontSize: 18, color: Colors.black54),
                     textAlign: TextAlign.center,
                   ),
@@ -68,14 +72,21 @@ class StartMenuScreen extends StatelessWidget {
               children: [
                 const Text(
                   "Select a Recipe to Simulate",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black87),
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
                 ),
                 const SizedBox(height: 15),
 
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green.shade700,
-                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 30,
+                      vertical: 15,
+                    ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -84,17 +95,25 @@ class StartMenuScreen extends StatelessWidget {
                   onPressed: () {
                     final game = CookingGameApp.getGameInstance(
                       "Kung Pao Chicken",
-                          (points, total) => null,
-                          () {},
+                      (points, total) => null,
+                      () {},
                     );
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => GameScreen(recipeName: "Kung Pao Chicken")),
+                      MaterialPageRoute(
+                        builder:
+                            (context) =>
+                                GameScreen(recipeName: "Kung Pao Chicken"),
+                      ),
                     );
                   },
                   child: const Text(
                     "Start Cooking Kung Pao Chicken",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ],

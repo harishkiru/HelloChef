@@ -372,8 +372,7 @@ Future<void> AppFirstRun() async {
               "id": 0,
               "title": "Kitchen Safety Quiz",
               "type": 3,
-              "imagePath":
-                  "assets/images/lesson_images/level_0_section_0_lesson_2.png",
+              "imagePath": "assets/images/lesson_images/level_0/section_2.png",
               "isCompleted": false,
               "quiz": {
                 "title": "Kitchen Basics Quiz",

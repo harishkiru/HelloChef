@@ -474,4 +474,6 @@ class DBHelper {
       throw Exception('User not authenticated');
     }
   }
+
+  // ********* Supabase XP and Badge Operations **********
 }

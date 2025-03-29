@@ -1,5 +1,3 @@
-import 'package:src/classes/lesson_item.dart';
-
 class LevelSection {
   final int id;
   final String title;

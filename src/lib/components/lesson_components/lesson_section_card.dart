@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:src/classes/level_section.dart';
-import 'package:shimmer/shimmer.dart';
 
 class LessonSectionCard extends StatefulWidget {
   final LevelSection section;

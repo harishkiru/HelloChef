@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:src/classes/lesson_item.dart';
 import 'package:src/components/common/safe_bottom_padding.dart';
-import 'package:confetti/confetti.dart';
+import 'package:src/components/common/gamification_widget.dart';
+import 'package:src/components/common/greyed_out_widget.dart';
 
 class InteractiveImageScreen extends StatefulWidget {
   final String imagePath;
@@ -23,44 +24,18 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
   // Track the highlighted button
   String? highlightedButton;
   bool showHints = false;
-  late ConfettiController _confettiController;
+  late int numberOfButtons;
+  int numberOfButtonsClicked = 0;
 
   @override
   void initState() {
     super.initState();
-    _confettiController = ConfettiController(
-      duration: const Duration(seconds: 3),
-    );
+    numberOfButtons = widget.buttonDetails.length;
   }
 
   @override
   void dispose() {
-    _confettiController.dispose();
     super.dispose();
-  }
-
-  void _onComplete(context) {
-    // Show confetti when the user completes the task
-    _confettiController.play();
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Congratulations!'),
-          content: Text('You have completed the task!'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-                Navigator.pop(context, true);
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
-    //Navigator.pop(context, true);
   }
 
   List<Widget> makeButtons() {
@@ -90,22 +65,18 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
               height: height,
               child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
+                  backgroundColor: WidgetStatePropertyAll(
                     isHighlighted
-                        ? Colors.green.withOpacity(0.3)
+                        ? Colors.green.withValues(alpha: 0.3)
                         : Colors.transparent,
                   ),
-                  foregroundColor: MaterialStateProperty.all(
-                    Colors.transparent,
-                  ),
-                  shadowColor: MaterialStateProperty.all(Colors.transparent),
-                  surfaceTintColor: MaterialStateProperty.all(
-                    Colors.transparent,
-                  ),
-                  padding: MaterialStateProperty.all(EdgeInsets.zero),
-                  minimumSize: MaterialStateProperty.all(Size.zero),
+                  foregroundColor: WidgetStatePropertyAll(Colors.transparent),
+                  shadowColor: WidgetStatePropertyAll(Colors.transparent),
+                  surfaceTintColor: WidgetStatePropertyAll(Colors.transparent),
+                  padding: WidgetStatePropertyAll(EdgeInsets.zero),
+                  minimumSize: WidgetStatePropertyAll(Size.zero),
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  shape: MaterialStateProperty.all(
+                  shape: WidgetStatePropertyAll(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(4),
                       side: BorderSide(
@@ -119,6 +90,7 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
                 onPressed: () {
                   setState(() {
                     highlightedButton = buttonName;
+                    numberOfButtonsClicked++;
                   });
 
                   showDialog(
@@ -189,7 +161,7 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: Colors.green.withOpacity(0.8),
+                    color: Colors.green.withValues(alpha: 0.8),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
@@ -243,13 +215,13 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
                     final item = widget.buttonDetails[index];
                     return ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green.withOpacity(0.1),
+                        backgroundColor: Colors.green.withValues(alpha: 0.1),
                         foregroundColor: Colors.green,
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                           side: BorderSide(
-                            color: Colors.green.withOpacity(0.5),
+                            color: Colors.green.withValues(alpha: 0.5),
                           ),
                         ),
                       ),
@@ -427,17 +399,6 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
                       children: [
                         Image.asset(widget.imagePath),
                         ...makeButtons(),
-                        Align(
-                          alignment: Alignment.topCenter,
-                          child: ConfettiWidget(
-                            confettiController: _confettiController,
-                            blastDirectionality: BlastDirectionality.explosive,
-                            numberOfParticles: 180,
-                            gravity: 0.1,
-                            minBlastForce: 10,
-                            maxBlastForce: 40,
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -455,19 +416,10 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
                   8,
                   0,
                 ), // Changed bottom margin from 30 to 0
-                child: ElevatedButton(
-                  onPressed: () => _onComplete(context),
-                  child: Text(
-                    'Complete',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
+                child:
+                    numberOfButtonsClicked == numberOfButtons
+                        ? GamificationWidget()
+                        : GreyedOutWidget(),
               ),
             ),
           ],

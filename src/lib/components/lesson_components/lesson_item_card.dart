@@ -143,6 +143,7 @@ class _LessonItemCardState extends State<LessonItemCard> {
     }
 
     dbHelper.completeLesson(widget.lessonItem.id);
+    dbHelper.updateUserXP(10);
 
     setState(() {
       widget.lessonItem.isCompleted = true;

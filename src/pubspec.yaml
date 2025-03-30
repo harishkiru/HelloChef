@@ -171,6 +171,7 @@ flutter:
     - assets/images/simulation_images/pan.png
 
     - assets/sounds/level_complete.mp3
+    - assets/sounds/rank_up.mp3
 
     - .env
 

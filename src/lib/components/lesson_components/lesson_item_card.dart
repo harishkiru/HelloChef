@@ -129,35 +129,18 @@ class _LessonItemCardState extends State<LessonItemCard> {
     }
   }
 
-  Color _getCardColor(int type) {
-    switch (type) {
-      case 0:
-        return Colors.green.shade700;
-      case 1:
-        return Colors.blue.shade700;
-      case 2:
-        return Colors.orange.shade700;
-      case 3:
-        return Colors.purple.shade700;
-      case 4:
-        return Colors.teal.shade700;
-      default:
-        return Colors.green.shade700;
-    }
-  }
-
   // Update lesson completion state and notify parent
   void _markLessonCompleted() async {
     if (widget.lessonItem.isCompleted) {
       return; // Lesson already completed
     }
 
-    dbHelper.completeLesson(widget.lessonItem.id);
-    final response = await dbHelper.updateUserXP(10);
-
     setState(() {
       widget.lessonItem.isCompleted = true;
     });
+
+    dbHelper.completeLesson(widget.lessonItem.id);
+    final response = await dbHelper.updateUserXP(10);
 
     if (response['rank'] != -1) {
       // Play sound
@@ -177,19 +160,24 @@ class _LessonItemCardState extends State<LessonItemCard> {
                 alignment: Alignment.topCenter,
                 child: ConfettiWidget(
                   confettiController: _confettiController,
-                  blastDirection: 0, // straight down
+                  blastDirectionality: BlastDirectionality.explosive,
                   emissionFrequency: 0.05,
                   numberOfParticles: 50,
-                  maxBlastForce: 100,
+                  maxBlastForce: 200,
                   minBlastForce: 50,
                   gravity: 0.3,
                   particleDrag: 0.05,
                   colors: const [
-                    Colors.green,
-                    Colors.blue,
-                    Colors.pink,
-                    Colors.orange,
-                    Colors.purple,
+                    Color.fromARGB(255, 255, 215, 0), // Gold
+                    Color.fromARGB(255, 255, 230, 128), // Light Gold
+                    Color.fromARGB(255, 238, 221, 130), // Pale Gold
+                    Color.fromARGB(255, 212, 175, 55), // Rich Gold
+                    Color.fromARGB(255, 255, 223, 0), // Golden Yellow
+                    Color.fromARGB(255, 205, 127, 50), // Metallic Bronze
+                    Color.fromARGB(255, 184, 134, 11), // Deep Gold
+                    Color.fromARGB(255, 237, 201, 175), // Shimmering Sand
+                    Color.fromARGB(255, 255, 204, 51), // Warm Yellow
+                    Color.fromARGB(255, 250, 231, 181), // Champagne Gold
                   ],
                 ),
               ),
@@ -208,7 +196,7 @@ class _LessonItemCardState extends State<LessonItemCard> {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      'LEVEL UP!',
+                      'RANK UP!',
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -303,11 +291,6 @@ class _LessonItemCardState extends State<LessonItemCard> {
         },
       );
     }
-
-    // Notify parent to refresh progress
-    if (widget.onCompleted != null) {
-      widget.onCompleted!();
-    }
   }
 
   Widget _buildCardContent(BuildContext context, {VoidCallback? onTap}) {
@@ -339,7 +322,7 @@ class _LessonItemCardState extends State<LessonItemCard> {
             Container(
               height: screenHeight * 0.15,
               decoration: BoxDecoration(
-                color: _getCardColor(widget.lessonItem.type),
+                color: Colors.grey.shade200,
                 image:
                     widget.lessonItem.imagePath != null &&
                             widget.lessonItem.imagePath!.isNotEmpty

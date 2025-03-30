@@ -64,22 +64,28 @@ class _LessonSectionCardState extends State<LessonSectionCard>
         } else if (snapshot.connectionState == ConnectionState.done) {
           return GestureDetector(
             onTapDown: (_) {
-              setState(() {
-                _isPressed = true;
-                _animationController.forward();
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                setState(() {
+                  _isPressed = true;
+                  _animationController.forward();
+                });
               });
             },
             onTapUp: (_) {
-              setState(() {
-                _isPressed = false;
-                _animationController.reverse();
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                setState(() {
+                  _isPressed = false;
+                  _animationController.reverse();
+                });
               });
               widget.onTap();
             },
             onTapCancel: () {
-              setState(() {
-                _isPressed = false;
-                _animationController.reverse();
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                setState(() {
+                  _isPressed = false;
+                  _animationController.reverse();
+                });
               });
             },
             child: AnimatedBuilder(

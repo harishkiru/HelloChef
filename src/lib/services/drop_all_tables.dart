@@ -41,10 +41,10 @@ void main() async {
 
   final db = DBHelper.instance();
   db.sqliteDatabase.then((database) async {
-    await dropAllTables(database!);
+    await dropAllTables(database);
   });
 
   db.sqliteDatabase.then((database) async {
-    await verifyTableDeletion(database!);
+    await verifyTableDeletion(database);
   });
 }

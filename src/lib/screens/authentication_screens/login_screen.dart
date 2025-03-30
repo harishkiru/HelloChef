@@ -60,9 +60,12 @@ class _LoginPageState extends State<LoginPage> {
 
       // Navigate to home screen
       if (mounted) {
-        Navigator.pushReplacementNamed(context, '/home');  // Changed from pushNamed to pushReplacementNamed
+        Navigator.pushReplacementNamed(
+          context,
+          '/home',
+        ); // Changed from pushNamed to pushReplacementNamed
       }
-    } on AuthException catch (error) {
+    } on AuthException {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -111,46 +114,47 @@ class _LoginPageState extends State<LoginPage> {
         serverClientId: dotenv.env['GOOGLE_CLIENT_ID'],
         scopes: ['email', 'profile'],
       );
-      
+
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-      
+
       if (googleUser == null) {
         setState(() {
           isLoading = false;
         });
         return;
       }
-      
+
       // Print full user details for debugging
-      print("Google user data: ${googleUser.displayName}, ${googleUser.email}, ${googleUser.id}");
-      
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-      
+      print(
+        "Google user data: ${googleUser.displayName}, ${googleUser.email}, ${googleUser.id}",
+      );
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
       // Print auth tokens for debugging
-      print("Access token: ${googleAuth.accessToken != null ? 'Present' : 'Missing'}");
+      print(
+        "Access token: ${googleAuth.accessToken != null ? 'Present' : 'Missing'}",
+      );
       print("ID token: ${googleAuth.idToken != null ? 'Present' : 'Missing'}");
-      
+
       if (googleAuth.idToken == null) {
         throw Exception("Failed to get ID token from Google");
       }
-      
+
       final AuthResponse res = await client.auth.signInWithIdToken(
         provider: OAuthProvider.google,
         idToken: googleAuth.idToken!,
         accessToken: googleAuth.accessToken,
       );
-      
+
       if (res.session != null) {
         final user = res.session!.user;
-        
+
         try {
           // Check if user exists in your custom users table
-          await client
-              .from('users')
-              .select()
-              .eq('auth_id', user.id)
-              .single();
-          
+          await client.from('users').select().eq('auth_id', user.id).single();
+
           // User exists, navigate to home
           if (mounted) {
             Navigator.pushReplacementNamed(context, '/home');
@@ -167,7 +171,9 @@ class _LoginPageState extends State<LoginPage> {
             if (nameParts.length > 1) {
               // If there are multiple parts, first part is firstName, rest is lastName
               firstName = nameParts.first;
-              lastName = nameParts.skip(1).join(' '); // Join all remaining parts for lastName
+              lastName = nameParts
+                  .skip(1)
+                  .join(' '); // Join all remaining parts for lastName
             } else if (nameParts.length == 1) {
               // If only one part, use it as firstName
               firstName = nameParts.first;
@@ -175,15 +181,16 @@ class _LoginPageState extends State<LoginPage> {
             }
           }
 
-          final result = await client.from('users').insert({
-            'auth_id': user.id,
-            'email': user.email,
-            'first_name': firstName,
-            'last_name': lastName,
-          }).select();
-          
+          final result =
+              await client.from('users').insert({
+                'auth_id': user.id,
+                'email': user.email,
+                'first_name': firstName,
+                'last_name': lastName,
+              }).select();
+
           print("Insert result: $result");
-          
+
           if (mounted) {
             Navigator.pushReplacementNamed(context, '/home');
           }
@@ -246,11 +253,7 @@ class _LoginPageState extends State<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(height: screenHeight * 0.1), // Add some top padding
-                  Icon(
-                    Icons.kitchen,
-                    size: logosize,
-                    color: Colors.green,
-                  ),
+                  Icon(Icons.kitchen, size: logosize, color: Colors.green),
                   const Text(
                     'Hello Chef',
                     style: TextStyle(
@@ -271,16 +274,22 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   MyButton(
                     onTap: isLoading ? null : _handleLogin,
-                    child: isLoading
-                        ? const CircularProgressIndicator(color: Colors.white)
-                        : const Text('Login'),
+                    child:
+                        isLoading
+                            ? const CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                            : const Text('Login'),
                   ),
                   const SizedBox(height: 20),
                   const Text('OR', style: TextStyle(color: Colors.grey)),
                   const SizedBox(height: 20),
                   ElevatedButton.icon(
                     onPressed: _handleGoogleSignIn,
-                    icon: Image.asset('assets/google_logo.png', height: 24),  // Add this image to your assets
+                    icon: Image.asset(
+                      'assets/google_logo.png',
+                      height: 24,
+                    ), // Add this image to your assets
                     label: const Text('Sign in with Google'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
@@ -291,7 +300,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   // Wrap the TextButton in SafeBottomPadding
                   SafeBottomPadding(
-                    extraPadding: screenHeight * 0.05, // Dynamic padding based on screen height
+                    extraPadding:
+                        screenHeight *
+                        0.05, // Dynamic padding based on screen height
                     child: TextButton(
                       onPressed: () {
                         Navigator.pushNamed(context, '/signup');

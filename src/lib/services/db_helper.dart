@@ -537,7 +537,5 @@ class DBHelper {
     } else {
       return {'xp': -1, 'rank': -1};
     }
-    // Ensure a return or throw statement at the end
-    throw Exception('Unexpected error in updateUserXP');
   }
 }

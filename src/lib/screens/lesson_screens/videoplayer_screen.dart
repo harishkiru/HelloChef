@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:src/classes/lesson_item.dart';
 import 'package:src/services/copy_asset.dart';
 import 'package:src/components/common/safe_bottom_padding.dart'; // Add this import
@@ -19,13 +17,12 @@ class VideoPlayerScreen extends StatefulWidget {
   });
 
   @override
-  _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
+  VideoPlayerScreenState createState() => VideoPlayerScreenState();
 }
 
-class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
+class VideoPlayerScreenState extends State<VideoPlayerScreen> {
   late final player = Player();
   late final controller = VideoController(player);
-  bool _playerInitialized = false;
 
   @override
   void initState() {
@@ -43,9 +40,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     }
 
     if (mounted) {
-      setState(() {
-        _playerInitialized = true;
-      });
+      setState(() {});
     }
   }
 
@@ -57,8 +52,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,

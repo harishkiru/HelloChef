@@ -149,147 +149,149 @@ class _LessonItemCardState extends State<LessonItemCard> {
       // Start confetti animation
       _confettiController.play();
 
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return Stack(
-            children: [
-              // Confetti effect on top of dialog
-              Align(
-                alignment: Alignment.topCenter,
-                child: ConfettiWidget(
-                  confettiController: _confettiController,
-                  blastDirectionality: BlastDirectionality.explosive,
-                  emissionFrequency: 0.05,
-                  numberOfParticles: 50,
-                  maxBlastForce: 200,
-                  minBlastForce: 50,
-                  gravity: 0.3,
-                  particleDrag: 0.05,
-                  colors: const [
-                    Color.fromARGB(255, 255, 215, 0), // Gold
-                    Color.fromARGB(255, 255, 230, 128), // Light Gold
-                    Color.fromARGB(255, 238, 221, 130), // Pale Gold
-                    Color.fromARGB(255, 212, 175, 55), // Rich Gold
-                    Color.fromARGB(255, 255, 223, 0), // Golden Yellow
-                    Color.fromARGB(255, 205, 127, 50), // Metallic Bronze
-                    Color.fromARGB(255, 184, 134, 11), // Deep Gold
-                    Color.fromARGB(255, 237, 201, 175), // Shimmering Sand
-                    Color.fromARGB(255, 255, 204, 51), // Warm Yellow
-                    Color.fromARGB(255, 250, 231, 181), // Champagne Gold
-                  ],
+      if (mounted) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return Stack(
+              children: [
+                // Confetti effect on top of dialog
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: ConfettiWidget(
+                    confettiController: _confettiController,
+                    blastDirectionality: BlastDirectionality.explosive,
+                    emissionFrequency: 0.05,
+                    numberOfParticles: 50,
+                    maxBlastForce: 200,
+                    minBlastForce: 50,
+                    gravity: 0.3,
+                    particleDrag: 0.05,
+                    colors: const [
+                      Color.fromARGB(255, 255, 215, 0), // Gold
+                      Color.fromARGB(255, 255, 230, 128), // Light Gold
+                      Color.fromARGB(255, 238, 221, 130), // Pale Gold
+                      Color.fromARGB(255, 212, 175, 55), // Rich Gold
+                      Color.fromARGB(255, 255, 223, 0), // Golden Yellow
+                      Color.fromARGB(255, 205, 127, 50), // Metallic Bronze
+                      Color.fromARGB(255, 184, 134, 11), // Deep Gold
+                      Color.fromARGB(255, 237, 201, 175), // Shimmering Sand
+                      Color.fromARGB(255, 255, 204, 51), // Warm Yellow
+                      Color.fromARGB(255, 250, 231, 181), // Champagne Gold
+                    ],
+                  ),
                 ),
-              ),
-              // Enhanced dialog
-              AlertDialog(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                backgroundColor: Colors.green.shade50,
-                title: Column(
-                  children: [
-                    const Icon(
-                      Icons.workspace_premium,
-                      color: Colors.amber,
-                      size: 50,
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      'RANK UP!',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.green.shade800,
+                // Enhanced dialog
+                AlertDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  backgroundColor: Colors.green.shade50,
+                  title: Column(
+                    children: [
+                      const Icon(
+                        Icons.workspace_premium,
+                        color: Colors.amber,
+                        size: 50,
                       ),
-                    ),
-                  ],
-                ),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      'Congratulations!',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.green.shade700,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      'You have achieved rank:',
-                      style: const TextStyle(fontSize: 16),
-                    ),
-                    const SizedBox(height: 15),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 25,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.green.shade700,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
-                            blurRadius: 5,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Text(
-                        '${response['rank']}',
-                        style: const TextStyle(
-                          fontSize: 32,
+                      const SizedBox(height: 10),
+                      Text(
+                        'RANK UP!',
+                        style: TextStyle(
+                          fontSize: 24,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.green.shade800,
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 20),
-                    Text(
-                      'Keep up the great work!',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontStyle: FontStyle.italic,
-                        color: Colors.green.shade600,
+                    ],
+                  ),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Congratulations!',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green.shade700,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                actions: [
-                  Center(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green.shade700,
-                        foregroundColor: Colors.white,
+                      const SizedBox(height: 10),
+                      Text(
+                        'You have achieved rank:',
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(height: 15),
+                      Container(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 40,
-                          vertical: 12,
+                          vertical: 10,
+                          horizontal: 25,
                         ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
+                        decoration: BoxDecoration(
+                          color: Colors.green.shade700,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.3),
+                              blurRadius: 5,
+                              offset: const Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        child: Text(
+                          '${response['rank']}',
+                          style: const TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                      child: const Text(
-                        'AWESOME!',
+                      const SizedBox(height: 20),
+                      Text(
+                        'Keep up the great work!',
                         style: TextStyle(
                           fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.italic,
+                          color: Colors.green.shade600,
+                        ),
+                      ),
+                    ],
+                  ),
+                  actions: [
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green.shade700,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 40,
+                            vertical: 12,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                        ),
+                        child: const Text(
+                          'AWESOME!',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
-          );
-        },
-      );
+                  ],
+                ),
+              ],
+            );
+          },
+        );
+      }
     }
   }
 
@@ -324,21 +326,19 @@ class _LessonItemCardState extends State<LessonItemCard> {
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
                 image:
-                    widget.lessonItem.imagePath != null &&
-                            widget.lessonItem.imagePath!.isNotEmpty
+                    widget.lessonItem.imagePath.isNotEmpty
                         ? DecorationImage(
-                          image: AssetImage(widget.lessonItem.imagePath!),
+                          image: AssetImage(widget.lessonItem.imagePath),
                           fit: BoxFit.cover,
                           colorFilter: ColorFilter.mode(
-                            Colors.black.withOpacity(0.3),
+                            Colors.black.withValues(alpha: 0.3),
                             BlendMode.darken,
                           ),
                         )
                         : null,
               ),
               child:
-                  widget.lessonItem.imagePath == null ||
-                          widget.lessonItem.imagePath!.isEmpty
+                  widget.lessonItem.imagePath.isEmpty
                       ? Center(
                         child: Icon(
                           _getIconForLessonType(widget.lessonItem.type),

@@ -2,7 +2,6 @@ import 'package:confetti/confetti.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:math';
 
 class GamificationWidget extends StatefulWidget {
   const GamificationWidget({super.key});
@@ -93,7 +92,7 @@ class _GamificationWidgetState extends State<GamificationWidget>
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: Colors.green.withOpacity(0.1),
+                      color: Colors.green.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
@@ -180,13 +179,13 @@ class _GamificationWidgetState extends State<GamificationWidget>
             height: screenHeight * 0.06,
             child: ElevatedButton(
               onPressed: () => levelComplete(context),
-              child: Text('Complete', style: TextStyle(color: Colors.white)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
+              child: Text('Complete', style: TextStyle(color: Colors.white)),
             ),
           ),
         ),

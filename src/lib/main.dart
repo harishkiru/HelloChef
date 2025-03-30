@@ -26,7 +26,7 @@ void main() async {
     await dbHelper.ensureTablesExist();
 
     // Only now try to insert app first run data
-    await AppFirstRun();
+    await appFirstRun();
 
     MediaKit.ensureInitialized();
     runApp(const MyApp());

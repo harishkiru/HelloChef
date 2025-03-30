@@ -1,6 +1,7 @@
 import 'package:confetti/confetti.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'dart:math';
 
 class GamificationWidget extends StatefulWidget {
@@ -10,43 +11,137 @@ class GamificationWidget extends StatefulWidget {
   State<GamificationWidget> createState() => _GamificationWidgetState();
 }
 
-class _GamificationWidgetState extends State<GamificationWidget> {
+class _GamificationWidgetState extends State<GamificationWidget>
+    with SingleTickerProviderStateMixin {
   late ConfettiController _confettiController;
   late AudioPlayer _player;
+  late AnimationController _animationController;
 
   @override
   void initState() {
     super.initState();
     _confettiController = ConfettiController(
-      duration: const Duration(seconds: 10),
+      duration: const Duration(seconds: 5),
     );
     _player = AudioPlayer();
     _player.setSource(AssetSource('sounds/level_complete.mp3'));
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
   }
 
   void levelComplete(context) {
-    // Show confetti when the user completes the task
+    // Trigger haptic feedback
+    HapticFeedback.heavyImpact();
+
+    // Enhanced confetti
     _confettiController.play();
+
+    // Play sound
     _player.resume();
-    showDialog(
+
+    // Animated dialog
+    showGeneralDialog(
       context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Congratulations!'),
-          content: Text('You have completed the lesson!'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-                Navigator.pop(context, true);
-              },
-              child: Text('OK'),
+      barrierDismissible: true,
+      barrierLabel: 'Congratulations Dialog',
+      transitionDuration: const Duration(milliseconds: 300),
+      pageBuilder: (context, animation1, animation2) {
+        return Container(); // Not used but required
+      },
+      transitionBuilder: (context, animation, secondaryAnimation, child) {
+        final curvedAnimation = CurvedAnimation(
+          parent: animation,
+          curve: Curves.easeInOut,
+        );
+
+        return ScaleTransition(
+          scale: Tween<double>(begin: 0.5, end: 1.0).animate(curvedAnimation),
+          child: FadeTransition(
+            opacity: Tween<double>(
+              begin: 0.0,
+              end: 1.0,
+            ).animate(curvedAnimation),
+            child: AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              backgroundColor: Colors.white,
+              title: Column(
+                children: [
+                  const Icon(Icons.star, color: Colors.amber, size: 50),
+                  const SizedBox(height: 10),
+                  const Text(
+                    'Congratulations!',
+                    style: TextStyle(
+                      color: Colors.green,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    'You have completed the lesson!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  const SizedBox(height: 15),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.green.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.emoji_events, color: Colors.amber),
+                        const SizedBox(width: 8),
+                        const Text(
+                          '+10 XP',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              actions: [
+                SizedBox(
+                  width: double.infinity,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.pop(context, true);
+                    },
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.0),
+                      child: Text(
+                        'Continue',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         );
       },
     );
-    //Navigator.pop(context, true);
   }
 
   @override
@@ -88,9 +183,11 @@ class _GamificationWidgetState extends State<GamificationWidget> {
     );
   }
 
+  @override
   void dispose() {
     _confettiController.dispose();
     _player.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 }

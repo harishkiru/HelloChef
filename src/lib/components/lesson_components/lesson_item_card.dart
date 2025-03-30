@@ -6,6 +6,8 @@ import 'package:src/screens/lesson_screens/quiz_screen.dart';
 import 'package:src/screens/lesson_screens/interactive_image_screen.dart';
 import 'package:src/services/db_helper.dart';
 import 'package:src/classes/quiz.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:confetti/confetti.dart';
 
 class LessonItemCard extends StatefulWidget {
   final LessonItem lessonItem;
@@ -19,14 +21,22 @@ class LessonItemCard extends StatefulWidget {
 
 class _LessonItemCardState extends State<LessonItemCard> {
   final dbHelper = DBHelper.instance();
+  late AudioPlayer _player;
+  late ConfettiController _confettiController;
 
   @override
   void initState() {
     super.initState();
+    _player = AudioPlayer();
+    _confettiController = ConfettiController(
+      duration: const Duration(seconds: 5),
+    );
   }
 
   @override
   void dispose() {
+    _player.dispose();
+    _confettiController.dispose();
     super.dispose();
   }
 
@@ -137,17 +147,162 @@ class _LessonItemCardState extends State<LessonItemCard> {
   }
 
   // Update lesson completion state and notify parent
-  void _markLessonCompleted() {
+  void _markLessonCompleted() async {
     if (widget.lessonItem.isCompleted) {
       return; // Lesson already completed
     }
 
     dbHelper.completeLesson(widget.lessonItem.id);
-    dbHelper.updateUserXP(10);
+    final response = await dbHelper.updateUserXP(10);
 
     setState(() {
       widget.lessonItem.isCompleted = true;
     });
+
+    if (response['rank'] != -1) {
+      // Play sound
+      _player.play(AssetSource('sounds/rank_up.mp3'));
+
+      // Start confetti animation
+      _confettiController.play();
+
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Stack(
+            children: [
+              // Confetti effect on top of dialog
+              Align(
+                alignment: Alignment.topCenter,
+                child: ConfettiWidget(
+                  confettiController: _confettiController,
+                  blastDirection: 0, // straight down
+                  emissionFrequency: 0.05,
+                  numberOfParticles: 50,
+                  maxBlastForce: 100,
+                  minBlastForce: 50,
+                  gravity: 0.3,
+                  particleDrag: 0.05,
+                  colors: const [
+                    Colors.green,
+                    Colors.blue,
+                    Colors.pink,
+                    Colors.orange,
+                    Colors.purple,
+                  ],
+                ),
+              ),
+              // Enhanced dialog
+              AlertDialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                backgroundColor: Colors.green.shade50,
+                title: Column(
+                  children: [
+                    const Icon(
+                      Icons.workspace_premium,
+                      color: Colors.amber,
+                      size: 50,
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      'LEVEL UP!',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green.shade800,
+                      ),
+                    ),
+                  ],
+                ),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'Congratulations!',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green.shade700,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      'You have achieved rank:',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(height: 15),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 25,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.green.shade700,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.3),
+                            blurRadius: 5,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Text(
+                        '${response['rank']}',
+                        style: const TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                      'Keep up the great work!',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.green.shade600,
+                      ),
+                    ),
+                  ],
+                ),
+                actions: [
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green.shade700,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 40,
+                          vertical: 12,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                      ),
+                      child: const Text(
+                        'AWESOME!',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          );
+        },
+      );
+    }
 
     // Notify parent to refresh progress
     if (widget.onCompleted != null) {

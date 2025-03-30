@@ -477,7 +477,7 @@ class DBHelper {
 
   // ********* Supabase XP and Badge Operations **********
 
-  Future<void> updateUserXP(int xp) async {
+  Future<Map<String, dynamic>> updateUserXP(int xp) async {
     final user = supabase.auth.currentUser;
     if (user != null) {
       // Fetch the current XP of the user
@@ -495,8 +495,49 @@ class DBHelper {
       // Update the XP in the database
       final newXP = currentXP + xp;
       await supabase.from('users').update({'xp': newXP}).eq('auth_id', user.id);
+
+      //Fetch the current user rank
+      final rankResponse =
+          await supabase
+              .from('users')
+              .select('user_rank')
+              .eq('auth_id', user.id)
+              .maybeSingle();
+
+      final rank = rankResponse?['user_rank'] as int? ?? 0;
+
+      // Fetch the next rank above the current rank
+      final nextRankResponse =
+          await supabase
+              .from('ranks')
+              .select('id, xp_required')
+              .gt('id', rank)
+              .order('id', ascending: true)
+              .limit(1)
+              .maybeSingle();
+
+      if (nextRankResponse != null) {
+        final nextRankXP = nextRankResponse['xp_required'] as int? ?? 0;
+        if (newXP >= nextRankXP) {
+          // Update the user rank in the database
+          await supabase
+              .from('users')
+              .update({'user_rank': nextRankResponse['id']})
+              .eq('auth_id', user.id);
+
+          return {'xp': newXP, 'rank': nextRankResponse['id']};
+        } else {
+          // User is not eligible for a rank up yet
+          return {'xp': newXP, 'rank': -1};
+        }
+      } else {
+        // No next rank found, user is at the highest rank
+        return {'xp': newXP, 'rank': -1};
+      }
     } else {
-      throw Exception('User not authenticated');
+      return {'xp': -1, 'rank': -1};
     }
+    // Ensure a return or throw statement at the end
+    throw Exception('Unexpected error in updateUserXP');
   }
 }

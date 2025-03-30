@@ -4,7 +4,6 @@ import 'package:src/components/lesson_components/lesson_section_card.dart';
 import 'package:src/screens/lesson_screens/level_section_overview_screen.dart';
 import 'package:src/services/db_helper.dart';
 import 'package:src/classes/level_section.dart';
-import 'package:src/components/common/safe_bottom_padding.dart';
 
 class LevelSectionScreen extends StatefulWidget {
   final Level level;

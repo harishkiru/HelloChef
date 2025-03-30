@@ -17,13 +17,13 @@ class GreyedOutWidget extends StatelessWidget {
             height: screenHeight * 0.06,
             child: ElevatedButton(
               onPressed: () {},
-              child: Text('Complete', style: TextStyle(color: Colors.white)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 177, 177, 177),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
+              child: Text('Complete', style: TextStyle(color: Colors.white)),
             ),
           ),
         ),

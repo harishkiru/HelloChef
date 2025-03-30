@@ -165,7 +165,7 @@ Future<bool> checkIfFirstRun(Database db) async {
   }
 }
 
-Future<void> AppFirstRun() async {
+Future<void> appFirstRun() async {
   // Get the database helper and ensure tables exist first
   final dbHelper = DBHelper.instance();
   //await dbHelper.ensureTablesExist();

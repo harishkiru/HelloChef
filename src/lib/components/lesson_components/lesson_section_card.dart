@@ -148,8 +148,8 @@ class _LessonSectionCardState extends State<LessonSectionCard>
                                           Shadow(
                                             offset: const Offset(1, 1),
                                             blurRadius: 3.0,
-                                            color: Colors.black.withOpacity(
-                                              0.3,
+                                            color: Colors.black.withValues(
+                                              alpha: 0.3,
                                             ),
                                           ),
                                         ],
@@ -230,7 +230,7 @@ class _LessonSectionCardState extends State<LessonSectionCard>
                                 borderRadius: BorderRadius.circular(12),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withOpacity(0.2),
+                                    color: Colors.black.withValues(alpha: 0.2),
                                     blurRadius: 4,
                                     offset: const Offset(0, 2),
                                   ),

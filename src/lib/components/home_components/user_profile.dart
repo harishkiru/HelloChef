@@ -29,7 +29,7 @@ class UserProfileDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          Container(
+          SizedBox(
             height: 115,
             child: DrawerHeader(
               decoration: const BoxDecoration(color: Colors.green),
@@ -98,11 +98,13 @@ class UserProfileDrawer extends StatelessWidget {
                         TextButton(
                           onPressed: () async {
                             await Supabase.instance.client.auth.signOut();
-                            Navigator.pushNamedAndRemoveUntil(
-                              context,
-                              '/',
-                              (route) => false,
-                            );
+                            if (context.mounted) {
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                '/',
+                                (route) => false,
+                              );
+                            }
                           },
                           child: const Text(
                             'Yes',
@@ -139,7 +141,7 @@ class UserProfileDrawer extends StatelessWidget {
                           onPressed: () async {
                             final db = DBHelper.instance();
                             await db.sqliteDatabase.then((database) async {
-                              await dropAllTables(database!);
+                              await dropAllTables(database);
                             });
                             await db.ensureTablesExist();
                             SystemNavigator.pop();

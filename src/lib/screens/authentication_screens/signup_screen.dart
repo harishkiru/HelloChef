@@ -20,7 +20,8 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   // Supabase client instance for database and authentication operations
   final SupabaseClient client = Supabase.instance.client;
@@ -32,23 +33,26 @@ class _SignUpPageState extends State<SignUpPage> {
   Future<bool> createUser({
     required final String email,
     required final String password,
-    required final String ConfirmPassword,
+    required final String confirmPassword,
     required final String firstName,
     required final String lastName,
   }) async {
     setState(() {
       isLoading = true;
     });
-    
+
     try {
       // Check if password and confirmation password match
-      if (password != ConfirmPassword) {
+      if (password != confirmPassword) {
         context.showErrorMessage("Passwords do not match");
         return false;
       }
 
       // Sign up the user using Supabase authentication
-      final response = await client.auth.signUp(email: email, password: password);
+      final response = await client.auth.signUp(
+        email: email,
+        password: password,
+      );
 
       // Retrieve the user's ID after successful sign-up
       final userId = response.user!.id;
@@ -64,7 +68,10 @@ class _SignUpPageState extends State<SignUpPage> {
       return true; // Return true if sign-up is successful
     } catch (e) {
       // Display a user friendly error message if sign-up fails
-      context.showErrorMessage('Sign up failed. Please try again.');
+
+      if (mounted) {
+        context.showErrorMessage('Sign up failed. Please try again.');
+      }
       return false; // Return false on failure
     } finally {
       setState(() {
@@ -85,39 +92,36 @@ class _SignUpPageState extends State<SignUpPage> {
         serverClientId: dotenv.env['GOOGLE_CLIENT_ID'],
         scopes: ['email', 'profile'],
       );
-      
+
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-      
+
       if (googleUser == null) {
         setState(() {
           isLoading = false;
         });
         return;
       }
-      
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-      
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
       if (googleAuth.idToken == null) {
         throw Exception("Failed to get ID token from Google");
       }
-      
+
       final AuthResponse res = await client.auth.signInWithIdToken(
         provider: OAuthProvider.google,
         idToken: googleAuth.idToken!,
         accessToken: googleAuth.accessToken,
       );
-      
+
       if (res.session != null) {
         final user = res.session!.user;
-        
+
         try {
           // Check if user exists in your custom users table
-          await client
-              .from('users')
-              .select()
-              .eq('auth_id', user.id)
-              .single();
-          
+          await client.from('users').select().eq('auth_id', user.id).single();
+
           // User exists, navigate to home
           if (mounted) {
             Navigator.pushReplacementNamed(context, '/home');
@@ -133,7 +137,9 @@ class _SignUpPageState extends State<SignUpPage> {
             if (nameParts.length > 1) {
               // If there are multiple parts, first part is firstName, rest is lastName
               firstName = nameParts.first;
-              lastName = nameParts.skip(1).join(' '); // Join all remaining parts for lastName
+              lastName = nameParts
+                  .skip(1)
+                  .join(' '); // Join all remaining parts for lastName
             } else if (nameParts.length == 1) {
               // If only one part, use it as firstName
               firstName = nameParts.first;
@@ -147,7 +153,7 @@ class _SignUpPageState extends State<SignUpPage> {
             'first_name': firstName,
             'last_name': lastName,
           });
-          
+
           if (mounted) {
             Navigator.pushReplacementNamed(context, '/home');
           }
@@ -197,11 +203,7 @@ class _SignUpPageState extends State<SignUpPage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         // Display an icon at the top
-        Icon(
-          Icons.kitchen,
-          size: logosize,
-          color: Colors.green,
-        ),
+        Icon(Icons.kitchen, size: logosize, color: Colors.green),
         // Display the app's name with styling
         const Text(
           'Hello Chef',
@@ -239,23 +241,28 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
         // Button to trigger sign-up
         MyButton(
-          onTap: isLoading 
-              ? null 
-              : () async {
-                  bool success = await createUser(
-                    email: _emailController.text,
-                    password: _passwordController.text,
-                    ConfirmPassword: _confirmPasswordController.text,
-                    firstName: _firstNameController.text,
-                    lastName: _lastNameController.text,
-                  );
-                  if (success && mounted) {
-                    Navigator.pushReplacementNamed(context, '/home');  // Changed from pushNamed to pushReplacementNamed
-                  }
-                },
-          child: isLoading
-              ? const CircularProgressIndicator(color: Colors.white)
-              : const Text('Sign Up'),
+          onTap:
+              isLoading
+                  ? null
+                  : () async {
+                    bool success = await createUser(
+                      email: _emailController.text,
+                      password: _passwordController.text,
+                      confirmPassword: _confirmPasswordController.text,
+                      firstName: _firstNameController.text,
+                      lastName: _lastNameController.text,
+                    );
+                    if (success && context.mounted) {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        '/home',
+                      ); // Changed from pushNamed to pushReplacementNamed
+                    }
+                  },
+          child:
+              isLoading
+                  ? const CircularProgressIndicator(color: Colors.white)
+                  : const Text('Sign Up'),
         ),
         const SizedBox(height: 20),
         const Text('OR', style: TextStyle(color: Colors.grey)),
@@ -273,7 +280,8 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
         // Wrap the TextButton in SafeBottomPadding
         SafeBottomPadding(
-          extraPadding: screenHeight * 0.05, // Dynamic padding based on screen height
+          extraPadding:
+              screenHeight * 0.05, // Dynamic padding based on screen height
           child: TextButton(
             onPressed: () {
               Navigator.pushNamed(context, '/login');
@@ -295,10 +303,7 @@ class _SignUpPageState extends State<SignUpPage> {
               vertical: 20.0,
               horizontal: 24.0, // Added horizontal padding for consistency
             ),
-            child: Transform.scale(
-              scale: scaleFactor,
-              child: content,
-            ),
+            child: Transform.scale(scale: scaleFactor, child: content),
           ),
         ),
       ),

@@ -7,7 +7,7 @@ void main(List<String> args) {
 }
 
 class Test extends StatelessWidget {
-  Test() {
+  Test({super.key}) {
     final player = AudioPlayer();
     player.play(AssetSource('sounds/rank_up.mp3'));
   }

@@ -5,16 +5,16 @@ import 'practice_grid.dart';
 import 'practice_data.dart';
 import 'package:src/components/home_components/user_profile.dart';
 import '../practice_simulation/start_menu.dart';
-import 'package:src/components/common/safe_bottom_padding.dart'; // Add this import
+// Add this import
 
 class PracticeScreen extends StatefulWidget {
   const PracticeScreen({super.key});
 
   @override
-  _PracticeScreenState createState() => _PracticeScreenState();
+  PracticeScreenState createState() => PracticeScreenState();
 }
 
-class _PracticeScreenState extends State<PracticeScreen> {
+class PracticeScreenState extends State<PracticeScreen> {
   tile.Difficulty selectedDifficulty = tile.Difficulty.all;
   tile.Category selectedCategory = tile.Category.all;
   late Future<List<tile.PracticeTile>> _practiceTilesFuture;
@@ -35,9 +35,11 @@ class _PracticeScreenState extends State<PracticeScreen> {
         actions: [
           TextButton(
             style: TextButton.styleFrom(
-              backgroundColor: Colors.white.withOpacity(0.2),
+              backgroundColor: Colors.white.withValues(alpha: 0.2),
               padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
             ),
             onPressed: () {
               Navigator.push(
@@ -58,7 +60,8 @@ class _PracticeScreenState extends State<PracticeScreen> {
         ],
       ),
       endDrawer: const UserProfileDrawer(),
-      body: SafeArea(  // Added SafeArea
+      body: SafeArea(
+        // Added SafeArea
         child: FutureBuilder<List<tile.PracticeTile>>(
           future: _practiceTilesFuture,
           builder: (context, snapshot) {
@@ -72,13 +75,16 @@ class _PracticeScreenState extends State<PracticeScreen> {
 
             final practiceTile = snapshot.data!;
 
-            final filteredItems = practiceTile.where((item) {
-              final matchesDifficulty =
-                  selectedDifficulty == tile.Difficulty.all || item.difficulty == selectedDifficulty;
-              final matchesCategory =
-                  selectedCategory == tile.Category.all || item.category == selectedCategory;
-              return matchesDifficulty && matchesCategory;
-            }).toList();
+            final filteredItems =
+                practiceTile.where((item) {
+                  final matchesDifficulty =
+                      selectedDifficulty == tile.Difficulty.all ||
+                      item.difficulty == selectedDifficulty;
+                  final matchesCategory =
+                      selectedCategory == tile.Category.all ||
+                      item.category == selectedCategory;
+                  return matchesDifficulty && matchesCategory;
+                }).toList();
 
             return Column(
               children: [
@@ -98,7 +104,9 @@ class _PracticeScreenState extends State<PracticeScreen> {
                 ),
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+                    padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).padding.bottom,
+                    ),
                     child: PracticeGrid(items: filteredItems),
                   ),
                 ),

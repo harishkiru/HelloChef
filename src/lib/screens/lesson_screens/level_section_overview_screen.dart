@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:src/classes/level_section.dart';
 import 'package:src/components/lesson_components/lesson_item_card.dart';

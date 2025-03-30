@@ -154,12 +154,23 @@ class _GamificationWidgetState extends State<GamificationWidget>
           alignment: Alignment.topCenter,
           child: ConfettiWidget(
             confettiController: _confettiController,
-            blastDirection: -pi / 2, // 270 degrees, shooting upwards
             blastDirectionality: BlastDirectionality.explosive,
             numberOfParticles: 300,
             gravity: 0.2, // Allows it to fall back down after reaching the top
             minBlastForce: 100, // Controls the initial speed
             maxBlastForce: 500,
+            colors: const [
+              Color.fromARGB(255, 255, 0, 0), // Red
+              Color.fromARGB(255, 255, 128, 0), // Orange
+              Color.fromARGB(255, 255, 255, 0), // Yellow
+              Color.fromARGB(255, 0, 255, 0), // Green
+              Color.fromARGB(255, 0, 128, 255), // Sky Blue
+              Color.fromARGB(255, 0, 0, 255), // Blue
+              Color.fromARGB(255, 128, 0, 255), // Purple
+              Color.fromARGB(255, 255, 0, 255), // Magenta
+              Color.fromARGB(255, 255, 20, 147), // Deep Pink
+              Color.fromARGB(255, 0, 255, 255), // Cyan
+            ],
           ),
         ),
         Padding(

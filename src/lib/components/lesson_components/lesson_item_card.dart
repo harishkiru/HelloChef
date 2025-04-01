@@ -6,16 +6,14 @@ import 'package:src/screens/lesson_screens/quiz_screen.dart';
 import 'package:src/screens/lesson_screens/interactive_image_screen.dart';
 import 'package:src/services/db_helper.dart';
 import 'package:src/classes/quiz.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:confetti/confetti.dart';
 
 class LessonItemCard extends StatefulWidget {
   final LessonItem lessonItem;
   final VoidCallback? onCompleted;
 
-  const LessonItemCard({
-    super.key, 
-    required this.lessonItem,
-    this.onCompleted,
-  });
+  const LessonItemCard({super.key, required this.lessonItem, this.onCompleted});
 
   @override
   State<LessonItemCard> createState() => _LessonItemCardState();
@@ -23,6 +21,35 @@ class LessonItemCard extends StatefulWidget {
 
 class _LessonItemCardState extends State<LessonItemCard> {
   final dbHelper = DBHelper.instance();
+  late AudioPlayer _player;
+  late ConfettiController _confettiController;
+
+  @override
+  void initState() {
+    super.initState();
+    _player = AudioPlayer();
+    _confettiController = ConfettiController(
+      duration: const Duration(seconds: 5),
+    );
+  }
+
+  @override
+  void dispose() {
+    _player.dispose();
+    _confettiController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (widget.lessonItem.type < 3) {
+      return textVideoandImageContent();
+    } else if (widget.lessonItem.type == 3) {
+      return quizContent();
+    } else {
+      return interactiveImageContent();
+    }
+  }
 
   Future<Quiz> getQuizFromLesson() async {
     List<Map<String, dynamic>> quizDetails = await dbHelper.getQuizFromQuizId(
@@ -102,55 +129,188 @@ class _LessonItemCardState extends State<LessonItemCard> {
     }
   }
 
-  Color _getCardColor(int type) {
-    switch (type) {
-      case 0:
-        return Colors.green.shade700;
-      case 1:
-        return Colors.blue.shade700;
-      case 2:
-        return Colors.orange.shade700;
-      case 3:
-        return Colors.purple.shade700;
-      case 4:
-        return Colors.teal.shade700;
-      default:
-        return Colors.green.shade700;
-    }
-  }
-
   // Update lesson completion state and notify parent
-  void _markLessonCompleted() {
+  void _markLessonCompleted() async {
+    if (widget.lessonItem.isCompleted) {
+      return; // Lesson already completed
+    }
+
     setState(() {
       widget.lessonItem.isCompleted = true;
     });
-    dbHelper.completeLesson(widget.lessonItem.id);
-    
-    // Notify parent to refresh progress
-    if (widget.onCompleted != null) {
-      widget.onCompleted!();
-    }
-  }
 
-  @override
-  Widget build(BuildContext context) {
-    if (widget.lessonItem.type < 3) {
-      return textVideoandImageContent();
-    } else if (widget.lessonItem.type == 3) {
-      return quizContent();
-    } else {
-      return interactiveImageContent();
+    dbHelper.completeLesson(widget.lessonItem.id);
+    final response = await dbHelper.updateUserXP(10);
+
+    if (response['rank'] != -1) {
+      // Play sound
+      _player.play(AssetSource('sounds/rank_up.mp3'));
+
+      // Start confetti animation
+      _confettiController.play();
+
+      if (mounted) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return Stack(
+              children: [
+                // Confetti effect on top of dialog
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: ConfettiWidget(
+                    confettiController: _confettiController,
+                    blastDirectionality: BlastDirectionality.explosive,
+                    emissionFrequency: 0.05,
+                    numberOfParticles: 50,
+                    maxBlastForce: 200,
+                    minBlastForce: 50,
+                    gravity: 0.3,
+                    particleDrag: 0.05,
+                    colors: const [
+                      Color.fromARGB(255, 255, 215, 0), // Gold
+                      Color.fromARGB(255, 255, 230, 128), // Light Gold
+                      Color.fromARGB(255, 238, 221, 130), // Pale Gold
+                      Color.fromARGB(255, 212, 175, 55), // Rich Gold
+                      Color.fromARGB(255, 255, 223, 0), // Golden Yellow
+                      Color.fromARGB(255, 205, 127, 50), // Metallic Bronze
+                      Color.fromARGB(255, 184, 134, 11), // Deep Gold
+                      Color.fromARGB(255, 237, 201, 175), // Shimmering Sand
+                      Color.fromARGB(255, 255, 204, 51), // Warm Yellow
+                      Color.fromARGB(255, 250, 231, 181), // Champagne Gold
+                    ],
+                  ),
+                ),
+                // Enhanced dialog
+                AlertDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  backgroundColor: Colors.green.shade50,
+                  title: Column(
+                    children: [
+                      const Icon(
+                        Icons.workspace_premium,
+                        color: Colors.amber,
+                        size: 50,
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        'RANK UP!',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green.shade800,
+                        ),
+                      ),
+                    ],
+                  ),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Congratulations!',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green.shade700,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        'You have achieved rank:',
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(height: 15),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: 25,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.green.shade700,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.3),
+                              blurRadius: 5,
+                              offset: const Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        child: Text(
+                          '${response['rank']}',
+                          style: const TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        'Keep up the great work!',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontStyle: FontStyle.italic,
+                          color: Colors.green.shade600,
+                        ),
+                      ),
+                    ],
+                  ),
+                  actions: [
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green.shade700,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 40,
+                            vertical: 12,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                        ),
+                        child: const Text(
+                          'AWESOME!',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            );
+          },
+        );
+      }
     }
   }
 
   Widget _buildCardContent(BuildContext context, {VoidCallback? onTap}) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+
     return Card(
-      margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 3.0), // Reduced vertical margin
+      margin: const EdgeInsets.symmetric(
+        vertical: 10.0,
+        horizontal: 30.0,
+      ), // Reduced vertical margin
       elevation: 4.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
         side: BorderSide(
-          color: widget.lessonItem.isCompleted ? Colors.green.shade300 : Colors.transparent,
+          color:
+              widget.lessonItem.isCompleted
+                  ? Colors.green.shade300
+                  : Colors.transparent,
           width: widget.lessonItem.isCompleted ? 2.0 : 0,
         ),
       ),
@@ -162,31 +322,33 @@ class _LessonItemCardState extends State<LessonItemCard> {
           children: [
             // Image section (reduced height)
             Container(
-              height: 100.0, // Reduced image height
+              height: screenHeight * 0.15,
               decoration: BoxDecoration(
-                color: _getCardColor(widget.lessonItem.type),
-                image: widget.lessonItem.imagePath != null && widget.lessonItem.imagePath!.isNotEmpty
-                    ? DecorationImage(
-                        image: AssetImage(widget.lessonItem.imagePath!),
-                        fit: BoxFit.cover,
-                        colorFilter: ColorFilter.mode(
-                          Colors.black.withOpacity(0.3),
-                          BlendMode.darken,
+                color: Colors.grey.shade200,
+                image:
+                    widget.lessonItem.imagePath.isNotEmpty
+                        ? DecorationImage(
+                          image: AssetImage(widget.lessonItem.imagePath),
+                          fit: BoxFit.cover,
+                          colorFilter: ColorFilter.mode(
+                            Colors.black.withValues(alpha: 0.3),
+                            BlendMode.darken,
+                          ),
+                        )
+                        : null,
+              ),
+              child:
+                  widget.lessonItem.imagePath.isEmpty
+                      ? Center(
+                        child: Icon(
+                          _getIconForLessonType(widget.lessonItem.type),
+                          size: 40.0,
+                          color: Colors.white,
                         ),
                       )
-                    : null,
-              ),
-              child: widget.lessonItem.imagePath == null || widget.lessonItem.imagePath!.isEmpty
-                  ? Center(
-                      child: Icon(
-                        _getIconForLessonType(widget.lessonItem.type),
-                        size: 40.0,
-                        color: Colors.white,
-                      ),
-                    )
-                  : null,
+                      : null,
             ),
-            
+
             // Content section with green background
             Stack(
               children: [
@@ -229,23 +391,21 @@ class _LessonItemCardState extends State<LessonItemCard> {
                     ],
                   ),
                 ),
-                
+
                 // Completion status indicator in bottom right corner
                 Positioned(
                   bottom: 8.0,
                   right: 8.0,
                   child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white.withOpacity(0.2),
-                    ),
                     padding: const EdgeInsets.all(2.0),
                     child: Icon(
                       widget.lessonItem.isCompleted
-                          ? Icons.check_circle  // Checkmark in circle for completed
-                          : Icons.circle_outlined,  // Just a circle for incomplete
+                          ? Icons
+                              .check_circle // Checkmark in circle for completed
+                          : Icons
+                              .circle_outlined, // Just a circle for incomplete
                       color: Colors.white,
-                      size: 22.0,
+                      size: 30.0,
                     ),
                   ),
                 ),
@@ -266,10 +426,11 @@ class _LessonItemCardState extends State<LessonItemCard> {
             final response = Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => MarkdownViewerScreen(
-                  markdown: widget.lessonItem.content!,
-                  lessonItem: widget.lessonItem,
-                ),
+                builder:
+                    (context) => MarkdownViewerScreen(
+                      markdown: widget.lessonItem.content!,
+                      lessonItem: widget.lessonItem,
+                    ),
               ),
             );
             response.then((value) {
@@ -282,10 +443,11 @@ class _LessonItemCardState extends State<LessonItemCard> {
             final response = Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => VideoPlayerScreen(
-                  videoUrl: widget.lessonItem.videoPath!,
-                  lessonItem: widget.lessonItem,
-                ),
+                builder:
+                    (context) => VideoPlayerScreen(
+                      videoUrl: widget.lessonItem.videoPath!,
+                      lessonItem: widget.lessonItem,
+                    ),
               ),
             );
             response.then((value) {
@@ -298,10 +460,11 @@ class _LessonItemCardState extends State<LessonItemCard> {
             final response = Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => MarkdownViewerScreen(
-                  markdown: widget.lessonItem.content!,
-                  lessonItem: widget.lessonItem,
-                ),
+                builder:
+                    (context) => MarkdownViewerScreen(
+                      markdown: widget.lessonItem.content!,
+                      lessonItem: widget.lessonItem,
+                    ),
               ),
             );
             response.then((value) {
@@ -332,10 +495,9 @@ class _LessonItemCardState extends State<LessonItemCard> {
               final response = Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => QuizScreen(
-                    quiz: quiz,
-                    lessonItem: widget.lessonItem,
-                  ),
+                  builder:
+                      (context) =>
+                          QuizScreen(quiz: quiz, lessonItem: widget.lessonItem),
                 ),
               );
               response.then((value) {
@@ -368,11 +530,12 @@ class _LessonItemCardState extends State<LessonItemCard> {
               final response = Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => InteractiveImageScreen(
-                    imagePath: widget.lessonItem.imagePath,
-                    buttonDetails: buttonDetails,
-                    lessonItem: widget.lessonItem,
-                  ),
+                  builder:
+                      (context) => InteractiveImageScreen(
+                        imagePath: widget.lessonItem.imagePath,
+                        buttonDetails: buttonDetails,
+                        lessonItem: widget.lessonItem,
+                      ),
                 ),
               );
               response.then((value) {

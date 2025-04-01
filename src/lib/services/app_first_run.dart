@@ -165,7 +165,7 @@ Future<bool> checkIfFirstRun(Database db) async {
   }
 }
 
-Future<void> AppFirstRun() async {
+Future<void> appFirstRun() async {
   // Get the database helper and ensure tables exist first
   final dbHelper = DBHelper.instance();
   //await dbHelper.ensureTablesExist();
@@ -218,16 +218,7 @@ Future<void> AppFirstRun() async {
                   "assets/images/lesson_images/level_0/section_0/lesson_1.png",
               "isCompleted": false,
               "videoPath": "assets/videos/level_0/section_0/video_0.mp4",
-            },
-            {
-              "id": 3,
-              "title": "Kitchen Setup & Cleanup Transcript",
-              "type": 2,
-              "imagePath":
-                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
-              "isCompleted": false,
-              "content":
-                  "# Getting Started \n\nAlright, let's get started. Before we begin cooking, we need to learn how to prepare our kitchen for cooking and how to clean up afterward. \n\nThe first thing we're going to wanna do is clean up any mess that may already exist in the kitchen. Clearing the space is going to be important to keep an organized and safe environment.\n\n![Photo](assets/images/lesson_transcript_images/level_0/section_0/transcript_0/0.png)\n\nNext, we're going to want to wipe every surface we will be working on with a clean, damp rag, making sure to sweep up any crumbs while we're at it. \n\n![Photo](assets/images/lesson_transcript_images/level_0/section_0/transcript_0/1.png)\n\nA good thing to also have on hand is a couple of clean, dry bar towels that can be used to dry surfaces on demand.\n\n![Photo](assets/images/lesson_transcript_images/level_0/section_0/transcript_0/2.png)\n\nIf we are going to cook with the stove, now is also a good time to turn on the kitchen fan. \n\nThe last thing we are going to do is wash our hands using warm water and soap, making sure to get a good clean wash under the nails as well. \n\n![Photo](assets/images/lesson_transcript_images/level_0/section_0/transcript_0/5.png)\n\nWith the kitchen and our hands clean, we can now start preparing our food.\n… \nNow that we have finished cooking, we should clean the kitchen so it will be convenient for the next time it needs to be used. \n\nMake sure to either dispose of or properly refrigerate any perishable unused ingredients, or you could just eat them…\n\nUsing a dishwasher can heavily cut down on the amount of dishes we need to wash so it is heavily recommended you use one to make cleaning faster.\n\nFor dishes that may not fit easily or are simply not dishwashable, we can easily clean them ourselves with hot water, dish soap, and a sponge. \n\n![Photo](assets/images/lesson_transcript_images/level_0/section_0/transcript_0/3.png)\n\nIf you have a drying rack setup, you can wash all the dishes and dry them separately to improve efficiency.\n\nAfter you are done with the dishes you should then wash out the sink making sure to remove any material caught in the trap.\n\nIt is once again recommended that you clean all the surfaces used when cooking as it’ll be much easier now than it will be later. \n\nAfter drying all surfaces and any pools around the sink, you should now remove the towels used when cooking to be washed as they are no longer clean. Remember, even a towel that only wiped up water is still not going to be clean if left to fester. \n\nWith that, the kitchen is clean. Good stuff\n\n![Photo](assets/images/lesson_transcript_images/level_0/section_0/transcript_0/4.png)\n\n",
+              "content:": "[Placeholder]",
             },
             {
               "id": 4,
@@ -337,7 +328,7 @@ Future<void> AppFirstRun() async {
             },
           ],
           "completedLessons": 0,
-          "totalLessons": 5,
+          "totalLessons": 4,
         },
         {
           "id": 1,
@@ -354,16 +345,7 @@ Future<void> AppFirstRun() async {
                   "assets/images/lesson_images/level_0/section_0/lesson_1.png",
               "isCompleted": false,
               "videoPath": "assets/videos/level_0/section_1/video_0.mp4",
-            },
-            {
-              "id": 1,
-              "title": "Video Transcript",
-              "type": 2,
-              "imagePath":
-                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
-              "isCompleted": false,
-              "content":
-                  "# Food Safety\n\nContamination is one of the easiest ways to make yourself or others sick in the kitchen, so it is important to understand what you should be doing to minimize the chances of this happening.\n\n![Photo](assets/images/lesson_transcript_images/level_0/section_1/transcript_0/0.png)\n\nWhen storing raw meat, it is important that it be stored in a tightly secured bag or container and placed away from other foods in the fridge. It is important to note that the amount of time you can safely store meat in the fridge widely depends on the temperature of the fridge and the best-before date provided by the seller. \n\n![Photo](assets/images/lesson_transcript_images/level_0/section_1/transcript_0/1.png)\n\nGenerally, with most fridges, it is safe to store meat up to the posted date but definitely not past this time, as bacteria and toxins can build up to unsafe levels. \n\n![Photo](assets/images/lesson_transcript_images/level_0/section_1/transcript_0/2.png)\n\nWhen preparing raw meats for cooking, make sure to a separate cutting board or plate to interact with the meat. Never use the same surface for prepared and raw ingredients. This is called cross contamination, and it should be avoided at all times. \n\nAfter you're done working with the raw meat and are going to touch something else, be sure to wash your hands no matter what \n\nAny contaminated surface needs to be cleaned before it can come in contact with a non-contaminated surface or item\n\nAlso, make sure to check that the internal temperature of the meat you're cooking is safe to consume before removing it from the heat. This can be best done with an instant read thermometer. \n\n![Photo](assets/images/lesson_transcript_images/level_0/section_1/transcript_0/3.png)\n\nWhen working with fresh fruits and vegetables make sure to rinse them off with cold water before consuming them as this helps to remove any toxins that could have been added during the lifetime of the food. \n\nDo not use soap, as soap can be absorbed by some fruits and vegetables and is not meant to be consumed. \n\nAfter you're done eating, you might have left overs. It is important for the longevity of the food that it be refrigerated as soon as possible. Make sure to use a container that isnt significantly larger then the portion of food it stores so it doesn’t take up too much space. \n\n![Photo](assets/images/lesson_transcript_images/level_0/section_1/transcript_0/4.png)\n\nDifferent types of food can be stored safely for different times, so keep this in mind when you're looking to eat leftovers. \n\n![Photo](assets/images/lesson_transcript_images/level_0/section_1/transcript_0/5.png)\n\n",
+              "content:": "[Placeholder]",
             },
             {
               "id": 2,
@@ -373,20 +355,11 @@ Future<void> AppFirstRun() async {
                   "assets/images/lesson_images/level_0/section_0/lesson_1.png",
               "isCompleted": false,
               "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
-            },
-            {
-              "id": 3,
-              "title": "Video Transcript",
-              "type": 2,
-              "imagePath":
-                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
-              "isCompleted": false,
-              "content":
-                  "# Heat Safety\n\nAlright, let's talk about safe heat handling.\n\nWhen working with kitchen appliances that generate heat, it is important to be aware of the risks and take proper precautions to avoid burns or accidents.\n\nLet's start with the oven. When opening the oven door, you should always stand to the side and allow a moment for the hot air to escape before reaching in. \n\n![Photo](assets/images/lesson_transcript_images/level_0/section_1/transcript_1/0.png)\n\nThis is especially true after food has been cooking since water vapour builds up inside the oven and will be extremely hot. When removing food from the oven, always use oven mitts or heat-resistant gloves to protect your hands from burns. Never use a damp cloth or towel, as the moisture can conduct heat or worse turn into steam and burn you.\n\n![Photo](assets/images/lesson_transcript_images/level_0/section_1/transcript_1/1.png)\n\nWhen using the stove, it's important to keep all pan and pot handles turned inward, flush with the stove or countertop. This prevents them from being accidentally knocked over, reducing the risk of spills and burns.\n\n![Photo](assets/images/lesson_transcript_images/level_0/section_1/transcript_1/2.png)\n\nAdditionally, if frying anything in oil, be sure to place the item in the pan facing away from you to minimize the chance of oil splashing on you.\n\n![Photo](assets/images/lesson_transcript_images/level_0/section_1/transcript_1/3.png)\n\nWhen boiling water, be extra careful when straining. Always pour away from yourself and stand out of the direct path of the steam, as steam can cause burns just as easily as boiling water. A safe approach is to use a colander placed in the sink and pour the water slowly to minimize splashing.\n\n![Photo](assets/images/lesson_transcript_images/level_0/section_1/transcript_1/4.png)\n\nToasters can also be a hazard if used incorrectly. If something becomes stuck inside, never attempt to remove it with a metal utensil while the toaster is plugged in. Doing so can lead to an electric shock. Instead, unplug the toaster first, let it cool, and then use a wooden or plastic utensil to carefully dislodge the stuck item.\n\n![Photo](assets/images/lesson_transcript_images/level_0/section_1/transcript_1/5.png)\n\nBy following these precautions, you can safely handle hot kitchen appliances and reduce the risk of burns or accidents. Stay safe and cook with confidence!\n\n\n",
+              "content:": "[Placeholder]",
             },
           ],
           "completedLessons": 0,
-          "totalLessons": 4,
+          "totalLessons": 2,
         },
         {
           "id": 2,
@@ -399,8 +372,7 @@ Future<void> AppFirstRun() async {
               "id": 0,
               "title": "Kitchen Safety Quiz",
               "type": 3,
-              "imagePath":
-                  "assets/images/lesson_images/level_0_section_0_lesson_2.png",
+              "imagePath": "assets/images/lesson_images/level_0/section_2.png",
               "isCompleted": false,
               "quiz": {
                 "title": "Kitchen Basics Quiz",
@@ -509,37 +481,443 @@ Future<void> AppFirstRun() async {
       "id": 1,
       "level": 1,
       "title": "Level 1",
-      "subtitle": "Kitchen Something",
+      "subtitle": "Introduction to Cooking",
       "imagePath": "assets/images/level_images/level_1.jpg",
       "isCompleted": false,
-      "sections": [],
+      "sections": [
+        {
+          "id": 0,
+          "title": "Knife Training",
+          "subtitle":
+              "Learn about the different types of knives and how to use them.",
+          "imagePath":
+              "assets/images/level_section_images/level_0/section_1.png",
+          "lessons": [
+            {
+              "id": 0,
+              "title": "Knife Identification",
+              "type": 0,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "content": "[Placeholder]",
+            },
+            {
+              "id": 1,
+              "title": "Safe Knife Handling",
+              "type": 1,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
+              "content:": "[Placeholder]",
+            },
+            {
+              "id": 2,
+              "title": "Cutting Techniques",
+              "type": 1,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
+              "content:": "[Placeholder]",
+            },
+            {
+              "id": 3,
+              "title": "Knife Quiz",
+              "type": 3,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "quiz": {
+                "title": "Knife Quiz",
+                "description": "Test your knowledge of knife skills.",
+                "questions": [
+                  {
+                    "question": "What is the best way to hold a knife?",
+                    "options": [
+                      "By the blade",
+                      "By the handle",
+                      "By the tip",
+                      "By the spine",
+                    ],
+                    "correctAnswerIndex": 1,
+                  },
+                ],
+              },
+            },
+          ],
+          "completedLessons": 0,
+          "totalLessons": 4,
+        },
+        {
+          "id": 1,
+          "title": "Introduction to Breakfast",
+          "subtitle": "Learn how to prepare fundamental breakfast ingredients.",
+          "imagePath":
+              "assets/images/level_section_images/level_0/section_1.png",
+          "lessons": [
+            {
+              "id": 0,
+              "title": "Eggs 101",
+              "type": 1,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "videoPath": "assets/videos/level_0/section_1/video_0.mp4",
+              "content:": "[Placeholder]",
+            },
+            {
+              "id": 1,
+              "title": "Bacon 101",
+              "type": 1,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
+              "content:": "[Placeholder]",
+            },
+            {
+              "id": 2,
+              "title": "American Breakfast Simulation",
+              "type": 0,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "content": "[Placeholder]",
+            },
+            {
+              "id": 3,
+              "title": "American Breakfast Recipe",
+              "type": 0,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "content": "[Placeholder]",
+            },
+          ],
+          "completedLessons": 0,
+          "totalLessons": 4,
+        },
+        {
+          "id": 2,
+          "title": "Introduction to Dinner",
+          "subtitle":
+              "Learn how to prepare some quick and easy dinner recipes and ingredients.",
+          "imagePath":
+              "assets/images/level_section_images/level_0/section_1.png",
+          "lessons": [
+            {
+              "id": 0,
+              "title": "How to Cook Rice",
+              "type": 0,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "content": "[Placeholder]",
+            },
+            {
+              "id": 1,
+              "title": "How to Cook Pasta",
+              "type": 0,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "content": "[Placeholder]",
+            },
+            {
+              "id": 2,
+              "title": "Chicken Stirfry",
+              "type": 1,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
+              "content:": "[Placeholder]",
+            },
+            {
+              "id": 3,
+              "title": "Chicken Stirfry Recipe",
+              "type": 0,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "content": "[Placeholder]",
+            },
+            {
+              "id": 4,
+              "title": "Tomato Beef Pasta",
+              "type": 1,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
+              "content:": "[Placeholder]",
+            },
+            {
+              "id": 5,
+              "title": "Tomato Beef Pasta Recipe",
+              "type": 0,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "content": "[Placeholder]",
+            },
+          ],
+          "completedLessons": 0,
+          "totalLessons": 6,
+        },
+      ],
     },
     {
       "id": 2,
       "level": 2,
       "title": "Level 2",
-      "subtitle": "Kitchen Learning Plus",
+      "subtitle": "Intermediate Cooking",
       "imagePath": "assets/images/level_images/level_2.jpg",
       "isCompleted": false,
-      "sections": [],
-    },
-    {
-      "id": 3,
-      "level": 3,
-      "title": "Level 3",
-      "subtitle": "Kitchen Foundations Plus Plus",
-      "imagePath": "assets/images/level_images/level_3.jpg",
-      "isCompleted": false,
-      "sections": [],
-    },
-    {
-      "id": 4,
-      "level": 4,
-      "title": "Level 4",
-      "subtitle": "Kitchen Foundations",
-      "imagePath": "assets/images/level_images/level_0.png",
-      "isCompleted": false,
-      "sections": [],
+      "sections": [
+        {
+          "id": 2,
+          "title": "Useful Knowledge and Skills",
+          "subtitle": "Tips and tricks for in the kitchen",
+          "imagePath":
+              "assets/images/level_section_images/level_0/section_1.png",
+          "lessons": [
+            {
+              "id": 2,
+              "title": "Carryover Cooking",
+              "type": 1,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
+              "content:": "[Placeholder]",
+            },
+            {
+              "id": 1,
+              "title": "Wet Brines vs Dry Brines",
+              "type": 0,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "content": "[Placeholder]",
+            },
+            {
+              "id": 4,
+              "title": "The Chicken",
+              "type": 4,
+              "imagePath":
+                  "assets/images/interactive_images/level_0/section_0/interactive_0/0.png",
+              "isCompleted": false,
+              "buttonDetails": [
+                {
+                  "name": "Fridge",
+                  "position_x": 0,
+                  "position_y": 0.125,
+                  "width": 0.14,
+                  "height": 0.275,
+                  "onPressed": "Used to store food meant to be kept cold",
+                },
+              ],
+            },
+            {
+              "id": 4,
+              "title": "Spatchcocking",
+              "type": 1,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
+              "content:": "[Placeholder]",
+            },
+            {
+              "id": 0,
+              "title": "Kitchen Tips Quiz",
+              "type": 3,
+              "imagePath":
+                  "assets/images/lesson_images/level_0_section_0_lesson_2.png",
+              "isCompleted": false,
+              "quiz": {
+                "title": "Kitchen Basics Quiz",
+                "description": "Test your knowledge of section content",
+                "questions": [
+                  {
+                    "question":
+                        "When should you refrigerate leftovers after cooking?",
+                    "options": [
+                      "Within 24 hours",
+                      "Within 4 hours",
+                      "Immediately ",
+                      "You don't need to refridgerate leftovers",
+                    ],
+                    "correctAnswerIndex": 2,
+                  },
+                ],
+              },
+            },
+          ],
+          "completedLessons": 0,
+          "totalLessons": 5,
+        },
+        {
+          "id": 2,
+          "title": "Beef: Intermediate",
+          "subtitle":
+              "Learn how to prepare some quick and easy dinner recipes and ingredients.",
+          "imagePath":
+              "assets/images/level_section_images/level_0/section_1.png",
+          "lessons": [
+            {
+              "id": 0,
+              "title": "Different cuts of beef and their uses",
+              "type": 0,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "content": "[Placeholder]",
+            },
+            {
+              "id": 2,
+              "title": "Cooking Steak",
+              "type": 1,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
+              "content:": "[Placeholder]",
+            },
+            {
+              "id": 3,
+              "title": "What is a Smash Burger?",
+              "type": 0,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "content": "[Placeholder]",
+            },
+            {
+              "id": 4,
+              "title": "Smash Burgers",
+              "type": 1,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
+              "content:": "[Placeholder]",
+            },
+          ],
+          "completedLessons": 0,
+          "totalLessons": 4,
+        },
+        {
+          "id": 2,
+          "title": "Introduction to Baking",
+          "subtitle": "Learn the fundamentals of baking",
+          "imagePath":
+              "assets/images/level_section_images/level_0/section_1.png",
+          "lessons": [
+            {
+              "id": 0,
+              "title": "Wet vs Dry Ingredients",
+              "type": 0,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "content": "[Placeholder]",
+            },
+
+            {
+              "id": 2,
+              "title": "Chocolate Chip Oatmeal Cookies",
+              "type": 1,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
+              "content:": "[Placeholder]",
+            },
+            {
+              "id": 3,
+              "title": "Chocolate Chip Oatmeal Recipe",
+              "type": 0,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "content": "[Placeholder]",
+            },
+            {
+              "id": 4,
+              "title": "Blueberry Muffins",
+              "type": 1,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
+              "content:": "[Placeholder]",
+            },
+            {
+              "id": 5,
+              "title": "Blueberry Muffins Simulation",
+              "type": 0,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "content": "[Placeholder]",
+            },
+            {
+              "id": 5,
+              "title": "Blueberry Muffins Recipe",
+              "type": 0,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "content": "[Placeholder]",
+            },
+          ],
+          "completedLessons": 0,
+          "totalLessons": 6,
+        },
+        {
+          "id": 2,
+          "title": "Cooking a Roast Dinner",
+          "subtitle": "Learn how to prepare a hearty roast dinner",
+          "imagePath":
+              "assets/images/level_section_images/level_0/section_1.png",
+          "lessons": [
+            {
+              "id": 2,
+              "title": "Roast Chicken Dinner",
+              "type": 1,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
+              "content:": "[Placeholder]",
+            },
+            {
+              "id": 0,
+              "title": "Cooking a Roast Dinner Simulation",
+              "type": 0,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "content": "[Placeholder]",
+            },
+            {
+              "id": 1,
+              "title": "Roast Chicken Recipe",
+              "type": 0,
+              "imagePath":
+                  "assets/images/lesson_images/level_0/section_0/lesson_1.png",
+              "isCompleted": false,
+              "content": "[Placeholder]",
+            },
+          ],
+          "completedLessons": 0,
+          "totalLessons": 3,
+        },
+      ],
     },
   ];
 

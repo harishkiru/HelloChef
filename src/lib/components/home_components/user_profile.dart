@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:src/services/db_helper.dart';
+import 'package:src/services/drop_all_tables.dart';
+import 'package:flutter/services.dart';
 
 class UserProfileIcon extends StatelessWidget {
   const UserProfileIcon({super.key});
@@ -27,12 +29,10 @@ class UserProfileDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          Container(
+          SizedBox(
             height: 115,
             child: DrawerHeader(
-              decoration: const BoxDecoration(
-                color: Colors.green,
-              ),
+              decoration: const BoxDecoration(color: Colors.green),
               child: FutureBuilder<Map<String, dynamic>?>(
                 future: DBHelper.instance().getUserDetails(),
                 builder: (context, snapshot) {
@@ -51,7 +51,8 @@ class UserProfileDrawer extends StatelessWidget {
                       children: [
                         const CircleAvatar(
                           backgroundImage: AssetImage(
-                              'assets/images/profile_placeholder.png'),
+                            'assets/images/profile_placeholder.png',
+                          ),
                         ),
                         const SizedBox(width: 10),
                         Text(
@@ -89,33 +90,76 @@ class UserProfileDrawer extends StatelessWidget {
               Navigator.pop(context);
               showDialog(
                 context: context,
-                builder: (context) => AlertDialog(
-                  title: const Text('Logout'),
-                  content: const Text('Are you sure you want to log out?'),
-                  actions: [
-                    TextButton(
-                      onPressed: () async {
-                        await Supabase.instance.client.auth.signOut();
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          '/',
-                          (route) => false,
-                        );
-                      },
-                      child: const Text(
-                        'Yes',
-                        style: TextStyle(color: Colors.green),
-                      ),
+                builder:
+                    (context) => AlertDialog(
+                      title: const Text('Logout'),
+                      content: const Text('Are you sure you want to log out?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () async {
+                            await Supabase.instance.client.auth.signOut();
+                            if (context.mounted) {
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                '/',
+                                (route) => false,
+                              );
+                            }
+                          },
+                          child: const Text(
+                            'Yes',
+                            style: TextStyle(color: Colors.green),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text(
+                            'No',
+                            style: TextStyle(color: Colors.green),
+                          ),
+                        ),
+                      ],
                     ),
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text(
-                        'No',
-                        style: TextStyle(color: Colors.green),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.delete),
+            title: const Text('Delete Local Data'),
+            onTap: () async {
+              Navigator.pop(context);
+              showDialog(
+                context: context,
+                builder:
+                    (context) => AlertDialog(
+                      title: const Text('Delete Local Data'),
+                      content: const Text(
+                        'Are you sure you want to delete all local data? This action cannot be undone.',
                       ),
+                      actions: [
+                        TextButton(
+                          onPressed: () async {
+                            final db = DBHelper.instance();
+                            await db.sqliteDatabase.then((database) async {
+                              await dropAllTables(database);
+                            });
+                            await db.ensureTablesExist();
+                            SystemNavigator.pop();
+                          },
+                          child: const Text(
+                            'Yes',
+                            style: TextStyle(color: Colors.green),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text(
+                            'No',
+                            style: TextStyle(color: Colors.green),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
               );
             },
           ),

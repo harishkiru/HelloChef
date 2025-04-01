@@ -41,6 +41,8 @@ dependencies:
   media_kit_libs_video: ^1.0.5
   permission_handler: any
   google_sign_in: any
+  shimmer: any
+  audioplayers: any
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons
@@ -48,6 +50,7 @@ dependencies:
   vector_math: ^2.1.4
   flame: ^1.26.0
   confetti: ^0.8.0
+  path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test:
@@ -167,6 +170,9 @@ flutter:
     - assets/images/simulation_images/newbg2.png
     - assets/images/simulation_images/background.png
     - assets/images/simulation_images/pan.png
+
+    - assets/sounds/level_complete.mp3
+    - assets/sounds/rank_up.mp3
 
     - .env
 

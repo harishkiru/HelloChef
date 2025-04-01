@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:src/classes/lesson_item.dart';
 import 'package:src/services/copy_asset.dart';
 import 'package:src/components/common/safe_bottom_padding.dart'; // Add this import
+import 'package:src/components/common/gamification_widget.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
   final String videoUrl; // pass asset path like "assets/videos/video.mp4"
@@ -18,17 +17,12 @@ class VideoPlayerScreen extends StatefulWidget {
   });
 
   @override
-  _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
+  VideoPlayerScreenState createState() => VideoPlayerScreenState();
 }
 
-class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
+class VideoPlayerScreenState extends State<VideoPlayerScreen> {
   late final player = Player();
   late final controller = VideoController(player);
-  bool _playerInitialized = false;
-
-  void _onComplete(context) {
-    Navigator.pop(context, true);
-  }
 
   @override
   void initState() {
@@ -45,9 +39,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       print('Error opening video: $e');
     }
 
-    setState(() {
-      _playerInitialized = true;
-    });
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override
@@ -58,11 +52,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green, 
+        backgroundColor: Colors.green,
         centerTitle: true,
         title: Text(
           widget.lessonItem.title,
@@ -113,18 +105,13 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               const SizedBox(height: 24),
               Text(
                 "Description:",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
               Text(
-                widget.lessonItem.description ?? "Watch the video to learn new cooking techniques.",
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.black87,
-                ),
+                widget.lessonItem.description ??
+                    "Watch the video to learn new cooking techniques.",
+                style: TextStyle(fontSize: 14, color: Colors.black87),
               ),
               Spacer(), // Use spacer instead of fixed height
               // Replace fixed margin with SafeBottomPadding
@@ -134,16 +121,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                   width: double.infinity,
                   height: 50, // Fixed reasonable height
                   margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  child: ElevatedButton(
-                    onPressed: () => _onComplete(context),
-                    child: Text('Complete', style: TextStyle(color: Colors.white)),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  ),
+                  child: GamificationWidget(),
                 ),
               ),
             ],

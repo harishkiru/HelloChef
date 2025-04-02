@@ -54,6 +54,17 @@ class _LevelSectionOverviewScreenState
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    
+    // Adaptive colors
+    final Color subtitleBgColor = isDarkMode 
+        ? Color(0xFF1A3020) // Dark green background for dark mode
+        : Colors.green.shade50;
+    
+    final Color subtitleTextColor = isDarkMode
+        ? Colors.green.shade300 // Lighter green text for dark mode
+        : Colors.green.shade800;
+        
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -76,11 +87,14 @@ class _LevelSectionOverviewScreenState
           children: [
             Container(
               padding: const EdgeInsets.symmetric(vertical: 10.0),
-              color: Colors.green.shade50,
+              color: subtitleBgColor,
               child: Text(
                 widget.section.subtitle,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 15, color: Colors.green.shade800),
+                style: TextStyle(
+                  fontSize: 15, 
+                  color: subtitleTextColor
+                ),
               ),
             ),
             Expanded(
@@ -90,9 +104,23 @@ class _LevelSectionOverviewScreenState
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
-                    return const Center(child: Text('Error loading lessons'));
+                    return Center(
+                      child: Text(
+                        'Error loading lessons',
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.bodyLarge?.color,
+                        ),
+                      ),
+                    );
                   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return const Center(child: Text('No lessons available'));
+                    return Center(
+                      child: Text(
+                        'No lessons available',
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.bodyLarge?.color,
+                        ),
+                      ),
+                    );
                   } else {
                     List<LessonItem> lessons = snapshot.data!;
                     return ListView.builder(

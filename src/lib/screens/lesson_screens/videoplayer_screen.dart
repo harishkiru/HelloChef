@@ -3,7 +3,7 @@ import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 import 'package:src/classes/lesson_item.dart';
 import 'package:src/services/copy_asset.dart';
-import 'package:src/components/common/safe_bottom_padding.dart'; // Add this import
+import 'package:src/components/common/safe_bottom_padding.dart';
 import 'package:src/components/common/gamification_widget.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
@@ -52,16 +52,18 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
         centerTitle: true,
         title: Text(
           widget.lessonItem.title,
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -79,7 +81,7 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+                  color: Theme.of(context).textTheme.bodyLarge?.color,
                 ),
               ),
               const SizedBox(height: 16),
@@ -91,9 +93,11 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black26,
+                          color: isDarkMode 
+                              ? Colors.black.withOpacity(0.5)
+                              : Colors.black26,
                           blurRadius: 8,
-                          offset: Offset(0, 3),
+                          offset: const Offset(0, 3),
                         ),
                       ],
                     ),
@@ -105,23 +109,31 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
               const SizedBox(height: 24),
               Text(
                 "Description:",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 16, 
+                  fontWeight: FontWeight.bold,
+                  color: isDarkMode
+                      ? Colors.green.shade300
+                      : Colors.green.shade800,
+                ),
               ),
               const SizedBox(height: 8),
               Text(
                 widget.lessonItem.description ??
                     "Watch the video to learn new cooking techniques.",
-                style: TextStyle(fontSize: 14, color: Colors.black87),
+                style: TextStyle(
+                  fontSize: 14, 
+                  color: Theme.of(context).textTheme.bodyMedium?.color,
+                ),
               ),
-              Spacer(), // Use spacer instead of fixed height
-              // Replace fixed margin with SafeBottomPadding
+              const Spacer(),
               SafeBottomPadding(
                 extraPadding: 16.0,
                 child: Container(
                   width: double.infinity,
-                  height: 50, // Fixed reasonable height
-                  margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  child: GamificationWidget(),
+                  height: 50,
+                  margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  child: const GamificationWidget(),
                 ),
               ),
             ],

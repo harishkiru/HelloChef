@@ -55,6 +55,10 @@ class ThemeProvider extends ChangeNotifier {
         foregroundColor: Colors.white,
       ),
     ),
+    textTheme: const TextTheme(
+      bodyLarge: TextStyle(color: Colors.black),
+      bodyMedium: TextStyle(color: Colors.black),
+    ),
   );
   
   // Dark theme definition
@@ -73,6 +77,10 @@ class ThemeProvider extends ChangeNotifier {
         backgroundColor: Colors.green,
         foregroundColor: Colors.white,
       ),
+    ),
+    textTheme: const TextTheme(
+      bodyLarge: TextStyle(color: Colors.white),
+      bodyMedium: TextStyle(color: Colors.white),
     ),
   );
 }

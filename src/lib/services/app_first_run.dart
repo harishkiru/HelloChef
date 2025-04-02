@@ -1345,17 +1345,83 @@ Happy cooking! 🍽️
               "title": "The Chicken",
               "type": 4,
               "imagePath":
-                  "assets/images/lesson_images/level_2/section_0/lesson_2.png",
+                  "assets/images/interactive_images/level_2/section_0/interactive_0/0.png",
               "isCompleted": false,
               "buttonDetails": [
                 {
-                  "name": "Fridge",
-                  "position_x": 0,
-                  "position_y": 0.125,
-                  "width": 0.14,
-                  "height": 0.275,
-                  "onPressed": "Used to store food meant to be kept cold",
+                  'name': 'Left Chicken Breast',
+                  'position_x': 0.25,
+                  'position_y': 0.07,
+                  'width': 0.2,
+                  'height': 0.2,
+                  'onPressed':
+                      'Lean meat, great for grilling, sautéing, or baking. Often used in sandwiches, salads, or chicken breasts with sauces. Can be cubed for stir-fry or soups.',
                 },
+                {
+                  'name': 'Right Chicken Breast',
+                  'position_x': 0.5,
+                  'position_y': 0.07,
+                  'width': 0.2,
+                  'height': 0.2,
+                  'onPressed':
+                      'Lean meat, great for grilling, sautéing, or baking. Often used in sandwiches, salads, or chicken breasts with sauces. Can be cubed for stir-fry or soups.',
+                },
+                {
+                  'name': 'Left Chicken Thigh',
+                  'position_x': 0.02,
+                  'position_y': 0.25,
+                  'width': 0.15,
+                  'height': 0.13,
+                  'onPressed':
+                      'More flavorful and tender than breasts, ideal for braising, roasting, grilling, or frying. Great for slow-cooked dishes like stews or curries.',
+                },
+                {
+                  'name': 'Right Chicken Thigh',
+                  'position_x': 0.72,
+                  'position_y': 0.25,
+                  'width': 0.175,
+                  'height': 0.15,
+                  'onPressed':
+                      'More flavorful and tender than breasts, ideal for braising, roasting, grilling, or frying. Great for slow-cooked dishes like stews or curries.',
+                },
+                {
+                  'name': 'Left Chicken Leg',
+                  'position_x': 0.175,
+                  'position_y': 0.3,
+                  'width': 0.22,
+                  'height': 0.125,
+                  'onPressed':
+                      'Flavorful and juicy, best for roasting, grilling, or deep frying. Often used in BBQ or baked with spices.',
+                },
+                {
+                  'name': 'Right Chicken Leg',
+                  'position_x': 0.5,
+                  'position_y': 0.3,
+                  'width': 0.22,
+                  'height': 0.125,
+                  'onPressed':
+                      'Flavorful and juicy, best for roasting, grilling, or deep frying. Often used in BBQ or baked with spices.',
+                },
+                {
+                  'name': 'Left Chicken Wing',
+                  'position_x': 0.04,
+                  'position_y': 0.15,
+                  'width': 0.2,
+                  'height': 0.075,
+                  'onPressed':
+                      'Popular for grilling, frying, or baking. Often used in appetizers or party dishes, typically coated with sauces like buffalo or BBQ.',
+                },
+                {
+                  'name': 'Right Chicken Wing',
+                  'position_x': 0.7,
+                  'position_y': 0.15,
+                  'width': 0.2,
+                  'height': 0.075,
+                  'onPressed':
+                      'Popular for grilling, frying, or baking. Often used in appetizers or party dishes, typically coated with sauces like buffalo or BBQ.',
+                },
+
+                // Add more button details here
               ],
             },
             {

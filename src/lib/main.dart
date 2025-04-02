@@ -9,6 +9,8 @@ import 'package:src/components/authentication_components/constant.dart'
 import 'package:media_kit/media_kit.dart';
 import 'package:src/services/app_first_run.dart';
 import 'package:src/services/db_helper.dart';
+import 'package:provider/provider.dart';
+import 'package:src/components/common/dark_mode.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +31,14 @@ void main() async {
     await appFirstRun();
 
     MediaKit.ensureInitialized();
-    runApp(const MyApp());
+    
+    // Wrap the app with ChangeNotifierProvider
+    runApp(
+      ChangeNotifierProvider(
+        create: (_) => ThemeProvider(),
+        child: const MyApp(),
+      ),
+    );
   } catch (e) {
     print('Fatal database initialization error: $e');
     // Add appropriate error handling
@@ -43,19 +52,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Supabase Flutter',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      initialRoute: // Check if the user is authenticated
-          utils.client.auth.currentSession != null ? '/home' : '/',
-      routes: {
-        // Define the routes
-        '/': (context) => const LoginPage(),
-        '/signup': (context) => const SignUpPage(),
-        '/login': (context) => const LoginPage(),
-        '/home': (context) => const NavigationScaffold(),
-      },
+    // Use Consumer to listen for theme changes
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, _) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Supabase Flutter',
+        theme: themeProvider.getTheme(), // Use the theme from provider
+        initialRoute: // Check if the user is authenticated
+            utils.client.auth.currentSession != null ? '/home' : '/',
+        routes: {
+          // Define the routes
+          '/': (context) => const LoginPage(),
+          '/signup': (context) => const SignUpPage(),
+          '/login': (context) => const LoginPage(),
+          '/home': (context) => const NavigationScaffold(),
+        },
+      ),
     );
   }
 }

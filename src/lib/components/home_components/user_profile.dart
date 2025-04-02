@@ -71,13 +71,7 @@ class UserProfileDrawer extends StatelessWidget {
               ),
             ),
           ),
-          ListTile(
-            leading: const Icon(Icons.settings),
-            title: const Text('Settings'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
+          // Settings option removed
           Consumer<ThemeProvider>(
             builder: (context, themeProvider, _) => SwitchListTile(
               secondary: const Icon(Icons.dark_mode),

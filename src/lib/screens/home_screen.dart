@@ -67,6 +67,8 @@ class HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    
     return PopScope(
       canPop: false,
       child: Scaffold(
@@ -99,9 +101,10 @@ class HomeScreenState extends State<HomeScreen> {
                       children: [
                         Text(
                           'Hi, $firstName!',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
+                            color: Theme.of(context).textTheme.bodyLarge?.color,
                           ),
                         ),
                         const SizedBox(height: 4),
@@ -109,7 +112,9 @@ class HomeScreenState extends State<HomeScreen> {
                           'Ready to cook something amazing today?',
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.grey[600],
+                            color: isDarkMode 
+                                ? Colors.grey[400] 
+                                : Colors.grey[600],
                           ),
                         ),
                       ],
@@ -130,7 +135,7 @@ class HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Row(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
@@ -138,9 +143,10 @@ class HomeScreenState extends State<HomeScreen> {
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
+                                color: Theme.of(context).textTheme.bodyLarge?.color,
                               ),
                             ),
-                            Text(
+                            const Text(
                               'Level 0',
                               style: TextStyle(
                                 fontSize: 18,
@@ -151,20 +157,26 @@ class HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                         const SizedBox(height: 8),
-                        const Text(
+                        Text(
                           'Kitchen Foundations',
-                          style: TextStyle(fontSize: 16),
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Theme.of(context).textTheme.bodyLarge?.color,
+                          ),
                         ),
                         const SizedBox(height: 16),
-                        const Text(
+                        Text(
                           'Progress: 1/3 Sections',
-                          style: TextStyle(fontSize: 14),
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Theme.of(context).textTheme.bodyMedium?.color,
+                          ),
                         ),
                         const SizedBox(height: 8),
-                        const LinearProgressIndicator(
+                        LinearProgressIndicator(
                           value: 0.33,
-                          backgroundColor: Colors.grey,
-                          valueColor: AlwaysStoppedAnimation<Color>(
+                          backgroundColor: isDarkMode ? Colors.grey[800] : Colors.grey[300],
+                          valueColor: const AlwaysStoppedAnimation<Color>(
                             Colors.green,
                           ),
                           minHeight: 8,
@@ -177,9 +189,13 @@ class HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 24),
 
                 // Continue Learning
-                const Text(
+                Text(
                   'Continue Learning',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 20, 
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
                 ),
                 const SizedBox(height: 12),
                 Card(
@@ -212,11 +228,12 @@ class HomeScreenState extends State<HomeScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
+                              Text(
                                 'Common Kitchen Equipment',
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).textTheme.bodyLarge?.color,
                                 ),
                               ),
                               const SizedBox(height: 8),
@@ -232,7 +249,9 @@ class HomeScreenState extends State<HomeScreen> {
                                     'Video Lesson',
                                     style: TextStyle(
                                       fontSize: 14,
-                                      color: Colors.grey[600],
+                                      color: isDarkMode 
+                                          ? Colors.grey[400] 
+                                          : Colors.grey[600],
                                     ),
                                   ),
                                 ],
@@ -264,15 +283,20 @@ class HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 24),
 
                 // Quick Access
-                const Text(
+                Text(
                   'Quick Access',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 20, 
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
                 ),
                 const SizedBox(height: 12),
                 Row(
                   children: [
                     Expanded(
                       child: _buildQuickAccessCard(
+                        context: context,
                         icon: Icons.book,
                         title: 'All Lessons',
                         onTap: () {
@@ -283,6 +307,7 @@ class HomeScreenState extends State<HomeScreen> {
                     const SizedBox(width: 12),
                     Expanded(
                       child: _buildQuickAccessCard(
+                        context: context,
                         icon: Icons.kitchen,
                         title: 'Practice',
                         onTap: () {
@@ -299,6 +324,7 @@ class HomeScreenState extends State<HomeScreen> {
                     const SizedBox(width: 12),
                     Expanded(
                       child: _buildQuickAccessCard(
+                        context: context,
                         icon: Icons.bookmark,
                         title: 'Saved',
                         onTap: () {
@@ -331,7 +357,9 @@ class HomeScreenState extends State<HomeScreen> {
                         borderRadius: BorderRadius.circular(16),
                       ),
                       elevation: 4,
-                      color: Colors.green.shade50,
+                      color: isDarkMode 
+                          ? Color(0xFF1A3020) // Dark green for dark mode
+                          : Colors.green.shade50,
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
@@ -346,11 +374,12 @@ class HomeScreenState extends State<HomeScreen> {
                                 const SizedBox(width: 8),
                                 Row(
                                   children: [
-                                    const Text(
+                                    Text(
                                       'Tip of the Week',
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
+                                        color: Theme.of(context).textTheme.bodyLarge?.color,
                                       ),
                                     ),
                                     const SizedBox(width: 8),
@@ -377,7 +406,13 @@ class HomeScreenState extends State<HomeScreen> {
                               ],
                             ),
                             const SizedBox(height: 12),
-                            Text(tip, style: const TextStyle(fontSize: 16)),
+                            Text(
+                              tip, 
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Theme.of(context).textTheme.bodyLarge?.color,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -401,6 +436,7 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildQuickAccessCard({
+    required BuildContext context,
     required IconData icon,
     required String title,
     required VoidCallback onTap,
@@ -420,9 +456,10 @@ class HomeScreenState extends State<HomeScreen> {
               Text(
                 title,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
+                  color: Theme.of(context).textTheme.bodyLarge?.color,
                 ),
               ),
             ],

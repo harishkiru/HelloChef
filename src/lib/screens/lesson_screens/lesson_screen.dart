@@ -54,9 +54,23 @@ class _LessonScreenState extends State<LessonScreen> {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
-                    return const Center(child: Text('Error loading levels'));
+                    return Center(
+                      child: Text(
+                        'Error loading levels',
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.bodyLarge?.color,
+                        ),
+                      ),
+                    );
                   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return const Center(child: Text('No levels available'));
+                    return Center(
+                      child: Text(
+                        'No levels available',
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.bodyLarge?.color,
+                        ),
+                      ),
+                    );
                   } else {
                     final List<Level> levels = snapshot.data!;
                     return ListView.builder(

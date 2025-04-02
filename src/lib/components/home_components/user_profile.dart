@@ -78,7 +78,7 @@ class UserProfileDrawer extends StatelessWidget {
               title: const Text('Dark Mode'),
               value: themeProvider.isDarkMode,
               onChanged: (_) {
-                themeProvider.toggleTheme();
+                themeProvider.toggleTheme(); // Add this line to call toggleTheme
                 Navigator.pop(context);
               },
             ),

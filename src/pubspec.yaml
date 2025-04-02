@@ -268,6 +268,11 @@ flutter:
 
 
     - assets/images/interactive_images/level_0/section_0/interactive_0/0.png
+
+    - assets/images/interactive_images/level_2/section_0/interactive_0/0.png
+
+
+
     - assets/images/simulation_images/measuring_cup.png
     - assets/images/simulation_images/corn_flour.png
     - assets/images/simulation_images/sake.png

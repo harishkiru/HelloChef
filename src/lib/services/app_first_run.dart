@@ -617,14 +617,96 @@ A serrated knife designed to slice through crusty bread and delicate pastries wi
                 "description": "Test your knowledge of knife skills.",
                 "questions": [
                   {
-                    "question": "What is the best way to hold a knife?",
+                    "question":
+                        "Which knife is best for peeling fruits and vegetables?",
                     "options": [
-                      "By the blade",
-                      "By the handle",
-                      "By the tip",
-                      "By the spine",
+                      "Utility Knife",
+                      "Pairing Knife",
+                      "Peeling Knife",
+                      "French Knife",
                     ],
                     "correctAnswerIndex": 1,
+                  },
+                  {
+                    "question": "What kind of knife is this?",
+                    "options": [
+                      "Serrated Knife",
+                      "Sawing Knife",
+                      "Bread Knife",
+                      "French Knife",
+                    ],
+                    "correctAnswerIndex": 2,
+                    "imagePath":
+                        "assets/images/quiz_images/level_1/section_0/quiz_0/0.png",
+                  },
+                  {
+                    "question": "What kind of knife is this?",
+                    "options": [
+                      "Chef's Knife",
+                      "Japanese Knife",
+                      "Kitchen Knife",
+                      "Utility Knife",
+                    ],
+                    "correctAnswerIndex": 0,
+                    "imagePath":
+                        "assets/images/quiz_images/level_1/section_0/quiz_0/1.png",
+                  },
+                  {
+                    "question": "What kind of knife is this?",
+                    "options": [
+                      "Peeling Knife",
+                      "3-inch Knife",
+                      "Short Knife",
+                      "Pairing Knife",
+                    ],
+                    "correctAnswerIndex": 3,
+                    "imagePath":
+                        "assets/images/quiz_images/level_1/section_0/quiz_0/2.png",
+                  },
+                  {
+                    "question": "What kind of knife is this?",
+                    "options": [
+                      "Regular Knife",
+                      "Utility Knife",
+                      "Worker Knife",
+                      "Bread Knife",
+                    ],
+                    "correctAnswerIndex": 1,
+                    "imagePath":
+                        "assets/images/quiz_images/level_1/section_0/quiz_0/3.png",
+                  },
+                  {
+                    "question":
+                        "Why is it important to use a sharp knife in the kitchen?",
+                    "options": [
+                      "Sharper knives are easier to clean",
+                      "Dull knives ruin the taste of food",
+                      "Sharp knives are safer to use",
+                      "It's not important to use a sharp knife",
+                    ],
+                    "correctAnswerIndex": 2,
+                  },
+                  {
+                    "question":
+                        "Rank the types of cuts from most to least precise.",
+                    "options": [
+                      "Chopped > Diced > Minced > Sliced",
+                      "Chopped > Sliced > Diced > Minced",
+                      "Minced > Chopped > Diced > Sliced",
+                      "Minced > Diced > Chopped > Sliced",
+                    ],
+                    "correctAnswerIndex": 3,
+                  },
+                  {
+                    "question":
+                        "What is the best alternative to using a knife to mince garlic?",
+                    "options": [
+                      "Cheese Grater",
+                      "Blender",
+                      "Garlic Press",
+                      "Food Processor",
+                    ],
+                    "correctAnswerIndex": 2,
                   },
                 ],
               },
@@ -666,7 +748,50 @@ A serrated knife designed to slice through crusty bread and delicate pastries wi
               "imagePath":
                   "assets/images/lesson_images/level_1/section_1/lesson_2.png",
               "isCompleted": false,
-              "content": "[Placeholder]",
+              "content": '''# American Style Breakfast  
+![American Style Breakfast](assets/images/lesson_images/level_1/section_1/lesson_2.png)
+
+---
+
+## Ingredients:
+- Eggs (as many as desired)  
+- Bacon (4-6 slices, depending on preference)  
+- Hashbrowns (frozen or fresh)  
+- Bread (for toast, 2 slices per person)  
+- Butter (for toast)  
+- Salt and pepper (for seasoning)
+
+---
+
+## Instructions
+
+### 1. Prepare the Bacon:
+- Heat a large skillet over medium heat.  
+- Place the bacon slices in the pan, ensuring they’re not overlapping.  
+- Cook for about 4-6 minutes per side, or until crispy and golden brown.  
+- Remove the bacon and place on a paper towel-lined plate to drain excess fat.
+
+### 2. Cook the Hashbrowns:
+- If using frozen hashbrowns, follow package instructions (usually pan-fry in oil for about 4-6 minutes per side).  
+- For fresh hashbrowns, grate potatoes and squeeze out excess water.  
+- Cook in a heated pan with oil, seasoning with salt and pepper. Fry until golden and crispy, about 8-10 minutes, flipping occasionally.
+
+### 3. Toast the Bread:
+- While the bacon and hashbrowns are cooking, place bread in a toaster or on a skillet.  
+- Toast until golden brown and crispy.  
+- Spread butter on top of the toast while still warm.
+
+### 4. Cook the Eggs:
+- In a separate pan, heat a little butter or oil over medium heat.  
+- Crack the eggs into the pan (either one at a time or as many as desired).  
+- Season with salt and pepper.  
+- Cook until the whites are set, and the yolks are done to your liking (sunny side up, scrambled, or over-easy).
+
+### 5. Serve:
+- Plate the eggs, bacon, hashbrowns, and toast.  
+- Optionally, garnish with fresh herbs or a little extra salt and pepper to taste.
+
+---''',
             },
           ],
           "completedLessons": 0,
@@ -841,7 +966,95 @@ Bon appétit! 🍽️
               "imagePath":
                   "assets/images/lesson_images/level_1/section_2/lesson_3.png",
               "isCompleted": false,
-              "content": "[Placeholder]",
+              "content": '''# Teriyaki Chicken Stir-Fry  
+![Teriyaki Chicken Stir-Fry](assets/images/lesson_images/level_1/section_2/lesson_3.png)
+
+A simple, healthy, and versatile stir-fry dish that you can easily adapt by changing the protein, vegetables, or sauce.
+
+---
+
+## Ingredients
+
+### For the Chicken:
+- 2 chicken breasts, cubed  
+- 1 tsp salt  
+- ½ tsp black pepper  
+- 1 tsp garlic powder  
+- 1 tsp onion powder  
+
+### For the Vegetables:
+- 1 head broccoli, cut into bite-sized florets  
+- 1 bell pepper, sliced  
+- 3 cloves garlic, minced  
+- 1 onion, sliced  
+- 2 carrots, peeled and sliced into thin rounds  
+- 1 tbsp cooking oil  
+- Salt & pepper to taste  
+
+### For the Rice:
+- 1 cup rice  
+- 2 cups chicken broth  
+- ½ tsp salt  
+- ½ tsp black pepper  
+- 2 tbsp butter  
+
+### For the Sauce:
+- 1 cup teriyaki sauce (store-bought or homemade)
+
+---
+
+## Instructions
+
+### Step 1: Prep the Chicken
+- Cube the chicken into bite-sized pieces.  
+- Season with salt, pepper, garlic powder, and onion powder. Toss to coat.  
+- Wash hands and clean the cutting board.
+
+### Step 2: Prep the Vegetables
+- Wash the broccoli, bell pepper, and carrots.  
+- Cut the broccoli into florets.  
+- Slice the bell pepper into strips, removing the core and white flesh.  
+- Mince the garlic (a garlic press can save time).  
+- Peel and slice the onion into thin strips.  
+- Peel and slice the carrots into even-sized rounds.
+
+### Step 3: Cook the Chicken
+- Heat oil in a large pan over medium heat.  
+- Add the chicken and cook for about 10 minutes.  
+- Check the internal temperature—it should be about 20-25°F below the safe cooking temp (165°F) since it will cook again later.  
+- Remove from the pan and set aside.
+
+### Step 4: Start the Rice
+- Bring chicken broth to a boil.  
+- Add rice, reduce heat, and cover.  
+- Stir occasionally to prevent sticking.
+
+### Step 5: Cook the Vegetables
+- In the same pan, add onions and garlic. Stir and season with salt & pepper.  
+- After 5-10 minutes, when onions are browned, add the broccoli, bell peppers, and carrots.  
+- Season again with salt & pepper and cover with a lid.  
+- Stir occasionally to ensure even cooking.
+
+### Step 6: Finish the Rice
+- Once the broth is mostly absorbed, add salt, pepper, and butter.  
+- Taste test:  
+  - If crunchy, add 1 more cup of water and increase heat.  
+  - If too salty, add more pepper and butter.  
+  - If bland, adjust seasoning.  
+- Cover and remove from heat.
+
+### Step 7: Combine Everything
+- Once vegetables are tender, pour in the teriyaki sauce and stir.  
+- Add the cooked chicken back into the pan and cover.  
+- Cook on medium-low for 5-10 minutes.  
+- Final taste test: adjust salt if needed.
+
+### Step 8: Serve
+- In a bowl or deep plate, spoon rice as the base.  
+- Add stir-fry over the rice, making sure to include plenty of sauce.
+
+---
+''',
             },
             {
               "id": 4,
@@ -860,7 +1073,77 @@ Bon appétit! 🍽️
               "imagePath":
                   "assets/images/lesson_images/level_1/section_2/lesson_5.png",
               "isCompleted": false,
-              "content": "[Placeholder]",
+              "content": '''# Simple and Easy Creamy Beef Pasta
+
+![Photo](assets/images/lesson_images/level_1/section_2/lesson_5.png)
+
+## Ingredients:
+
+- 1 onion, diced
+- 3 cloves garlic, minced (or use a garlic press)
+- 2 tbsp oil
+- Salt and pepper, to taste
+- 1 lb (450g) ground beef
+- 1 tsp thyme
+- 1 tsp rosemary
+- 12 oz (340g) pasta (shell shape recommended)
+- Water for boiling
+- 2 cups store-bought pasta sauce
+- 1/2 cup heavy cream
+- Fresh parsley, for garnish (optional)
+- Shredded cheese, for garnish (optional)
+
+## Instructions:
+
+### Prepare the Ingredients:
+1. Dice the onion by cutting it in half, slicing lengthwise, then widthwise.
+2. Mince the garlic or use a garlic press.
+
+### Sauté the Aromatics:
+1. Preheat a pan with oil over medium heat.
+2. Once hot, add diced onion and minced garlic.
+3. Season with salt and pepper.
+4. Cook until the onions turn golden brown.
+
+### Boil the Pasta:
+1. Fill a pot with water and season it with salt.
+2. Bring the water to a boil.
+
+### Cook the Ground Beef:
+1. Add ground beef to the pan with browned onions.
+2. Season with salt, pepper, thyme, and rosemary.
+3. Break up the meat into small, pebble-sized pieces.
+4. Stir occasionally and cook until browned.
+
+### Cook the Pasta:
+1. Once the water is boiling, add the pasta.
+2. Stir occasionally to prevent sticking.
+3. Cook according to package instructions, tasting a piece near the end to check for doneness.
+4. Strain the pasta about a minute before perfect doneness and return to the pot.
+
+### Make the Sauce:
+1. Once the ground beef is fully cooked, taste-test for seasoning.
+2. Add store-bought pasta sauce, ensuring the meat is well coated.
+3. Increase heat slightly if the sauce isn't bubbling.
+4. Let simmer for 10-15 minutes to reduce excess water.
+
+### Finish with Cream:
+1. Add heavy cream to the meat sauce, stirring well.
+2. The sauce should change from red to a creamy orange hue.
+
+### Combine Pasta and Sauce:
+1. Stir the pasta into the sauce until well combined.
+2. Cover the pan and let it finish cooking for 5 minutes, stirring occasionally to prevent burning.
+
+### Final Taste Test:
+1. Adjust seasoning if necessary.
+
+### Serve and Garnish:
+1. Plate the pasta in a bowl.
+2. Garnish with fresh parsley and shredded cheese.
+3. Enjoy!
+
+''',
             },
           ],
           "completedLessons": 0,
@@ -1097,15 +1380,59 @@ Happy cooking! 🍽️
                 "description": "Test your knowledge of section content",
                 "questions": [
                   {
-                    "question":
-                        "When should you refrigerate leftovers after cooking?",
+                    "question": "How do you spatchcock a chicken?",
                     "options": [
-                      "Within 24 hours",
-                      "Within 4 hours",
-                      "Immediately ",
-                      "You don't need to refridgerate leftovers",
+                      "By salting it overnight",
+                      "By cooking it in a pressure cooker",
+                      "By removing the spine and flattening it",
+                      "By boiling it",
                     ],
                     "correctAnswerIndex": 2,
+                  },
+                  {
+                    "question":
+                        "What is the main difference between wet and dry brining?",
+                    "options": [
+                      "Wet brining involves soaking in a saltwater solution while dry brining uses salt alone",
+                      "Dry brining is faster than wet brining",
+                      "Wet brining is only for poultry",
+                      "Dry brining is only for red meat",
+                    ],
+                    "correctAnswerIndex": 0,
+                  },
+                  {
+                    "question": "What is carryover cooking?",
+                    "options": [
+                      "Meat continues to cook after being removed from heat because it's still in the pan",
+                      "Meat continues to cook after being removed from heat because the internal temperature is warmer then the external temperature",
+                      "Meat continues to cook after being removed from heat because the warmth from the room is absorbed",
+                      "Meat continues to cook after being removed from heat due to residual heat",
+                    ],
+                    "correctAnswerIndex": 3,
+                  },
+                  {
+                    "question":
+                        "How long should you ideally leave meat in a wet brine?",
+                    "options": ["1 hour", "Overnight", "2-3 hours", "48 hours"],
+                    "correctAnswerIndex": 1,
+                  },
+                  {
+                    "question": "What is the name of this cut of chicken?",
+                    "options": ["Breast", "Thigh", "Wing", "Drumstick"],
+                    "correctAnswerIndex": 1,
+                    "imagePath":
+                        "assets/images/quiz_images/level_2/section_0/quiz_0/0.png",
+                  },
+                  {
+                    "question":
+                        "What is the benefit of spatchcocking a chicken?",
+                    "options": [
+                      "It cooks faster and more evenly",
+                      "It makes the chicken feed more people",
+                      "It makes the chicken look more appealing",
+                      "It makes the chicken less greasy",
+                    ],
+                    "correctAnswerIndex": 0,
                   },
                 ],
               },
@@ -1372,7 +1699,62 @@ Happy baking! 🍰🍽️
               "imagePath":
                   "assets/images/lesson_images/level_2/section_2/lesson_2.png",
               "isCompleted": false,
-              "content": "[Placeholder]",
+              "content": '''# Oatmeal Chocolate Chip Cookies  
+![Oatmeal Chocolate Chip Cookies](assets/images/lesson_images/level_2/section_2/lesson_2.png)
+
+**Yield:** Approximately 24 cookies (depending on size)
+
+---
+
+## Ingredients:
+- 1 cup brown sugar  
+- 1 cup white sugar  
+- 1 cup butter (softened)  
+- 2 eggs  
+- 12 oz chocolate chips  
+- 1 tsp baking powder  
+- 1/2 tsp salt  
+- 1 tsp baking soda  
+- 1 tsp vanilla extract  
+- 2 cups all-purpose flour  
+- 2 1/2 cups oats (rolled oats)
+
+---
+
+## Instructions
+
+### 1. Preheat Oven:
+- Preheat your oven to 400°F (200°C).  
+- Line a baking sheet with parchment paper or lightly grease it.
+
+### 2. Cream Butter and Sugars:
+- In a large mixing bowl, cream together the butter, brown sugar, and white sugar until the mixture is light and fluffy.
+
+### 3. Add Eggs and Vanilla:
+- Beat in the eggs, one at a time.  
+- Stir in the vanilla extract.
+
+### 4. Combine Dry Ingredients:
+- In a separate bowl, whisk together the flour, baking powder, baking soda, and salt.
+
+### 5. Mix Dry and Wet Ingredients:
+- Gradually add the dry ingredients to the wet ingredients, mixing until just combined.
+
+### 6. Add Oats and Chocolate Chips:
+- Stir in the oats and chocolate chips until evenly distributed.
+
+### 7. Scoop Dough:
+- Use a cookie scoop or tablespoon to drop dough onto the prepared baking sheet.  
+- Leave about 2 inches of space between each cookie.
+
+### 8. Bake:
+- Bake for 8 minutes or until the cookies are golden brown around the edges.  
+- The centers may still appear slightly soft, but they will firm up as they cool.
+
+### 9. Cool:
+- Let the cookies cool on the baking sheet for a few minutes before transferring them to a wire rack to cool completely.
+
+---''',
             },
             {
               "id": 4,
@@ -1400,7 +1782,74 @@ Happy baking! 🍰🍽️
               "imagePath":
                   "assets/images/lesson_images/level_2/section_2/lesson_5.png",
               "isCompleted": false,
-              "content": "[Placeholder]",
+              "content": '''# The Best Blueberry Muffins Ever  
+![Blueberry Muffins](assets/images/lesson_images/level_2/section_2/lesson_5.png)
+
+**Yield:** 8 muffins (or 12 smaller muffins)  
+**Prep time:** 15 minutes  
+**Cook time:** 25 minutes  
+**Total time:** 40 minutes  
+
+---
+
+## Ingredients
+
+### Muffin Ingredients:
+- 2/3 cup white sugar  
+- 1 large egg  
+- 1/2 cup vegetable oil OR melted butter  
+- 1/3 cup milk  
+- 1 teaspoon vanilla extract  
+- 1 1/4 cups all-purpose flour (or gluten-free mix)  
+- 1 teaspoon baking powder  
+- 1/4 teaspoon salt  
+- 1/2 cup sour cream (can substitute with yogurt)  
+- 1 cup blueberries  
+- About 1 tablespoon white sugar for the topping (optional)
+
+---
+
+## Instructions
+
+### 1. Preheat the Oven:
+- Preheat the oven to 375°F (190°C).  
+- Optionally, grease your muffin tin lightly to prevent muffin tops from sticking, and insert muffin liners if desired.
+
+### 2. Mix Wet Ingredients:
+- In a large bowl, combine sugar, egg, oil (or melted butter), milk, and vanilla.  
+- Stir until everything is well combined.
+
+### 3. Add Dry Ingredients:
+- Add flour, baking powder, and salt to the wet mixture.  
+- To avoid using an extra bowl, stir the baking powder and salt into the flour before adding them to the wet ingredients.  
+- Stir until just combined — be careful not to overmix.
+
+### 4. Add Sour Cream and Blueberries:
+- Gently fold in the sour cream until well distributed.  
+- Then, fold in the blueberries.  
+- Reserve about half of the blueberries for topping the muffins before baking.
+
+### 5. Distribute the Batter:
+- Evenly distribute the batter among the muffin tin cups.  
+- For tall, high-crowned muffins, fill the muffin tin all the way to the top.  
+- For smaller muffins, fill 12 cups.  
+- Optionally, sprinkle the reserved blueberries on top, pressing them lightly into the batter.  
+- Sprinkle 1 tablespoon of sugar over the tops for added sweetness and shine.
+
+### 6. Bake the Muffins:
+- Bake for about 25 minutes or until a toothpick inserted into the center comes out clean.  
+- If using frozen blueberries, increase the baking time by about 5 minutes.  
+- Adjust the baking time based on the number of muffins being made.
+
+### 7. Cool and Store:
+- Let the muffins cool in the pan for a few minutes before transferring them to a wire rack.  
+- To keep them extra moist, place them in a sealed container while they are still warm.
+
+---
+
+## Notes:
+- If you prefer the flavor of butter, use melted butter instead of vegetable oil.
+- For jumbo muffins, use a jumbo muffin tin and bake at 350°F (175°C) for about 40 minutes.''',
             },
           ],
           "completedLessons": 0,
@@ -1439,7 +1888,77 @@ Happy baking! 🍰🍽️
               "imagePath":
                   "assets/images/lesson_images/level_2/section_3/lesson_2.png",
               "isCompleted": false,
-              "content": "[Placeholder]",
+              "content": '''# Roast Chicken Dinner Recipe  
+![Roast Chicken Dinner](assets/images/lesson_images/level_2/section_3/lesson_2/0.png)
+
+---
+
+## Ingredients:
+- 1 whole chicken (brined overnight, either wet or dry)  
+- 1 spatchcocked chicken (brined overnight, either wet or dry)  
+- Olive oil  
+- 2 sweet potatoes, peeled and chopped  
+- 1 head of broccoli, rinsed and chopped  
+- Salt  
+- Black pepper  
+- Garlic powder  
+- Chili flakes  
+- Onion powder  
+
+---
+
+## Equipment:
+- Oven  
+- Baking pans  
+- Cutting board  
+- Knife  
+- Tongs  
+- Timer  
+- Meat thermometer  
+
+---
+
+## Instructions
+
+### 1. Preheat the Oven:
+- Set the oven to 400°F (or 375°F for convection ovens).
+
+### 2. Prepare the Chickens:
+- Coat both the whole and spatchcocked chickens in olive oil.  
+- If possible, use chickens of similar size for more consistent cooking times.
+
+### 3. Cooking Sequence Plan:
+- **Whole chicken:** 75 minutes  
+- **Spatchcocked chicken:** 50 minutes  
+- **Sweet potatoes:** 35 minutes  
+- **Broccoli:** 15 minutes
+
+### 4. Start Cooking:
+- Place the whole chicken in the oven and set a timer for 25 minutes.  
+- After 25 minutes, add the spatchcocked chicken and set a new timer for 20 minutes.
+
+### 5. Prepare the Vegetables:
+- Peel and chop the sweet potatoes.  
+- Rinse and chop the broccoli.
+
+### 6. Season the Vegetables:
+- **Sweet Potatoes:** Toss with olive oil, salt, pepper, and garlic powder.  
+- **Broccoli:** Toss with olive oil, salt, pepper, chili flakes, and onion powder.
+
+### 7. Continue Cooking:
+- When the 20-minute timer goes off, add the sweet potatoes and set another timer for 15 minutes.  
+- Flip the whole chicken to ensure even cooking.
+
+### 8. Final Steps:
+- When the next timer goes off, add the broccoli and set the final timer for 15 minutes.  
+- Check the temperature of both chickens using a meat thermometer. The whole chicken may be done early; if so, remove it and let it rest.  
+- If desired, finish the spatchcocked chicken under the broiler for added color, but watch closely to prevent burning.
+
+### 9. Rest & Serve:
+- Let the chicken rest for 10-20 minutes before carving.  
+- Serve with the roasted vegetables.
+
+---''',
             },
           ],
           "completedLessons": 0,

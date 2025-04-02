@@ -205,6 +205,13 @@ flutter:
 
     - assets/images/quiz_images/level_0/section_2/quiz_0/0.png
 
+    - assets/images/quiz_images/level_1/section_0/quiz_0/0.png
+    - assets/images/quiz_images/level_1/section_0/quiz_0/1.png
+    - assets/images/quiz_images/level_1/section_0/quiz_0/2.png
+    - assets/images/quiz_images/level_1/section_0/quiz_0/3.png
+
+    - assets/images/quiz_images/level_2/section_0/quiz_0/0.png
+
     
     - assets/images/profile_placeholder.png
 

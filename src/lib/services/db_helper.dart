@@ -554,6 +554,17 @@ class DBHelper {
 
   // ********* Supabase XP and Badge Operations **********
 
+  Future<void> addDefaultBadge() async {
+    final user = supabase.auth.currentUser;
+
+    if (user != null) {
+      final response = await supabase.from('badges').insert({
+        'badge_id': 1, // Default badge ID
+        'user_id': user.id,
+      });
+    }
+  }
+
   Future<Map<String, dynamic>> updateUserXP(int xp) async {
     final user = supabase.auth.currentUser;
     if (user != null) {

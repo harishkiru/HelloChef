@@ -191,6 +191,8 @@ class _LoginPageState extends State<LoginPage> {
 
           print("Insert result: $result");
 
+          dbHelper.addDefaultBadge();
+
           if (mounted) {
             Navigator.pushReplacementNamed(context, '/home');
           }

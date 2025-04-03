@@ -717,4 +717,41 @@ class DBHelper {
     
     return leaderboardData;
   }
+
+  Future<List<Map<String, dynamic>>> getUserBadgesById(String userId) async {
+    // Get all badges
+    final allBadges = await supabase
+      .from('badges')
+      .select('id, badge_name, badge_image_url, badge_description')
+      .order('id');
+    
+    if (allBadges == null) {
+      return [];
+    }
+    
+    // Get the user's unlocked badges
+    final userBadges = await supabase
+      .from('user_badges')
+      .select('badge_id')
+      .eq('user_id', userId);
+    
+    // Create a set of unlocked badge IDs for quick lookup
+    final Set<int> unlockedBadgeIds = userBadges != null
+        ? userBadges.map<int>((item) => item['badge_id'] as int).toSet()
+        : {};
+        
+    // Map all badges with unlock status
+    return allBadges.map<Map<String, dynamic>>((badge) {
+      final badgeId = badge['id'] as int;
+      final isUnlocked = unlockedBadgeIds.contains(badgeId);
+      
+      return {
+        'id': badgeId,
+        'name': badge['badge_name'],
+        'imageUrl': badge['badge_image_url'],
+        'description': badge['badge_description'],
+        'unlocked': isUnlocked,
+      };
+    }).toList();
+  }
 }

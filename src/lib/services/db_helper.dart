@@ -538,4 +538,111 @@ class DBHelper {
       return {'xp': -1, 'rank': -1};
     }
   }
+
+  // Get user XP and rank information
+  Future<Map<String, dynamic>> getUserXpAndRank() async {
+    final user = supabase.auth.currentUser;
+    if (user != null) {
+      // Get user's current XP and rank
+      final userResponse = await supabase
+        .from('users')
+        .select('xp, user_rank')
+        .eq('auth_id', user.id)
+        .maybeSingle();
+      
+      if (userResponse == null) {
+        return {
+          'currentXP': 0,
+          'currentRank': 0,
+          'nextRank': 1,
+          'xpForNextRank': 100,
+          'xpForCurrentRank': 0,
+          'progress': 0.0,
+        };
+      }
+      
+      final currentXP = userResponse['xp'] as int? ?? 0;
+      final currentRank = userResponse['user_rank'] as int? ?? 0;
+      
+      // Get information about the current rank
+      final currentRankResponse = await supabase
+        .from('ranks')
+        .select('id, xp_required')
+        .eq('id', currentRank)
+        .maybeSingle();
+      
+      // Get information about the next rank
+      final nextRankResponse = await supabase
+        .from('ranks')
+        .select('id, xp_required')
+        .gt('id', currentRank)
+        .order('id', ascending: true)
+        .limit(1)
+        .maybeSingle();
+      
+      final int xpForCurrentRank = currentRankResponse?['xp_required'] as int? ?? 0;
+      final int xpForNextRank = nextRankResponse?['xp_required'] as int? ?? 100;
+      final int nextRank = nextRankResponse?['id'] as int? ?? (currentRank + 1);
+      
+      // Calculate progress to next rank
+      double progress = 0.0;
+      if (xpForNextRank > xpForCurrentRank) {
+        progress = (currentXP - xpForCurrentRank) / (xpForNextRank - xpForCurrentRank);
+        // Ensure progress is between 0 and 1
+        progress = progress.clamp(0.0, 1.0);
+      }
+      
+      return {
+        'currentXP': currentXP,
+        'currentRank': currentRank,
+        'nextRank': nextRank,
+        'xpForNextRank': xpForNextRank,
+        'xpForCurrentRank': xpForCurrentRank,
+        'progress': progress,
+      };
+    } else {
+      throw Exception('User not authenticated');
+    }
+  }
+
+  // Get user badges
+  Future<List<Map<String, dynamic>>> getUserBadges() async {
+    final user = supabase.auth.currentUser;
+    if (user != null) {
+      // First get the user's ID from the users table
+      final userResponse = await supabase
+        .from('users')
+        .select('id')
+        .eq('auth_id', user.id)
+        .maybeSingle();
+      
+      if (userResponse == null) {
+        return [];
+      }
+      
+      final userId = userResponse['id'];
+      
+      // Now get the badges
+      final badgesResponse = await supabase
+        .from('user_badges')
+        .select('badge_id, badges(id, badge_name, badge_image_url)')
+        .eq('user_id', userId);
+      
+      if (badgesResponse == null || badgesResponse.isEmpty) {
+        return [];
+      }
+      
+      // Extract the badge data from the response
+      return badgesResponse.map<Map<String, dynamic>>((item) {
+        final badge = item['badges'];
+        return {
+          'id': badge['id'],
+          'name': badge['badge_name'],
+          'imageUrl': badge['badge_image_url'],
+        };
+      }).toList();
+    } else {
+      return [];
+    }
+  }
 }

@@ -226,7 +226,7 @@ Future<void> appFirstRun() async {
               "title": "The Kitchen",
               "type": 4,
               "imagePath":
-                  "assets/images/lesson_images/level_0/section_0/lesson_3.png",
+                  "assets/images/interactive_images/level_0/section_0/interactive_0/0.png",
               "isCompleted": false,
               "buttonDetails": [
                 {

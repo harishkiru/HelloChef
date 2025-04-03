@@ -4,7 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class GamificationWidget extends StatefulWidget {
-  const GamificationWidget({super.key});
+  bool? isQuiz;
+  int? score;
+  int? totalQuestions;
+
+  GamificationWidget({
+    super.key,
+    this.isQuiz = false,
+    this.score = 0,
+    this.totalQuestions = 0,
+  });
 
   @override
   State<GamificationWidget> createState() => _GamificationWidgetState();
@@ -83,8 +92,10 @@ class _GamificationWidgetState extends State<GamificationWidget>
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text(
-                    'You have completed the lesson!',
+                  Text(
+                    widget.isQuiz == true
+                        ? 'You scored ${widget.score} out of ${widget.totalQuestions}'
+                        : 'You have completed the lesson!',
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 16),
                   ),

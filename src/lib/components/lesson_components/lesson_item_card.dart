@@ -139,17 +139,21 @@ class _LessonItemCardState extends State<LessonItemCard> {
       widget.lessonItem.isCompleted = true;
     });
 
-    dbHelper.completeLesson(widget.lessonItem.id);
+    await dbHelper.completeLesson(widget.lessonItem.id);
+
+    if (widget.onCompleted != null) {
+      widget.onCompleted!();
+    }
     final response = await dbHelper.updateUserXP(10);
 
     if (response['rank'] != -1) {
-      // Play sound
-      _player.play(AssetSource('sounds/rank_up.mp3'));
-
-      // Start confetti animation
-      _confettiController.play();
-
       if (mounted) {
+        // Play sound
+        _player.play(AssetSource('sounds/rank_up.mp3'));
+
+        // Start confetti animation
+        _confettiController.play();
+
         showDialog(
           context: context,
           barrierDismissible: false,

@@ -1,6 +1,9 @@
+import 'package:src/classes/lesson_item.dart';
+import 'package:src/classes/progress.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:src/classes/level.dart';
 
 class DBHelper {
   // Create a singleton instance of DBHelper
@@ -292,6 +295,80 @@ class DBHelper {
   }
 
   // ********** Lessons SQlite Operations **********
+
+  Future<Progress> getCurrentLevelProgress() async {
+    final db = await sqliteDatabase;
+    final currentLevel = await db.query(
+      'Levels',
+      where: 'isCompleted = ?',
+      whereArgs: [0],
+      orderBy: 'level ASC',
+      limit: 1,
+    );
+
+    Level level = Level(
+      id: currentLevel.first['id'] as int,
+      level: currentLevel.first['level'] as int,
+      title: currentLevel.first['title'] as String,
+      subtitle: currentLevel.first['subtitle'] as String,
+      imagePath: currentLevel.first['imagePath'] as String,
+      isCompleted: currentLevel.first['isCompleted'] == 1,
+    );
+
+    final sections = await db.query(
+      'Sections',
+      where: 'levelId = ?',
+      whereArgs: [level.id],
+    );
+
+    int numSections = sections.length;
+    int numSectionsCompleted = 0;
+    double progressPercentage = 0.0;
+    int numLessons = 0;
+    int numLessonsCompleted = 0;
+
+    for (final section in sections) {
+      numLessons += section['totalLessons'] as int;
+      numLessonsCompleted += section['completedLessons'] as int;
+      if (section['completedLessons'] == section['totalLessons']) {
+        numSectionsCompleted += 1;
+      }
+    }
+
+    if (numLessons > 0) {
+      progressPercentage = (numLessonsCompleted / numLessons);
+    }
+    return Progress(
+      level: level,
+      numSections: numSections,
+      numSectionsCompleted: numSectionsCompleted,
+      progressPercentage: progressPercentage,
+    );
+  }
+
+  Future<LessonItem> getNextUpLesson() async {
+    final db = await sqliteDatabase;
+    final result = await db.query(
+      'Lessons',
+      where: 'isCompleted = ?',
+      whereArgs: [0],
+      orderBy: 'id ASC',
+      limit: 1,
+    );
+
+    final lesson = LessonItem(
+      id: result.first['id'] as int,
+      title: result.first['title'] as String,
+      type: result.first['type'] as int,
+      content: result.first['content'] as String?,
+      videoPath: result.first['videoPath'] as String?,
+      imagePath: result.first['imagePath'] as String,
+      quizId: result.first['quizId'] as int?,
+      isCompleted: result.first['isCompleted'] == 1,
+    );
+
+    return lesson;
+  }
 
   Future<void> ensureTablesExist() async {
     final db = await sqliteDatabase;

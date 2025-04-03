@@ -53,7 +53,7 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
@@ -93,9 +93,10 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [
                         BoxShadow(
-                          color: isDarkMode 
-                              ? Colors.black.withOpacity(0.5)
-                              : Colors.black26,
+                          color:
+                              isDarkMode
+                                  ? Colors.black.withOpacity(0.5)
+                                  : Colors.black26,
                           blurRadius: 8,
                           offset: const Offset(0, 3),
                         ),
@@ -110,11 +111,12 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
               Text(
                 "Description:",
                 style: TextStyle(
-                  fontSize: 16, 
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: isDarkMode
-                      ? Colors.green.shade300
-                      : Colors.green.shade800,
+                  color:
+                      isDarkMode
+                          ? Colors.green.shade300
+                          : Colors.green.shade800,
                 ),
               ),
               const SizedBox(height: 8),
@@ -122,7 +124,7 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 widget.lessonItem.content ??
                     "Watch the video to learn new cooking techniques.",
                 style: TextStyle(
-                  fontSize: 14, 
+                  fontSize: 14,
                   color: Theme.of(context).textTheme.bodyMedium?.color,
                 ),
               ),
@@ -132,8 +134,11 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 child: Container(
                   width: double.infinity,
                   height: 50,
-                  margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  child: const GamificationWidget(),
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 8,
+                  ),
+                  child: GamificationWidget(),
                 ),
               ),
             ],

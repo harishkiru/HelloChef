@@ -43,11 +43,7 @@ dependencies:
   google_sign_in: any
   shimmer: any
   audioplayers: any
-  provider: any
-  shared_preferences: any
   youtube_player_flutter: ^9.1.1
-  flame_audio: any
-
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons
@@ -217,10 +213,6 @@ flutter:
 
     - assets/images/quiz_images/level_2/section_0/quiz_0/0.png
 
-    - assets/images/badge_images/home_cook.png
-    - assets/images/badge_images/hello_chef.png
-    - assets/images/badge_images/master_chef.png
-    - assets/images/badge_images/quiz_ace.png
     
     - assets/images/profile_placeholder.png
 
@@ -247,31 +239,18 @@ flutter:
     # - assets/videos/level_2/section_2/video_1.mp4
     # - assets/videos/level_2/section_3/video_0.mp4
 
-    # - assets/videos/level_1/section_0/video_0.mp4
-    # - assets/videos/level_1/section_0/video_1.mp4
-    # - assets/videos/level_1/section_1/video_0.mp4
+    - assets/videos/level_1/section_0/video_0.mp4
+    - assets/videos/level_1/section_0/video_1.mp4
+    - assets/videos/level_1/section_1/video_0.mp4
     # - assets/videos/level_1/section_2/video_0.mp4
     # - assets/videos/level_1/section_2/video_1.mp4
 
-    # - assets/videos/level_2/section_0/video_0.mp4
-    # - assets/videos/level_2/section_1/video_0.mp4
-    # - assets/videos/level_2/section_1/video_1.mp4
+    - assets/videos/level_2/section_0/video_0.mp4
+    - assets/videos/level_2/section_1/video_0.mp4
+    - assets/videos/level_2/section_1/video_1.mp4
     # - assets/videos/level_2/section_2/video_0.mp4
     # - assets/videos/level_2/section_2/video_1.mp4
     # - assets/videos/level_2/section_3/video_0.mp4
-
-#    - assets/videos/level_1/section_0/video_0.mp4
-#    - assets/videos/level_1/section_0/video_1.mp4
-#    - assets/videos/level_1/section_1/video_0.mp4
-#    - assets/videos/level_1/section_2/video_0.mp4
-#    - assets/videos/level_1/section_2/video_1.mp4
-#
-#    - assets/videos/level_2/section_0/video_0.mp4
-#    - assets/videos/level_2/section_1/video_0.mp4
-#    - assets/videos/level_2/section_1/video_1.mp4
-#     - assets/videos/level_2/section_2/video_0.mp4
-#     - assets/videos/level_2/section_2/video_1.mp4
-#     - assets/videos/level_2/section_3/video_0.mp4
 
     - assets/images/lesson_transcript_images/level_0/section_0/transcript_0/0.png
     - assets/images/lesson_transcript_images/level_0/section_0/transcript_0/1.png
@@ -342,10 +321,6 @@ flutter:
 
     - assets/sounds/level_complete.mp3
     - assets/sounds/rank_up.mp3
-
-    - assets/audio/chop.mp3
-    - assets/audio/pour.mp3
-    - assets/audio/sprinkle.mp3
 
     - .env
 

@@ -5,6 +5,7 @@ import 'package:src/services/drop_all_tables.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:src/components/common/dark_mode.dart';
+import 'package:src/screens/leaderboard_screen.dart';
 
 class UserProfileIcon extends StatelessWidget {
   const UserProfileIcon({super.key});
@@ -105,6 +106,27 @@ class UserProfileDrawer extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
+          ),
+          
+          // Leaderboard Option
+          ListTile(
+            leading: Icon(
+              Icons.leaderboard,
+              color: isDarkMode ? Colors.green[300] : Colors.green[700],
+            ),
+            title: Text(
+              'Leaderboard',
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodyLarge?.color,
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context); // Close drawer
+              Navigator.push(
+                context, 
+                MaterialPageRoute(builder: (context) => const LeaderboardScreen()),
+              );
+            },
           ),
           
           // Logout Option

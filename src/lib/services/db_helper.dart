@@ -671,4 +671,50 @@ class DBHelper {
       return [];
     }
   }
+
+  Future<List<Map<String, dynamic>>> getLeaderboardData() async {
+    // Get current user
+    final currentUser = supabase.auth.currentUser;
+    
+    // Get all users ordered by XP (descending)
+    final usersData = await supabase
+      .from('users')
+      .select('id, auth_id, first_name, last_name, xp, user_rank')
+      .order('xp', ascending: false);
+    
+    if (usersData == null || usersData.isEmpty) {
+      return [];
+    }
+    
+    // Get all user_badges
+    final allBadges = await supabase
+      .from('user_badges')
+      .select('user_id');
+    
+    // Count badges per user
+    Map<String, int> badgeCounts = {};
+    if (allBadges != null) {
+      for (var badge in allBadges) {
+        final userId = badge['user_id'];
+        badgeCounts[userId] = (badgeCounts[userId] ?? 0) + 1;
+      }
+    }
+    
+    // Create leaderboard data
+    List<Map<String, dynamic>> leaderboardData = usersData.map<Map<String, dynamic>>((userData) {
+      final userId = userData['id'];
+      return {
+        'id': userId,
+        'firstName': userData['first_name'],
+        'lastName': userData['last_name'],
+        'xp': userData['xp'],
+        'rank': userData['user_rank'],
+        'badgeCount': badgeCounts[userId] ?? 0,
+        // Check if this is the current user
+        'isCurrentUser': currentUser != null && userData['auth_id'] == currentUser.id,
+      };
+    }).toList();
+    
+    return leaderboardData;
+  }
 }

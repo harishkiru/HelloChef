@@ -17,6 +17,8 @@ class FilterOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
       child: Row(
@@ -26,13 +28,14 @@ class FilterOptions extends StatelessWidget {
             child: Stack(
               children: [
                 _buildDropdownBox<Difficulty>(
+                  context: context,
                   value: selectedDifficulty,
                   items: Difficulty.values,
                   onChanged: (newValue) {
                     onDifficultySelected(newValue!);
                   },
                 ),
-                _buildFloatingLabel("Difficulty"),
+                _buildFloatingLabel(context, "Difficulty"),
               ],
             ),
           ),
@@ -41,13 +44,14 @@ class FilterOptions extends StatelessWidget {
             child: Stack(
               children: [
                 _buildDropdownBox<Category>(
+                  context: context,
                   value: selectedCategory,
                   items: Category.values,
                   onChanged: (newValue) {
                     onCategorySelected(newValue!);
                   },
                 ),
-                _buildFloatingLabel("Category"),
+                _buildFloatingLabel(context, "Category"),
               ],
             ),
           ),
@@ -56,19 +60,21 @@ class FilterOptions extends StatelessWidget {
     );
   }
 
-  Widget _buildFloatingLabel(String label) {
+  Widget _buildFloatingLabel(BuildContext context, String label) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    
     return Positioned(
       left: 14,
       top: 4,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 4),
-        color: Colors.white,
+        color: isDarkMode ? Theme.of(context).cardColor : Colors.white,
         child: Text(
           label,
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.bold,
-            color: Colors.grey[700],
+            color: isDarkMode ? Colors.grey[400] : Colors.grey[700],
           ),
         ),
       ),
@@ -76,30 +82,43 @@ class FilterOptions extends StatelessWidget {
   }
 
   Widget _buildDropdownBox<T>({
+    required BuildContext context,
     required T value,
     required List<T> items,
     required ValueChanged<T?> onChanged,
   }) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12),
       margin: EdgeInsets.only(top: 12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: isDarkMode ? Theme.of(context).cardColor : Colors.white,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.grey[400]!, width: 1.5),
+        border: Border.all(
+          color: isDarkMode ? Colors.grey[700]! : Colors.grey[400]!, 
+          width: 1.5
+        ),
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<T>(
           value: value,
           isExpanded: true,
           icon: Icon(Icons.arrow_drop_down, color: Colors.green[700]),
+          dropdownColor: isDarkMode ? Theme.of(context).cardColor : Colors.white,
           onChanged: onChanged,
           items: items.map((T item) {
             return DropdownMenuItem<T>(
               value: item,
               child: Text(
                 _capitalize(item.toString().split('.').last),
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 16, 
+                  fontWeight: FontWeight.bold,
+                  color: isDarkMode 
+                      ? Theme.of(context).textTheme.bodyLarge?.color
+                      : Colors.black,
+                ),
               ),
             );
           }).toList(),

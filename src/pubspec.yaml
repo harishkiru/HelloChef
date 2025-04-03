@@ -216,6 +216,9 @@ flutter:
     - assets/images/quiz_images/level_2/section_0/quiz_0/0.png
 
     - assets/images/badge_images/home_cook.png
+    - assets/images/badge_images/hello_chef.png
+    - assets/images/badge_images/master_chef.png
+    - assets/images/badge_images/quiz_ace.png
     
     - assets/images/profile_placeholder.png
 

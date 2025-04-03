@@ -606,10 +606,20 @@ class DBHelper {
   }
 
   // Get user badges
-  Future<List<Map<String, dynamic>>> getUserBadges() async {
+  Future<List<Map<String, dynamic>>> getAllBadgesWithUnlockStatus() async {
     final user = supabase.auth.currentUser;
     if (user != null) {
-      // First get the user's ID from the users table
+      // First get all badges
+      final allBadges = await supabase
+        .from('badges')
+        .select('id, badge_name, badge_image_url, badge_description')
+        .order('id');
+      
+      if (allBadges == null) {
+        return [];
+      }
+      
+      // Get the user's ID from the users table
       final userResponse = await supabase
         .from('users')
         .select('id')
@@ -617,28 +627,44 @@ class DBHelper {
         .maybeSingle();
       
       if (userResponse == null) {
-        return [];
+        // Return all badges as locked if user is not found
+        return allBadges.map<Map<String, dynamic>>((badge) {
+          return {
+            'id': badge['id'],
+            'name': badge['badge_name'],
+            'imageUrl': badge['badge_image_url'],
+            'description': badge['badge_description'],
+            'unlocked': false,
+          };
+        }).toList();
       }
       
       final userId = userResponse['id'];
       
-      // Now get the badges
-      final badgesResponse = await supabase
+      // Get the user's unlocked badges
+      final userBadges = await supabase
         .from('user_badges')
-        .select('badge_id, badges(id, badge_name, badge_image_url)')
+        .select('badge_id')
         .eq('user_id', userId);
       
-      if (badgesResponse == null || badgesResponse.isEmpty) {
-        return [];
-      }
+      // Create a set of unlocked badge IDs for quick lookup
+      final Set<int> unlockedBadgeIds = userBadges != null
+          ? userBadges.map<int>((item) => item['badge_id'] as int).toSet()
+          : {};
+          
+      print("Unlocked badge IDs: $unlockedBadgeIds"); // Debug
       
-      // Extract the badge data from the response
-      return badgesResponse.map<Map<String, dynamic>>((item) {
-        final badge = item['badges'];
+      // Map all badges with unlock status
+      return allBadges.map<Map<String, dynamic>>((badge) {
+        final badgeId = badge['id'] as int;
+        final isUnlocked = unlockedBadgeIds.contains(badgeId);
+        
         return {
-          'id': badge['id'],
+          'id': badgeId,
           'name': badge['badge_name'],
           'imageUrl': badge['badge_image_url'],
+          'description': badge['badge_description'],
+          'unlocked': isUnlocked,
         };
       }).toList();
     } else {

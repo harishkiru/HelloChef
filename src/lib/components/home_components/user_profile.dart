@@ -337,7 +337,7 @@ class UserProfileDrawer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
             child: Text(
-              'Your Badges',
+              'Badges',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -346,7 +346,7 @@ class UserProfileDrawer extends StatelessWidget {
             ),
           ),
           FutureBuilder<List<Map<String, dynamic>>>(
-            future: DBHelper.instance().getUserBadges(),
+            future: DBHelper.instance().getAllBadgesWithUnlockStatus(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
@@ -360,7 +360,7 @@ class UserProfileDrawer extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Text(
-                      'Error loading badges',
+                      'Error loading badges: ${snapshot.error}',
                       style: TextStyle(
                         color: Theme.of(context).textTheme.bodyMedium?.color
                       ),
@@ -388,17 +388,9 @@ class UserProfileDrawer extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            'No badges earned yet',
+                            'No badges available',
                             style: TextStyle(
                               color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            'Complete lessons to earn badges',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: isDarkMode ? Colors.grey[500] : Colors.grey[700],
                             ),
                           ),
                         ],
@@ -413,36 +405,203 @@ class UserProfileDrawer extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(12.0),  // Fixed: Added 'padding:' parameter name
-                  child: Wrap(
-                    spacing: 12,
-                    runSpacing: 12,
-                    children: badges.map((badge) {
-                      return Tooltip(
-                        message: badge['name'],
-                        child: Container(
-                          width: 60,
-                          height: 60,
-                          decoration: BoxDecoration(
-                            color: isDarkMode ? Colors.grey[800] : Colors.grey[200],
-                            borderRadius: BorderRadius.circular(8),
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Count of unlocked badges
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 12.0),
+                        child: Text(
+                          'Unlocked: ${badges.where((b) => b['unlocked'] == true).length}/${badges.length}',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: isDarkMode ? Colors.green[200] : Colors.green[800],
                           ),
-                          child: badge['imageUrl'] != null && badge['imageUrl'].isNotEmpty
-                              ? _buildBadgeImage(badge['imageUrl'])
-                              : Icon(
-                                  Icons.emoji_events,
-                                  size: 32,
-                                  color: Colors.amber[600],
-                                ),
                         ),
-                      );
-                    }).toList(),
+                      ),
+                      // Badge grid
+                      Wrap(
+                        spacing: 12,
+                        runSpacing: 12,
+                        children: badges.map((badge) {
+                          final bool isUnlocked = badge['unlocked'] as bool;
+                          return GestureDetector(
+                            onTap: () => _showBadgeDetails(context, badge),
+                            child: Tooltip(
+                              message: badge['name'],
+                              child: Container(
+                                width: 60,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  color: isDarkMode ? Colors.grey[800] : Colors.grey[200],
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: isUnlocked 
+                                    ? Border.all(
+                                        color: Colors.amber[600]!,
+                                        width: 2,
+                                      )
+                                    : null,
+                                ),
+                                child: Stack(
+                                  children: [
+                                    Center(
+                                      child: Opacity(
+                                        opacity: isUnlocked ? 1.0 : 0.4,
+                                        child: badge['imageUrl'] != null && badge['imageUrl'].isNotEmpty
+                                            ? _buildBadgeImage(badge['imageUrl'])
+                                            : Icon(
+                                                Icons.emoji_events,
+                                                size: 32,
+                                                color: Colors.amber[600],
+                                              ),
+                                      ),
+                                    ),
+                                    if (!isUnlocked)
+                                      Positioned(
+                                        top: 0,
+                                        right: 0,
+                                        child: Container(
+                                          padding: EdgeInsets.all(4),
+                                          decoration: BoxDecoration(
+                                            color: Colors.black45,
+                                            borderRadius: BorderRadius.only(
+                                              topRight: Radius.circular(8),
+                                              bottomLeft: Radius.circular(8),
+                                            ),
+                                          ),
+                                          child: Icon(
+                                            Icons.lock,
+                                            color: Colors.white,
+                                            size: 14,
+                                          ),
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ],
                   ),
                 ),
               );
             },
           ),
           const SizedBox(height: 8),
+        ],
+      ),
+    );
+  }
+
+  // Add this method to show badge details popup
+  void _showBadgeDetails(BuildContext context, Map<String, dynamic> badge) {
+    final bool isUnlocked = badge['unlocked'] as bool;
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        contentPadding: EdgeInsets.zero,
+        content: Container(
+          width: 300,
+          padding: EdgeInsets.zero,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Badge status header
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                decoration: BoxDecoration(
+                  color: isUnlocked 
+                    ? Colors.green
+                    : isDarkMode ? Colors.grey[700] : Colors.grey[400],
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                  ),
+                ),
+                child: Text(
+                  isUnlocked ? 'UNLOCKED' : 'LOCKED',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+              
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    // Badge image
+                    Container(
+                      width: 80,
+                      height: 80,
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: isDarkMode ? Colors.grey[800] : Colors.grey[200],
+                        shape: BoxShape.circle,
+                        border: isUnlocked 
+                          ? Border.all(color: Colors.amber[600]!, width: 2)
+                          : null,
+                      ),
+                      child: Opacity(
+                        opacity: isUnlocked ? 1.0 : 0.5,
+                        child: badge['imageUrl'] != null && badge['imageUrl'].isNotEmpty
+                          ? _buildBadgeImage(badge['imageUrl'])
+                          : Icon(
+                              Icons.emoji_events,
+                              size: 50,
+                              color: Colors.amber[600],
+                            ),
+                      ),
+                    ),
+                    
+                    const SizedBox(height: 16),
+                    
+                    // Badge name
+                    Text(
+                      badge['name'] ?? 'Unknown Badge',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).textTheme.bodyLarge?.color,
+                      ),
+                    ),
+                    
+                    const SizedBox(height: 8),
+                    
+                    // Badge description
+                    Text(
+                      badge['description'] ?? 'No description available',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Theme.of(context).textTheme.bodyMedium?.color,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(
+              'Close',
+              style: TextStyle(color: Colors.green),
+            ),
+          ),
         ],
       ),
     );

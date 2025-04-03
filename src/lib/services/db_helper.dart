@@ -626,4 +626,220 @@ class DBHelper {
       return {'xp': -1, 'rank': -1};
     }
   }
+
+  // Get user XP and rank information
+  Future<Map<String, dynamic>> getUserXpAndRank() async {
+    final user = supabase.auth.currentUser;
+    if (user != null) {
+      // Get user's current XP and rank
+      final userResponse = await supabase
+        .from('users')
+        .select('xp, user_rank')
+        .eq('auth_id', user.id)
+        .maybeSingle();
+      
+      if (userResponse == null) {
+        return {
+          'currentXP': 0,
+          'currentRank': 0,
+          'nextRank': 1,
+          'xpForNextRank': 100,
+          'xpForCurrentRank': 0,
+          'progress': 0.0,
+        };
+      }
+      
+      final currentXP = userResponse['xp'] as int? ?? 0;
+      final currentRank = userResponse['user_rank'] as int? ?? 0;
+      
+      // Get information about the current rank
+      final currentRankResponse = await supabase
+        .from('ranks')
+        .select('id, xp_required')
+        .eq('id', currentRank)
+        .maybeSingle();
+      
+      // Get information about the next rank
+      final nextRankResponse = await supabase
+        .from('ranks')
+        .select('id, xp_required')
+        .gt('id', currentRank)
+        .order('id', ascending: true)
+        .limit(1)
+        .maybeSingle();
+      
+      final int xpForCurrentRank = currentRankResponse?['xp_required'] as int? ?? 0;
+      final int xpForNextRank = nextRankResponse?['xp_required'] as int? ?? 100;
+      final int nextRank = nextRankResponse?['id'] as int? ?? (currentRank + 1);
+      
+      // Calculate progress to next rank
+      double progress = 0.0;
+      if (xpForNextRank > xpForCurrentRank) {
+        progress = (currentXP - xpForCurrentRank) / (xpForNextRank - xpForCurrentRank);
+        // Ensure progress is between 0 and 1
+        progress = progress.clamp(0.0, 1.0);
+      }
+      
+      return {
+        'currentXP': currentXP,
+        'currentRank': currentRank,
+        'nextRank': nextRank,
+        'xpForNextRank': xpForNextRank,
+        'xpForCurrentRank': xpForCurrentRank,
+        'progress': progress,
+      };
+    } else {
+      throw Exception('User not authenticated');
+    }
+  }
+
+  // Get user badges
+  Future<List<Map<String, dynamic>>> getAllBadgesWithUnlockStatus() async {
+    final user = supabase.auth.currentUser;
+    if (user != null) {
+      // First get all badges
+      final allBadges = await supabase
+        .from('badges')
+        .select('id, badge_name, badge_image_url, badge_description')
+        .order('id');
+      
+      if (allBadges == null) {
+        return [];
+      }
+      
+      // Get the user's ID from the users table
+      final userResponse = await supabase
+        .from('users')
+        .select('id')
+        .eq('auth_id', user.id)
+        .maybeSingle();
+      
+      if (userResponse == null) {
+        // Return all badges as locked if user is not found
+        return allBadges.map<Map<String, dynamic>>((badge) {
+          return {
+            'id': badge['id'],
+            'name': badge['badge_name'],
+            'imageUrl': badge['badge_image_url'],
+            'description': badge['badge_description'],
+            'unlocked': false,
+          };
+        }).toList();
+      }
+      
+      final userId = userResponse['id'];
+      
+      // Get the user's unlocked badges
+      final userBadges = await supabase
+        .from('user_badges')
+        .select('badge_id')
+        .eq('user_id', userId);
+      
+      // Create a set of unlocked badge IDs for quick lookup
+      final Set<int> unlockedBadgeIds = userBadges != null
+          ? userBadges.map<int>((item) => item['badge_id'] as int).toSet()
+          : {};
+          
+      print("Unlocked badge IDs: $unlockedBadgeIds"); // Debug
+      
+      // Map all badges with unlock status
+      return allBadges.map<Map<String, dynamic>>((badge) {
+        final badgeId = badge['id'] as int;
+        final isUnlocked = unlockedBadgeIds.contains(badgeId);
+        
+        return {
+          'id': badgeId,
+          'name': badge['badge_name'],
+          'imageUrl': badge['badge_image_url'],
+          'description': badge['badge_description'],
+          'unlocked': isUnlocked,
+        };
+      }).toList();
+    } else {
+      return [];
+    }
+  }
+
+  Future<List<Map<String, dynamic>>> getLeaderboardData() async {
+    // Get current user
+    final currentUser = supabase.auth.currentUser;
+    
+    // Get all users ordered by XP (descending)
+    final usersData = await supabase
+      .from('users')
+      .select('id, auth_id, first_name, last_name, xp, user_rank')
+      .order('xp', ascending: false);
+    
+    if (usersData == null || usersData.isEmpty) {
+      return [];
+    }
+    
+    // Get all user_badges
+    final allBadges = await supabase
+      .from('user_badges')
+      .select('user_id');
+    
+    // Count badges per user
+    Map<String, int> badgeCounts = {};
+    if (allBadges != null) {
+      for (var badge in allBadges) {
+        final userId = badge['user_id'];
+        badgeCounts[userId] = (badgeCounts[userId] ?? 0) + 1;
+      }
+    }
+    
+    // Create leaderboard data
+    List<Map<String, dynamic>> leaderboardData = usersData.map<Map<String, dynamic>>((userData) {
+      final userId = userData['id'];
+      return {
+        'id': userId,
+        'firstName': userData['first_name'],
+        'lastName': userData['last_name'],
+        'xp': userData['xp'],
+        'rank': userData['user_rank'],
+        'badgeCount': badgeCounts[userId] ?? 0,
+        // Check if this is the current user
+        'isCurrentUser': currentUser != null && userData['auth_id'] == currentUser.id,
+      };
+    }).toList();
+    
+    return leaderboardData;
+  }
+
+  Future<List<Map<String, dynamic>>> getUserBadgesById(String userId) async {
+    // Get all badges
+    final allBadges = await supabase
+      .from('badges')
+      .select('id, badge_name, badge_image_url, badge_description')
+      .order('id');
+    
+    if (allBadges == null) {
+      return [];
+    }
+    
+    // Get the user's unlocked badges
+    final userBadges = await supabase
+      .from('user_badges')
+      .select('badge_id')
+      .eq('user_id', userId);
+    
+    // Create a set of unlocked badge IDs for quick lookup
+    final Set<int> unlockedBadgeIds = userBadges != null
+        ? userBadges.map<int>((item) => item['badge_id'] as int).toSet()
+        : {};
+        
+    // Map all badges with unlock status
+    return allBadges.map<Map<String, dynamic>>((badge) {
+      final badgeId = badge['id'] as int;
+      final isUnlocked = unlockedBadgeIds.contains(badgeId);
+      
+      return {
+        'id': badgeId,
+        'name': badge['badge_name'],
+        'imageUrl': badge['badge_image_url'],
+        'description': badge['badge_description'],
+        'unlocked': isUnlocked,
+      };
+    }).toList();
+  }
 }

@@ -109,7 +109,7 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
               ),
               const SizedBox(height: 8),
               Text(
-                widget.lessonItem.description ??
+                widget.lessonItem.content ??
                     "Watch the video to learn new cooking techniques.",
                 style: TextStyle(fontSize: 14, color: Colors.black87),
               ),

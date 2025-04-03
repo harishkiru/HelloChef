@@ -218,7 +218,8 @@ Future<void> appFirstRun() async {
                   "assets/images/lesson_images/level_0/section_0/lesson_2.png",
               "isCompleted": false,
               "videoPath": "assets/videos/level_0/section_0/video_0.mp4",
-              "content:": "[Placeholder]",
+              "content":
+                  "Learn how to keep your kitchen clean and organized before and after cooking! This video walks you through essential steps like wiping surfaces, managing dishes efficiently, and maintaining hygiene for a safe and smooth cooking experience. A little effort now makes future meal prep much easier. Keep your kitchen fresh and ready to go!",
             },
             {
               "id": 4,
@@ -345,7 +346,8 @@ Future<void> appFirstRun() async {
                   "assets/images/lesson_images/level_0/section_1/lesson_0.png",
               "isCompleted": false,
               "videoPath": "assets/videos/level_0/section_1/video_0.mp4",
-              "content:": "[Placeholder]",
+              "content":
+                  "Food safety is essential for keeping yourself and others healthy in the kitchen. This video covers key practices like proper meat storage, avoiding cross-contamination, and ensuring food is cooked to a safe temperature. You'll also learn the right way to wash fruits and vegetables and how to store leftovers correctly. Follow these tips to keep your meals both delicious and safe!",
             },
             {
               "id": 2,
@@ -355,7 +357,8 @@ Future<void> appFirstRun() async {
                   "assets/images/lesson_images/level_0/section_1/lesson_1.png",
               "isCompleted": false,
               "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
-              "content:": "[Placeholder]",
+              "content":
+                  "Handling heat safely in the kitchen is crucial to avoiding burns and accidents. This video covers essential precautions for using ovens, stovetops, boiling water, and toasters, ensuring you stay safe while cooking. Learn how to prevent steam burns, safely handle hot cookware, and avoid electrical hazards. With these tips, you can cook with confidence and keep your kitchen accident-free!",
             },
           ],
           "completedLessons": 0,
@@ -592,8 +595,9 @@ A serrated knife designed to slice through crusty bread and delicate pastries wi
               "imagePath":
                   "assets/images/lesson_images/level_1/section_0/lesson_1.png",
               "isCompleted": false,
-              "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
-              "content:": "[Placeholder]",
+              "videoPath": "assets/videos/level_1/section_0/video_0.mp4",
+              "content":
+                  "Knife safety is essential for efficient and injury-free cooking. This video covers key tips, including using a sharp knife for better control, choosing the right knife for the job, and proper finger positioning to avoid cuts. Learn how to handle your knife safely and confidently while preparing meals. With these techniques, you’ll slice like a pro while keeping your fingers intact!",
             },
             {
               "id": 2,
@@ -602,8 +606,9 @@ A serrated knife designed to slice through crusty bread and delicate pastries wi
               "imagePath":
                   "assets/images/lesson_images/level_1/section_0/lesson_2.png",
               "isCompleted": false,
-              "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
-              "content:": "[Placeholder]",
+              "videoPath": "assets/videos/level_1/section_0/video_1.mp4",
+              "content":
+                  "Understanding different cutting techniques is essential for following recipes with ease. This video breaks down slicing, chopping, dicing, and mincing, explaining when and how to use each method. Whether you're preparing proteins, vegetables, or aromatics like garlic, using the right cut ensures better texture and flavor in your dishes. Master these techniques and take your cooking skills to the next level!",
             },
             {
               "id": 3,
@@ -729,8 +734,9 @@ A serrated knife designed to slice through crusty bread and delicate pastries wi
               "imagePath":
                   "assets/images/lesson_images/level_1/section_1/lesson_0.png",
               "isCompleted": false,
-              "videoPath": "assets/videos/level_0/section_1/video_0.mp4",
-              "content:": "[Placeholder]",
+              "videoPath": "assets/videos/level_1/section_1/video_0.mp4",
+              "content":
+                  "Eggs are a breakfast staple, and this video explores seven different ways to prepare them to perfection. From classic scrambled eggs and sunny-side up to more advanced techniques like poaching and soft-boiling, you'll learn step-by-step instructions for each method. Whether you prefer a fluffy omelet, a rich runny yolk, or a perfectly cooked hard-boiled egg, this guide has you covered. Master these techniques and elevate your breakfast game!",
             },
             {
               "id": 2,
@@ -956,8 +962,9 @@ Bon appétit! 🍽️
               "imagePath":
                   "assets/images/lesson_images/level_1/section_2/lesson_2.png",
               "isCompleted": false,
-              "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
-              "content:": "[Placeholder]",
+              "videoPath": "assets/videos/level_1/section_2/video_0.mp4",
+              "content":
+                  "Stir-frying is one of the easiest and most versatile cooking techniques, allowing you to create delicious meals with endless variations. In this video, we walk through how to make a flavorful teriyaki chicken stir-fry, covering everything from prepping the ingredients to cooking the perfect rice. With simple steps and helpful cooking tips, you'll learn how to balance flavors, properly cook proteins and vegetables, and bring everything together for a well-rounded dish. Whether you're a beginner or looking to refine your stir-fry skills, this guide will have you cooking with confidence in no time!",
             },
             {
               "id": 3,
@@ -1063,8 +1070,9 @@ A simple, healthy, and versatile stir-fry dish that you can easily adapt by chan
               "imagePath":
                   "assets/images/lesson_images/level_1/section_2/lesson_4.png",
               "isCompleted": false,
-              "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
-              "content:": "[Placeholder]",
+              "videoPath": "assets/videos/level_1/section_2/video_1.mp4",
+              "content":
+                  "This simple and delicious pasta dish is perfect for any day of the week. In this video, we walk through each step, from dicing onions and mincing garlic to cooking the pasta and preparing a rich, flavorful meat sauce. With easy-to-follow instructions, seasoning tips, and a final creamy touch, you'll learn how to create a comforting and well-balanced pasta meal. Whether you're a beginner or looking for a quick and satisfying recipe, this dish is sure to become a go-to favorite!",
             },
             {
               "id": 5,
@@ -1431,8 +1439,9 @@ Happy cooking! 🍽️
               "imagePath":
                   "assets/images/lesson_images/level_2/section_0/lesson_3.png",
               "isCompleted": false,
-              "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
-              "content:": "[Placeholder]",
+              "videoPath": "assets/videos/level_2/section_0/video_0.mp4",
+              "content":
+                  "Spatchcocking a chicken is a simple but effective technique to ensure even cooking, preventing dry white meat while properly cooking the dark meat. In this video, we break down the process step by step, from positioning the chicken correctly to removing the spine and flattening it for optimal heat distribution. Whether you're roasting or grilling, this method will give you juicier, more evenly cooked chicken every time!",
             },
             {
               "id": 0,
@@ -1639,8 +1648,9 @@ Happy cooking! 🍽️
               "imagePath":
                   "assets/images/lesson_images/level_2/section_1/lesson_1.png",
               "isCompleted": false,
-              "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
-              "content:": "[Placeholder]",
+              "videoPath": "assets/videos/level_2/section_1/video_0.mp4",
+              "content":
+                  "In this video, we’re mastering the reverse sear method for cooking the perfect steak. By slowly cooking the steak in the oven at a low temperature, we ensure it heats evenly, locking in juiciness. We then finish it off with a quick sear in a hot pan, adding butter and basting for a rich, flavorful crust. Follow this method for a tender, perfectly cooked steak every time!",
             },
             {
               "id": 4,
@@ -1649,8 +1659,9 @@ Happy cooking! 🍽️
               "imagePath":
                   "assets/images/lesson_images/level_2/section_1/lesson_2.png",
               "isCompleted": false,
-              "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
-              "content:": "[Placeholder]",
+              "videoPath": "assets/videos/level_2/section_1/video_1.mp4",
+              "content":
+                  "In this video, we're making delicious smash burgers! Start by dicing some onions and preparing a tangy burger sauce with ketchup, mayo, mustard, and dill pickle juice. Cook the onions, then heat your pan to medium-high for the patties. Smash meatballs of ground beef into thin patties for maximum browning and flavor. Add cheese, toast the buns in burger grease, and stack your patty with the sauce, pickles, and grilled onions. Enjoy the ultimate juicy, crispy, and flavorful smash burger!",
             },
           ],
           "completedLessons": 0,
@@ -1755,8 +1766,9 @@ Happy baking! 🍰🍽️
               "imagePath":
                   "assets/images/lesson_images/level_2/section_2/lesson_1.png",
               "isCompleted": false,
-              "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
-              "content:": "[Placeholder]",
+              "videoPath": "assets/videos/level_2/section_2/video_0.mp4",
+              "content":
+                  "In this video, we're baking some delicious oatmeal chocolate chip cookies! Start by preheating your oven to 400°F (200°C). Soften your butter in the microwave and then mix it with both white and brown sugar. Add flour, salt, baking soda, baking powder, oats, and chocolate chips to create the cookie dough. Mix in eggs and vanilla, and then combine everything using a stand mixer or by hand. Arrange your cookie dough on a parchment-lined baking sheet, making sure to leave enough space for them to spread. Bake for 8 minutes, cool on a rack, and enjoy your fresh, homemade cookies!",
             },
             {
               "id": 3,
@@ -1829,8 +1841,9 @@ Happy baking! 🍰🍽️
               "imagePath":
                   "assets/images/lesson_images/level_2/section_2/lesson_3.png",
               "isCompleted": false,
-              "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
-              "content:": "[Placeholder]",
+              "videoPath": "assets/videos/level_2/section_2/video_1.mp4",
+              "content":
+                  "In this video, we’re baking some delicious blueberry muffins! Start by preheating the oven to 375°F. Rinse your blueberries if using fresh ones, and then melt the butter in the microwave on low power. Combine the melted butter with sugar, vanilla, milk, and eggs. Mix gently with a fork to avoid over-mixing the batter, which could make the muffins dense. Add flour, baking powder, and sour cream, folding in the blueberries last. Scoop the batter into muffin liners, filling them halfway to account for expansion. Bake for 25 minutes, then do the toothpick test to check for doneness. Let them cool, and then transfer to a cooling rack. Enjoy your perfectly moist, homemade blueberry muffins!",
             },
             {
               "id": 5,
@@ -1935,8 +1948,9 @@ Happy baking! 🍰🍽️
               "imagePath":
                   "assets/images/lesson_images/level_2/section_3/lesson_0.png",
               "isCompleted": false,
-              "videoPath": "assets/videos/level_0/section_1/video_1.mp4",
-              "content:": "[Placeholder]",
+              "videoPath": "assets/videos/level_2/section_3/video_0.mp4",
+              "content":
+                  "In this video, we'll be preparing a delicious roast dinner featuring both a whole and spatchcock chicken, along with roasted vegetables and sweet potatoes. We’ll walk you through the timing process for cooking everything to perfection in the oven, including tips on preparing the chicken, vegetables, and using the broiler for a crispy finish. Join us as we master timing and roasting techniques for a perfect roast dinner!",
             },
             {
               "id": 0,

@@ -6,6 +6,7 @@ import 'cooking_game.dart';
 import 'start_menu.dart';
 import 'package:src/components/common/safe_bottom_padding.dart';
 
+
 class GameScreen extends StatefulWidget {
   final String recipeName;
 
@@ -130,7 +131,8 @@ class _GameScreenState extends State<GameScreen> {
           ),
         ],
       ),
-      body: SafeArea(
+
+      body: SafeArea(  // Added SafeArea
         child: Stack(
           children: [
             GameWidget(game: game),

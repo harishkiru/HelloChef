@@ -5,7 +5,6 @@ import 'practice_grid.dart';
 import 'practice_data.dart';
 import 'package:src/components/home_components/user_profile.dart';
 import '../practice_simulation/start_menu.dart';
-// Add this import
 
 class PracticeScreen extends StatefulWidget {
   const PracticeScreen({super.key});
@@ -27,6 +26,8 @@ class PracticeScreenState extends State<PracticeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text('Practice', style: TextStyle(color: Colors.white)),
@@ -61,16 +62,25 @@ class PracticeScreenState extends State<PracticeScreen> {
       ),
       endDrawer: const UserProfileDrawer(),
       body: SafeArea(
-        // Added SafeArea
         child: FutureBuilder<List<tile.PracticeTile>>(
           future: _practiceTilesFuture,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
+              return Center(
+                child: Text(
+                  'Error: ${snapshot.error}',
+                  style: TextStyle(color: Theme.of(context).textTheme.bodyLarge?.color),
+                ),
+              );
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return const Center(child: Text('No recipes available.'));
+              return Center(
+                child: Text(
+                  'No recipes available.',
+                  style: TextStyle(color: Theme.of(context).textTheme.bodyLarge?.color),
+                ),
+              );
             }
 
             final practiceTile = snapshot.data!;

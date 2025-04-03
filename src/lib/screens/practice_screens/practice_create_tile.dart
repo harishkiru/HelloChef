@@ -8,6 +8,8 @@ class TileMaker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -35,8 +37,12 @@ class TileMaker extends StatelessWidget {
                     item.imageUrl,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) => Container(
-                      color: Colors.grey[300],
-                      child: Icon(Icons.image_not_supported, size: 50, color: Colors.grey[600]),
+                      color: isDarkMode ? Colors.grey[800] : Colors.grey[300],
+                      child: Icon(
+                        Icons.image_not_supported, 
+                        size: 50, 
+                        color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+                      ),
                     ),
                     loadingBuilder: (context, child, loadingProgress) {
                       if (loadingProgress == null) return child;
@@ -57,7 +63,7 @@ class TileMaker extends StatelessWidget {
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                        color: _getDifficultyColor(item.difficulty),
+                        color: _getDifficultyColor(item.difficulty, isDarkMode),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
@@ -78,7 +84,7 @@ class TileMaker extends StatelessWidget {
             Expanded(
               flex: 4, // Increased from 3 to 4
               child: Container(
-                color: Colors.green,
+                color: isDarkMode ? Colors.green : Colors.green,
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6), // Reduced padding
                 child: Center(
                   child: Column(
@@ -122,16 +128,16 @@ class TileMaker extends StatelessWidget {
   }
   
   // Helper method to get appropriate color for difficulty level
-  Color _getDifficultyColor(Difficulty difficulty) {
+  Color _getDifficultyColor(Difficulty difficulty, bool isDarkMode) {
     switch (difficulty) {
       case Difficulty.easy:
-        return Colors.green[600]!;
+        return isDarkMode ? Colors.green[800]! : Colors.green[600]!;
       case Difficulty.medium:
-        return Colors.orange[600]!;
+        return isDarkMode ? Colors.orange[800]! : Colors.orange[600]!;
       case Difficulty.hard:
-        return Colors.red[600]!;
+        return isDarkMode ? Colors.red[800]! : Colors.red[600]!;
       default:
-        return Colors.blue[600]!;
+        return isDarkMode ? Colors.blue[800]! : Colors.blue[600]!;
     }
   }
   

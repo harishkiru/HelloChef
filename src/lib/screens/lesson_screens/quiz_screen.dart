@@ -235,42 +235,6 @@ class _QuizScreenState extends State<QuizScreen> {
                                           answered = false;
                                           selectedAnswerIndex = null;
                                         });
-                                      } else {
-                                        // Quiz finished
-                                        showDialog(
-                                          context: context,
-                                          builder:
-                                              (context) => AlertDialog(
-                                                title: const Text(
-                                                  'Quiz Completed',
-                                                ),
-                                                content: Text(
-                                                  'Your score: $score/${widget.quiz.questions.length}',
-                                                  style: const TextStyle(
-                                                    fontSize: 18,
-                                                  ),
-                                                ),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.pop(
-                                                        context,
-                                                      ); // Close dialog
-                                                      Navigator.pop(
-                                                        context,
-                                                        true,
-                                                      ); // Go back to lessons
-                                                    },
-                                                    child: const Text(
-                                                      'Finish',
-                                                      style: TextStyle(
-                                                        color: Colors.green,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                        );
                                       }
                                     }
                                   },

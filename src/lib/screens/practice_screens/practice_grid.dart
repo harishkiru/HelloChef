@@ -9,7 +9,14 @@ class PracticeGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (items.isEmpty) {
-      return Center(child: Text('No exercises available for this difficulty.'));
+      return Center(
+        child: Text(
+          'No exercises available for this difficulty.',
+          style: TextStyle(
+            color: Theme.of(context).textTheme.bodyLarge?.color,
+          ),
+        ),
+      );
     }
 
     return GridView.builder(

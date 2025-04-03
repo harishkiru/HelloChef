@@ -3,6 +3,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:src/services/db_helper.dart';
 import 'package:src/services/drop_all_tables.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:src/components/common/dark_mode.dart';
 
 class UserProfileIcon extends StatelessWidget {
   const UserProfileIcon({super.key});
@@ -69,19 +71,17 @@ class UserProfileDrawer extends StatelessWidget {
               ),
             ),
           ),
-          ListTile(
-            leading: const Icon(Icons.settings),
-            title: const Text('Settings'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.dark_mode),
-            title: const Text('Dark Mode'),
-            onTap: () {
-              Navigator.pop(context);
-            },
+          // Settings option removed
+          Consumer<ThemeProvider>(
+            builder: (context, themeProvider, _) => SwitchListTile(
+              secondary: const Icon(Icons.dark_mode),
+              title: const Text('Dark Mode'),
+              value: themeProvider.isDarkMode,
+              onChanged: (_) {
+                themeProvider.toggleTheme(); // Add this line to call toggleTheme
+                Navigator.pop(context);
+              },
+            ),
           ),
           ListTile(
             leading: const Icon(Icons.logout),

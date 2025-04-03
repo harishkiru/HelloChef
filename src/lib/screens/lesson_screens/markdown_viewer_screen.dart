@@ -1,7 +1,7 @@
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter/material.dart';
 import 'package:src/classes/lesson_item.dart';
-import 'package:src/components/common/safe_bottom_padding.dart'; // Add this import
+import 'package:src/components/common/safe_bottom_padding.dart';
 import 'package:src/components/common/gamification_widget.dart';
 import 'package:src/components/common/greyed_out_widget.dart';
 
@@ -49,15 +49,17 @@ class _MarkdownViewerScreenState extends State<MarkdownViewerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: Text(
           widget.lessonItem.title,
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -75,21 +77,48 @@ class _MarkdownViewerScreenState extends State<MarkdownViewerScreen> {
                   imageBuilder: (uri, title, alt) {
                     return Image.asset(uri.toString());
                   },
+                  styleSheet: MarkdownStyleSheet(
+                    // Use theme text colors
+                    p: TextStyle(color: Theme.of(context).textTheme.bodyLarge?.color),
+                    h1: TextStyle(
+                      fontSize: 24, 
+                      fontWeight: FontWeight.bold,
+                      color: isDarkMode ? Colors.green.shade300 : Colors.green.shade800,
+                    ),
+                    h2: TextStyle(
+                      fontSize: 22, 
+                      fontWeight: FontWeight.bold,
+                      color: isDarkMode ? Colors.green.shade300 : Colors.green.shade800,
+                    ),
+                    h3: TextStyle(
+                      fontSize: 18, 
+                      fontWeight: FontWeight.bold,
+                      color: isDarkMode ? Colors.green.shade300 : Colors.green.shade800,
+                    ),
+                    em: TextStyle(fontStyle: FontStyle.italic, color: Theme.of(context).textTheme.bodyLarge?.color),
+                    strong: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyLarge?.color),
+                    blockquote: TextStyle(
+                      color: isDarkMode ? Colors.grey.shade300 : Colors.grey.shade700,
+                      fontStyle: FontStyle.italic,
+                    ),
+                    code: TextStyle(
+                      fontFamily: 'monospace',
+                      backgroundColor: isDarkMode ? Colors.grey.shade800 : Colors.grey.shade200,
+                      color: isDarkMode ? Colors.green.shade300 : Colors.green.shade700,
+                    ),
+                    codeblockDecoration: BoxDecoration(
+                      color: isDarkMode ? Colors.grey.shade900 : Colors.grey.shade200,
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                  ),
                 ),
               ),
-              // Replace fixed margin with SafeBottomPadding
               SafeBottomPadding(
                 extraPadding: 16.0,
                 child: Container(
                   width: double.infinity,
-                  margin: EdgeInsets.fromLTRB(
-                    8,
-                    8,
-                    8,
-                    0,
-                  ), // Changed bottom margin from 40 to 0
-                  child:
-                      reachedBottom ? GamificationWidget() : GreyedOutWidget(),
+                  margin: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+                  child: reachedBottom ? GamificationWidget() : GreyedOutWidget(),
                 ),
               ),
             ],

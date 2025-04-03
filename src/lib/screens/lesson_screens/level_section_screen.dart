@@ -51,6 +51,17 @@ class _LevelSectionScreenState extends State<LevelSectionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    
+    // Adaptive colors
+    final Color subtitleBgColor = isDarkMode 
+        ? Color(0xFF1A3020) // Dark green background for dark mode
+        : Colors.green.shade50;
+    
+    final Color subtitleTextColor = isDarkMode
+        ? Colors.green.shade300 // Lighter green text for dark mode
+        : Colors.green.shade800;
+        
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -73,11 +84,14 @@ class _LevelSectionScreenState extends State<LevelSectionScreen> {
           children: [
             Container(
               padding: const EdgeInsets.symmetric(vertical: 10.0),
-              color: Colors.green.shade50,
+              color: subtitleBgColor,
               child: Text(
                 widget.level.subtitle,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18, color: Colors.green.shade800),
+                style: TextStyle(
+                  fontSize: 18, 
+                  color: subtitleTextColor
+                ),
               ),
             ),
             Expanded(
@@ -87,9 +101,23 @@ class _LevelSectionScreenState extends State<LevelSectionScreen> {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
+                    return Center(
+                      child: Text(
+                        'Error: ${snapshot.error}',
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.bodyLarge?.color,
+                        ),
+                      ),
+                    );
                   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return const Center(child: Text('No sections available.'));
+                    return Center(
+                      child: Text(
+                        'No sections available.',
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.bodyLarge?.color,
+                        ),
+                      ),
+                    );
                   } else {
                     List<LevelSection> sections = snapshot.data!;
                     return ListView.builder(

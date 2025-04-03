@@ -279,7 +279,7 @@ class UserProfileDrawer extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Level $currentRank',
+                        'Rank $currentRank',  // Changed from 'Level $currentRank'
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -310,7 +310,7 @@ class UserProfileDrawer extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    '$xpNeeded XP until Level $nextRank',
+                    '$xpNeeded XP until Rank $nextRank',  // Changed from 'Level $nextRank'
                     style: TextStyle(
                       fontSize: 14,
                       color: isDarkMode ? Colors.grey[400] : Colors.grey[600],

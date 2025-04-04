@@ -1,0 +1,347 @@
+name: src
+description: "A new Flutter project."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.0
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_dotenv: any
+  supabase_flutter: any
+  sqflite: any
+  path: any
+  flutter_markdown: any
+  video_player: any
+  media_kit: ^1.1.11 
+  media_kit_video: ^1.2.5 
+  media_kit_libs_video: ^1.0.5
+  permission_handler: any
+  google_sign_in: any
+  shimmer: any
+  audioplayers: any
+  provider: any
+  shared_preferences: any
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons
+  cupertino_icons: ^1.0.8
+  vector_math: ^2.1.4
+  flame: ^1.26.0
+  confetti: ^0.8.0
+  path_provider: ^2.1.5
+
+dev_dependencies:
+  flutter_launcher_icons: ^0.13.1
+  flutter_test:
+    sdk: flutter
+  
+  flutter_lints: ^5.0.0
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/images/app_icon.png"
+
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/google_logo.png
+    - assets/images/level_images/level_0.png
+    - assets/images/level_images/level_1.png
+    - assets/images/level_images/level_2.png
+
+    - assets/images/level_section_images/level_0/section_0.png
+    - assets/images/level_section_images/level_0/section_1.png
+    - assets/images/level_section_images/level_0/section_2.png
+
+    - assets/images/level_section_images/level_1/section_0.png
+    - assets/images/level_section_images/level_1/section_1.png
+    - assets/images/level_section_images/level_1/section_2.png
+
+    - assets/images/level_section_images/level_2/section_0.png
+    - assets/images/level_section_images/level_2/section_1.png
+    - assets/images/level_section_images/level_2/section_2.png
+    - assets/images/level_section_images/level_2/section_3.png
+
+
+    - assets/images/lesson_images/level_0/section_0/lesson_0.png
+    - assets/images/lesson_images/level_0/section_0/lesson_1.png
+    - assets/images/lesson_images/level_0/section_0/lesson_2.png
+    - assets/images/lesson_images/level_0/section_0/lesson_3.png
+
+    - assets/images/lesson_images/level_0/section_1/lesson_0.png
+    - assets/images/lesson_images/level_0/section_1/lesson_1.png
+
+    - assets/images/lesson_images/level_0/section_2/lesson_0.png
+
+    - assets/images/lesson_images/level_1/section_0/lesson_0.png
+    - assets/images/lesson_images/level_1/section_0/lesson_1.png
+    - assets/images/lesson_images/level_1/section_0/lesson_2.png
+    - assets/images/lesson_images/level_1/section_0/lesson_3.png
+
+    - assets/images/lesson_images/level_1/section_1/lesson_0.png
+
+    - assets/images/lesson_images/level_1/section_1/lesson_2.png
+
+    - assets/images/lesson_images/level_1/section_2/lesson_0.png
+    - assets/images/lesson_images/level_1/section_2/lesson_1.png
+    - assets/images/lesson_images/level_1/section_2/lesson_2.png
+    - assets/images/lesson_images/level_1/section_2/lesson_3.png
+    - assets/images/lesson_images/level_1/section_2/lesson_4.png
+    - assets/images/lesson_images/level_1/section_2/lesson_5.png
+
+    - assets/images/lesson_images/level_2/section_0/lesson_0.png
+    - assets/images/lesson_images/level_2/section_0/lesson_1.png
+    - assets/images/lesson_images/level_2/section_0/lesson_2.png
+    - assets/images/lesson_images/level_2/section_0/lesson_3.png
+    - assets/images/lesson_images/level_2/section_0/lesson_4.png
+
+    - assets/images/lesson_images/level_2/section_1/lesson_0.png
+    - assets/images/lesson_images/level_2/section_1/lesson_1.png
+    - assets/images/lesson_images/level_2/section_1/lesson_2.png
+
+    - assets/images/lesson_images/level_2/section_2/lesson_0.png
+    - assets/images/lesson_images/level_2/section_2/lesson_1.png
+    - assets/images/lesson_images/level_2/section_2/lesson_2.png
+    - assets/images/lesson_images/level_2/section_2/lesson_3.png
+
+    - assets/images/lesson_images/level_2/section_2/lesson_5.png
+
+    - assets/images/lesson_images/level_2/section_3/lesson_0.png
+
+    - assets/images/lesson_images/level_2/section_3/lesson_2.png
+
+    - assets/images/lesson_markdown_images/level_0/section_0/lesson_0/0.png
+    - assets/images/lesson_markdown_images/level_0/section_0/lesson_1/0.png
+
+    - assets/images/lesson_markdown_images/level_1/section_0/lesson_0/0.png
+    - assets/images/lesson_markdown_images/level_1/section_0/lesson_0/1.png
+    - assets/images/lesson_markdown_images/level_1/section_0/lesson_0/2.png
+    - assets/images/lesson_markdown_images/level_1/section_0/lesson_0/3.png
+    - assets/images/lesson_markdown_images/level_1/section_0/lesson_0/4.png
+
+    - assets/images/lesson_markdown_images/level_1/section_2/lesson_0/0.png
+    - assets/images/lesson_markdown_images/level_1/section_2/lesson_0/1.png
+    - assets/images/lesson_markdown_images/level_1/section_2/lesson_0/2.png
+    - assets/images/lesson_markdown_images/level_1/section_2/lesson_0/3.png
+    - assets/images/lesson_markdown_images/level_1/section_2/lesson_0/4.png
+    
+    - assets/images/lesson_markdown_images/level_1/section_2/lesson_1/0.png
+    - assets/images/lesson_markdown_images/level_1/section_2/lesson_1/1.png
+    - assets/images/lesson_markdown_images/level_1/section_2/lesson_1/2.png
+    - assets/images/lesson_markdown_images/level_1/section_2/lesson_1/3.png
+    - assets/images/lesson_markdown_images/level_1/section_2/lesson_1/4.png
+    - assets/images/lesson_markdown_images/level_1/section_2/lesson_1/5.png
+
+    - assets/images/lesson_markdown_images/level_2/section_0/lesson_0/0.png
+    - assets/images/lesson_markdown_images/level_2/section_0/lesson_0/1.png
+    - assets/images/lesson_markdown_images/level_2/section_0/lesson_0/2.png
+    - assets/images/lesson_markdown_images/level_2/section_0/lesson_0/3.png
+    - assets/images/lesson_markdown_images/level_2/section_0/lesson_0/4.png
+
+    - assets/images/lesson_markdown_images/level_2/section_0/lesson_1/0.png
+    - assets/images/lesson_markdown_images/level_2/section_0/lesson_1/1.png
+    - assets/images/lesson_markdown_images/level_2/section_0/lesson_1/2.png
+    - assets/images/lesson_markdown_images/level_2/section_0/lesson_1/3.png
+
+    - assets/images/lesson_markdown_images/level_2/section_1/lesson_0/0.png
+    - assets/images/lesson_markdown_images/level_2/section_1/lesson_0/1.png
+    - assets/images/lesson_markdown_images/level_2/section_1/lesson_0/2.png
+    - assets/images/lesson_markdown_images/level_2/section_1/lesson_0/3.png
+    - assets/images/lesson_markdown_images/level_2/section_1/lesson_0/4.png
+    - assets/images/lesson_markdown_images/level_2/section_1/lesson_0/5.png
+    - assets/images/lesson_markdown_images/level_2/section_1/lesson_0/6.png
+    - assets/images/lesson_markdown_images/level_2/section_1/lesson_0/7.png
+    - assets/images/lesson_markdown_images/level_2/section_1/lesson_0/8.png
+
+    - assets/images/lesson_markdown_images/level_2/section_2/lesson_0/0.png
+    - assets/images/lesson_markdown_images/level_2/section_2/lesson_0/1.png
+    - assets/images/lesson_markdown_images/level_2/section_2/lesson_0/2.png
+    - assets/images/lesson_markdown_images/level_2/section_2/lesson_0/3.png
+    - assets/images/lesson_markdown_images/level_2/section_2/lesson_0/4.png
+    - assets/images/lesson_markdown_images/level_2/section_2/lesson_0/5.png
+    - assets/images/lesson_markdown_images/level_2/section_2/lesson_0/6.png
+
+
+    - assets/images/quiz_images/level_0/section_2/quiz_0/0.png
+
+    - assets/images/quiz_images/level_1/section_0/quiz_0/0.png
+    - assets/images/quiz_images/level_1/section_0/quiz_0/1.png
+    - assets/images/quiz_images/level_1/section_0/quiz_0/2.png
+    - assets/images/quiz_images/level_1/section_0/quiz_0/3.png
+
+    - assets/images/quiz_images/level_2/section_0/quiz_0/0.png
+
+    - assets/images/badge_images/home_cook.png
+    - assets/images/badge_images/hello_chef.png
+    - assets/images/badge_images/master_chef.png
+    - assets/images/badge_images/quiz_ace.png
+    
+    - assets/images/profile_placeholder.png
+
+    - assets/data/recipes.json
+    - assets/data/recipes_simulation.json
+    - assets/levels/levels.json
+    - assets/data/recipes_simulation.json
+    - assets/data/tips.json
+    
+    # - assets/videos/level_0/section_0/video_0.mp4
+    # - assets/videos/level_0/section_1/video_0.mp4
+    # - assets/videos/level_0/section_1/video_1.mp4
+
+    # - assets/videos/level_1/section_0/video_0.mp4
+    # - assets/videos/level_1/section_0/video_1.mp4
+    # - assets/videos/level_1/section_1/video_0.mp4
+    # - assets/videos/level_1/section_2/video_0.mp4
+    # - assets/videos/level_1/section_2/video_1.mp4
+
+    # - assets/videos/level_2/section_0/video_0.mp4
+    # - assets/videos/level_2/section_1/video_0.mp4
+    # - assets/videos/level_2/section_1/video_1.mp4
+    # - assets/videos/level_2/section_2/video_0.mp4
+    # - assets/videos/level_2/section_2/video_1.mp4
+    # - assets/videos/level_2/section_3/video_0.mp4
+
+    - assets/images/lesson_transcript_images/level_0/section_0/transcript_0/0.png
+    - assets/images/lesson_transcript_images/level_0/section_0/transcript_0/1.png
+    - assets/images/lesson_transcript_images/level_0/section_0/transcript_0/2.png
+    - assets/images/lesson_transcript_images/level_0/section_0/transcript_0/3.png
+    - assets/images/lesson_transcript_images/level_0/section_0/transcript_0/4.png
+    - assets/images/lesson_transcript_images/level_0/section_0/transcript_0/5.png
+
+    - assets/images/lesson_transcript_images/level_0/section_1/transcript_0/0.png
+    - assets/images/lesson_transcript_images/level_0/section_1/transcript_0/1.png
+    - assets/images/lesson_transcript_images/level_0/section_1/transcript_0/2.png
+    - assets/images/lesson_transcript_images/level_0/section_1/transcript_0/3.png
+    - assets/images/lesson_transcript_images/level_0/section_1/transcript_0/4.png
+    - assets/images/lesson_transcript_images/level_0/section_1/transcript_0/5.png
+
+    - assets/images/lesson_transcript_images/level_0/section_1/transcript_1/0.png
+    - assets/images/lesson_transcript_images/level_0/section_1/transcript_1/1.png
+    - assets/images/lesson_transcript_images/level_0/section_1/transcript_1/2.png
+    - assets/images/lesson_transcript_images/level_0/section_1/transcript_1/3.png
+    - assets/images/lesson_transcript_images/level_0/section_1/transcript_1/4.png
+    - assets/images/lesson_transcript_images/level_0/section_1/transcript_1/5.png
+
+    - assets/images/simulation_images/newbg2.png
+    - assets/images/simulation_images/corn_flour.png
+    - assets/images/simulation_images/sake.png
+    - assets/images/simulation_images/sesame_seed_oil.png
+    - assets/images/simulation_images/soy_sauce.png
+    - assets/images/simulation_images/water.png
+    - assets/images/simulation_images/chicken.png
+    - assets/images/simulation_images/chilli_powder.png
+    - assets/images/simulation_images/rice_vinegar.png
+    - assets/images/simulation_images/brown_sugar.png
+    - assets/images/simulation_images/spring_onions.png
+    - assets/images/simulation_images/garlic_clove.png
+    - assets/images/simulation_images/water_chestnut.png
+    - assets/images/simulation_images/peanuts.png
+    - assets/images/simulation_images/newbg.png
+    - assets/images/simulation_images/newbg2.png
+    - assets/images/simulation_images/background.png
+    - assets/images/simulation_images/pan.png
+
+
+
+    - assets/images/interactive_images/level_0/section_0/interactive_0/0.png
+
+    - assets/images/interactive_images/level_2/section_0/interactive_0/0.png
+
+
+
+    - assets/images/simulation_images/measuring_cup.png
+    - assets/images/simulation_images/corn_flour.png
+    - assets/images/simulation_images/sake.png
+    - assets/images/simulation_images/sesame_seed_oil.png
+    - assets/images/simulation_images/soy_sauce.png
+    - assets/images/simulation_images/water.png
+    - assets/images/simulation_images/chicken.png
+    - assets/images/simulation_images/chilli_powder.png
+    - assets/images/simulation_images/rice_vinegar.png
+    - assets/images/simulation_images/brown_sugar.png
+    - assets/images/simulation_images/spring_onions.png
+    - assets/images/simulation_images/garlic_clove.png
+    - assets/images/simulation_images/water_chestnut.png
+    - assets/images/simulation_images/peanuts.png
+    - assets/images/simulation_images/newbg.png
+    - assets/images/simulation_images/newbg2.png
+    - assets/images/simulation_images/background.png
+    - assets/images/simulation_images/pan.png
+
+    - assets/sounds/level_complete.mp3
+    - assets/sounds/rank_up.mp3
+    - assets/sounds/achievement_unlocked.mp3
+
+    - .env
+
+
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/to/resolution-aware-images
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/to/asset-from-package
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/to/font-from-package

@@ -3,9 +3,11 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:src/services/db_helper.dart';
+import 'package:src/classes/lesson_item.dart';
 
 class GamificationWidget extends StatefulWidget {
   bool? isQuiz;
+  LessonItem lessonItem;
   int? score;
   int? totalQuestions;
 
@@ -14,6 +16,7 @@ class GamificationWidget extends StatefulWidget {
     this.isQuiz = false,
     this.score = 0,
     this.totalQuestions = 0,
+    required this.lessonItem,
   });
 
   @override
@@ -38,6 +41,27 @@ class _GamificationWidgetState extends State<GamificationWidget>
       if (response) {
         return true; // Badge will be awarded
       }
+    }
+    return false;
+  }
+
+  Future<bool> _checkForHelloChefBadge() async {
+    await dbHelper.addLessonToTotalLessonsCompleted();
+
+    final response = await dbHelper.checkIfHelloChefBadgeUnlocked();
+    if (response) {
+      return true; // Badge will be awarded
+    }
+    return false;
+  }
+
+  Future<bool> _checkForMasterChefBadge() async {
+    await dbHelper.addLessonToTotalLessonsCompleted();
+    await dbHelper.addRecipeToTotalRecipesCreated();
+
+    final response = await dbHelper.checkIfMasterChefBadgeUnlocked();
+    if (response) {
+      return true; // Badge will be awarded
     }
     return false;
   }
@@ -92,13 +116,195 @@ class _GamificationWidgetState extends State<GamificationWidget>
                   ),
                   const SizedBox(height: 20),
                   const Text(
-                    'Home Cook Badge',
+                    'Quiz Master Badge',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 12),
                   const Text(
                     'You\'ve scored perfect on your first try on all HelloChef quizzes!',
+                    style: TextStyle(fontSize: 16),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 24),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      foregroundColor: Colors.white,
+                      minimumSize: const Size(double.infinity, 45),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: const Text(
+                      'Awesome!',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
+  }
+
+  Future<void> giveMasterChefBadge() async {
+    await dbHelper.addBadge(3);
+
+    _achievementPlayer.resume();
+
+    if (mounted) {
+      return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            elevation: 8,
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Achievement Unlocked!',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  const Text(
+                    'Master Chef',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 24),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.green.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Image.asset(
+                      'assets/images/badge_images/master_chef.png',
+                      height: 120,
+                      width: 120,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'MasterChef Badge',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'You\'ve prepared all tutorial recipes!',
+                    style: TextStyle(fontSize: 16),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 24),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      foregroundColor: Colors.white,
+                      minimumSize: const Size(double.infinity, 45),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: const Text(
+                      'Awesome!',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
+  }
+
+  Future<void> giveHelloChefBadge() async {
+    await dbHelper.addBadge(4);
+
+    _achievementPlayer.resume();
+
+    if (mounted) {
+      return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            elevation: 8,
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Achievement Unlocked!',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  const Text(
+                    'Hello Chef!',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 24),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.green.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Image.asset(
+                      'assets/images/badge_images/hello_chef.png',
+                      height: 120,
+                      width: 120,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Hello Chef Badge',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'You\'ve completed all the HelloChef Lesson Content',
                     style: TextStyle(fontSize: 16),
                     textAlign: TextAlign.center,
                   ),
@@ -153,11 +359,19 @@ class _GamificationWidgetState extends State<GamificationWidget>
 
   void levelComplete(context) async {
     bool badgeEarned = false;
+    int badgeType = -1;
 
-    if (widget.isQuiz != null && widget.isQuiz == true) {
+    if (widget.isQuiz == true) {
+      badgeType = 2;
       badgeEarned = await _checkForQuizBadge(
         widget.score == widget.totalQuestions,
       );
+    } else if (widget.lessonItem.title.contains('Recipe')) {
+      badgeType = 3;
+      badgeEarned = await _checkForMasterChefBadge();
+    } else {
+      badgeType = 4;
+      badgeEarned = await _checkForHelloChefBadge();
     }
 
     // Trigger haptic feedback
@@ -171,7 +385,13 @@ class _GamificationWidgetState extends State<GamificationWidget>
 
     // Show badge popup first if earned, then show lesson completion popup
     if (badgeEarned) {
-      await giveQuizBadge();
+      if (badgeType == 2) {
+        await giveQuizBadge();
+      } else if (badgeType == 3) {
+        await giveMasterChefBadge();
+      } else if (badgeType == 4) {
+        await giveHelloChefBadge();
+      }
       if (!mounted) return;
     }
 

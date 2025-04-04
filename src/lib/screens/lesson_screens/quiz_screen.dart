@@ -263,6 +263,7 @@ class _QuizScreenState extends State<QuizScreen> {
                               score + 1, // Add 1 to include the last question
                           totalQuestions: widget.quiz.questions.length,
                           isQuiz: true,
+                          lessonItem: widget.lessonItem,
                         ),
               ),
             ],

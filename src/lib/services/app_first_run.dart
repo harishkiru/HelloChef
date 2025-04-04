@@ -739,15 +739,6 @@ A serrated knife designed to slice through crusty bread and delicate pastries wi
                   "Eggs are a breakfast staple, and this video explores seven different ways to prepare them to perfection. From classic scrambled eggs and sunny-side up to more advanced techniques like poaching and soft-boiling, you'll learn step-by-step instructions for each method. Whether you prefer a fluffy omelet, a rich runny yolk, or a perfectly cooked hard-boiled egg, this guide has you covered. Master these techniques and elevate your breakfast game!",
             },
             {
-              "id": 2,
-              "title": "American Breakfast Simulation",
-              "type": 0,
-              "imagePath":
-                  "assets/images/lesson_images/level_1/section_1/lesson_2.png",
-              "isCompleted": false,
-              "content": "[Placeholder]",
-            },
-            {
               "id": 3,
               "title": "American Breakfast Recipe",
               "type": 0,
@@ -801,7 +792,7 @@ A serrated knife designed to slice through crusty bread and delicate pastries wi
             },
           ],
           "completedLessons": 0,
-          "totalLessons": 3,
+          "totalLessons": 2,
         },
         {
           "id": 2,
@@ -1847,15 +1838,6 @@ Happy baking! 🍰🍽️
             },
             {
               "id": 5,
-              "title": "Blueberry Muffins Simulation",
-              "type": 0,
-              "imagePath":
-                  "assets/images/lesson_images/level_2/section_2/lesson_5.png",
-              "isCompleted": false,
-              "content": "[Placeholder]",
-            },
-            {
-              "id": 5,
               "title": "Blueberry Muffins Recipe",
               "type": 0,
               "imagePath":
@@ -1932,7 +1914,7 @@ Happy baking! 🍰🍽️
             },
           ],
           "completedLessons": 0,
-          "totalLessons": 6,
+          "totalLessons": 5,
         },
         {
           "id": 2,
@@ -1953,15 +1935,6 @@ Happy baking! 🍰🍽️
                   "In this video, we'll be preparing a delicious roast dinner featuring both a whole and spatchcock chicken, along with roasted vegetables and sweet potatoes. We’ll walk you through the timing process for cooking everything to perfection in the oven, including tips on preparing the chicken, vegetables, and using the broiler for a crispy finish. Join us as we master timing and roasting techniques for a perfect roast dinner!",
             },
             {
-              "id": 0,
-              "title": "Cooking a Roast Dinner Simulation",
-              "type": 0,
-              "imagePath":
-                  "assets/images/lesson_images/level_2/section_3/lesson_2.png",
-              "isCompleted": false,
-              "content": "[Placeholder]",
-            },
-            {
               "id": 1,
               "title": "Roast Chicken Recipe",
               "type": 0,
@@ -1969,7 +1942,7 @@ Happy baking! 🍰🍽️
                   "assets/images/lesson_images/level_2/section_3/lesson_2.png",
               "isCompleted": false,
               "content": '''# Roast Chicken Dinner Recipe  
-![Roast Chicken Dinner](assets/images/lesson_images/level_2/section_3/lesson_2/0.png)
+![Roast Chicken Dinner](assets/images/lesson_images/level_2/section_3/lesson_2.png)
 
 ---
 
@@ -2042,7 +2015,7 @@ Happy baking! 🍰🍽️
             },
           ],
           "completedLessons": 0,
-          "totalLessons": 3,
+          "totalLessons": 2,
         },
       ],
     },

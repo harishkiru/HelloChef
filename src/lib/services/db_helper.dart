@@ -613,6 +613,37 @@ class DBHelper {
     return false;
   }
 
+  Future<bool> checkIfHelloChefBadgeUnlocked() async {
+    final db = await sqliteDatabase;
+
+    // Get the number of lessons completed and compare to the total number of lessons which is 37
+    final result = await db.rawQuery(
+      'SELECT totalLessonsCompleted FROM badges WHERE defaultBadge = ?',
+      [1],
+    );
+    if (result.isNotEmpty) {
+      final totalLessonsCompleted =
+          result.first['totalLessonsCompleted'] as int;
+      return totalLessonsCompleted >= 37;
+    }
+    return false;
+  }
+
+  Future<bool> checkIfMasterChefBadgeUnlocked() async {
+    final db = await sqliteDatabase;
+
+    // get the number of recipes created and compare to the total number of recipes which is 10
+    final result = await db.rawQuery(
+      'SELECT totalRecipesCreated FROM badges WHERE defaultBadge = ?',
+      [1],
+    );
+    if (result.isNotEmpty) {
+      final totalRecipesCreated = result.first['totalRecipesCreated'] as int;
+      return totalRecipesCreated >= 6;
+    }
+    return false;
+  }
+
   // ********** Supabase User Operations **********
   Future<Map<String, dynamic>?> getUserDetails() async {
     // Return cached data if present.

@@ -50,7 +50,7 @@ class _MarkdownViewerScreenState extends State<MarkdownViewerScreen> {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
@@ -79,35 +79,64 @@ class _MarkdownViewerScreenState extends State<MarkdownViewerScreen> {
                   },
                   styleSheet: MarkdownStyleSheet(
                     // Use theme text colors
-                    p: TextStyle(color: Theme.of(context).textTheme.bodyLarge?.color),
+                    p: TextStyle(
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
+                    ),
                     h1: TextStyle(
-                      fontSize: 24, 
+                      fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: isDarkMode ? Colors.green.shade300 : Colors.green.shade800,
+                      color:
+                          isDarkMode
+                              ? Colors.green.shade300
+                              : Colors.green.shade800,
                     ),
                     h2: TextStyle(
-                      fontSize: 22, 
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
-                      color: isDarkMode ? Colors.green.shade300 : Colors.green.shade800,
+                      color:
+                          isDarkMode
+                              ? Colors.green.shade300
+                              : Colors.green.shade800,
                     ),
                     h3: TextStyle(
-                      fontSize: 18, 
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: isDarkMode ? Colors.green.shade300 : Colors.green.shade800,
+                      color:
+                          isDarkMode
+                              ? Colors.green.shade300
+                              : Colors.green.shade800,
                     ),
-                    em: TextStyle(fontStyle: FontStyle.italic, color: Theme.of(context).textTheme.bodyLarge?.color),
-                    strong: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyLarge?.color),
+                    em: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
+                    ),
+                    strong: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
+                    ),
                     blockquote: TextStyle(
-                      color: isDarkMode ? Colors.grey.shade300 : Colors.grey.shade700,
+                      color:
+                          isDarkMode
+                              ? Colors.grey.shade300
+                              : Colors.grey.shade700,
                       fontStyle: FontStyle.italic,
                     ),
                     code: TextStyle(
                       fontFamily: 'monospace',
-                      backgroundColor: isDarkMode ? Colors.grey.shade800 : Colors.grey.shade200,
-                      color: isDarkMode ? Colors.green.shade300 : Colors.green.shade700,
+                      backgroundColor:
+                          isDarkMode
+                              ? Colors.grey.shade800
+                              : Colors.grey.shade200,
+                      color:
+                          isDarkMode
+                              ? Colors.green.shade300
+                              : Colors.green.shade700,
                     ),
                     codeblockDecoration: BoxDecoration(
-                      color: isDarkMode ? Colors.grey.shade900 : Colors.grey.shade200,
+                      color:
+                          isDarkMode
+                              ? Colors.grey.shade900
+                              : Colors.grey.shade200,
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
@@ -118,7 +147,10 @@ class _MarkdownViewerScreenState extends State<MarkdownViewerScreen> {
                 child: Container(
                   width: double.infinity,
                   margin: const EdgeInsets.fromLTRB(8, 8, 8, 0),
-                  child: reachedBottom ? GamificationWidget() : GreyedOutWidget(),
+                  child:
+                      reachedBottom
+                          ? GamificationWidget(lessonItem: widget.lessonItem)
+                          : GreyedOutWidget(),
                 ),
               ),
             ],

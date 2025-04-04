@@ -138,7 +138,7 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
                     horizontal: 8,
                     vertical: 8,
                   ),
-                  child: GamificationWidget(),
+                  child: GamificationWidget(lessonItem: widget.lessonItem),
                 ),
               ),
             ],

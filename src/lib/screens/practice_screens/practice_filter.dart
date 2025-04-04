@@ -8,12 +8,12 @@ class FilterOptions extends StatelessWidget {
   final Function(Category) onCategorySelected;
 
   const FilterOptions({
-    Key? key,
+    super.key,
     required this.selectedDifficulty,
     required this.onDifficultySelected,
     required this.selectedCategory,
     required this.onCategorySelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

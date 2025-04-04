@@ -42,8 +42,11 @@ dependencies:
   permission_handler: any
   google_sign_in: any
   shimmer: any
+  provider: any
+  flame_audio: any
   audioplayers: any
   youtube_player_flutter: ^9.1.1
+  http: any
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons
@@ -53,6 +56,7 @@ dependencies:
   confetti: ^0.8.0
   path_provider: ^2.1.5
 
+  shared_preferences: any
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
   flutter_test:
@@ -239,15 +243,15 @@ flutter:
     # - assets/videos/level_2/section_2/video_1.mp4
     # - assets/videos/level_2/section_3/video_0.mp4
 
-    - assets/videos/level_1/section_0/video_0.mp4
-    - assets/videos/level_1/section_0/video_1.mp4
-    - assets/videos/level_1/section_1/video_0.mp4
+    # - assets/videos/level_1/section_0/video_0.mp4
+    # - assets/videos/level_1/section_0/video_1.mp4
+   #  - assets/videos/level_1/section_1/video_0.mp4
     # - assets/videos/level_1/section_2/video_0.mp4
     # - assets/videos/level_1/section_2/video_1.mp4
 
-    - assets/videos/level_2/section_0/video_0.mp4
-    - assets/videos/level_2/section_1/video_0.mp4
-    - assets/videos/level_2/section_1/video_1.mp4
+    # - assets/videos/level_2/section_0/video_0.mp4
+   #  - assets/videos/level_2/section_1/video_0.mp4
+   #  - assets/videos/level_2/section_1/video_1.mp4
     # - assets/videos/level_2/section_2/video_0.mp4
     # - assets/videos/level_2/section_2/video_1.mp4
     # - assets/videos/level_2/section_3/video_0.mp4
@@ -321,6 +325,10 @@ flutter:
 
     - assets/sounds/level_complete.mp3
     - assets/sounds/rank_up.mp3
+    - assets/audio/pour.mp3
+    - assets/audio/chop.mp3
+    - assets/audio/sprinkle.mp3
+
 
     - .env
 

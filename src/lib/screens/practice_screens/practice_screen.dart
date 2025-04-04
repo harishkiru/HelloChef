@@ -34,29 +34,29 @@ class PracticeScreenState extends State<PracticeScreen> {
         backgroundColor: Colors.green,
         automaticallyImplyLeading: false,
         actions: [
-          TextButton(
-            style: TextButton.styleFrom(
-              backgroundColor: Colors.white.withValues(alpha: 0.2),
-              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => StartMenuScreen()),
-              );
-            },
-            child: Text(
-              "Simulation",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
+          // TextButton(
+          //   style: TextButton.styleFrom(
+          //     backgroundColor: Colors.white.withValues(alpha: 0.2),
+          //     padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          //     shape: RoundedRectangleBorder(
+          //       borderRadius: BorderRadius.circular(8),
+          //     ),
+          //   ),
+          //   onPressed: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(builder: (context) => StartMenuScreen()),
+          //     );
+          //   },
+          //   // child: Text(
+          //   //   "Simulation",
+          //   //   style: TextStyle(
+          //   //     color: Colors.white,
+          //   //     fontSize: 16,
+          //   //     fontWeight: FontWeight.bold,
+          //   //   ),
+          //   // ),
+          // ),
           const UserProfileIcon(),
         ],
       ),

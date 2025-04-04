@@ -4,79 +4,94 @@
         "strMeal": "Dal fry",
         "steps": [
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Toor_dal",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "cook",
+                "action": "pour",
                 "ingredient": "Water",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.blue"
             },
             {
-                "action": "stir",
+                "action": "sprinkle",
                 "ingredient": "Salt",
-                "interaction": "rotate"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.grey"
             },
             {
-                "action": "stir",
+                "action": "sprinkle",
                 "ingredient": "Turmeric",
-                "interaction": "rotate"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "cook",
+                "action": "pour",
                 "ingredient": "Ghee",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "stir",
+                "action": "pour",
                 "ingredient": "Chopped_tomatoes",
-                "interaction": "rotate"
+                "interaction": "pour",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "serve",
+                "action": "sprinkle",
                 "ingredient": "Cumin_seeds",
-                "interaction": "swipe"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Mustard_Seeds",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.grey"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Bay_Leaf",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.green"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Green_Chilli",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.green"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Ginger",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Red_Pepper",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Cilantro",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.green"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Sugar",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Garam_Masala",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.brown"
             }
         ]
     },
@@ -85,74 +100,88 @@
         "strMeal": "Fish pie",
         "steps": [
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Floury_Potatoes",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "cook",
+                "action": "pour",
                 "ingredient": "Olive_Oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "stir",
+                "action": "pour",
                 "ingredient": "Semi-skimmed_Milk",
-                "interaction": "rotate"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "stir",
+                "action": "chop",
                 "ingredient": "White_Fish_Fillets",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "stir",
+                "action": "pour",
                 "ingredient": "Plain_flour",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Nutmeg",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Double_Cream",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Jerusalem_Artichokes",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Leek",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Prawns",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Parsley",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Dill",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Lemon",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
-                "ingredient": "Gruyère",
-                "interaction": "tap"
+                "action": "chop",
+                "ingredient": "Gruy\u00e8re",
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             }
         ]
     },
@@ -161,59 +190,70 @@
         "strMeal": "Flamiche",
         "steps": [
             {
-                "action": "stir",
+                "action": "chop",
                 "ingredient": "Butter",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.blue"
             },
             {
-                "action": "stir",
+                "action": "chop",
                 "ingredient": "Leek",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "cook",
+                "action": "sprinkle",
                 "ingredient": "Salt",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "stir",
+                "action": "pour",
                 "ingredient": "Creme_Fraiche",
-                "interaction": "rotate"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Egg",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.blue"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Egg_Yolks",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Nutmeg",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Plain_Flour",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Lard",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Cheddar_Cheese",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Water",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.blue"
             }
         ]
     },
@@ -222,74 +262,88 @@
         "strMeal": "Beef Asado",
         "steps": [
             {
-                "action": "stir",
+                "action": "chop",
                 "ingredient": "Beef",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "cook",
+                "action": "pour",
                 "ingredient": "Beef_Stock_Concentrate",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "stir",
+                "action": "pour",
                 "ingredient": "Tomato_Puree",
-                "interaction": "rotate"
+                "interaction": "pour",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "cook",
+                "action": "pour",
                 "ingredient": "Water",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.blue"
             },
             {
-                "action": "cook",
+                "action": "pour",
                 "ingredient": "Soy_Sauce",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "cook",
+                "action": "pour",
                 "ingredient": "White_Wine_Vinegar",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "cook",
+                "action": "sprinkle",
                 "ingredient": "Pepper",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.grey"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Bay_Leaf",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Lemon",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Tomato_Sauce",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Butter",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Olive_Oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Onion",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Garlic",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             }
         ]
     },
@@ -298,64 +352,76 @@
         "strMeal": "Fish fofos",
         "steps": [
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Haddock",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Potatoes",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Green_Chilli",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.purple"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Coriander",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.purple"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Cumin_Seeds",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Pepper",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.grey"
             },
             {
-                "action": "stir",
+                "action": "chop",
                 "ingredient": "Garlic",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Ginger",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.purple"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Flour",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Eggs",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "cook",
+                "action": "sprinkle",
                 "ingredient": "Breadcrumbs",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Vegetable_Oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             }
         ]
     },
@@ -364,84 +430,100 @@
         "strMeal": "Steak Diane",
         "steps": [
             {
-                "action": "cook",
+                "action": "pour",
                 "ingredient": "Canola_Oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "stir",
+                "action": "chop",
                 "ingredient": "Beef_Fillet",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Beef_Stock",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Butter",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.blue"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Garlic",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Challots",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Mushrooms",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Brandy",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Heavy_Cream",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Dijon_Mustard",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Worcestershire_Sauce",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Tabasco_Sauce",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Parsley",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.green"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Chives",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.green"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Salt",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Pepper",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.grey"
             }
         ]
     },
@@ -450,89 +532,106 @@
         "strMeal": "Beef Lo Mein",
         "steps": [
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Beef",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "stir",
+                "action": "sprinkle",
                 "ingredient": "Salt",
-                "interaction": "rotate"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "boil",
+                "action": "sprinkle",
                 "ingredient": "Pepper",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.grey"
             },
             {
-                "action": "cook",
+                "action": "pour",
                 "ingredient": "Sesame_Seed_Oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "stir",
+                "action": "chop",
                 "ingredient": "Egg",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.blue"
             },
             {
-                "action": "cook",
+                "action": "pour",
                 "ingredient": "Starch",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "cook",
+                "action": "pour",
                 "ingredient": "Oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Noodles",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Onion",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Minced_Garlic",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "stir",
+                "action": "chop",
                 "ingredient": "Ginger",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.purple"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Bean_Sprouts",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Mushrooms",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Water",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.blue"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Oyster_Sauce",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Sugar",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Soy_Sauce",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             }
         ]
     },
@@ -541,54 +640,64 @@
         "strMeal": "Egg Drop Soup",
         "steps": [
             {
-                "action": "boil",
+                "action": "pour",
                 "ingredient": "Chicken_Stock",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Salt",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "boil",
+                "action": "sprinkle",
                 "ingredient": "Sugar",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Pepper",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.grey"
             },
             {
-                "action": "stir",
+                "action": "pour",
                 "ingredient": "Sesame_Seed_Oil",
-                "interaction": "rotate"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "serve",
+                "action": "chop",
                 "ingredient": "Peas",
-                "interaction": "swipe"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Mushrooms",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Cornstarch",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Water",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.blue"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Spring_Onions",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             }
         ]
     },
@@ -597,74 +706,88 @@
         "strMeal": "Beef Caldereta",
         "steps": [
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Beef",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Beef_Stock",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "boil",
+                "action": "pour",
                 "ingredient": "Soy_Sauce",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "cook",
+                "action": "pour",
                 "ingredient": "Water",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.blue"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Green_Pepper",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.purple"
             },
             {
-                "action": "stir",
+                "action": "chop",
                 "ingredient": "Red_Pepper",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.purple"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Potatoes",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "serve",
+                "action": "chop",
                 "ingredient": "Carrots",
-                "interaction": "swipe"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Tomato_Puree",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Peanut_Butter",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Chilli_Powder",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Onion",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Garlic",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Olive_Oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             }
         ]
     },
@@ -673,89 +796,106 @@
         "strMeal": "Escovitch Fish",
         "steps": [
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Red_Snapper",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Vegetable_Oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Garlic",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "stir",
+                "action": "chop",
                 "ingredient": "Ginger",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.purple"
             },
             {
-                "action": "stir",
+                "action": "sprinkle",
                 "ingredient": "Thyme",
-                "interaction": "rotate"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.green"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Bay_Leaf",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "serve",
+                "action": "chop",
                 "ingredient": "Red_Pepper",
-                "interaction": "swipe"
+                "interaction": "chop",
+                "particleColor": "Colors.purple"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Yellow_Pepper",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.purple"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Onion",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Carrots",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Sugar",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Allspice",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.grey"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Worcestershire_Sauce",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Scotch_Bonnet",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Lime",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Malt_Vinegar",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Pepper",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.grey"
             }
         ]
     },
@@ -764,49 +904,58 @@
         "strMeal": "Baingan Bharta",
         "steps": [
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Aubergine",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "bake",
+                "action": "chop",
                 "ingredient": "Onion",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Tomatoes",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Garlic",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Green_Chilli",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.purple"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Red_Chilli_Powder",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Coriander_Leaves",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.purple"
             },
             {
-                "action": "cook",
+                "action": "sprinkle",
                 "ingredient": "salt",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.white"
             }
         ]
     },
@@ -817,52 +966,62 @@
             {
                 "action": "chop",
                 "ingredient": "Egg_Plants",
-                "interaction": "drag"
+                "interaction": "chop",
+                "particleColor": "Colors.blue"
             },
             {
-                "action": "stir",
+                "action": "sprinkle",
                 "ingredient": "Sugar",
-                "interaction": "rotate"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "cook",
+                "action": "sprinkle",
                 "ingredient": "Salt",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Pepper",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.grey"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Garlic",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "cook",
+                "action": "pour",
                 "ingredient": "Olive_Oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Ground_Pork",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Rice_Vinegar",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Soy_Sauce",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Bay_Leaf",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             }
         ]
     },
@@ -871,39 +1030,46 @@
         "strMeal": "Crispy Eggplant",
         "steps": [
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Egg_Plants",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.blue"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Breadcrumbs",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Sesame_Seed",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Eggs",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.blue"
             },
             {
-                "action": "cook",
+                "action": "sprinkle",
                 "ingredient": "Salt",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Pepper",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.grey"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Vegetable_Oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             }
         ]
     },
@@ -914,67 +1080,80 @@
             {
                 "action": "pour",
                 "ingredient": "Sake",
-                "interaction": "pour"
+                "interaction": "pour",
+                "particleColor": "Colors.orange"
             },
             {
                 "action": "pour",
                 "ingredient": "Soy_Sauce",
-                "interaction": "pour"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
                 "action": "pour",
                 "ingredient": "Sesame_Seed_Oil",
-                "interaction": "pour"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "sprinkle",
+                "action": "pour",
                 "ingredient": "Corn_Flour",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
                 "action": "pour",
                 "ingredient": "Water",
-                "interaction": "pour"
+                "interaction": "pour",
+                "particleColor": "Colors.blue"
             },
             {
                 "action": "chop",
                 "ingredient": "Chicken",
-                "interaction": "chop"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
                 "action": "sprinkle",
                 "ingredient": "Chilli_Powder",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.red"
             },
             {
                 "action": "pour",
                 "ingredient": "Rice_Vinegar",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
                 "action": "sprinkle",
                 "ingredient": "Brown_Sugar",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.brown"
             },
             {
                 "action": "chop",
                 "ingredient": "Spring_Onions",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
                 "action": "chop",
                 "ingredient": "Garlic_Clove",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
                 "action": "pour",
                 "ingredient": "Water_Chestnut",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.blue"
             },
             {
                 "action": "chop",
                 "ingredient": "Peanuts",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             }
         ]
     },
@@ -983,64 +1162,76 @@
         "strMeal": "Tandoori chicken",
         "steps": [
             {
-                "action": "stir",
+                "action": "chop",
                 "ingredient": "lemons",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "stir",
+                "action": "sprinkle",
                 "ingredient": "paprika",
-                "interaction": "rotate"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "red_onions",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "chicken_thighs",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "vegetable_oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Greek_yogurt",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "ginger",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.purple"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "garlic_clove",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "garam_masala",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "ground_cumin",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "chilli_powder",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "turmeric",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.orange"
             }
         ]
     },
@@ -1049,79 +1240,94 @@
         "strMeal": "Beef Bourguignon",
         "steps": [
             {
-                "action": "cook",
+                "action": "pour",
                 "ingredient": "Goose_Fat",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "stir",
+                "action": "chop",
                 "ingredient": "Beef_Shin",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Bacon",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Challots",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
                 "action": "chop",
                 "ingredient": "Chestnut_Mushroom",
-                "interaction": "drag"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Garlic_Clove",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Bouquet_Garni",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Tomato_Puree",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Red_Wine",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Celeriac",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Olive_Oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Thyme",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Rosemary",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Bay_Leaf",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Cardamom",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             }
         ]
     },
@@ -1130,49 +1336,58 @@
         "strMeal": "Fish Soup (Ukha)",
         "steps": [
             {
-                "action": "stir",
+                "action": "pour",
                 "ingredient": "Olive_Oil",
-                "interaction": "rotate"
-            },
-            {
-                "action": "cook",
-                "ingredient": "Onion",
-                "interaction": "tap"
-            },
-            {
-                "action": "stir",
-                "ingredient": "Carrots",
-                "interaction": "rotate"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
                 "action": "chop",
+                "ingredient": "Onion",
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
+            },
+            {
+                "action": "chop",
+                "ingredient": "Carrots",
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
+            },
+            {
+                "action": "pour",
                 "ingredient": "Fish_Stock",
-                "interaction": "drag"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Water",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.blue"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Potatoes",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Bay_Leaf",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Cod",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Salmon",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             }
         ]
     },
@@ -1181,44 +1396,52 @@
         "strMeal": "Garides Saganaki",
         "steps": [
             {
-                "action": "boil",
+                "action": "chop",
                 "ingredient": "Raw_king_prawns",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "stir",
+                "action": "pour",
                 "ingredient": "Olive_oil",
-                "interaction": "rotate"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Chopped_onion",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "stir",
+                "action": "chop",
                 "ingredient": "Freshly_chopped_parsley",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "serve",
+                "action": "pour",
                 "ingredient": "White_wine",
-                "interaction": "swipe"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Chopped_tomatoes",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Minced_garlic",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Cubed_Feta_cheese",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             }
         ]
     },
@@ -1227,64 +1450,76 @@
         "strMeal": "Chickpea Fajitas",
         "steps": [
             {
-                "action": "cook",
+                "action": "pour",
                 "ingredient": "Chickpeas",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Olive_Oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "stir",
+                "action": "sprinkle",
                 "ingredient": "Paprika",
-                "interaction": "rotate"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Tomatoes",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Red_Onions",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Red_Wine_Vinegar",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "bake",
+                "action": "chop",
                 "ingredient": "Avocado",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Lime",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Sour_Cream",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Harissa_Spice",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Corn_Tortillas",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Coriander",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.chop"
             }
         ]
     },
@@ -1293,69 +1528,82 @@
         "strMeal": "Brown Stew Chicken",
         "steps": [
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Chicken",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Tomato",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Onions",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Garlic_Clove",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "stir",
+                "action": "chop",
                 "ingredient": "Red_Pepper",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.purple"
             },
             {
-                "action": "stir",
+                "action": "chop",
                 "ingredient": "Carrots",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Lime",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Thyme",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.green"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Allspice",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.grey"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Soy_Sauce",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Cornstarch",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Coconut_Milk",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Vegetable_Oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             }
         ]
     },
@@ -1364,94 +1612,112 @@
         "strMeal": "Beef Dumpling Stew",
         "steps": [
             {
-                "action": "cook",
+                "action": "pour",
                 "ingredient": "Olive_Oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Butter",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.blue"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Beef",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Plain_Flour",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Garlic",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Onions",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Celery",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Carrots",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "stir",
+                "action": "chop",
                 "ingredient": "Leek",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Swede",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "cook",
+                "action": "pour",
                 "ingredient": "Red_Wine",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Beef_Stock",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Bay_Leaf",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Thyme",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.green"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Parsley",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Baking_Powder",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Suet",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Water",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.blue"
             }
         ]
     },
@@ -1460,79 +1726,94 @@
         "strMeal": "Beef and Oyster pie",
         "steps": [
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Beef",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "stir",
+                "action": "pour",
                 "ingredient": "Olive_Oil",
-                "interaction": "rotate"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Shallots",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "stir",
+                "action": "chop",
                 "ingredient": "Garlic",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "stir",
+                "action": "chop",
                 "ingredient": "Bacon",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "stir",
+                "action": "sprinkle",
                 "ingredient": "Thyme",
-                "interaction": "rotate"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.green"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Bay_Leaf",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "bake",
+                "action": "pour",
                 "ingredient": "Stout",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Beef_Stock",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Corn_Flour",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Oysters",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Plain_Flour",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Salt",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Butter",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.blue"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Eggs",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.blue"
             }
         ]
     },
@@ -1541,74 +1822,88 @@
         "strMeal": "Chick-Fil-A Sandwich",
         "steps": [
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Chicken_Breast",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "chop",
+                "action": "pour",
                 "ingredient": "Pickle_Juice",
-                "interaction": "drag"
-            },
-            {
-                "action": "prepare",
-                "ingredient": "Egg",
-                "interaction": "tap"
-            },
-            {
-                "action": "prepare",
-                "ingredient": "Milk",
-                "interaction": "tap"
-            },
-            {
-                "action": "prepare",
-                "ingredient": "Flour",
-                "interaction": "tap"
-            },
-            {
-                "action": "prepare",
-                "ingredient": "Icing_Sugar",
-                "interaction": "tap"
-            },
-            {
-                "action": "cook",
-                "ingredient": "Paprika",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.green"
             },
             {
                 "action": "chop",
+                "ingredient": "Egg",
+                "interaction": "chop",
+                "particleColor": "Colors.blue"
+            },
+            {
+                "action": "pour",
+                "ingredient": "Milk",
+                "interaction": "pour",
+                "particleColor": "Colors.white"
+            },
+            {
+                "action": "pour",
+                "ingredient": "Flour",
+                "interaction": "pour",
+                "particleColor": "Colors.white"
+            },
+            {
+                "action": "pour",
+                "ingredient": "Icing_Sugar",
+                "interaction": "pour",
+                "particleColor": "Colors.white"
+            },
+            {
+                "action": "sprinkle",
+                "ingredient": "Paprika",
+                "interaction": "sprinkle",
+                "particleColor": "Colors.red"
+            },
+            {
+                "action": "sprinkle",
                 "ingredient": "Salt",
-                "interaction": "drag"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "serve",
+                "action": "sprinkle",
                 "ingredient": "Black_Pepper",
-                "interaction": "swipe"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.grey"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Garlic_Powder",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Celery_Salt",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Cayenne_Pepper",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Olive_Oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Sesame_Seed_Burger_Buns",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.brown"
             }
         ]
     },
@@ -1617,99 +1912,118 @@
         "strMeal": "General Tsos Chicken",
         "steps": [
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Chicken_Breast",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Plain_Flour",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Egg",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.blue"
             },
             {
-                "action": "stir",
+                "action": "pour",
                 "ingredient": "Starch",
-                "interaction": "rotate"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Baking_Powder",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Salt",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "cook",
+                "action": "sprinkle",
                 "ingredient": "Onion_Salt",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "cook",
+                "action": "sprinkle",
                 "ingredient": "Garlic_Powder",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Water",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.blue"
             },
             {
-                "action": "stir",
+                "action": "pour",
                 "ingredient": "Chicken_Stock",
-                "interaction": "rotate"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "boil",
+                "action": "pour",
                 "ingredient": "Duck_Sauce",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "stir",
+                "action": "pour",
                 "ingredient": "Soy_Sauce",
-                "interaction": "rotate"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "stir",
+                "action": "pour",
                 "ingredient": "Honey",
-                "interaction": "rotate"
+                "interaction": "pour",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Rice_Vinegar",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Sesame_Seed_Oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Gochujang",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Garlic",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Spring_Onions",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Ginger",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.purple"
             }
         ]
     },
@@ -1718,79 +2032,94 @@
         "strMeal": "Beef and Mustard Pie",
         "steps": [
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Beef",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Plain_Flour",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "cook",
+                "action": "pour",
                 "ingredient": "Rapeseed_Oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "cook",
+                "action": "pour",
                 "ingredient": "Red_Wine",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "cook",
+                "action": "pour",
                 "ingredient": "Beef_Stock",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Onion",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Carrots",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "cook",
+                "action": "sprinkle",
                 "ingredient": "Thyme",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.green"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Mustard",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "cook",
+                "action": "pour",
                 "ingredient": "Egg_Yolks",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Puff_Pastry",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Green_Beans",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "serve",
+                "action": "chop",
                 "ingredient": "Butter",
-                "interaction": "swipe"
+                "interaction": "chop",
+                "particleColor": "Colors.blue"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Salt",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Pepper",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.grey"
             }
         ]
     },
@@ -1799,59 +2128,70 @@
         "strMeal": "Cabbage Soup (Shchi)",
         "steps": [
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Unsalted_Butter",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.purple"
             },
             {
-                "action": "stir",
+                "action": "chop",
                 "ingredient": "Onion",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Cabbage",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Carrots",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Celery",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Bay_Leaf",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "serve",
+                "action": "pour",
                 "ingredient": "Vegetable_Stock",
-                "interaction": "swipe"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Potatoes",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Tomatoes",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Sour_Cream",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Dill",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             }
         ]
     },
@@ -1860,89 +2200,106 @@
         "strMeal": "Kentucky Fried Chicken",
         "steps": [
             {
-                "action": "stir",
+                "action": "chop",
                 "ingredient": "Chicken",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "stir",
+                "action": "pour",
                 "ingredient": "Oil",
-                "interaction": "rotate"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "stir",
+                "action": "pour",
                 "ingredient": "Egg_White",
-                "interaction": "rotate"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Flour",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "cook",
+                "action": "sprinkle",
                 "ingredient": "Brown_Sugar",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "cook",
+                "action": "sprinkle",
                 "ingredient": "Salt",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "paprika",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "onion_salt",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "chili_powder",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "black_pepper",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.black"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "celery_salt",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "sage",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.purple"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "garlic_powder",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "allspice",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.grey"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "oregano",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.purple"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "basil",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.purple"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "marjoram",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.purple"
             }
         ]
     },
@@ -1953,57 +2310,68 @@
             {
                 "action": "chop",
                 "ingredient": "Beef_Brisket",
-                "interaction": "drag"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Salt",
-                "interaction": "tap"
-            },
-            {
-                "action": "prepare",
-                "ingredient": "Onion",
-                "interaction": "tap"
-            },
-            {
-                "action": "prepare",
-                "ingredient": "Garlic",
-                "interaction": "tap"
-            },
-            {
-                "action": "bake",
-                "ingredient": "Thyme",
-                "interaction": "tap"
-            },
-            {
-                "action": "cook",
-                "ingredient": "Rosemary",
-                "interaction": "tap"
-            },
-            {
-                "action": "cook",
-                "ingredient": "Bay_Leaves",
-                "interaction": "tap"
-            },
-            {
-                "action": "prepare",
-                "ingredient": "beef_stock",
-                "interaction": "tap"
-            },
-            {
-                "action": "prepare",
-                "ingredient": "Carrots",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.white"
             },
             {
                 "action": "chop",
-                "ingredient": "Mustard",
-                "interaction": "drag"
+                "ingredient": "Onion",
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
+                "ingredient": "Garlic",
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
+            },
+            {
+                "action": "sprinkle",
+                "ingredient": "Thyme",
+                "interaction": "sprinkle",
+                "particleColor": "Colors.green"
+            },
+            {
+                "action": "chop",
+                "ingredient": "Rosemary",
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
+            },
+            {
+                "action": "chop",
+                "ingredient": "Bay_Leaves",
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
+            },
+            {
+                "action": "pour",
+                "ingredient": "beef_stock",
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
+            },
+            {
+                "action": "chop",
+                "ingredient": "Carrots",
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
+            },
+            {
+                "action": "pour",
+                "ingredient": "Mustard",
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
+            },
+            {
+                "action": "chop",
                 "ingredient": "Potatoes",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             }
         ]
     },
@@ -2012,94 +2380,112 @@
         "strMeal": "Fish Stew with Rouille",
         "steps": [
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Prawns",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
+            },
+            {
+                "action": "pour",
+                "ingredient": "Olive_Oil",
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
+            },
+            {
+                "action": "pour",
+                "ingredient": "Dry_White_Wine",
+                "interaction": "pour",
+                "particleColor": "Colors.white"
+            },
+            {
+                "action": "pour",
+                "ingredient": "Fish_Stock",
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
                 "action": "chop",
-                "ingredient": "Olive_Oil",
-                "interaction": "drag"
-            },
-            {
-                "action": "cook",
-                "ingredient": "Dry_White_Wine",
-                "interaction": "tap"
-            },
-            {
-                "action": "stir",
-                "ingredient": "Fish_Stock",
-                "interaction": "rotate"
-            },
-            {
-                "action": "stir",
                 "ingredient": "Fennel",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "stir",
+                "action": "chop",
                 "ingredient": "Onion",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Garlic",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Potatoes",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Orange",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Star_Anise",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Bay_Leaf",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Harissa_Spice",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Tomato_Puree",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Chopped_Tomatoes",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Mussels",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "White_Fish",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Thyme",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.green"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Bread",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             }
         ]
     },
@@ -2108,64 +2494,76 @@
         "strMeal": "Cajun spiced fish tacos",
         "steps": [
             {
-                "action": "cook",
+                "action": "sprinkle",
                 "ingredient": "cajun",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "cayenne_pepper",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "stir",
+                "action": "chop",
                 "ingredient": "white_fish",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "vegetable_oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "flour_tortilla",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "avocado",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "little_gem_lettuce",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Spring_Onions",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "salsa",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "sour_cream",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "lemon",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "garlic",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             }
         ]
     },
@@ -2176,37 +2574,44 @@
             {
                 "action": "chop",
                 "ingredient": "Beetroot",
-                "interaction": "drag"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Olive_Oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Chicken_Stock_Cube",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Water",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.blue"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Potatoes",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Cannellini_Beans",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Dill",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             }
         ]
     },
@@ -2217,37 +2622,44 @@
             {
                 "action": "chop",
                 "ingredient": "Fennel",
-                "interaction": "drag"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Parsley",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Lemon",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Cherry_Tomatoes",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Olive_Oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Salmon",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Black_Olives",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             }
         ]
     },
@@ -2258,87 +2670,104 @@
             {
                 "action": "chop",
                 "ingredient": "Butter",
-                "interaction": "drag"
+                "interaction": "chop",
+                "particleColor": "Colors.blue"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Olive_Oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Chicken",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Salt",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Squash",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Broccoli",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "mushrooms",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Pepper",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.grey"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "onion",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "garlic",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "red_pepper_flakes",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "white_wine",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "milk",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "heavy_cream",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Parmesan_cheese",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "bowtie_pasta",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Parsley",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             }
         ]
     },
@@ -2347,24 +2776,28 @@
         "strMeal": "Chicken Enchilada Casserole",
         "steps": [
             {
-                "action": "chop",
+                "action": "pour",
                 "ingredient": "Enchilada_sauce",
-                "interaction": "drag"
+                "interaction": "pour",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "shredded_Monterey_Jack_cheese",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "corn_tortillas",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "chicken_breasts",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             }
         ]
     },
@@ -2373,39 +2806,46 @@
         "strMeal": "Grilled Portuguese sardines",
         "steps": [
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Sardines",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "Olive_Oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "stir",
+                "action": "chop",
                 "ingredient": "Garlic",
-                "interaction": "rotate"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "Paprika",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Lemon",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "Rosemary",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "cook",
+                "action": "chop",
                 "ingredient": "Red_Chilli",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.purple"
             }
         ]
     },
@@ -2414,64 +2854,76 @@
         "strMeal": "Chicken Fajita Mac and Cheese",
         "steps": [
             {
-                "action": "cook",
+                "action": "pour",
                 "ingredient": "macaroni",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "chicken_stock",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.brown"
             },
             {
-                "action": "stir",
+                "action": "pour",
                 "ingredient": "heavy_cream",
-                "interaction": "rotate"
+                "interaction": "pour",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "bake",
+                "action": "sprinkle",
                 "ingredient": "fajita_seasoning",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.red"
             },
             {
-                "action": "prepare",
+                "action": "sprinkle",
                 "ingredient": "salt",
-                "interaction": "tap"
+                "interaction": "sprinkle",
+                "particleColor": "Colors.white"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "chicken_breast",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "pour",
                 "ingredient": "olive_oil",
-                "interaction": "tap"
+                "interaction": "pour",
+                "particleColor": "Colors.yellow"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "onion",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "red_pepper",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.purple"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "garlic",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "cheddar_cheese",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             },
             {
-                "action": "prepare",
+                "action": "chop",
                 "ingredient": "parsley",
-                "interaction": "tap"
+                "interaction": "chop",
+                "particleColor": "Colors.orange"
             }
         ]
     }

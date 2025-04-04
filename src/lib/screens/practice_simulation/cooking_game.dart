@@ -1,10 +1,15 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:ui' as ui;
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'game_step.dart';
+import 'package:http/http.dart' as http;
+import '../practice_simulation/game_step.dart';
 
 class CookingGame extends FlameGame {
+  final ValueNotifier<bool> isLoadingNotifier = ValueNotifier(true);
   final String recipeName;
   final Function(int, int) onStepComplete;
   final Function() onGameComplete;
@@ -27,8 +32,35 @@ class CookingGame extends FlameGame {
     return "Get ready to start cooking!";
   }
 
+  Future<Sprite> _loadSprite(String ingredient) async {
+    final url =
+        'https://www.themealdb.com/images/ingredients/${ingredient.replaceAll(" ", "%20")}.png';
+
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        final ui.Image image = await _decodeImage(response.bodyBytes);
+        return Sprite(image);
+      }
+    } catch (e) {
+      print("❌ Failed to preload image for $ingredient: $e");
+    }
+
+    return await Sprite.load('simulation_images/default.png');
+  }
+
+  Future<ui.Image> _decodeImage(Uint8List bytes) async {
+    final Completer<ui.Image> completer = Completer();
+    ui.decodeImageFromList(bytes, (ui.Image img) {
+      completer.complete(img);
+    });
+    return completer.future;
+  }
+
   @override
   Future<void> onLoad() async {
+    isLoadingNotifier.value = true;
+
     if (_isLoaded) return;
 
     print("Loading game for recipe: $recipeName");
@@ -39,7 +71,8 @@ class CookingGame extends FlameGame {
       ..priority = -1;
     add(background);
 
-    final String response = await rootBundle.loadString('assets/data/recipes_simulation.json');
+    final String response =
+    await rootBundle.loadString('assets/data/recipes_simulation.json');
     final List<dynamic> recipes = jsonDecode(response);
     final Map<String, dynamic>? recipe = recipes.firstWhere(
           (r) => r["strMeal"] == recipeName,
@@ -52,19 +85,25 @@ class CookingGame extends FlameGame {
     }
 
     final List<dynamic> stepList = recipe["steps"];
-    steps = stepList.map((step) {
-      return GameStep.fromJson(
-        step as Map<String, dynamic>,
-        onStepComplete,
-        stepList.length,
+    steps = await Future.wait(stepList.map((step) async {
+      final sprite = await _loadSprite(step["ingredient"]);
+      return GameStep(
+        action: step["action"],
+        ingredient: step["ingredient"],
+        particleColor: step["particleColor"],
+        onStepComplete: onStepComplete,
+        totalSteps: stepList.length,
+        preloadedSprite: sprite,
       );
-    }).toList();
+    }));
+
 
     print("Loaded ${steps.length} steps for $recipeName");
     _isLoaded = true;
     currentStepIndex = 0;
     add(steps[currentStepIndex]);
     onStepChanged?.call();
+    isLoadingNotifier.value = false;
   }
 
   void nextStep() {
@@ -89,5 +128,4 @@ class CookingGame extends FlameGame {
       onStepChanged?.call();
     }
   }
-
 }

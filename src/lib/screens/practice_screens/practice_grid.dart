@@ -4,7 +4,7 @@ import 'practice_tile.dart';
 
 class PracticeGrid extends StatelessWidget {
   final List<PracticeTile> items;
-  const PracticeGrid({Key? key, required this.items}) : super(key: key);
+  const PracticeGrid({super.key, required this.items});
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@ import 'recipe_detail_screen.dart';
 
 class TileMaker extends StatelessWidget {
   final PracticeTile item;
-  const TileMaker({Key? key, required this.item}) : super(key: key);
+  const TileMaker({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {

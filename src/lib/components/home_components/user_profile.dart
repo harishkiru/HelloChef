@@ -629,8 +629,6 @@ class UserProfileDrawer extends StatelessWidget {
     );
   }
 
-  // Add this method to the UserProfileDrawer class
-
   Widget _buildBadgeImage(String imageUrl) {
     // Check if the URL starts with 'http' or 'https' (a web URL)
     if (imageUrl.startsWith('http')) {

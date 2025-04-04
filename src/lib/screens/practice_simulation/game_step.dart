@@ -1,46 +1,46 @@
+// game_step.dart
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
 import 'package:flame/particles.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'dart:async' as dart_async;
 import 'dart:ui';
-import 'cooking_game.dart';
 import 'dart:math';
+import 'cooking_game.dart';
 
 class GameStep extends SpriteComponent with DragCallbacks, TapCallbacks {
   final String action;
   final String ingredient;
+  final String? particleColor;
   final Function(int, int) onStepComplete;
   final int totalSteps;
+  final Sprite? preloadedSprite;
   late CookingGame game;
   bool stepCompleted = false;
   bool _isPouring = false;
   bool _pourComplete = false;
   dart_async.Timer? _pourTimer;
 
-  final Map<String, Color> ingredientColors = {
-    "Sake": Colors.green,
-    "Soy_Sauce": Colors.brown,
-    "Sesame_Seed_Oil": Colors.orange,
-    "Corn_Flour": Colors.yellow,
-    "Water": Colors.blue,
-    "Chilli_Powder": Colors.redAccent,
-    "Rice_Vinegar": Colors.pink,
-    "Brown_Sugar": Colors.brown,
-  };
-
   GameStep({
     required this.action,
     required this.ingredient,
     required this.onStepComplete,
     required this.totalSteps,
+    this.preloadedSprite,
+    this.particleColor,
   });
 
-  factory GameStep.fromJson(Map<String, dynamic> json, Function(int, int) onStepComplete, int totalSteps) {
+  factory GameStep.fromJson(
+      Map<String, dynamic> json,
+      Function(int, int) onStepComplete,
+      int totalSteps,
+      ) {
     return GameStep(
       action: json["action"],
       ingredient: json["ingredient"],
+      particleColor: json["particleColor"],
       onStepComplete: onStepComplete,
       totalSteps: totalSteps,
     );
@@ -52,31 +52,57 @@ class GameStep extends SpriteComponent with DragCallbacks, TapCallbacks {
     double screenWidth = game.size.x;
     double screenHeight = game.size.y;
 
-    sprite = await Sprite.load('simulation_images/${ingredient.toLowerCase().replaceAll(" ", "_")}.png');
+    if (preloadedSprite != null) {
+      sprite = preloadedSprite!;
+    } else {
+      sprite = await Sprite.load('simulation_images/default.png');
+    }
 
     size = Vector2(screenWidth * 0.250, screenWidth * 0.250);
     position = Vector2(screenWidth * -0.02, screenHeight * 0.28);
   }
 
+  Color? getFlutterColor(String? colorString) {
+    switch (colorString) {
+      case 'Colors.green':
+        return Colors.green;
+      case 'Colors.brown':
+        return Colors.brown;
+      case 'Colors.orange':
+        return Colors.orange;
+      case 'Colors.yellow':
+        return Colors.yellow;
+      case 'Colors.blue':
+        return Colors.blue;
+      case 'Colors.redAccent':
+        return Colors.redAccent;
+      case 'Colors.pink':
+        return Colors.pink;
+      case 'Colors.purple':
+        return Colors.purple;
+      default:
+        return Colors.grey;
+    }
+  }
+
   @override
   void onTapDown(TapDownEvent event) {
     if (action == 'stir') {
+      FlameAudio.play('stir_sound.mp3');
       add(RotateEffect.by(1.5, EffectController(duration: 0.5)));
       completeStep();
     } else if (action == 'chop') {
       _startChop();
     } else if (action == 'sprinkle') {
-      _addSprinkleEffect(position + Vector2(size.x * 0.4, size.y * 0.3), ingredientColors[ingredient]);
+      FlameAudio.play('sprinkle.mp3');
+      _addSprinkleEffect(position + Vector2(size.x * 0.4, size.y * 0.3), getFlutterColor(particleColor));
       completeStep();
     }
   }
 
   @override
   void onDragStart(DragStartEvent event) {
-    if (stepCompleted) {
-      return;
-    }
-
+    if (stepCompleted) return;
     if (action != 'pour' && action != 'chop') {
       add(ScaleEffect.to(Vector2(1.3, 1.3), EffectController(duration: 0.2)));
     }
@@ -84,9 +110,7 @@ class GameStep extends SpriteComponent with DragCallbacks, TapCallbacks {
 
   @override
   void onDragUpdate(DragUpdateEvent event) {
-    if (stepCompleted || action == 'sprinkle') {
-      return;
-    }
+    if (stepCompleted || action == 'sprinkle') return;
 
     if (action == 'pour' && !_pourComplete) {
       if (!_isPouring) {
@@ -117,11 +141,12 @@ class GameStep extends SpriteComponent with DragCallbacks, TapCallbacks {
     _isPouring = true;
     _pourComplete = false;
 
+    FlameAudio.play('pour.mp3');
     add(RotateEffect.to(0.4, EffectController(duration: 0.5, curve: Curves.easeInOut)));
 
     Future.delayed(const Duration(milliseconds: 500), () {
       _pourTimer = dart_async.Timer.periodic(const Duration(milliseconds: 100), (timer) {
-        _addPourEffect(position + Vector2(size.x * 0.45, size.y * 0.3), ingredientColors[ingredient]);
+        _addPourEffect(position + Vector2(size.x * 0.45, size.y * 0.3), getFlutterColor(particleColor));
       });
     });
 
@@ -133,15 +158,11 @@ class GameStep extends SpriteComponent with DragCallbacks, TapCallbacks {
   }
 
   void _stopPouring() {
-    if (_pourTimer != null) {
-      _pourTimer!.cancel();
-    }
-
+    _pourTimer?.cancel();
     _isPouring = false;
     _pourComplete = true;
 
     add(RotateEffect.to(0, EffectController(duration: 0.3, curve: Curves.easeOut)));
-
     completeStep();
   }
 
@@ -172,30 +193,27 @@ class GameStep extends SpriteComponent with DragCallbacks, TapCallbacks {
     );
   }
 
-
   void _addSprinkleEffect(Vector2 position, Color? particleColor) {
-    print("✅ Sprinkle effect triggered at: $position");
-
-    double startY = position.y - 150;
-    double endY = startY + 50;
+    double potX = this.position.x + size.x * 0.7;
+    double startY = this.position.y;
+    double endY = game.size.y * 0.55;
 
     parent?.add(
       ParticleSystemComponent(
-        position: position,
+        position: Vector2(potX, startY),
         particle: Particle.generate(
-          count: 30,
-          lifespan: 2.0,
+          count: 20,
+          lifespan: 1.0,
           generator: (i) {
-            double xOffset = Random().nextDouble() * 100 - 50;
-
-            double yOffset = lerpDouble(startY, endY, i / 30)!;
+            double xOffset = Random().nextDouble() * 10 - 5;
+            double yOffset = Random().nextDouble() * (endY - startY);
 
             return AcceleratedParticle(
               acceleration: Vector2(0, 100),
-              speed: Vector2(xOffset, 0),
-              position: position.clone() + Vector2(0, startY - position.y),
+              speed: Vector2(0, 50),
+              position: Vector2(xOffset, yOffset),
               child: CircleParticle(
-                radius: 6.0,
+                radius: 4.0,
                 paint: Paint()..color = particleColor ?? Colors.grey,
               ),
             );
@@ -208,8 +226,8 @@ class GameStep extends SpriteComponent with DragCallbacks, TapCallbacks {
   void _startChop() {
     if (stepCompleted) return;
 
+    FlameAudio.play('chop.mp3');
     opacity = 0.0;
-
     _splitIntoPieces(6);
 
     add(MoveEffect.by(
@@ -224,7 +242,8 @@ class GameStep extends SpriteComponent with DragCallbacks, TapCallbacks {
 
   void _splitIntoPieces(int numPieces) {
     double pieceWidth = size.x / numPieces;
-    List<SpriteComponent> pieces = [];
+    double dropTargetY = game.size.y * 0.55;
+    double dropXStart = position.x + size.x * 0.75;
 
     for (int i = 0; i < numPieces; i++) {
       var piece = SpriteComponent(
@@ -233,20 +252,19 @@ class GameStep extends SpriteComponent with DragCallbacks, TapCallbacks {
         position: position + Vector2(pieceWidth * i, 0),
       );
 
-      piece.add(MoveEffect.by(
-        Vector2(Random().nextDouble() * 60 - 30, 300),
+      double offsetX = Random().nextDouble() * 40 - 20;
+
+      piece.add(MoveEffect.to(
+        Vector2(dropXStart + offsetX, dropTargetY),
         EffectController(duration: 1.0, curve: Curves.easeOut),
       ));
 
-      Future.delayed(const Duration(milliseconds: 500), () {
-        piece.add(OpacityEffect.to(
-          0,
-          EffectController(duration: 0.5),
-        ));
-      });
+      piece.add(OpacityEffect.to(
+        0,
+        EffectController(duration: 1.0),
+      ));
 
       parent?.add(piece);
-      pieces.add(piece);
     }
   }
 
@@ -254,7 +272,7 @@ class GameStep extends SpriteComponent with DragCallbacks, TapCallbacks {
     if (stepCompleted) return;
 
     stepCompleted = true;
-    print("Step completed: $action on $ingredient");
+    print("Step completed: \$action on \$ingredient");
 
     add(ScaleEffect.to(Vector2(1.6, 1.6), EffectController(duration: 0.3, reverseDuration: 0.3)));
 

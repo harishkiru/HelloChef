@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:src/classes/lesson_item.dart';
+import 'package:src/classes/progress.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:src/components/home_components/user_profile.dart';
 import 'package:src/services/db_helper.dart';
@@ -6,6 +8,8 @@ import 'package:src/services/navigation_service.dart';
 import 'package:src/components/common/safe_bottom_padding.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:src/components/lesson_components/lesson_item_card.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,12 +26,120 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   late Future<String> _tipOfTheWeek;
+  late LessonItem lessonItem;
+  late AudioPlayer _player;
+  final dbHelper = DBHelper.instance();
 
   @override
   void initState() {
     super.initState();
     checkAuth();
+    _player = AudioPlayer();
+    _player.setSource(AssetSource('sounds/achievement_unlocked.mp3'));
     _tipOfTheWeek = _getTipOfTheWeek();
+    defaultBadge(context);
+  }
+
+  Future<void> defaultBadge(BuildContext context) async {
+    final response = await dbHelper.checkIfGivenDefaultBadge();
+
+    if (response) {
+      return;
+    }
+
+    await dbHelper.setDefaultBadgeGiven();
+
+    _player.resume();
+
+    if (context.mounted) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            elevation: 8,
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Achievement Unlocked!',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  const Text(
+                    'Welcome to HelloChef!',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 24),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.green.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Image.asset(
+                      'assets/images/badge_images/home_cook.png',
+                      height: 120,
+                      width: 120,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Home Cook Badge',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'You\'ve taken your first step on your culinary journey!',
+                    style: TextStyle(fontSize: 16),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 24),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      foregroundColor: Colors.white,
+                      minimumSize: const Size(double.infinity, 45),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: const Text(
+                      'Awesome!',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
+  }
+
+  Future<LessonItem> getLessonItem() async {
+    lessonItem = await dbHelper.getNextUpLesson();
+    return lessonItem;
   }
 
   // Function to get the current week number (1-52)
@@ -65,10 +177,21 @@ class HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  void _refresh() {
+    setState(() {
+      _tipOfTheWeek = _getTipOfTheWeek();
+    });
+  }
+
+  Future<Progress> getProgress() async {
+    final progress = await dbHelper.getCurrentLevelProgress();
+    return progress;
+  }
+
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    
+
     return PopScope(
       canPop: false,
       child: Scaffold(
@@ -82,352 +205,305 @@ class HomeScreenState extends State<HomeScreen> {
           actions: const [UserProfileIcon()],
         ),
         endDrawer: const UserProfileDrawer(),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Greeting with user's name
-                FutureBuilder<Map<String, dynamic>?>(
-                  future: DBHelper.instance().getUserDetails(),
-                  builder: (context, snapshot) {
-                    String firstName = "Chef";
-                    if (snapshot.hasData && snapshot.data != null) {
-                      firstName = snapshot.data!['first_name'] ?? "Chef";
-                    }
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Hi, $firstName!',
-                          style: TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).textTheme.bodyLarge?.color,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          'Ready to cook something amazing today?',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: isDarkMode 
-                                ? Colors.grey[400] 
-                                : Colors.grey[600],
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                ),
-
-                const SizedBox(height: 24),
-
-                // Current level progress
-                Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  elevation: 4,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Current Level',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).textTheme.bodyLarge?.color,
-                              ),
-                            ),
-                            const Text(
-                              'Level 0',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.green,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'Kitchen Foundations',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Theme.of(context).textTheme.bodyLarge?.color,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          'Progress: 1/3 Sections',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Theme.of(context).textTheme.bodyMedium?.color,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        LinearProgressIndicator(
-                          value: 0.33,
-                          backgroundColor: isDarkMode ? Colors.grey[800] : Colors.grey[300],
-                          valueColor: const AlwaysStoppedAnimation<Color>(
-                            Colors.green,
-                          ),
-                          minHeight: 8,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-
-                const SizedBox(height: 24),
-
-                // Continue Learning
-                Text(
-                  'Continue Learning',
-                  style: TextStyle(
-                    fontSize: 20, 
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).textTheme.bodyLarge?.color,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  elevation: 4,
-                  child: Padding(
-                    padding: const EdgeInsets.all(0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: 120,
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(16),
-                              topRight: Radius.circular(16),
-                            ),
-                            image: DecorationImage(
-                              image: AssetImage(
-                                'assets/images/level_section_images/level_0/section_0.png',
-                              ),
-                              fit: BoxFit.cover,
+        body: RefreshIndicator(
+          onRefresh: () async {
+            _refresh();
+          },
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Greeting with user's name
+                  FutureBuilder<Map<String, dynamic>?>(
+                    future: DBHelper.instance().getUserDetails(),
+                    builder: (context, snapshot) {
+                      String firstName = "Chef";
+                      if (snapshot.hasData && snapshot.data != null) {
+                        firstName = snapshot.data!['first_name'] ?? "Chef";
+                      }
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Hi, $firstName!',
+                            style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color:
+                                  Theme.of(context).textTheme.bodyLarge?.color,
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Common Kitchen Equipment',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Theme.of(context).textTheme.bodyLarge?.color,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Row(
-                                children: [
-                                  const Icon(
-                                    Icons.play_circle_filled,
-                                    size: 16,
-                                    color: Colors.green,
-                                  ),
-                                  const SizedBox(width: 6),
-                                  Text(
-                                    'Video Lesson',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: isDarkMode 
-                                          ? Colors.grey[400] 
-                                          : Colors.grey[600],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 16),
-                              ElevatedButton(
-                                onPressed: () {
-                                  // Change to lessons tab (index 0)
-                                  NavigationService().changeTab(0);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.green,
-                                  foregroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  minimumSize: const Size(double.infinity, 40),
-                                ),
-                                child: const Text('Resume'),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-
-                const SizedBox(height: 24),
-
-                // Quick Access
-                Text(
-                  'Quick Access',
-                  style: TextStyle(
-                    fontSize: 20, 
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).textTheme.bodyLarge?.color,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Row(
-                  children: [
-                    Expanded(
-                      child: _buildQuickAccessCard(
-                        context: context,
-                        icon: Icons.book,
-                        title: 'All Lessons',
-                        onTap: () {
-                          NavigationService().changeTab(0);
-                        },
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: _buildQuickAccessCard(
-                        context: context,
-                        icon: Icons.kitchen,
-                        title: 'Practice',
-                        onTap: () {
-                          // Switch to practice tab (index 2)
-                          final scaffold =
-                              context.findAncestorWidgetOfExactType<Scaffold>();
-                          if (scaffold != null) {
-                            Scaffold.of(context);
-                            NavigationService().changeTab(2);
-                          }
-                        },
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: _buildQuickAccessCard(
-                        context: context,
-                        icon: Icons.bookmark,
-                        title: 'Saved',
-                        onTap: () {
-                          // Placeholder for saved section
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Saved recipes coming soon!'),
-                              backgroundColor: Colors.green,
+                          const SizedBox(height: 4),
+                          Text(
+                            'Ready to cook something amazing today?',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color:
+                                  isDarkMode
+                                      ? Colors.grey[400]
+                                      : Colors.grey[600],
                             ),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
 
-                const SizedBox(height: 24),
+                  const SizedBox(height: 24),
 
-                // Tip of the Week (updated from Tip of the Day)
-                FutureBuilder<String>(
-                  future: _tipOfTheWeek,
-                  builder: (context, snapshot) {
-                    String tip = "Always taste your food as you cook!";
-                    if (snapshot.hasData && snapshot.data != null) {
-                      tip = snapshot.data!;
-                    }
-
-                    return Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      elevation: 4,
-                      color: isDarkMode 
-                          ? Color(0xFF1A3020) // Dark green for dark mode
-                          : Colors.green.shade50,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
+                  FutureBuilder(
+                    future: getProgress(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (snapshot.hasError) {
+                        return Center(
+                          child: Text(
+                            'Error loading progress',
+                            style: TextStyle(
+                              color:
+                                  Theme.of(context).textTheme.bodyLarge?.color,
+                            ),
+                          ),
+                        );
+                      } else if (!snapshot.hasData || snapshot.data == null) {
+                        return Center(
+                          child: Text(
+                            'No progress available',
+                            style: TextStyle(
+                              color:
+                                  Theme.of(context).textTheme.bodyLarge?.color,
+                            ),
+                          ),
+                        );
+                      } else {
+                        return Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          elevation: 4,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Icon(
-                                  Icons.lightbulb,
-                                  color: Colors.amber.shade700,
-                                ),
-                                const SizedBox(width: 8),
                                 Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Tip of the Week',
+                                      'Current Level',
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
-                                        color: Theme.of(context).textTheme.bodyLarge?.color,
+                                        color:
+                                            Theme.of(
+                                              context,
+                                            ).textTheme.bodyLarge?.color,
                                       ),
                                     ),
-                                    const SizedBox(width: 8),
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 8,
-                                        vertical: 2,
-                                      ),
-                                      decoration: BoxDecoration(
+                                    Text(
+                                      'Level ${snapshot.data!.level.level}',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
                                         color: Colors.green,
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                      child: Text(
-                                        'Week ${_getCurrentWeekNumber()}',
-                                        style: const TextStyle(
-                                          fontSize: 12,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                        ),
                                       ),
                                     ),
                                   ],
                                 ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  snapshot.data!.level.subtitle,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color:
+                                        Theme.of(
+                                          context,
+                                        ).textTheme.bodyLarge?.color,
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                Text(
+                                  'Progress: ${snapshot.data!.numSectionsCompleted} / ${snapshot.data!.numSections} Sections',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color:
+                                        Theme.of(
+                                          context,
+                                        ).textTheme.bodyMedium?.color,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                LinearProgressIndicator(
+                                  value: snapshot.data!.progressPercentage,
+                                  backgroundColor:
+                                      isDarkMode
+                                          ? Colors.grey[800]
+                                          : Colors.grey[300],
+                                  valueColor:
+                                      const AlwaysStoppedAnimation<Color>(
+                                        Colors.green,
+                                      ),
+                                  minHeight: 8,
+                                ),
                               ],
                             ),
-                            const SizedBox(height: 12),
-                            Text(
-                              tip, 
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Theme.of(context).textTheme.bodyLarge?.color,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                          ),
+                        );
+                      }
+                    },
+                  ),
 
-                // Add SafeBottomPadding at the end of the SingleChildScrollView content
-                SafeBottomPadding(
-                  extraPadding: 8.0,
-                  child: SizedBox(
-                    height: 16,
-                  ), // Smaller SizedBox instead of the const SizedBox(height: 24)
-                ),
-              ],
+                  // Quick Access Cards
+                  // Current level progress
+                  const SizedBox(height: 24),
+
+                  // Continue Learning
+                  Text(
+                    'Continue Learning',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  FutureBuilder(
+                    future: getLessonItem(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (snapshot.hasError) {
+                        return Center(
+                          child: Text(
+                            'Error loading lesson',
+                            style: TextStyle(
+                              color:
+                                  Theme.of(context).textTheme.bodyLarge?.color,
+                            ),
+                          ),
+                        );
+                      } else if (!snapshot.hasData || snapshot.data == null) {
+                        return Center(
+                          child: Text(
+                            'No lessons available',
+                            style: TextStyle(
+                              color:
+                                  Theme.of(context).textTheme.bodyLarge?.color,
+                            ),
+                          ),
+                        );
+                      } else {
+                        return LessonItemCard(
+                          lessonItem: lessonItem,
+                          onCompleted: _refresh,
+                          isOnHomeScreen: true,
+                        );
+                      }
+                    },
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  // Tip of the Week (updated from Tip of the Day)
+                  FutureBuilder<String>(
+                    future: _tipOfTheWeek,
+                    builder: (context, snapshot) {
+                      String tip = "Always taste your food as you cook!";
+                      if (snapshot.hasData && snapshot.data != null) {
+                        tip = snapshot.data!;
+                      }
+
+                      return Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        elevation: 4,
+                        color:
+                            isDarkMode
+                                ? Color(0xFF1A3020) // Dark green for dark mode
+                                : Colors.green.shade50,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.lightbulb,
+                                    color: Colors.amber.shade700,
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Tip of the Week',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color:
+                                              Theme.of(
+                                                context,
+                                              ).textTheme.bodyLarge?.color,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 8,
+                                          vertical: 2,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: Colors.green,
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
+                                        ),
+                                        child: Text(
+                                          'Week ${_getCurrentWeekNumber()}',
+                                          style: const TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 12),
+                              Text(
+                                tip,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color:
+                                      Theme.of(
+                                        context,
+                                      ).textTheme.bodyLarge?.color,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+
+                  // Add SafeBottomPadding at the end of the SingleChildScrollView content
+                  SafeBottomPadding(
+                    extraPadding: 8.0,
+                    child: SizedBox(
+                      height: 16,
+                    ), // Smaller SizedBox instead of the const SizedBox(height: 24)
+                  ),
+                ],
+              ),
             ),
           ),
         ),

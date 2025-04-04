@@ -39,18 +39,22 @@ class RecipeDetailScreen extends StatelessWidget {
                     fit: BoxFit.cover,
                     width: double.infinity,
                     height: 250,
-                    errorBuilder: (context, error, stackTrace) =>
-                        Icon(Icons.error, size: 60, color: Colors.grey),
+                    errorBuilder:
+                        (context, error, stackTrace) =>
+                            Icon(Icons.error, size: 60, color: Colors.grey),
                   ),
                 ),
                 SizedBox(height: 20),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
-                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 10,
+                        ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -59,42 +63,21 @@ class RecipeDetailScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => GameScreen(recipeName: item.title),
+                            builder:
+                                (context) => GameScreen(recipeName: item.title),
                           ),
                         );
                       },
                       icon: Icon(Icons.play_arrow, color: Colors.white),
                       label: Text(
                         "Start Simulation",
-                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                     SizedBox(width: 12),
-                    if (item.youtubeUrl.isNotEmpty)
-                      ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red,
-                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        onPressed: () async {
-                          final Uri url = Uri.parse(item.youtubeUrl);
-                          if (await canLaunchUrl(url)) {
-                            await launchUrl(url, mode: LaunchMode.externalApplication);
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Could not open the video.')),
-                            );
-                          }
-                        },
-                        icon: Icon(Icons.ondemand_video, color: Colors.white),
-                        label: Text(
-                          "YouTube",
-                          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-                        ),
-                      ),
                   ],
                 ),
                 Text(
@@ -111,19 +94,22 @@ class RecipeDetailScreen extends StatelessWidget {
                   context: context,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: item.ingredients.map((ingredient) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: Text(
-                          "• ${ingredient['name']} - ${ingredient['quantity']}",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color:
-                            Theme.of(context).textTheme.bodyLarge?.color,
-                          ),
-                        ),
-                      );
-                    }).toList(),
+                    children:
+                        item.ingredients.map((ingredient) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            child: Text(
+                              "• ${ingredient['name']} - ${ingredient['quantity']}",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color:
+                                    Theme.of(
+                                      context,
+                                    ).textTheme.bodyLarge?.color,
+                              ),
+                            ),
+                          );
+                        }).toList(),
                   ),
                 ),
                 SizedBox(height: 20),
@@ -132,47 +118,58 @@ class RecipeDetailScreen extends StatelessWidget {
                   context: context,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: item.instructions
-                        .split("\n")
-                        .where((step) => step.trim().isNotEmpty)
-                        .map((step) => step.replaceFirst(RegExp(r'^\d+\.\s*'), ''))
-                        .toList()
-                        .asMap()
-                        .entries
-                        .map((entry) {
-                      int stepIndex = entry.key + 1;
-                      String stepText = entry.value.trim();
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: RichText(
-                          text: TextSpan(
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge
-                                  ?.color,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: "Step $stepIndex \n",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                  color: isDarkMode
-                                      ? Colors.green[300]
-                                      : Colors.green[800],
+                    children:
+                        item.instructions
+                            .split("\n")
+                            .where((step) => step.trim().isNotEmpty)
+                            .map(
+                              (step) =>
+                                  step.replaceFirst(RegExp(r'^\d+\.\s*'), ''),
+                            )
+                            .toList()
+                            .asMap()
+                            .entries
+                            .map((entry) {
+                              int stepIndex = entry.key + 1;
+                              String stepText = entry.value.trim();
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 8.0,
                                 ),
-                              ),
-                              TextSpan(text: stepText),
-                            ],
-                          ),
-                        ),
-                      );
-                    }).toList(),
+                                child: RichText(
+                                  text: TextSpan(
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color:
+                                          Theme.of(
+                                            context,
+                                          ).textTheme.bodyLarge?.color,
+                                    ),
+                                    children: [
+                                      TextSpan(
+                                        text: "Step $stepIndex \n",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                          color:
+                                              isDarkMode
+                                                  ? Colors.green[300]
+                                                  : Colors.green[800],
+                                        ),
+                                      ),
+                                      TextSpan(text: stepText),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            })
+                            .toList(),
                   ),
                 ),
-                SafeBottomPadding(extraPadding: 16.0, child: SizedBox(height: 16)),
+                SafeBottomPadding(
+                  extraPadding: 16.0,
+                  child: SizedBox(height: 16),
+                ),
               ],
             ),
           ),
@@ -206,9 +203,10 @@ class RecipeDetailScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color: isDarkMode
-                ? Colors.black.withOpacity(0.3)
-                : Colors.black.withOpacity(0.1),
+            color:
+                isDarkMode
+                    ? Colors.black.withOpacity(0.3)
+                    : Colors.black.withOpacity(0.1),
             blurRadius: 8,
             spreadRadius: 1,
             offset: Offset(0, 3),

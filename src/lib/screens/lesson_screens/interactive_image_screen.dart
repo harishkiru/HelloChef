@@ -40,7 +40,7 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
   List<Widget> makeButtons() {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     List<Widget> buttons = [];
-    
+
     for (var button in widget.buttonDetails) {
       final buttonName = button['name'] as String;
       final isHighlighted = highlightedButton == buttonName || showHints;
@@ -183,7 +183,7 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
 
   void _showAllItems() {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    
+
     showModalBottomSheet(
       context: context,
       backgroundColor: Theme.of(context).cardColor, // Use theme color
@@ -218,9 +218,10 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
                     final item = widget.buttonDetails[index];
                     return ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: isDarkMode 
-                            ? Colors.green.withValues(alpha: 0.3)
-                            : Colors.green.withValues(alpha: 0.1),
+                        backgroundColor:
+                            isDarkMode
+                                ? Colors.green.withValues(alpha: 0.3)
+                                : Colors.green.withValues(alpha: 0.1),
                         foregroundColor: Colors.green,
                         elevation: 0,
                         shape: RoundedRectangleBorder(
@@ -311,19 +312,18 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    
+
     // Define adaptive colors based on theme
-    final Color containerBgColor = isDarkMode 
-        ? Colors.green.shade900.withOpacity(0.2) 
-        : Colors.green.shade100;
-        
-    final Color gradientStart = isDarkMode 
-        ? Theme.of(context).scaffoldBackgroundColor 
-        : Colors.white;
-        
-    final Color gradientEnd = isDarkMode 
-        ? Color(0xFF0A3012) 
-        : Colors.green.shade50;
+    final Color containerBgColor =
+        isDarkMode
+            ? Colors.green.shade900.withOpacity(0.2)
+            : Colors.green.shade100;
+
+    final Color gradientStart =
+        isDarkMode ? Theme.of(context).scaffoldBackgroundColor : Colors.white;
+
+    final Color gradientEnd =
+        isDarkMode ? Color(0xFF0A3012) : Colors.green.shade50;
 
     return Scaffold(
       appBar: AppBar(
@@ -371,9 +371,10 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: isDarkMode 
-                        ? Colors.black.withOpacity(0.3) 
-                        : Colors.black.withOpacity(0.1),
+                    color:
+                        isDarkMode
+                            ? Colors.black.withOpacity(0.3)
+                            : Colors.black.withOpacity(0.1),
                     offset: Offset(0, 2),
                     blurRadius: 4,
                   ),
@@ -389,9 +390,10 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
-                        color: isDarkMode
-                            ? Colors.green.shade400
-                            : Colors.green.shade800,
+                        color:
+                            isDarkMode
+                                ? Colors.green.shade400
+                                : Colors.green.shade800,
                       ),
                     ),
                   ),
@@ -403,15 +405,19 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: isDarkMode ? Colors.green.shade800 : Colors.green.shade200,
-                      width: 2
+                      color:
+                          isDarkMode
+                              ? Colors.green.shade800
+                              : Colors.green.shade200,
+                      width: 2,
                     ),
                     borderRadius: BorderRadius.circular(8),
                     boxShadow: [
                       BoxShadow(
-                        color: isDarkMode
-                            ? Colors.black.withOpacity(0.4)
-                            : Colors.black.withOpacity(0.1),
+                        color:
+                            isDarkMode
+                                ? Colors.black.withOpacity(0.4)
+                                : Colors.black.withOpacity(0.1),
                         offset: Offset(0, 3),
                         blurRadius: 6,
                       ),
@@ -435,15 +441,10 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
               child: Container(
                 width: double.infinity,
                 height: screenHeight * 0.075,
-                margin: EdgeInsets.fromLTRB(
-                  8,
-                  8,
-                  8,
-                  0,
-                ),
+                margin: EdgeInsets.fromLTRB(8, 8, 8, 0),
                 child:
                     numberOfButtonsClicked == numberOfButtons
-                        ? GamificationWidget()
+                        ? GamificationWidget(lessonItem: widget.lessonItem)
                         : GreyedOutWidget(),
               ),
             ),

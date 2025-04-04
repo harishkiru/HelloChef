@@ -302,7 +302,10 @@ flutter:
 
     - assets/images/interactive_images/level_2/section_0/interactive_0/0.png
 
-
+    - assets/images/badge_images/hello_chef.png
+    - assets/images/badge_images/master_chef.png
+    - assets/images/badge_images/quiz_ace.png
+    - assets/images/badge_images/home_cook.png
 
     - assets/images/simulation_images/measuring_cup.png
     - assets/images/simulation_images/corn_flour.png
@@ -329,6 +332,7 @@ flutter:
     - assets/audio/chop.mp3
     - assets/audio/sprinkle.mp3
 
+    - assets/sounds/achievement_unlocked.mp3
 
     - .env
 

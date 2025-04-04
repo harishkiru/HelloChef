@@ -226,7 +226,7 @@ Future<void> appFirstRun() async {
               "title": "The Kitchen",
               "type": 4,
               "imagePath":
-                  "assets/images/lesson_images/level_0/section_0/lesson_3.png",
+                  "assets/images/interactive_images/level_0/section_0/interactive_0/0.png",
               "isCompleted": false,
               "buttonDetails": [
                 {
@@ -739,15 +739,6 @@ A serrated knife designed to slice through crusty bread and delicate pastries wi
                   "Eggs are a breakfast staple, and this video explores seven different ways to prepare them to perfection. From classic scrambled eggs and sunny-side up to more advanced techniques like poaching and soft-boiling, you'll learn step-by-step instructions for each method. Whether you prefer a fluffy omelet, a rich runny yolk, or a perfectly cooked hard-boiled egg, this guide has you covered. Master these techniques and elevate your breakfast game!",
             },
             {
-              "id": 2,
-              "title": "American Breakfast Simulation",
-              "type": 0,
-              "imagePath":
-                  "assets/images/lesson_images/level_1/section_1/lesson_2.png",
-              "isCompleted": false,
-              "content": "[Placeholder]",
-            },
-            {
               "id": 3,
               "title": "American Breakfast Recipe",
               "type": 0,
@@ -801,7 +792,7 @@ A serrated knife designed to slice through crusty bread and delicate pastries wi
             },
           ],
           "completedLessons": 0,
-          "totalLessons": 3,
+          "totalLessons": 2,
         },
         {
           "id": 2,
@@ -964,7 +955,7 @@ Bon appétit! 🍽️
               "isCompleted": false,
               "videoPath": "assets/videos/level_1/section_2/video_0.mp4",
               "content":
-                  "Stir-frying is one of the easiest and most versatile cooking techniques, allowing you to create delicious meals with endless variations. In this video, we walk through how to make a flavorful teriyaki chicken stir-fry, covering everything from prepping the ingredients to cooking the perfect rice. With simple steps and helpful cooking tips, you'll learn how to balance flavors, properly cook proteins and vegetables, and bring everything together for a well-rounded dish. Whether you're a beginner or looking to refine your stir-fry skills, this guide will have you cooking with confidence in no time!",
+                  "Stir-frying is one of the easiest and most versatile cooking techniques, allowing you to create delicious meals with endless variations. In this video, we walk through how to make a flavorful teriyaki chicken stir-fry, covering everything from prepping the ingredients to cooking the perfect rice. With simple steps and helpful cooking tips, you'll learn how to balance flavors, properly cook proteins and vegetables, and bring everything together for a well-rounded dish.",
             },
             {
               "id": 3,
@@ -1478,10 +1469,10 @@ Happy cooking! 🍽️
                   {
                     "question": "What is carryover cooking?",
                     "options": [
-                      "Meat continues to cook after being removed from heat because it's still in the pan",
-                      "Meat continues to cook after being removed from heat because the internal temperature is warmer then the external temperature",
-                      "Meat continues to cook after being removed from heat because the warmth from the room is absorbed",
-                      "Meat continues to cook after being removed from heat due to residual heat",
+                      "Internal Meat Layers continue to cook after being removed from heat because it's still in the pan",
+                      "Internal Meat Layers continue to cook after being removed from heat because the internal layers are warmer then the outer layers",
+                      "Internal Meat Layers continue to cook after being removed from heat because the warmth from the room is absorbed",
+                      "Internal Meat Layers continue to cook after being removed from heat due to the heat retained in the outer layers",
                     ],
                     "correctAnswerIndex": 3,
                   },
@@ -1847,15 +1838,6 @@ Happy baking! 🍰🍽️
             },
             {
               "id": 5,
-              "title": "Blueberry Muffins Simulation",
-              "type": 0,
-              "imagePath":
-                  "assets/images/lesson_images/level_2/section_2/lesson_5.png",
-              "isCompleted": false,
-              "content": "[Placeholder]",
-            },
-            {
-              "id": 5,
               "title": "Blueberry Muffins Recipe",
               "type": 0,
               "imagePath":
@@ -1932,7 +1914,7 @@ Happy baking! 🍰🍽️
             },
           ],
           "completedLessons": 0,
-          "totalLessons": 6,
+          "totalLessons": 5,
         },
         {
           "id": 2,
@@ -1953,15 +1935,6 @@ Happy baking! 🍰🍽️
                   "In this video, we'll be preparing a delicious roast dinner featuring both a whole and spatchcock chicken, along with roasted vegetables and sweet potatoes. We’ll walk you through the timing process for cooking everything to perfection in the oven, including tips on preparing the chicken, vegetables, and using the broiler for a crispy finish. Join us as we master timing and roasting techniques for a perfect roast dinner!",
             },
             {
-              "id": 0,
-              "title": "Cooking a Roast Dinner Simulation",
-              "type": 0,
-              "imagePath":
-                  "assets/images/lesson_images/level_2/section_3/lesson_2.png",
-              "isCompleted": false,
-              "content": "[Placeholder]",
-            },
-            {
               "id": 1,
               "title": "Roast Chicken Recipe",
               "type": 0,
@@ -1969,7 +1942,7 @@ Happy baking! 🍰🍽️
                   "assets/images/lesson_images/level_2/section_3/lesson_2.png",
               "isCompleted": false,
               "content": '''# Roast Chicken Dinner Recipe  
-![Roast Chicken Dinner](assets/images/lesson_images/level_2/section_3/lesson_2/0.png)
+![Roast Chicken Dinner](assets/images/lesson_images/level_2/section_3/lesson_2.png)
 
 ---
 
@@ -2042,7 +2015,7 @@ Happy baking! 🍰🍽️
             },
           ],
           "completedLessons": 0,
-          "totalLessons": 3,
+          "totalLessons": 2,
         },
       ],
     },

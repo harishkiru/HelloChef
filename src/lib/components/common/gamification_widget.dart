@@ -544,7 +544,7 @@ class _GamificationWidgetState extends State<GamificationWidget>
     HapticFeedback.heavyImpact();
 
     // Enhanced confetti
-    _confettiController.play();
+    //_confettiController.play();
 
     // Play sound
     _levelPlayer.resume();

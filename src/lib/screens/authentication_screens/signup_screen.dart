@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:src/components/authentication_components/textbox.dart';
 import 'package:src/components/authentication_components/button.dart';
 import 'package:src/components/authentication_components/constant.dart';
-import 'package:src/services/db_helper.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:src/components/common/safe_bottom_padding.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -30,8 +29,6 @@ class _SignUpPageState extends State<SignUpPage> {
   // Boolean to track loading state for UI updates
   bool isLoading = false;
 
-  DBHelper dbHelper = DBHelper.instance();
-
   // Function to create a new user with the provided details
   Future<bool> createUser({
     required final String email,
@@ -56,8 +53,6 @@ class _SignUpPageState extends State<SignUpPage> {
         email: email,
         password: password,
       );
-
-      dbHelper.addDefaultBadge();
 
       // Retrieve the user's ID after successful sign-up
       final userId = response.user!.id;
@@ -158,8 +153,6 @@ class _SignUpPageState extends State<SignUpPage> {
             'first_name': firstName,
             'last_name': lastName,
           });
-
-          dbHelper.addDefaultBadge();
 
           if (mounted) {
             Navigator.pushReplacementNamed(context, '/home');

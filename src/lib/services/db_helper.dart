@@ -51,6 +51,17 @@ class DBHelper {
         )
       ''');
 
+      await db.execute('''
+        CREATE TABLE badges (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          defaultBadge INTEGER DEFAULT 0,
+          quizesCompleted INTEGER DEFAULT 0,
+          perfectQuizesCompleted INTEGER DEFAULT 0,
+          totalLessonsCompleted INTEGER DEFAULT 0,
+          totalRecipesCreated INTEGER DEFAULT 0
+        )
+      ''');
+
       // Create Levels table
       await db.execute('''
         CREATE TABLE Levels (
@@ -529,6 +540,79 @@ class DBHelper {
     }
   }
 
+  Future<bool> checkIfGivenDefaultBadge() async {
+    final db = await sqliteDatabase;
+    final result = await db.query(
+      'badges',
+      where: 'defaultBadge = ?',
+      whereArgs: [1],
+    );
+    return result.isNotEmpty;
+  }
+
+  Future<void> setDefaultBadgeGiven() async {
+    final db = await sqliteDatabase;
+
+    await db.insert('badges', {
+      'defaultBadge': 1,
+      'quizesCompleted': 0,
+      'perfectQuizesCompleted': 0,
+      'totalLessonsCompleted': 0,
+      'totalRecipesCreated': 0,
+    });
+    await addBadge(1);
+  }
+
+  Future<void> addQuizToTotalQuizesCompleted() async {
+    final db = await sqliteDatabase;
+    await db.rawUpdate(
+      'UPDATE badges SET quizesCompleted = quizesCompleted + 1 WHERE defaultBadge = ?',
+      [1],
+    );
+  }
+
+  Future<void> addPerfectQuizToTotalQuizesCompleted() async {
+    final db = await sqliteDatabase;
+    await db.rawUpdate(
+      'UPDATE badges SET perfectQuizesCompleted = perfectQuizesCompleted + 1 WHERE defaultBadge = ?',
+      [1],
+    );
+  }
+
+  Future<void> addLessonToTotalLessonsCompleted() async {
+    final db = await sqliteDatabase;
+    await db.rawUpdate(
+      'UPDATE badges SET totalLessonsCompleted = totalLessonsCompleted + 1 WHERE defaultBadge = ?',
+      [1],
+    );
+  }
+
+  Future<void> addRecipeToTotalRecipesCreated() async {
+    final db = await sqliteDatabase;
+    await db.rawUpdate(
+      'UPDATE badges SET totalRecipesCreated = totalRecipesCreated + 1 WHERE defaultBadge = ?',
+      [1],
+    );
+  }
+
+  Future<bool> checkIfPerfectQuizUnlocked() async {
+    final db = await sqliteDatabase;
+
+    // Get the number of perfect quizzes completed if the number of total quizzes completed is no greater then the number of perfect quizzes completed return true
+    final result = await db.rawQuery(
+      'SELECT quizesCompleted, perfectQuizesCompleted FROM badges WHERE defaultBadge = ?',
+      [1],
+    );
+    if (result.isNotEmpty) {
+      final quizesCompleted = result.first['quizesCompleted'] as int;
+      final perfectQuizesCompleted =
+          result.first['perfectQuizesCompleted'] as int;
+      return quizesCompleted <= perfectQuizesCompleted &&
+          perfectQuizesCompleted == 2;
+    }
+    return false;
+  }
+
   // ********** Supabase User Operations **********
   Future<Map<String, dynamic>?> getUserDetails() async {
     // Return cached data if present.
@@ -554,13 +638,21 @@ class DBHelper {
 
   // ********* Supabase XP and Badge Operations **********
 
-  Future<void> addDefaultBadge() async {
+  Future<void> addBadge(int id) async {
     final user = supabase.auth.currentUser;
 
+    // get the user ID from the users table
+    final userResponse =
+        await supabase
+            .from('users')
+            .select('id')
+            .eq('auth_id', user!.id)
+            .maybeSingle();
+
     if (user != null) {
-      final response = await supabase.from('badges').insert({
-        'badge_id': 1, // Default badge ID
-        'user_id': user.id,
+      final response = await supabase.from('user_badges').insert({
+        'badge_id': id, // Default badge ID
+        'user_id': userResponse!['id'],
       });
     }
   }
@@ -632,12 +724,13 @@ class DBHelper {
     final user = supabase.auth.currentUser;
     if (user != null) {
       // Get user's current XP and rank
-      final userResponse = await supabase
-        .from('users')
-        .select('xp, user_rank')
-        .eq('auth_id', user.id)
-        .maybeSingle();
-      
+      final userResponse =
+          await supabase
+              .from('users')
+              .select('xp, user_rank')
+              .eq('auth_id', user.id)
+              .maybeSingle();
+
       if (userResponse == null) {
         return {
           'currentXP': 0,
@@ -648,38 +741,42 @@ class DBHelper {
           'progress': 0.0,
         };
       }
-      
+
       final currentXP = userResponse['xp'] as int? ?? 0;
       final currentRank = userResponse['user_rank'] as int? ?? 0;
-      
+
       // Get information about the current rank
-      final currentRankResponse = await supabase
-        .from('ranks')
-        .select('id, xp_required')
-        .eq('id', currentRank)
-        .maybeSingle();
-      
+      final currentRankResponse =
+          await supabase
+              .from('ranks')
+              .select('id, xp_required')
+              .eq('id', currentRank)
+              .maybeSingle();
+
       // Get information about the next rank
-      final nextRankResponse = await supabase
-        .from('ranks')
-        .select('id, xp_required')
-        .gt('id', currentRank)
-        .order('id', ascending: true)
-        .limit(1)
-        .maybeSingle();
-      
-      final int xpForCurrentRank = currentRankResponse?['xp_required'] as int? ?? 0;
+      final nextRankResponse =
+          await supabase
+              .from('ranks')
+              .select('id, xp_required')
+              .gt('id', currentRank)
+              .order('id', ascending: true)
+              .limit(1)
+              .maybeSingle();
+
+      final int xpForCurrentRank =
+          currentRankResponse?['xp_required'] as int? ?? 0;
       final int xpForNextRank = nextRankResponse?['xp_required'] as int? ?? 100;
       final int nextRank = nextRankResponse?['id'] as int? ?? (currentRank + 1);
-      
+
       // Calculate progress to next rank
       double progress = 0.0;
       if (xpForNextRank > xpForCurrentRank) {
-        progress = (currentXP - xpForCurrentRank) / (xpForNextRank - xpForCurrentRank);
+        progress =
+            (currentXP - xpForCurrentRank) / (xpForNextRank - xpForCurrentRank);
         // Ensure progress is between 0 and 1
         progress = progress.clamp(0.0, 1.0);
       }
-      
+
       return {
         'currentXP': currentXP,
         'currentRank': currentRank,
@@ -699,21 +796,22 @@ class DBHelper {
     if (user != null) {
       // First get all badges
       final allBadges = await supabase
-        .from('badges')
-        .select('id, badge_name, badge_image_url, badge_description')
-        .order('id');
-      
+          .from('badges')
+          .select('id, badge_name, badge_image_url, badge_description')
+          .order('id');
+
       if (allBadges == null) {
         return [];
       }
-      
+
       // Get the user's ID from the users table
-      final userResponse = await supabase
-        .from('users')
-        .select('id')
-        .eq('auth_id', user.id)
-        .maybeSingle();
-      
+      final userResponse =
+          await supabase
+              .from('users')
+              .select('id')
+              .eq('auth_id', user.id)
+              .maybeSingle();
+
       if (userResponse == null) {
         // Return all badges as locked if user is not found
         return allBadges.map<Map<String, dynamic>>((badge) {
@@ -726,27 +824,28 @@ class DBHelper {
           };
         }).toList();
       }
-      
+
       final userId = userResponse['id'];
-      
+
       // Get the user's unlocked badges
       final userBadges = await supabase
-        .from('user_badges')
-        .select('badge_id')
-        .eq('user_id', userId);
-      
+          .from('user_badges')
+          .select('badge_id')
+          .eq('user_id', userId);
+
       // Create a set of unlocked badge IDs for quick lookup
-      final Set<int> unlockedBadgeIds = userBadges != null
-          ? userBadges.map<int>((item) => item['badge_id'] as int).toSet()
-          : {};
-          
+      final Set<int> unlockedBadgeIds =
+          userBadges != null
+              ? userBadges.map<int>((item) => item['badge_id'] as int).toSet()
+              : {};
+
       print("Unlocked badge IDs: $unlockedBadgeIds"); // Debug
-      
+
       // Map all badges with unlock status
       return allBadges.map<Map<String, dynamic>>((badge) {
         final badgeId = badge['id'] as int;
         final isUnlocked = unlockedBadgeIds.contains(badgeId);
-        
+
         return {
           'id': badgeId,
           'name': badge['badge_name'],
@@ -763,22 +862,20 @@ class DBHelper {
   Future<List<Map<String, dynamic>>> getLeaderboardData() async {
     // Get current user
     final currentUser = supabase.auth.currentUser;
-    
+
     // Get all users ordered by XP (descending)
     final usersData = await supabase
-      .from('users')
-      .select('id, auth_id, first_name, last_name, xp, user_rank')
-      .order('xp', ascending: false);
-    
+        .from('users')
+        .select('id, auth_id, first_name, last_name, xp, user_rank')
+        .order('xp', ascending: false);
+
     if (usersData == null || usersData.isEmpty) {
       return [];
     }
-    
+
     // Get all user_badges
-    final allBadges = await supabase
-      .from('user_badges')
-      .select('user_id');
-    
+    final allBadges = await supabase.from('user_badges').select('user_id');
+
     // Count badges per user
     Map<String, int> badgeCounts = {};
     if (allBadges != null) {
@@ -787,52 +884,55 @@ class DBHelper {
         badgeCounts[userId] = (badgeCounts[userId] ?? 0) + 1;
       }
     }
-    
+
     // Create leaderboard data
-    List<Map<String, dynamic>> leaderboardData = usersData.map<Map<String, dynamic>>((userData) {
-      final userId = userData['id'];
-      return {
-        'id': userId,
-        'firstName': userData['first_name'],
-        'lastName': userData['last_name'],
-        'xp': userData['xp'],
-        'rank': userData['user_rank'],
-        'badgeCount': badgeCounts[userId] ?? 0,
-        // Check if this is the current user
-        'isCurrentUser': currentUser != null && userData['auth_id'] == currentUser.id,
-      };
-    }).toList();
-    
+    List<Map<String, dynamic>> leaderboardData =
+        usersData.map<Map<String, dynamic>>((userData) {
+          final userId = userData['id'];
+          return {
+            'id': userId,
+            'firstName': userData['first_name'],
+            'lastName': userData['last_name'],
+            'xp': userData['xp'],
+            'rank': userData['user_rank'],
+            'badgeCount': badgeCounts[userId] ?? 0,
+            // Check if this is the current user
+            'isCurrentUser':
+                currentUser != null && userData['auth_id'] == currentUser.id,
+          };
+        }).toList();
+
     return leaderboardData;
   }
 
   Future<List<Map<String, dynamic>>> getUserBadgesById(String userId) async {
     // Get all badges
     final allBadges = await supabase
-      .from('badges')
-      .select('id, badge_name, badge_image_url, badge_description')
-      .order('id');
-    
+        .from('badges')
+        .select('id, badge_name, badge_image_url, badge_description')
+        .order('id');
+
     if (allBadges == null) {
       return [];
     }
-    
+
     // Get the user's unlocked badges
     final userBadges = await supabase
-      .from('user_badges')
-      .select('badge_id')
-      .eq('user_id', userId);
-    
+        .from('user_badges')
+        .select('badge_id')
+        .eq('user_id', userId);
+
     // Create a set of unlocked badge IDs for quick lookup
-    final Set<int> unlockedBadgeIds = userBadges != null
-        ? userBadges.map<int>((item) => item['badge_id'] as int).toSet()
-        : {};
-        
+    final Set<int> unlockedBadgeIds =
+        userBadges != null
+            ? userBadges.map<int>((item) => item['badge_id'] as int).toSet()
+            : {};
+
     // Map all badges with unlock status
     return allBadges.map<Map<String, dynamic>>((badge) {
       final badgeId = badge['id'] as int;
       final isUnlocked = unlockedBadgeIds.contains(badgeId);
-      
+
       return {
         'id': badgeId,
         'name': badge['badge_name'],

@@ -2,6 +2,7 @@ import 'package:confetti/confetti.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:src/services/db_helper.dart';
 
 class GamificationWidget extends StatefulWidget {
   bool? isQuiz;
@@ -22,8 +23,115 @@ class GamificationWidget extends StatefulWidget {
 class _GamificationWidgetState extends State<GamificationWidget>
     with SingleTickerProviderStateMixin {
   late ConfettiController _confettiController;
-  late AudioPlayer _player;
+  late AudioPlayer _levelPlayer;
+  late AudioPlayer _achievementPlayer;
   late AnimationController _animationController;
+  final dbHelper = DBHelper.instance();
+
+  Future<bool> _checkForQuizBadge(bool perfect) async {
+    await dbHelper.addLessonToTotalLessonsCompleted();
+    await dbHelper.addQuizToTotalQuizesCompleted();
+
+    if (perfect) {
+      await dbHelper.addPerfectQuizToTotalQuizesCompleted();
+      final response = await dbHelper.checkIfPerfectQuizUnlocked();
+      if (response) {
+        return true; // Badge will be awarded
+      }
+    }
+    return false;
+  }
+
+  Future<void> giveQuizBadge() async {
+    await dbHelper.addBadge(2);
+
+    _achievementPlayer.resume();
+
+    if (mounted) {
+      return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            elevation: 8,
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Achievement Unlocked!',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  const Text(
+                    'Quiz Master',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 24),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.green.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Image.asset(
+                      'assets/images/badge_images/quiz_ace.png',
+                      height: 120,
+                      width: 120,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Home Cook Badge',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'You\'ve scored perfect on your first try on all HelloChef quizzes!',
+                    style: TextStyle(fontSize: 16),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 24),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      foregroundColor: Colors.white,
+                      minimumSize: const Size(double.infinity, 45),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: const Text(
+                      'Awesome!',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
+  }
 
   @override
   void initState() {
@@ -31,15 +139,27 @@ class _GamificationWidgetState extends State<GamificationWidget>
     _confettiController = ConfettiController(
       duration: const Duration(seconds: 5),
     );
-    _player = AudioPlayer();
-    _player.setSource(AssetSource('sounds/level_complete.mp3'));
+    _levelPlayer = AudioPlayer();
+    _levelPlayer.setSource(AssetSource('sounds/level_complete.mp3'));
+    _achievementPlayer = AudioPlayer();
+    _achievementPlayer.setSource(
+      AssetSource('sounds/achievement_unlocked.mp3'),
+    );
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 500),
     );
   }
 
-  void levelComplete(context) {
+  void levelComplete(context) async {
+    bool badgeEarned = false;
+
+    if (widget.isQuiz != null && widget.isQuiz == true) {
+      badgeEarned = await _checkForQuizBadge(
+        widget.score == widget.totalQuestions,
+      );
+    }
+
     // Trigger haptic feedback
     HapticFeedback.heavyImpact();
 
@@ -47,9 +167,15 @@ class _GamificationWidgetState extends State<GamificationWidget>
     _confettiController.play();
 
     // Play sound
-    _player.resume();
+    _levelPlayer.resume();
 
-    // Animated dialog
+    // Show badge popup first if earned, then show lesson completion popup
+    if (badgeEarned) {
+      await giveQuizBadge();
+      if (!mounted) return;
+    }
+
+    // Show lesson completion popup after badge popup (if any)
     showGeneralDialog(
       context: context,
       barrierDismissible: true,
@@ -207,8 +333,9 @@ class _GamificationWidgetState extends State<GamificationWidget>
   @override
   void dispose() {
     _confettiController.dispose();
-    _player.dispose();
+    _levelPlayer.dispose();
     _animationController.dispose();
+    _achievementPlayer.dispose();
     super.dispose();
   }
 }

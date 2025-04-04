@@ -314,6 +314,7 @@ flutter:
 
     - assets/sounds/level_complete.mp3
     - assets/sounds/rank_up.mp3
+    - assets/sounds/achievement_unlocked.mp3
 
     - .env
 

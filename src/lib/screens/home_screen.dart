@@ -9,6 +9,7 @@ import 'package:src/components/common/safe_bottom_padding.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:src/components/lesson_components/lesson_item_card.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,13 +27,114 @@ class HomeScreenState extends State<HomeScreen> {
 
   late Future<String> _tipOfTheWeek;
   late LessonItem lessonItem;
+  late AudioPlayer _player;
   final dbHelper = DBHelper.instance();
 
   @override
   void initState() {
     super.initState();
     checkAuth();
+    _player = AudioPlayer();
+    _player.setSource(AssetSource('sounds/achievement_unlocked.mp3'));
     _tipOfTheWeek = _getTipOfTheWeek();
+    defaultBadge(context);
+  }
+
+  Future<void> defaultBadge(BuildContext context) async {
+    final response = await dbHelper.checkIfGivenDefaultBadge();
+
+    if (response) {
+      return;
+    }
+
+    await dbHelper.setDefaultBadgeGiven();
+
+    _player.resume();
+
+    if (context.mounted) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            elevation: 8,
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Achievement Unlocked!',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  const Text(
+                    'Welcome to HelloChef!',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 24),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.green.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Image.asset(
+                      'assets/images/badge_images/home_cook.png',
+                      height: 120,
+                      width: 120,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Home Cook Badge',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'You\'ve taken your first step on your culinary journey!',
+                    style: TextStyle(fontSize: 16),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 24),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      foregroundColor: Colors.white,
+                      minimumSize: const Size(double.infinity, 45),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: const Text(
+                      'Awesome!',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
   }
 
   Future<LessonItem> getLessonItem() async {
@@ -296,20 +398,10 @@ class HomeScreenState extends State<HomeScreen> {
                           ),
                         );
                       } else {
-                        return ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Card(
-                            margin: EdgeInsets.zero,
-                            elevation: 6,
-                            shadowColor: Colors.black.withOpacity(0.2),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: LessonItemCard(
-                              lessonItem: lessonItem,
-                              onCompleted: _refresh,
-                            ),
-                          ),
+                        return LessonItemCard(
+                          lessonItem: lessonItem,
+                          onCompleted: _refresh,
+                          isOnHomeScreen: true,
                         );
                       }
                     },

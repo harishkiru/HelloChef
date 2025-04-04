@@ -12,8 +12,14 @@ import 'package:confetti/confetti.dart';
 class LessonItemCard extends StatefulWidget {
   final LessonItem lessonItem;
   final VoidCallback? onCompleted;
+  final bool? isOnHomeScreen;
 
-  const LessonItemCard({super.key, required this.lessonItem, this.onCompleted});
+  const LessonItemCard({
+    super.key,
+    required this.lessonItem,
+    this.onCompleted,
+    this.isOnHomeScreen,
+  });
 
   @override
   State<LessonItemCard> createState() => _LessonItemCardState();
@@ -303,9 +309,9 @@ class _LessonItemCardState extends State<LessonItemCard> {
     final double screenHeight = MediaQuery.of(context).size.height;
 
     return Card(
-      margin: const EdgeInsets.symmetric(
+      margin: EdgeInsets.symmetric(
         vertical: 10.0,
-        horizontal: 30.0,
+        horizontal: (widget.isOnHomeScreen ?? false) ? 0 : 30.0,
       ), // Reduced vertical margin
       elevation: 4.0,
       shape: RoundedRectangleBorder(

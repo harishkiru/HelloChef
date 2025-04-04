@@ -955,7 +955,7 @@ Bon appétit! 🍽️
               "isCompleted": false,
               "videoPath": "assets/videos/level_1/section_2/video_0.mp4",
               "content":
-                  "Stir-frying is one of the easiest and most versatile cooking techniques, allowing you to create delicious meals with endless variations. In this video, we walk through how to make a flavorful teriyaki chicken stir-fry, covering everything from prepping the ingredients to cooking the perfect rice. With simple steps and helpful cooking tips, you'll learn how to balance flavors, properly cook proteins and vegetables, and bring everything together for a well-rounded dish. Whether you're a beginner or looking to refine your stir-fry skills, this guide will have you cooking with confidence in no time!",
+                  "Stir-frying is one of the easiest and most versatile cooking techniques, allowing you to create delicious meals with endless variations. In this video, we walk through how to make a flavorful teriyaki chicken stir-fry, covering everything from prepping the ingredients to cooking the perfect rice. With simple steps and helpful cooking tips, you'll learn how to balance flavors, properly cook proteins and vegetables, and bring everything together for a well-rounded dish.",
             },
             {
               "id": 3,
@@ -1469,10 +1469,10 @@ Happy cooking! 🍽️
                   {
                     "question": "What is carryover cooking?",
                     "options": [
-                      "Meat continues to cook after being removed from heat because it's still in the pan",
-                      "Meat continues to cook after being removed from heat because the internal temperature is warmer then the external temperature",
-                      "Meat continues to cook after being removed from heat because the warmth from the room is absorbed",
-                      "Meat continues to cook after being removed from heat due to residual heat",
+                      "Internal Meat Layers continue to cook after being removed from heat because it's still in the pan",
+                      "Internal Meat Layers continue to cook after being removed from heat because the internal layers are warmer then the outer layers",
+                      "Internal Meat Layers continue to cook after being removed from heat because the warmth from the room is absorbed",
+                      "Internal Meat Layers continue to cook after being removed from heat due to the heat retained in the outer layers",
                     ],
                     "correctAnswerIndex": 3,
                   },

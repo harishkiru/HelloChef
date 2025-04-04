@@ -608,7 +608,7 @@ class DBHelper {
       final perfectQuizesCompleted =
           result.first['perfectQuizesCompleted'] as int;
       return quizesCompleted <= perfectQuizesCompleted &&
-          perfectQuizesCompleted == 2;
+          perfectQuizesCompleted == 3;
     }
     return false;
   }

@@ -624,7 +624,7 @@ class DBHelper {
     if (result.isNotEmpty) {
       final totalLessonsCompleted =
           result.first['totalLessonsCompleted'] as int;
-      return totalLessonsCompleted >= 37;
+      return totalLessonsCompleted == 37;
     }
     return false;
   }
@@ -639,7 +639,7 @@ class DBHelper {
     );
     if (result.isNotEmpty) {
       final totalRecipesCreated = result.first['totalRecipesCreated'] as int;
-      return totalRecipesCreated >= 6;
+      return totalRecipesCreated == 6;
     }
     return false;
   }

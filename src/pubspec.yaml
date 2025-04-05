@@ -334,15 +334,6 @@ flutter:
 
     - assets/sounds/achievement_unlocked.mp3
 
-    - assets/images/pfp_images/chef_pfp_1.png
-    - assets/images/pfp_images/chef_pfp_2.png
-    - assets/images/pfp_images/chef_pfp_3.png
-    - assets/images/pfp_images/chef_pfp_4.png
-    - assets/images/pfp_images/chef_pfp_5.png
-    - assets/images/pfp_images/chef_pfp_6.png
-    - assets/images/pfp_images/chef_pfp_7.png
-    - assets/images/pfp_images/chef_pfp_8.png
-
     - .env
 
 

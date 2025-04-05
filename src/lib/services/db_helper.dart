@@ -661,7 +661,7 @@ class DBHelper {
       final response =
           await supabase
               .from('users')
-              .select('first_name, last_name')
+              .select('first_name, last_name, pfp_path') // Added pfp_path
               .eq('auth_id', user.id)
               .maybeSingle();
 
@@ -675,6 +675,23 @@ class DBHelper {
   // Add this method to clear cached user details
   void clearCachedUserDetails() {
     _cachedUserDetails = null;
+  }
+
+  // Add this method to DBHelper class
+
+  Future<void> updateUserProfilePicture(String path) async {
+    final user = supabase.auth.currentUser;
+    if (user != null) {
+      await supabase
+          .from('users')
+          .update({'pfp_path': path})
+          .eq('auth_id', user.id);
+      
+      // Clear cached user details to ensure we get the updated profile picture
+      _cachedUserDetails = null;
+    } else {
+      throw Exception('User not authenticated');
+    }
   }
 
   // ********* Supabase XP and Badge Operations **********

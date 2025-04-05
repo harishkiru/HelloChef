@@ -924,7 +924,7 @@ class DBHelper {
     // Get all users ordered by XP (descending)
     final usersData = await supabase
         .from('users')
-        .select('id, auth_id, first_name, last_name, xp, user_rank')
+        .select('id, auth_id, first_name, last_name, xp, user_rank, pfp_path')  // Added pfp_path
         .order('xp', ascending: false);
 
     if (usersData == null || usersData.isEmpty) {
@@ -953,6 +953,7 @@ class DBHelper {
             'lastName': userData['last_name'],
             'xp': userData['xp'],
             'rank': userData['user_rank'],
+            'pfpPath': userData['pfp_path'],  // Include pfp_path in the returned data
             'badgeCount': badgeCounts[userId] ?? 0,
             // Check if this is the current user
             'isCurrentUser':

@@ -7,13 +7,30 @@ import 'package:provider/provider.dart';
 import 'package:src/components/common/dark_mode.dart';
 import 'package:src/screens/leaderboard_screen.dart';
 
-class UserProfileIcon extends StatelessWidget {
+class UserProfileIcon extends StatefulWidget {
   const UserProfileIcon({super.key});
 
   @override
+  State<UserProfileIcon> createState() => _UserProfileIconState();
+}
+
+class _UserProfileIconState extends State<UserProfileIcon> {
+  late Future<Map<String, dynamic>?> _userDetailsFuture;
+  
+  @override
+  void initState() {
+    super.initState();
+    _refreshUserDetails();
+  }
+  
+  void _refreshUserDetails() {
+    _userDetailsFuture = DBHelper.instance().getUserDetails(refresh: true);
+  }
+  
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map<String, dynamic>?>(
-      future: DBHelper.instance().getUserDetails(),
+      future: _userDetailsFuture,
       builder: (context, snapshot) {
         final pfpPath = snapshot.data?['pfp_path'];
         
@@ -22,6 +39,10 @@ class UserProfileIcon extends StatelessWidget {
           child: GestureDetector(
             onTap: () {
               Scaffold.of(context).openEndDrawer();
+              // Refresh user details when drawer opens
+              setState(() {
+                _refreshUserDetails();
+              });
             },
             child: CircleAvatar(
               backgroundImage: pfpPath != null && pfpPath.toString().isNotEmpty
@@ -744,7 +765,7 @@ class UserProfileDrawer extends StatelessWidget {
                 onTap: () async {
                   final selectedPicture = availablePictures[index];
                   try {
-                    Navigator.pop(context); // Close dialog first to show loading indicator
+                    Navigator.pop(context); // Close dialog first
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text('Updating profile picture...'),
@@ -754,7 +775,11 @@ class UserProfileDrawer extends StatelessWidget {
                     
                     await DBHelper.instance().updateUserProfilePicture(selectedPicture);
                     
+                    // Force rebuild of all UserProfileIcon instances
                     if (context.mounted) {
+                      // This rebuilds any ancestors that depend on MediaQuery, including app bar
+                      MediaQuery.of(context).removePadding(removeTop: true);
+                      
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Profile picture updated!'),

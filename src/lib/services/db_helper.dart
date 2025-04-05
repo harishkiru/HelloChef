@@ -645,9 +645,14 @@ class DBHelper {
   }
 
   // ********** Supabase User Operations **********
-  Future<Map<String, dynamic>?> getUserDetails() async {
-    // Return cached data if present.
-    if (_cachedUserDetails != null) {
+  Future<Map<String, dynamic>?> getUserDetails({bool refresh = false}) async {
+    // Clear cache if refresh is requested
+    if (refresh) {
+      _cachedUserDetails = null;
+    }
+    
+    // Return cached data if present and no refresh requested
+    if (_cachedUserDetails != null && !refresh) {
       return _cachedUserDetails;
     }
 
@@ -665,6 +670,11 @@ class DBHelper {
     } else {
       throw Exception('User not authenticated');
     }
+  }
+
+  // Add this method to clear cached user details
+  void clearCachedUserDetails() {
+    _cachedUserDetails = null;
   }
 
   // ********* Supabase XP and Badge Operations **********

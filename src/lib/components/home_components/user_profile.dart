@@ -161,6 +161,9 @@ class UserProfileDrawer extends StatelessWidget {
                   actions: [
                     TextButton(
                       onPressed: () async {
+                        // Clear the user details cache first
+                        DBHelper.instance().clearCachedUserDetails();
+                        // Then sign out
                         await Supabase.instance.client.auth.signOut();
                         if (context.mounted) {
                           Navigator.pushNamedAndRemoveUntil(

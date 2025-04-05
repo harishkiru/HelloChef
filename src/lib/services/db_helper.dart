@@ -4,6 +4,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:src/classes/level.dart';
+import 'dart:async';
 
 class DBHelper {
   // Create a singleton instance of DBHelper
@@ -18,6 +19,10 @@ class DBHelper {
 
   // Cached user details
   Map<String, dynamic>? _cachedUserDetails;
+
+  // Stream controller for profile updates
+  static final StreamController<void> _profileUpdateController = StreamController<void>.broadcast();
+  static Stream<void> get profileUpdates => _profileUpdateController.stream;
 
   // Initialize SQLite Database
   Future<Database> get sqliteDatabase async {
@@ -689,6 +694,9 @@ class DBHelper {
       
       // Clear cached user details to ensure we get the updated profile picture
       _cachedUserDetails = null;
+      
+      // Notify all listeners that the profile was updated
+      _profileUpdateController.add(null);
     } else {
       throw Exception('User not authenticated');
     }

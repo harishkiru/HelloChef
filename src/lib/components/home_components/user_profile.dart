@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:src/components/common/dark_mode.dart';
 import 'package:src/screens/leaderboard_screen.dart';
+import 'dart:async';
 
 class UserProfileIcon extends StatefulWidget {
   const UserProfileIcon({super.key});
@@ -16,11 +17,27 @@ class UserProfileIcon extends StatefulWidget {
 
 class _UserProfileIconState extends State<UserProfileIcon> {
   late Future<Map<String, dynamic>?> _userDetailsFuture;
+  StreamSubscription? _profileSubscription;
   
   @override
   void initState() {
     super.initState();
     _refreshUserDetails();
+    
+    // Listen for profile updates
+    _profileSubscription = DBHelper.profileUpdates.listen((_) {
+      if (mounted) {
+        setState(() {
+          _refreshUserDetails();
+        });
+      }
+    });
+  }
+  
+  @override
+  void dispose() {
+    _profileSubscription?.cancel();
+    super.dispose();
   }
   
   void _refreshUserDetails() {

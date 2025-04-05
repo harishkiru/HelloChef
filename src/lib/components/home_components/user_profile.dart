@@ -299,6 +299,13 @@ class UserProfileDrawer extends StatelessWidget {
                           await dropAllTables(database);
                         });
                         await db.ensureTablesExist();
+                        
+                        // Clear cached user details
+                        DBHelper.instance().clearCachedUserDetails();
+                        
+                        // Sign out from Supabase before closing the app
+                        await Supabase.instance.client.auth.signOut();
+                        
                         SystemNavigator.pop();
                       },
                       child: const Text(

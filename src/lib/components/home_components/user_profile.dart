@@ -6,25 +6,87 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:src/components/common/dark_mode.dart';
 import 'package:src/screens/leaderboard_screen.dart';
+import 'dart:async';
 
-class UserProfileIcon extends StatelessWidget {
+class UserProfileIcon extends StatefulWidget {
   const UserProfileIcon({super.key});
 
   @override
+  State<UserProfileIcon> createState() => _UserProfileIconState();
+}
+
+class _UserProfileIconState extends State<UserProfileIcon> {
+  late Future<Map<String, dynamic>?> _userDetailsFuture;
+  StreamSubscription? _profileSubscription;
+  
+  @override
+  void initState() {
+    super.initState();
+    _refreshUserDetails();
+    
+    // Listen for profile updates
+    _profileSubscription = DBHelper.profileUpdates.listen((_) {
+      if (mounted) {
+        setState(() {
+          _refreshUserDetails();
+        });
+      }
+    });
+  }
+  
+  @override
+  void dispose() {
+    _profileSubscription?.cancel();
+    super.dispose();
+  }
+  
+  void _refreshUserDetails() {
+    _userDetailsFuture = DBHelper.instance().getUserDetails(refresh: true);
+  }
+  
+  @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: const CircleAvatar(
-        backgroundImage: AssetImage('assets/images/profile_placeholder.png'),
-      ),
-      onPressed: () {
-        Scaffold.of(context).openEndDrawer();
-      },
+    return FutureBuilder<Map<String, dynamic>?>(
+      future: _userDetailsFuture,
+      builder: (context, snapshot) {
+        final pfpPath = snapshot.data?['pfp_path'];
+        
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: GestureDetector(
+            onTap: () {
+              Scaffold.of(context).openEndDrawer();
+              // Refresh user details when drawer opens
+              setState(() {
+                _refreshUserDetails();
+              });
+            },
+            child: CircleAvatar(
+              backgroundImage: pfpPath != null && pfpPath.toString().isNotEmpty
+                ? AssetImage(pfpPath.toString())
+                : const AssetImage('assets/images/profile_placeholder.png'),
+              radius: 20,
+            ),
+          ),
+        );
+      }
     );
   }
 }
 
 class UserProfileDrawer extends StatelessWidget {
   const UserProfileDrawer({super.key});
+
+  static const List<String> availablePictures = [
+    'assets/images/pfp_images/chef_pfp_1.png',
+    'assets/images/pfp_images/chef_pfp_2.png',
+    'assets/images/pfp_images/chef_pfp_3.png',
+    'assets/images/pfp_images/chef_pfp_4.png',
+    'assets/images/pfp_images/chef_pfp_5.png',
+    'assets/images/pfp_images/chef_pfp_6.png',
+    'assets/images/pfp_images/chef_pfp_7.png',
+    'assets/images/pfp_images/chef_pfp_8.png',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +101,7 @@ class UserProfileDrawer extends StatelessWidget {
             child: DrawerHeader(
               decoration: const BoxDecoration(color: Colors.green),
               child: FutureBuilder<Map<String, dynamic>?>(
-                future: DBHelper.instance().getUserDetails(),
+                future: DBHelper.instance().getUserDetails(refresh: true), // Always get fresh data
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(
@@ -52,15 +114,23 @@ class UserProfileDrawer extends StatelessWidget {
                         snapshot.data?['first_name']?.toString() ?? 'First';
                     final lastName =
                         snapshot.data?['last_name']?.toString() ?? 'Last';
+                    final pfpPath = snapshot.data?['pfp_path'];
+                    
                     return Row(
                       children: [
-                        const CircleAvatar(
-                          backgroundImage: AssetImage(
-                            'assets/images/profile_placeholder.png',
+                        Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.white, width: 2),
                           ),
-                          radius: 30,
+                          child: CircleAvatar(
+                            backgroundImage: pfpPath != null && pfpPath.toString().isNotEmpty
+                              ? AssetImage(pfpPath.toString())
+                              : const AssetImage('assets/images/profile_placeholder.png'),
+                            radius: 20, // Increased size to be more prominent in the header
+                          ),
                         ),
-                        const SizedBox(width: 10),
+                        const SizedBox(width: 20),
                         Expanded(
                           child: Text(
                             '$firstName $lastName',
@@ -129,6 +199,24 @@ class UserProfileDrawer extends StatelessWidget {
             },
           ),
           
+          // Profile Picture Option
+          ListTile(
+            leading: Icon(
+              Icons.account_circle,
+              color: isDarkMode ? Colors.green[300] : Colors.green[700],
+            ),
+            title: Text(
+              'Change Profile Picture',
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodyLarge?.color,
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context); // Close drawer
+              _showProfilePictureSelector(context);
+            },
+          ),
+          
           // Logout Option
           ListTile(
             leading: Icon(
@@ -161,6 +249,9 @@ class UserProfileDrawer extends StatelessWidget {
                   actions: [
                     TextButton(
                       onPressed: () async {
+                        // Clear the user details cache first
+                        DBHelper.instance().clearCachedUserDetails();
+                        // Then sign out
                         await Supabase.instance.client.auth.signOut();
                         if (context.mounted) {
                           Navigator.pushNamedAndRemoveUntil(
@@ -225,6 +316,13 @@ class UserProfileDrawer extends StatelessWidget {
                           await dropAllTables(database);
                         });
                         await db.ensureTablesExist();
+                        
+                        // Clear cached user details
+                        DBHelper.instance().clearCachedUserDetails();
+                        
+                        // Sign out from Supabase before closing the app
+                        await Supabase.instance.client.auth.signOut();
+                        
                         SystemNavigator.pop();
                       },
                       child: const Text(
@@ -662,5 +760,96 @@ class UserProfileDrawer extends StatelessWidget {
         color: Colors.amber[600],
       );
     }
+  }
+
+  void _showProfilePictureSelector(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+          'Select Profile Picture',
+          style: TextStyle(
+            color: Theme.of(context).textTheme.bodyLarge?.color,
+          ),
+        ),
+        content: SizedBox(
+          width: 300,
+          height: 300,
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+            ),
+            itemCount: availablePictures.length,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () async {
+                  final selectedPicture = availablePictures[index];
+                  try {
+                    Navigator.pop(context); // Close dialog first
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Updating profile picture...'),
+                        duration: Duration(seconds: 1),
+                      ),
+                    );
+                    
+                    await DBHelper.instance().updateUserProfilePicture(selectedPicture);
+                    
+                    // Force rebuild of all UserProfileIcon instances
+                    if (context.mounted) {
+                      // This rebuilds any ancestors that depend on MediaQuery, including app bar
+                      MediaQuery.of(context).removePadding(removeTop: true);
+                      
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Profile picture updated!'),
+                          backgroundColor: Colors.green,
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                    }
+                  } catch (e) {
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Error updating profile picture'),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    }
+                  }
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: isDarkMode ? Colors.grey[700]! : Colors.grey[300]!),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(9),
+                    child: Image.asset(
+                      availablePictures[index],
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text(
+              'Cancel',
+              style: TextStyle(color: Colors.green),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

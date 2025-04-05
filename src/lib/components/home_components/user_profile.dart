@@ -134,16 +134,45 @@ class UserProfileDrawer extends StatelessWidget {
                     
                     return Row(
                       children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white, width: 2),
-                          ),
-                          child: CircleAvatar(
-                            backgroundImage: pfpPath != null && pfpPath.toString().isNotEmpty
-                              ? AssetImage(pfpPath.toString())
-                              : const AssetImage('assets/images/profile_placeholder.png'),
-                            radius: 20, // Increased size to be more prominent in the header
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context); // Close the drawer first
+                            _showProfilePictureSelector(context);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(color: Colors.white, width: 2),
+                            ),
+                            child: Stack(
+                              children: [
+                                CircleAvatar(
+                                  backgroundImage: pfpPath != null && pfpPath.toString().isNotEmpty
+                                    ? AssetImage(pfpPath.toString())
+                                    : const AssetImage('assets/images/profile_placeholder.png'),
+                                  radius: 20, // Maintain existing size
+                                ),
+                                // Add a subtle indicator to show it's tappable
+                                Positioned(
+                                  right: 0,
+                                  bottom: 0,
+                                  child: Container(
+                                    width: 16,
+                                    height: 16,
+                                    decoration: BoxDecoration(
+                                      color: Colors.green[700],
+                                      shape: BoxShape.circle,
+                                      border: Border.all(color: Colors.white, width: 1),
+                                    ),
+                                    child: const Icon(
+                                      Icons.edit,
+                                      color: Colors.white,
+                                      size: 10,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         const SizedBox(width: 20),

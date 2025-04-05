@@ -56,16 +56,32 @@ class _UserProfileIconState extends State<UserProfileIcon> {
           child: GestureDetector(
             onTap: () {
               Scaffold.of(context).openEndDrawer();
-              // Refresh user details when drawer opens
               setState(() {
                 _refreshUserDetails();
               });
             },
-            child: CircleAvatar(
-              backgroundImage: pfpPath != null && pfpPath.toString().isNotEmpty
-                ? AssetImage(pfpPath.toString())
-                : const AssetImage('assets/images/profile_placeholder.png'),
-              radius: 20,
+            child: Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.white, width: 1),
+              ),
+              child: ClipOval(
+                child: pfpPath != null && pfpPath.toString().isNotEmpty
+                  ? Image.asset(
+                      pfpPath.toString(),
+                      fit: BoxFit.cover, // This ensures image fills the circle completely
+                      width: 40,
+                      height: 40,
+                    )
+                  : Image.asset(
+                      'assets/images/profile_placeholder.png',
+                      fit: BoxFit.cover,
+                      width: 40,
+                      height: 40,
+                    ),
+              ),
             ),
           ),
         );

@@ -4,7 +4,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:src/classes/level.dart';
-import 'dart:async';
 
 class DBHelper {
   // Create a singleton instance of DBHelper
@@ -19,10 +18,6 @@ class DBHelper {
 
   // Cached user details
   Map<String, dynamic>? _cachedUserDetails;
-
-  // Stream controller for profile updates
-  static final StreamController<void> _profileUpdateController = StreamController<void>.broadcast();
-  static Stream<void> get profileUpdates => _profileUpdateController.stream;
 
   // Initialize SQLite Database
   Future<Database> get sqliteDatabase async {
@@ -650,14 +645,9 @@ class DBHelper {
   }
 
   // ********** Supabase User Operations **********
-  Future<Map<String, dynamic>?> getUserDetails({bool refresh = false}) async {
-    // Clear cache if refresh is requested
-    if (refresh) {
-      _cachedUserDetails = null;
-    }
-    
-    // Return cached data if present and no refresh requested
-    if (_cachedUserDetails != null && !refresh) {
+  Future<Map<String, dynamic>?> getUserDetails() async {
+    // Return cached data if present.
+    if (_cachedUserDetails != null) {
       return _cachedUserDetails;
     }
 
@@ -666,37 +656,12 @@ class DBHelper {
       final response =
           await supabase
               .from('users')
-              .select('first_name, last_name, pfp_path') // Added pfp_path
+              .select('first_name, last_name')
               .eq('auth_id', user.id)
               .maybeSingle();
 
       _cachedUserDetails = response;
       return _cachedUserDetails;
-    } else {
-      throw Exception('User not authenticated');
-    }
-  }
-
-  // Add this method to clear cached user details
-  void clearCachedUserDetails() {
-    _cachedUserDetails = null;
-  }
-
-  // Add this method to DBHelper class
-
-  Future<void> updateUserProfilePicture(String path) async {
-    final user = supabase.auth.currentUser;
-    if (user != null) {
-      await supabase
-          .from('users')
-          .update({'pfp_path': path})
-          .eq('auth_id', user.id);
-      
-      // Clear cached user details to ensure we get the updated profile picture
-      _cachedUserDetails = null;
-      
-      // Notify all listeners that the profile was updated
-      _profileUpdateController.add(null);
     } else {
       throw Exception('User not authenticated');
     }
@@ -932,7 +897,7 @@ class DBHelper {
     // Get all users ordered by XP (descending)
     final usersData = await supabase
         .from('users')
-        .select('id, auth_id, first_name, last_name, xp, user_rank, pfp_path')  // Added pfp_path
+        .select('id, auth_id, first_name, last_name, xp, user_rank')
         .order('xp', ascending: false);
 
     if (usersData == null || usersData.isEmpty) {
@@ -961,7 +926,6 @@ class DBHelper {
             'lastName': userData['last_name'],
             'xp': userData['xp'],
             'rank': userData['user_rank'],
-            'pfpPath': userData['pfp_path'],  // Include pfp_path in the returned data
             'badgeCount': badgeCounts[userId] ?? 0,
             // Check if this is the current user
             'isCurrentUser':

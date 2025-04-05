@@ -121,18 +121,32 @@ class LeaderboardScreenState extends State<LeaderboardScreen> {
                         leading: Container(
                           width: 36,
                           height: 36,
-                          alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: _getPositionColor(index, isDarkMode),
                             shape: BoxShape.circle,
+                            color: user['pfpPath'] == null ? _getPositionColor(index, isDarkMode) : null,
+                            border: user['pfpPath'] != null ? Border.all(
+                              color: _getPositionColor(index, isDarkMode),
+                              width: 2,
+                            ) : null,
                           ),
-                          child: Text(
-                            '${index + 1}',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          child: user['pfpPath'] != null && user['pfpPath'].toString().isNotEmpty
+                            ? ClipOval(
+                                child: Image.asset(
+                                  user['pfpPath'],
+                                  width: 36,
+                                  height: 36,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            : Center(
+                                child: Text(
+                                  '${index + 1}',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
                         ),
                         title: Row(
                           children: [
@@ -270,6 +284,30 @@ class LeaderboardScreenState extends State<LeaderboardScreen> {
                   padding: const EdgeInsets.all(16),
                   child: Column(
                     children: [
+                      Container(
+                        width: 60,
+                        height: 60,
+                        margin: const EdgeInsets.only(bottom: 12),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.white, width: 2),
+                          color: Colors.white,
+                        ),
+                        child: user['pfpPath'] != null && user['pfpPath'].toString().isNotEmpty
+                          ? ClipOval(
+                              child: Image.asset(
+                                user['pfpPath'],
+                                width: 60,
+                                height: 60,
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                          : const Icon(
+                              Icons.person,
+                              size: 40,
+                              color: Colors.green,
+                            ),
+                      ),
                       Text(
                         '$firstName $lastName',
                         style: const TextStyle(

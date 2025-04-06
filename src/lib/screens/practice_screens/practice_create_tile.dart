@@ -13,7 +13,7 @@ class TileMaker extends StatelessWidget {
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      clipBehavior: Clip.antiAlias, // Ensures the image doesn't overflow
+      clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: () {
           Navigator.push(
@@ -26,13 +26,11 @@ class TileMaker extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Image section - reduced flex slightly to give more room for text
             Expanded(
-              flex: 6, // Reduced from 7 to 6
+              flex: 6,
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  // Image with error handling
                   Image.network(
                     item.imageUrl,
                     fit: BoxFit.cover,
@@ -56,7 +54,6 @@ class TileMaker extends StatelessWidget {
                     },
                   ),
                   
-                  // Difficulty badge
                   Positioned(
                     top: 8,
                     right: 8,
@@ -80,22 +77,21 @@ class TileMaker extends StatelessWidget {
               ),
             ),
             
-            // Text section - increased flex for more space
             Expanded(
-              flex: 4, // Increased from 3 to 4
+              flex: 4,
               child: Container(
                 color: isDarkMode ? Colors.green : Colors.green,
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6), // Reduced padding
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                 child: Center(
                   child: Column(
-                    mainAxisSize: MainAxisSize.min, // Use minimum space needed
+                    mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
                         item.title,
                         style: TextStyle(
-                          fontSize: 13, // Slightly reduced font size
+                          fontSize: 13,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
@@ -104,11 +100,11 @@ class TileMaker extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                       if (item.subtitle.isNotEmpty) ...[
-                        SizedBox(height: 2), // Smaller spacing
+                        SizedBox(height: 2),
                         Text(
                           item.subtitle,
                           style: TextStyle(
-                            fontSize: 11, // Slightly reduced font size
+                            fontSize: 11,
                             color: Colors.white.withOpacity(0.9),
                           ),
                           textAlign: TextAlign.center,
@@ -127,7 +123,7 @@ class TileMaker extends StatelessWidget {
     );
   }
   
-  // Helper method to get appropriate color for difficulty level
+  // helper method to get appropriate color for difficulty level
   Color _getDifficultyColor(Difficulty difficulty, bool isDarkMode) {
     switch (difficulty) {
       case Difficulty.easy:
@@ -141,7 +137,7 @@ class TileMaker extends StatelessWidget {
     }
   }
   
-  // Helper method to get appropriate text for difficulty level
+  // helper method to get appropriate text for difficulty level
   String _getDifficultyText(Difficulty difficulty) {
     switch (difficulty) {
       case Difficulty.easy:

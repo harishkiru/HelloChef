@@ -3,43 +3,41 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 
 class ThemeProvider extends ChangeNotifier {
-  // Key for storing theme preference
+  // storing theme preference
   static const String _themePreferenceKey = 'isDarkMode';
   
-  // Default to light mode
+  // default is light mode
   bool _isDarkMode = false;
   
   bool get isDarkMode => _isDarkMode;
   
-  // Initialize the theme provider
   ThemeProvider() {
     _loadThemeFromPrefs();
   }
   
-  // Load the theme preference from SharedPreferences
+  // load the theme preference from SharedPreferences
   Future<void> _loadThemeFromPrefs() async {
     final prefs = await SharedPreferences.getInstance();
     _isDarkMode = prefs.getBool(_themePreferenceKey) ?? false;
     notifyListeners();
   }
   
-  // Toggle between light and dark mode
+  // toggle between light and dark mode
   Future<void> toggleTheme() async {
     _isDarkMode = !_isDarkMode;
-    
-    // Save the preference
+
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_themePreferenceKey, _isDarkMode);
     
     notifyListeners();
   }
   
-  // Get the appropriate theme based on the current mode
+  // get the appropriate theme based on the current mode
   ThemeData getTheme() {
     return _isDarkMode ? _darkTheme : _lightTheme;
   }
   
-  // Light theme definition
+  // light theme definition
   static final ThemeData _lightTheme = ThemeData(
     brightness: Brightness.light,
     primarySwatch: Colors.green,
@@ -61,7 +59,7 @@ class ThemeProvider extends ChangeNotifier {
     ),
   );
   
-  // Dark theme definition
+  // dark theme definition
   static final ThemeData _darkTheme = ThemeData(
     brightness: Brightness.dark,
     primarySwatch: Colors.green,
@@ -85,7 +83,7 @@ class ThemeProvider extends ChangeNotifier {
   );
 }
 
-// Helper extension to easily access ThemeProvider from any BuildContext
+// helper extension to easily access this from any BuildContext
 extension ThemeContextExtension on BuildContext {
   ThemeProvider get themeProvider => Provider.of<ThemeProvider>(this, listen: false);
 }

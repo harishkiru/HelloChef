@@ -3,12 +3,12 @@ import 'package:src/classes/quiz.dart';
 class LessonItem {
   final int id;
   final String title;
-  final int type; // 0: content, 1: video, 2: quiz
+  final int type;
   final String imagePath;
   final String? videoPath;
   final String? content;
   final Quiz? quiz;
-  final int? quizId; // Used for quiz type
+  final int? quizId;
   final List<Map<String, dynamic>>? buttonDetails;
   final String? description;
 

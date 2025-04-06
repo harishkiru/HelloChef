@@ -15,21 +15,17 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  // Controllers for managing text input in form fields
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
 
-  // Supabase client instance for database and authentication operations
   final SupabaseClient client = Supabase.instance.client;
 
-  // Boolean to track loading state for UI updates
   bool isLoading = false;
 
-  // Function to create a new user with the provided details
+  // create a new user with the provided details
   Future<bool> createUser({
     required final String email,
     required final String password,
@@ -42,22 +38,18 @@ class _SignUpPageState extends State<SignUpPage> {
     });
 
     try {
-      // Check if password and confirmation password match
       if (password != confirmPassword) {
         context.showErrorMessage("Passwords do not match");
         return false;
       }
 
-      // Sign up the user using Supabase authentication
       final response = await client.auth.signUp(
         email: email,
         password: password,
       );
 
-      // Retrieve the user's ID after successful sign-up
       final userId = response.user!.id;
 
-      // Insert additional user details into the 'users' table
       await client.from('users').insert({
         'auth_id': userId,
         'email': email,
@@ -65,14 +57,13 @@ class _SignUpPageState extends State<SignUpPage> {
         'last_name': lastName,
       });
 
-      return true; // Return true if sign-up is successful
+      return true;
     } catch (e) {
-      // Display a user friendly error message if sign-up fails
 
       if (mounted) {
         context.showErrorMessage('Sign up failed. Please try again.');
       }
-      return false; // Return false on failure
+      return false;
     } finally {
       setState(() {
         isLoading = false;
@@ -80,14 +71,13 @@ class _SignUpPageState extends State<SignUpPage> {
     }
   }
 
-  // Add Google sign-in method
+  // google sign-in method
   Future<void> _handleGoogleSignIn() async {
     setState(() {
       isLoading = true;
     });
 
     try {
-      // Initialize with your web client ID from .env
       final GoogleSignIn googleSignIn = GoogleSignIn(
         serverClientId: dotenv.env['GOOGLE_CLIENT_ID'],
         scopes: ['email', 'profile'],
@@ -119,29 +109,23 @@ class _SignUpPageState extends State<SignUpPage> {
         final user = res.session!.user;
 
         try {
-          // Check if user exists in your custom users table
           await client.from('users').select().eq('auth_id', user.id).single();
 
-          // User exists, navigate to home
           if (mounted) {
             Navigator.pushReplacementNamed(context, '/home');
           }
         } catch (e) {
-          // User doesn't exist in custom table, create entry
           String firstName = '';
           String lastName = '';
 
-          // Better name splitting logic
           if (googleUser.displayName != null) {
             final nameParts = googleUser.displayName!.trim().split(' ');
             if (nameParts.length > 1) {
-              // If there are multiple parts, first part is firstName, rest is lastName
               firstName = nameParts.first;
               lastName = nameParts
                   .skip(1)
-                  .join(' '); // Join all remaining parts for lastName
+                  .join(' ');
             } else if (nameParts.length == 1) {
-              // If only one part, use it as firstName
               firstName = nameParts.first;
               lastName = '';
             }
@@ -191,20 +175,16 @@ class _SignUpPageState extends State<SignUpPage> {
     double scaleFactor = 1.0;
     double logosize = 150.0;
 
-    // Apply scaling for screens under 600 logical pixels
     if (screenHeight < 650) {
       scaleFactor = 0.98;
       logosize = 120.0;
     }
 
-    // Build the content widget
     Widget content = Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        // Display an icon at the top
         Icon(Icons.kitchen, size: logosize, color: Colors.green),
-        // Display the app's name with styling
         const Text(
           'Hello Chef',
           style: TextStyle(
@@ -213,7 +193,6 @@ class _SignUpPageState extends State<SignUpPage> {
             color: Colors.green,
           ),
         ),
-        // Text fields for user input
         MyTextFormField(
           controller: _firstNameController,
           label: const Text('First Name'),
@@ -239,7 +218,6 @@ class _SignUpPageState extends State<SignUpPage> {
           label: const Text('Confirm Password'),
           obscureText: true,
         ),
-        // Button to trigger sign-up
         MyButton(
           onTap:
               isLoading
@@ -256,7 +234,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       Navigator.pushReplacementNamed(
                         context,
                         '/home',
-                      ); // Changed from pushNamed to pushReplacementNamed
+                      );
                     }
                   },
           child:
@@ -278,10 +256,9 @@ class _SignUpPageState extends State<SignUpPage> {
             minimumSize: const Size(double.infinity, 50),
           ),
         ),
-        // Wrap the TextButton in SafeBottomPadding
         SafeBottomPadding(
           extraPadding:
-              screenHeight * 0.05, // Dynamic padding based on screen height
+              screenHeight * 0.05,
           child: TextButton(
             onPressed: () {
               Navigator.pushNamed(context, '/login');
@@ -301,7 +278,7 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Padding(
             padding: const EdgeInsets.symmetric(
               vertical: 20.0,
-              horizontal: 24.0, // Added horizontal padding for consistency
+              horizontal: 24.0,
             ),
             child: Transform.scale(scale: scaleFactor, child: content),
           ),

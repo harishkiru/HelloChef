@@ -24,7 +24,7 @@ class _LevelSectionScreenState extends State<LevelSectionScreen> {
     _refreshSections();
   }
 
-  // Function to refresh sections data
+  // refresh sections data
   void _refreshSections() {
     setState(() {
       _sectionsFuture = getAllSectionsFromLevel(widget.level.id);
@@ -53,14 +53,11 @@ class _LevelSectionScreenState extends State<LevelSectionScreen> {
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     
-    // Adaptive colors
     final Color subtitleBgColor = isDarkMode 
-        ? Color(0xFF1A3020) // Dark green background for dark mode
-        : Colors.green.shade50;
+        ? Color(0xFF1A3020) : Colors.green.shade50;
     
     final Color subtitleTextColor = isDarkMode
-        ? Colors.green.shade300 // Lighter green text for dark mode
-        : Colors.green.shade800;
+        ? Colors.green.shade300 : Colors.green.shade800;
         
     return Scaffold(
       appBar: AppBar(
@@ -141,7 +138,6 @@ class _LevelSectionScreenState extends State<LevelSectionScreen> {
                                       ),
                                 ),
                               ).then((_) {
-                                // Always refresh when returning from lesson section
                                 _refreshSections();
                               });
                             },

@@ -78,7 +78,6 @@ class _MarkdownViewerScreenState extends State<MarkdownViewerScreen> {
                     return Image.asset(uri.toString());
                   },
                   styleSheet: MarkdownStyleSheet(
-                    // Use theme text colors
                     p: TextStyle(
                       color: Theme.of(context).textTheme.bodyLarge?.color,
                     ),
@@ -86,17 +85,13 @@ class _MarkdownViewerScreenState extends State<MarkdownViewerScreen> {
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color:
-                          isDarkMode
-                              ? Colors.green.shade300
-                              : Colors.green.shade800,
+                          isDarkMode ? Colors.green.shade300 : Colors.green.shade800,
                     ),
                     h2: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                       color:
-                          isDarkMode
-                              ? Colors.green.shade300
-                              : Colors.green.shade800,
+                          isDarkMode ? Colors.green.shade300 : Colors.green.shade800,
                     ),
                     h3: TextStyle(
                       fontSize: 18,
@@ -116,27 +111,19 @@ class _MarkdownViewerScreenState extends State<MarkdownViewerScreen> {
                     ),
                     blockquote: TextStyle(
                       color:
-                          isDarkMode
-                              ? Colors.grey.shade300
-                              : Colors.grey.shade700,
+                          isDarkMode ? Colors.grey.shade300 : Colors.grey.shade700,
                       fontStyle: FontStyle.italic,
                     ),
                     code: TextStyle(
                       fontFamily: 'monospace',
                       backgroundColor:
-                          isDarkMode
-                              ? Colors.grey.shade800
-                              : Colors.grey.shade200,
+                          isDarkMode ? Colors.grey.shade800 : Colors.grey.shade200,
                       color:
-                          isDarkMode
-                              ? Colors.green.shade300
-                              : Colors.green.shade700,
+                          isDarkMode ? Colors.green.shade300 : Colors.green.shade700,
                     ),
                     codeblockDecoration: BoxDecoration(
                       color:
-                          isDarkMode
-                              ? Colors.grey.shade900
-                              : Colors.grey.shade200,
+                          isDarkMode ? Colors.grey.shade900 : Colors.grey.shade200,
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),

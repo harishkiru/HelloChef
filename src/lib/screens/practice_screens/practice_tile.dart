@@ -9,7 +9,7 @@ class PracticeTile {
   final List<Map<String, String>> ingredients;
   final Difficulty difficulty;
   final Category category;
-  final String youtubeUrl; // ✅ Added
+  final String youtubeUrl;
 
   PracticeTile({
     required this.imageUrl,
@@ -19,7 +19,7 @@ class PracticeTile {
     required this.ingredients,
     required this.difficulty,
     required this.category,
-    required this.youtubeUrl, // ✅ Added
+    required this.youtubeUrl,
   });
 
   factory PracticeTile.fromJson(Map<String, dynamic> json) {
@@ -40,7 +40,7 @@ class PracticeTile {
       ingredients: parsedIngredients,
       difficulty: _mapDifficulty(json['difficulty']),
       category: _mapCategory(json['strCategory']),
-      youtubeUrl: json['strYoutube'] ?? '', // ✅ Added
+      youtubeUrl: json['strYoutube'] ?? '',
     );
   }
 }

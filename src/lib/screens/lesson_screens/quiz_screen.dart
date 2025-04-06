@@ -25,19 +25,10 @@ class _QuizScreenState extends State<QuizScreen> {
     final question = widget.quiz.questions[currentQuestionIndex];
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
-    // Define adaptive colors for various states
-    final correctBgColor =
-        isDarkMode
-            ? Colors.green.shade900.withOpacity(0.5)
-            : Colors.green.shade100;
-    final wrongBgColor =
-        isDarkMode ? Colors.red.shade900.withOpacity(0.5) : Colors.red.shade100;
-    final selectedBgColor =
-        isDarkMode
-            ? Colors.blue.shade900.withOpacity(0.5)
-            : Colors.blue.shade100;
-    final borderColor =
-        isDarkMode ? Colors.grey.shade600 : Colors.grey.shade300;
+    final correctBgColor = isDarkMode ? Colors.green.shade900.withOpacity(0.5) : Colors.green.shade100;
+    final wrongBgColor = isDarkMode ? Colors.red.shade900.withOpacity(0.5) : Colors.red.shade100;
+    final selectedBgColor = isDarkMode ? Colors.blue.shade900.withOpacity(0.5) : Colors.blue.shade100;
+    final borderColor = isDarkMode ? Colors.grey.shade600 : Colors.grey.shade300;
 
     return Scaffold(
       appBar: AppBar(
@@ -59,7 +50,6 @@ class _QuizScreenState extends State<QuizScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Progress info
               Text(
                 'Question ${currentQuestionIndex + 1}/${widget.quiz.questions.length}',
                 style: TextStyle(
@@ -79,7 +69,6 @@ class _QuizScreenState extends State<QuizScreen> {
 
               const SizedBox(height: 20),
 
-              // Question
               Text(
                 question.question,
                 style: TextStyle(
@@ -91,7 +80,6 @@ class _QuizScreenState extends State<QuizScreen> {
 
               const SizedBox(height: 16),
 
-              // Image if available
               if (question.imagePath != null)
                 Container(
                   height: 200,
@@ -107,7 +95,6 @@ class _QuizScreenState extends State<QuizScreen> {
 
               const SizedBox(height: 24),
 
-              // Options
               ...List.generate(question.options.length, (index) {
                 final isSelected = selectedAnswerIndex == index;
                 final isCorrect =
@@ -209,7 +196,6 @@ class _QuizScreenState extends State<QuizScreen> {
 
               const SizedBox(height: 24),
 
-              // Submit button or Next button
               SafeBottomPadding(
                 extraPadding: 16.0,
                 child:
@@ -259,8 +245,7 @@ class _QuizScreenState extends State<QuizScreen> {
                           ),
                         )
                         : GamificationWidget(
-                          score:
-                              score + 1, // Add 1 to include the last question
+                          score: score + 1, // add 1 to include the last question
                           totalQuestions: widget.quiz.questions.length,
                           isQuiz: true,
                           lessonItem: widget.lessonItem,

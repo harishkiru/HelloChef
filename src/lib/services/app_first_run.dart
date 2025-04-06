@@ -5,7 +5,7 @@ Future<void> insertInitialData(
   Database db,
   List<Map<String, dynamic>> levels,
 ) async {
-  // Add marker to first run table to signify that the app has been run before
+  // add marker to first run table to signify that the app has been run before
 
   await db.execute('''
       INSERT INTO FirstRun (isFirstRun)
@@ -13,7 +13,6 @@ Future<void> insertInitialData(
     ''');
 
   for (var level in levels) {
-    // Insert Level
     await db.execute(
       '''
       INSERT INTO Levels (level, title, subtitle, imagePath, isCompleted)
@@ -28,12 +27,10 @@ Future<void> insertInitialData(
       ],
     );
 
-    // Get the last inserted levelId
     var levelIdResult = await db.rawQuery('SELECT last_insert_rowid()');
     int levelId = levelIdResult.first['last_insert_rowid()'] as int;
 
     for (var section in level['sections']) {
-      // Insert Section
       await db.execute(
         '''
         INSERT INTO Sections (levelId, title, subtitle, imagePath, completedLessons, totalLessons)
@@ -49,12 +46,10 @@ Future<void> insertInitialData(
         ],
       );
 
-      // Get the last inserted sectionId
       var sectionIdResult = await db.rawQuery('SELECT last_insert_rowid()');
       int sectionId = sectionIdResult.first['last_insert_rowid()'] as int;
 
       for (var lesson in section['lessons']) {
-        // Insert Lesson
         await db.execute(
           '''
           INSERT INTO Lessons (sectionId, title, type, imagePath, isCompleted, content, videoPath, quizId)
@@ -72,11 +67,9 @@ Future<void> insertInitialData(
           ],
         );
 
-        // Get the last inserted lessonId
         var lessonIdResult = await db.rawQuery('SELECT last_insert_rowid()');
         int lessonId = lessonIdResult.first['last_insert_rowid()'] as int;
 
-        // Insert InteractiveButtons if they exist
         if (lesson['buttonDetails'] != null) {
           for (var button in lesson['buttonDetails']) {
             await db.execute(
@@ -97,11 +90,9 @@ Future<void> insertInitialData(
           }
         }
 
-        // Insert Quiz and QuizQuestions if they exist
         if (lesson['quiz'] != null) {
           var quiz = lesson['quiz'];
 
-          // Insert Quiz
           await db.execute(
             '''
             INSERT INTO Quizzes (title, description)
@@ -110,11 +101,9 @@ Future<void> insertInitialData(
             [quiz['title'], quiz['description']],
           );
 
-          // Get the last inserted quizId
           var quizIdResult = await db.rawQuery('SELECT last_insert_rowid()');
           int quizId = quizIdResult.first['last_insert_rowid()'] as int;
 
-          // Update the lesson with the quizId
           await db.execute(
             '''
             UPDATE Lessons SET quizId = ? WHERE id = ?
@@ -122,7 +111,6 @@ Future<void> insertInitialData(
             [quizId, lessonId],
           );
 
-          // Insert QuizQuestions
           for (var question in quiz['questions']) {
             await db.execute(
               '''
@@ -134,7 +122,7 @@ Future<void> insertInitialData(
                 question['question'],
                 question['options'].join(
                   ',',
-                ), // Convert list to comma-separated string
+                ),
                 question['imagePath'],
                 question['videoPath'],
                 question['correctAnswerIndex'],
@@ -148,16 +136,13 @@ Future<void> insertInitialData(
 }
 
 Future<bool> checkIfFirstRun(Database db) async {
-  // Check if the FirstRun table exists
   List<Map<String, dynamic>> result = await db.rawQuery(
     'SELECT name FROM sqlite_master WHERE type = "table" AND name = "FirstRun"',
   );
 
   if (result.isEmpty) {
-    // If the table doesn't exist, it means this is the first run
     return true;
   } else {
-    // If the table exists, check if it's empty
     List<Map<String, dynamic>> firstRunResult = await db.rawQuery(
       'SELECT * FROM FirstRun',
     );
@@ -166,14 +151,10 @@ Future<bool> checkIfFirstRun(Database db) async {
 }
 
 Future<void> appFirstRun() async {
-  // Get the database helper and ensure tables exist first
   final dbHelper = DBHelper.instance();
-  //await dbHelper.ensureTablesExist();
 
-  // Only after tables are confirmed to exist, get the database and insert data
   final db = await dbHelper.sqliteDatabase;
 
-  // Your JSON data
   List<Map<String, dynamic>> levels = [
     {
       "id": 0,
@@ -2021,10 +2002,7 @@ Happy baking! 🍰🍽️
     },
   ];
 
-  // Call the function to insert data
-
   try {
-    // Check if this is the first run
     if (await checkIfFirstRun(db)) {
       print("This is the first run of the app");
       await insertInitialData(db, levels);

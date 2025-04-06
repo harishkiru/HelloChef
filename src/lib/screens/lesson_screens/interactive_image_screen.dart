@@ -38,14 +38,12 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
   }
 
   List<Widget> makeButtons() {
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     List<Widget> buttons = [];
 
     for (var button in widget.buttonDetails) {
       final buttonName = button['name'] as String;
       final isHighlighted = highlightedButton == buttonName || showHints;
 
-      // Calculate exact positions and sizes
       final double top =
           MediaQuery.of(context).size.height * (button['position_y']! as num);
       final double left =
@@ -58,7 +56,6 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
       buttons.add(
         Stack(
           children: [
-            // The button itself with exact positioning
             Positioned(
               top: top,
               left: left,
@@ -150,14 +147,13 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
               ),
             ),
 
-            // The label positioned above the button
             if (isHighlighted)
               Positioned(
-                top: top - 24, // Position just above the button
+                top: top - 24,
                 left:
                     left +
                     (width / 2) -
-                    40, // Horizontally center the label above the button
+                    40,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
@@ -186,7 +182,7 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
 
     showModalBottomSheet(
       context: context,
-      backgroundColor: Theme.of(context).cardColor, // Use theme color
+      backgroundColor: Theme.of(context).cardColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -237,7 +233,6 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
                           highlightedButton = item['name'] as String;
                         });
 
-                        // Show dialog for the item
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
@@ -313,7 +308,6 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
     final screenHeight = MediaQuery.of(context).size.height;
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
-    // Define adaptive colors based on theme
     final Color containerBgColor =
         isDarkMode
             ? Colors.green.shade900.withOpacity(0.2)
@@ -372,9 +366,7 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
                 boxShadow: [
                   BoxShadow(
                     color:
-                        isDarkMode
-                            ? Colors.black.withOpacity(0.3)
-                            : Colors.black.withOpacity(0.1),
+                        isDarkMode ? Colors.black.withOpacity(0.3) : Colors.black.withOpacity(0.1),
                     offset: Offset(0, 2),
                     blurRadius: 4,
                   ),
@@ -391,9 +383,7 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                         color:
-                            isDarkMode
-                                ? Colors.green.shade400
-                                : Colors.green.shade800,
+                            isDarkMode ? Colors.green.shade400 : Colors.green.shade800,
                       ),
                     ),
                   ),

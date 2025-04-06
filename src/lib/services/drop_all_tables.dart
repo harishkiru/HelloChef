@@ -4,16 +4,14 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:src/services/db_helper.dart';
 
 Future<void> dropAllTables(Database db) async {
-  // Get the list of all tables
   List<Map<String, dynamic>> tables = await db.rawQuery(
     'SELECT name FROM sqlite_master WHERE type = "table"',
   );
 
-  // Drop each table
   for (var table in tables) {
     String tableName = table['name'];
     if (tableName != 'sqlite_sequence') {
-      // Skip the sqlite_sequence table
+      // skip the sqlite_sequence table
       await db.execute('DROP TABLE IF EXISTS $tableName');
     }
     print('Dropped table: $tableName');
@@ -21,7 +19,6 @@ Future<void> dropAllTables(Database db) async {
 }
 
 Future<void> verifyTableDeletion(Database db) async {
-  // Get the list of all tables
   List<Map<String, dynamic>> tables = await db.rawQuery(
     'SELECT name FROM sqlite_master WHERE type = "table"',
   );

@@ -25,7 +25,7 @@ class _LevelSectionOverviewScreenState
     _refreshLessons();
   }
 
-  // Function to refresh lessons data
+  // refresh lessons data
   void _refreshLessons() {
     setState(() {
       _lessonsFuture = getAllLessonsFromSection(widget.section.id);
@@ -56,14 +56,9 @@ class _LevelSectionOverviewScreenState
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     
-    // Adaptive colors
-    final Color subtitleBgColor = isDarkMode 
-        ? Color(0xFF1A3020) // Dark green background for dark mode
-        : Colors.green.shade50;
+    final Color subtitleBgColor = isDarkMode ? Color(0xFF1A3020) : Colors.green.shade50;
     
-    final Color subtitleTextColor = isDarkMode
-        ? Colors.green.shade300 // Lighter green text for dark mode
-        : Colors.green.shade800;
+    final Color subtitleTextColor = isDarkMode ? Colors.green.shade300 : Colors.green.shade800;
         
     return Scaffold(
       appBar: AppBar(

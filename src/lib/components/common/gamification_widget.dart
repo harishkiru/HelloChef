@@ -378,10 +378,8 @@ class _GamificationWidgetState extends State<GamificationWidget>
 
     if (response['rank'] != -1) {
       if (mounted) {
-        // Play sound
         _rankUpPlayer.resume();
 
-        // Start confetti animation
         _confettiController.play();
 
         return showDialog(
@@ -390,7 +388,7 @@ class _GamificationWidgetState extends State<GamificationWidget>
           builder: (BuildContext context) {
             return Stack(
               children: [
-                // Confetti effect on top of dialog
+                // confetti effect on top of dialog
                 Align(
                   alignment: Alignment.topCenter,
                   child: ConfettiWidget(
@@ -403,20 +401,19 @@ class _GamificationWidgetState extends State<GamificationWidget>
                     gravity: 0.3,
                     particleDrag: 0.05,
                     colors: const [
-                      Color.fromARGB(255, 255, 215, 0), // Gold
-                      Color.fromARGB(255, 255, 230, 128), // Light Gold
-                      Color.fromARGB(255, 238, 221, 130), // Pale Gold
-                      Color.fromARGB(255, 212, 175, 55), // Rich Gold
-                      Color.fromARGB(255, 255, 223, 0), // Golden Yellow
-                      Color.fromARGB(255, 205, 127, 50), // Metallic Bronze
-                      Color.fromARGB(255, 184, 134, 11), // Deep Gold
-                      Color.fromARGB(255, 237, 201, 175), // Shimmering Sand
-                      Color.fromARGB(255, 255, 204, 51), // Warm Yellow
-                      Color.fromARGB(255, 250, 231, 181), // Champagne Gold
+                      Color.fromARGB(255, 255, 215, 0),
+                      Color.fromARGB(255, 255, 230, 128),
+                      Color.fromARGB(255, 238, 221, 130),
+                      Color.fromARGB(255, 212, 175, 55),
+                      Color.fromARGB(255, 255, 223, 0),
+                      Color.fromARGB(255, 205, 127, 50),
+                      Color.fromARGB(255, 184, 134, 11),
+                      Color.fromARGB(255, 237, 201, 175),
+                      Color.fromARGB(255, 255, 204, 51),
+                      Color.fromARGB(255, 250, 231, 181),
                     ],
                   ),
                 ),
-                // Enhanced dialog
                 AlertDialog(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
@@ -534,7 +531,7 @@ class _GamificationWidgetState extends State<GamificationWidget>
 
     if (widget.lessonItem.isCompleted) {
       Navigator.pop(context, true);
-      return; // Lesson already completed, no need to show the dialog again
+      return;
     }
 
     await _checkForRankUp();
@@ -555,16 +552,15 @@ class _GamificationWidgetState extends State<GamificationWidget>
       badgeEarned = await _checkForHelloChefBadge();
     }
 
-    // Trigger haptic feedback
+    // trigger haptic feedback
     HapticFeedback.heavyImpact();
 
-    // Enhanced confetti
-    //_confettiController.play();
 
-    // Play sound
+
+    // play sound
     _levelPlayer.resume();
 
-    // Show badge popup first if earned, then show lesson completion popup
+    // show badge popup first if earned, then show lesson completion popup
     if (badgeEarned) {
       if (badgeType == 2) {
         await giveQuizBadge();
@@ -577,7 +573,7 @@ class _GamificationWidgetState extends State<GamificationWidget>
       if (!mounted) return;
     }
 
-    // Show lesson completion popup after badge popup (if any)
+    // show lesson completion popup after badge popup (if any)
     showGeneralDialog(
       context: context,
       barrierDismissible: true,
@@ -695,20 +691,20 @@ class _GamificationWidgetState extends State<GamificationWidget>
             confettiController: _confettiController,
             blastDirectionality: BlastDirectionality.explosive,
             numberOfParticles: 300,
-            gravity: 0.2, // Allows it to fall back down after reaching the top
-            minBlastForce: 100, // Controls the initial speed
+            gravity: 0.2,
+            minBlastForce: 100,
             maxBlastForce: 500,
             colors: const [
-              Color.fromARGB(255, 255, 0, 0), // Red
-              Color.fromARGB(255, 255, 128, 0), // Orange
-              Color.fromARGB(255, 255, 255, 0), // Yellow
-              Color.fromARGB(255, 0, 255, 0), // Green
-              Color.fromARGB(255, 0, 128, 255), // Sky Blue
-              Color.fromARGB(255, 0, 0, 255), // Blue
-              Color.fromARGB(255, 128, 0, 255), // Purple
-              Color.fromARGB(255, 255, 0, 255), // Magenta
-              Color.fromARGB(255, 255, 20, 147), // Deep Pink
-              Color.fromARGB(255, 0, 255, 255), // Cyan
+              Color.fromARGB(255, 255, 0, 0),
+              Color.fromARGB(255, 255, 128, 0),
+              Color.fromARGB(255, 255, 255, 0),
+              Color.fromARGB(255, 0, 255, 0), 
+              Color.fromARGB(255, 0, 128, 255),
+              Color.fromARGB(255, 0, 0, 255), 
+              Color.fromARGB(255, 128, 0, 255),
+              Color.fromARGB(255, 255, 0, 255),
+              Color.fromARGB(255, 255, 20, 147),
+              Color.fromARGB(255, 0, 255, 255),
             ],
           ),
         ),

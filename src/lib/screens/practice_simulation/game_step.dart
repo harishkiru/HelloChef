@@ -1,4 +1,3 @@
-// game_step.dart
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
@@ -102,6 +101,7 @@ class GameStep extends SpriteComponent with DragCallbacks, TapCallbacks {
 
   @override
   void onDragStart(DragStartEvent event) {
+    super.onDragStart(event);
     if (stepCompleted) return;
     if (action != 'pour' && action != 'chop') {
       add(ScaleEffect.to(Vector2(1.3, 1.3), EffectController(duration: 0.2)));
@@ -126,6 +126,7 @@ class GameStep extends SpriteComponent with DragCallbacks, TapCallbacks {
 
   @override
   void onDragEnd(DragEndEvent event) {
+    super.onDragEnd(event);
     add(ScaleEffect.to(Vector2(1.0, 1.0), EffectController(duration: 0.2)));
 
     if (action == 'pour' && _isPouring) {

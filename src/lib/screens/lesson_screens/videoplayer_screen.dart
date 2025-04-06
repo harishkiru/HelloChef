@@ -69,79 +69,81 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
       ),
       extendBody: true,
       extendBodyBehindAppBar: true,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 8),
-              Text(
-                widget.lessonItem.title,
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).textTheme.bodyLarge?.color,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 8),
+                Text(
+                  widget.lessonItem.title,
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 16),
-              Center(
-                child: AspectRatio(
-                  aspectRatio: 16 / 9,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color:
-                              isDarkMode
-                                  ? Colors.black.withOpacity(0.5)
-                                  : Colors.black26,
-                          blurRadius: 8,
-                          offset: const Offset(0, 3),
-                        ),
-                      ],
+                const SizedBox(height: 16),
+                Center(
+                  child: AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color:
+                                isDarkMode
+                                    ? Colors.black.withOpacity(0.5)
+                                    : Colors.black26,
+                            blurRadius: 8,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      clipBehavior: Clip.antiAlias,
+                      child: Video(controller: controller),
                     ),
-                    clipBehavior: Clip.antiAlias,
-                    child: Video(controller: controller),
                   ),
                 ),
-              ),
-              const SizedBox(height: 24),
-              Text(
-                "Description:",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color:
-                      isDarkMode
-                          ? Colors.green.shade300
-                          : Colors.green.shade800,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                widget.lessonItem.content ??
-                    "Watch the video to learn new cooking techniques.",
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Theme.of(context).textTheme.bodyMedium?.color,
-                ),
-              ),
-              const Spacer(),
-              SafeBottomPadding(
-                extraPadding: 16.0,
-                child: Container(
-                  width: double.infinity,
-                  height: 50,
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 8,
+                const SizedBox(height: 24),
+                Text(
+                  "Description:",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color:
+                        isDarkMode
+                            ? Colors.green.shade300
+                            : Colors.green.shade800,
                   ),
-                  child: GamificationWidget(lessonItem: widget.lessonItem),
                 ),
-              ),
-            ],
+                const SizedBox(height: 8),
+                Text(
+                  widget.lessonItem.content ??
+                      "Watch the video to learn new cooking techniques.",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Theme.of(context).textTheme.bodyMedium?.color,
+                  ),
+                ),
+                const Spacer(),
+                SafeBottomPadding(
+                  extraPadding: 16.0,
+                  child: Container(
+                    width: double.infinity,
+                    height: 50,
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 8,
+                    ),
+                    child: GamificationWidget(lessonItem: widget.lessonItem),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

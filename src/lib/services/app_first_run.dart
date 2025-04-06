@@ -722,7 +722,7 @@ A serrated knife designed to slice through crusty bread and delicate pastries wi
         },
         {
           "id": 1,
-          "title": "Introduction to Breakfast",
+          "title": "Intro to Breakfast",
           "subtitle": "Learn how to prepare fundamental breakfast ingredients.",
           "imagePath":
               "assets/images/level_section_images/level_1/section_1.png",
@@ -796,7 +796,7 @@ A serrated knife designed to slice through crusty bread and delicate pastries wi
         },
         {
           "id": 2,
-          "title": "Introduction to Dinner",
+          "title": "Intro to Dinner",
           "subtitle":
               "Learn how to prepare some quick and easy dinner recipes and ingredients.",
           "imagePath":
@@ -1160,7 +1160,7 @@ A simple, healthy, and versatile stir-fry dish that you can easily adapt by chan
       "sections": [
         {
           "id": 2,
-          "title": "Useful Knowledge and Skills",
+          "title": "Useful Knowledge",
           "subtitle": "Tips and tricks for in the kitchen",
           "imagePath":
               "assets/images/level_section_images/level_2/section_0.png",
@@ -1660,7 +1660,7 @@ Happy cooking! 🍽️
         },
         {
           "id": 2,
-          "title": "Introduction to Baking",
+          "title": "Intro to Baking",
           "subtitle": "Learn the fundamentals of baking",
           "imagePath":
               "assets/images/level_section_images/level_2/section_2.png",
@@ -1918,7 +1918,7 @@ Happy baking! 🍰🍽️
         },
         {
           "id": 2,
-          "title": "Cooking a Roast Dinner",
+          "title": "Roast Dinners",
           "subtitle": "Learn how to prepare a hearty roast dinner",
           "imagePath":
               "assets/images/level_section_images/level_2/section_3.png",

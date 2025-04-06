@@ -46,6 +46,7 @@ class _LessonSectionCardState extends State<LessonSectionCard>
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
     const double verticalPadding = 20.0;
     final bool isCompleted =
         widget.section.completedLessons >= widget.section.totalLessons;
@@ -140,9 +141,11 @@ class _LessonSectionCardState extends State<LessonSectionCard>
                                   children: [
                                     Text(
                                       widget.section.title,
+                                      maxLines: 1,
                                       style: TextStyle(
-                                        fontSize: 22,
+                                        fontSize: screenWidth * 0.045,
                                         fontWeight: FontWeight.bold,
+                                        overflow: TextOverflow.ellipsis,
                                         color: Colors.white,
                                         shadows: [
                                           Shadow(
@@ -159,7 +162,7 @@ class _LessonSectionCardState extends State<LessonSectionCard>
                                     Text(
                                       widget.section.subtitle,
                                       style: const TextStyle(
-                                        fontSize: 14,
+                                        fontSize: 12,
                                         color: Colors.white,
                                       ),
                                       softWrap: true,

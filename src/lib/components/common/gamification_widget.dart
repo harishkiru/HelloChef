@@ -31,6 +31,7 @@ class _GamificationWidgetState extends State<GamificationWidget>
   late AudioPlayer _achievementPlayer;
   late AnimationController _animationController;
   final dbHelper = DBHelper.instance();
+  bool _inProgress = false;
 
   @override
   void initState() {
@@ -50,6 +51,12 @@ class _GamificationWidgetState extends State<GamificationWidget>
       vsync: this,
       duration: const Duration(milliseconds: 500),
     );
+  }
+
+  void changeProgress() {
+    setState(() {
+      _inProgress = !_inProgress;
+    });
   }
 
   Future<bool> _checkForQuizBadge(bool perfect) async {
@@ -106,10 +113,12 @@ class _GamificationWidgetState extends State<GamificationWidget>
               padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(height: 8),
                   const Text(
                     'Achievement Unlocked!',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -196,11 +205,13 @@ class _GamificationWidgetState extends State<GamificationWidget>
             child: Container(
               padding: const EdgeInsets.all(20),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const SizedBox(height: 8),
                   const Text(
                     'Achievement Unlocked!',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -288,10 +299,12 @@ class _GamificationWidgetState extends State<GamificationWidget>
               padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(height: 8),
                   const Text(
                     'Achievement Unlocked!',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -517,6 +530,8 @@ class _GamificationWidgetState extends State<GamificationWidget>
   }
 
   void levelComplete(context) async {
+    changeProgress();
+
     if (widget.lessonItem.isCompleted) {
       Navigator.pop(context, true);
       return; // Lesson already completed, no need to show the dialog again
@@ -558,6 +573,7 @@ class _GamificationWidgetState extends State<GamificationWidget>
       } else if (badgeType == 4) {
         await giveHelloChefBadge();
       }
+
       if (!mounted) return;
     }
 
@@ -664,6 +680,7 @@ class _GamificationWidgetState extends State<GamificationWidget>
         );
       },
     );
+    changeProgress();
   }
 
   @override
@@ -701,14 +718,25 @@ class _GamificationWidgetState extends State<GamificationWidget>
             width: double.infinity,
             height: screenHeight * 0.06,
             child: ElevatedButton(
-              onPressed: () => levelComplete(context),
+              onPressed:
+                  _inProgress == false ? () => levelComplete(context) : null,
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
+                backgroundColor:
+                    _inProgress == false
+                        ? Colors.green
+                        : const Color.fromARGB(255, 158, 158, 158),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              child: Text('Complete', style: TextStyle(color: Colors.white)),
+              child:
+                  _inProgress == false
+                      ? Text('Complete', style: TextStyle(color: Colors.white))
+                      : SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      ),
             ),
           ),
         ),

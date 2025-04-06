@@ -433,7 +433,7 @@ class _InteractiveImageScreenState extends State<InteractiveImageScreen> {
                 height: screenHeight * 0.075,
                 margin: EdgeInsets.fromLTRB(8, 8, 8, 0),
                 child:
-                    numberOfButtonsClicked == numberOfButtons
+                    numberOfButtonsClicked >= numberOfButtons
                         ? GamificationWidget(lessonItem: widget.lessonItem)
                         : GreyedOutWidget(),
               ),

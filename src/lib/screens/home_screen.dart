@@ -4,7 +4,6 @@ import 'package:src/classes/progress.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:src/components/home_components/user_profile.dart';
 import 'package:src/services/db_helper.dart';
-import 'package:src/services/navigation_service.dart';
 import 'package:src/components/common/safe_bottom_padding.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
@@ -144,7 +143,7 @@ class HomeScreenState extends State<HomeScreen> {
     return lessonItem;
   }
 
-  // Function to get the current week number (1-52)
+  // function to get the current week number (1-52)
   int _getCurrentWeekNumber() {
     final now = DateTime.now();
     final startOfYear = DateTime(now.year, 1, 1);
@@ -156,23 +155,19 @@ class HomeScreenState extends State<HomeScreen> {
     final daysDifference = now.difference(firstMonday).inDays;
     final weekNumber = (daysDifference / 7).floor() + 1;
 
-    // Ensure the week number is between 1 and 52
     return (weekNumber > 0 && weekNumber <= 52) ? weekNumber : 1;
   }
 
-  // Function to load the appropriate tip based on week number
+  // function to load the appropriate tip based on week number
   Future<String> _getTipOfTheWeek() async {
     try {
-      // Load the tips from the JSON file
       final String response = await rootBundle.loadString(
         'assets/data/tips.json',
       );
       final List<dynamic> tips = json.decode(response);
 
-      // Get current week number (0-based index for the array)
       final int weekIndex = _getCurrentWeekNumber() - 1;
 
-      // Return the tip for this week
       return tips[weekIndex];
     } catch (e) {
       return "Always taste your food as you cook and adjust seasoning as needed.";
@@ -218,7 +213,6 @@ class HomeScreenState extends State<HomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Greeting with user's name
                   FutureBuilder<Map<String, dynamic>?>(
                     future: DBHelper.instance().getUserDetails(),
                     builder: (context, snapshot) {
@@ -342,10 +336,7 @@ class HomeScreenState extends State<HomeScreen> {
                                 const SizedBox(height: 8),
                                 LinearProgressIndicator(
                                   value: snapshot.data!.progressPercentage,
-                                  backgroundColor:
-                                      isDarkMode
-                                          ? Colors.grey[800]
-                                          : Colors.grey[300],
+                                  backgroundColor: isDarkMode ? Colors.grey[800] : Colors.grey[300],
                                   valueColor:
                                       const AlwaysStoppedAnimation<Color>(
                                         Colors.green,
@@ -360,11 +351,8 @@ class HomeScreenState extends State<HomeScreen> {
                     },
                   ),
 
-                  // Quick Access Cards
-                  // Current level progress
                   const SizedBox(height: 24),
 
-                  // Continue Learning
                   Text(
                     'Continue Learning',
                     style: TextStyle(
@@ -411,7 +399,6 @@ class HomeScreenState extends State<HomeScreen> {
 
                   const SizedBox(height: 24),
 
-                  // Tip of the Week (updated from Tip of the Day)
                   FutureBuilder<String>(
                     future: _tipOfTheWeek,
                     builder: (context, snapshot) {
@@ -426,9 +413,7 @@ class HomeScreenState extends State<HomeScreen> {
                         ),
                         elevation: 4,
                         color:
-                            isDarkMode
-                                ? Color(0xFF1A3020) // Dark green for dark mode
-                                : Colors.green.shade50,
+                            isDarkMode ? Color(0xFF1A3020) : Colors.green.shade50,
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Column(
@@ -497,50 +482,15 @@ class HomeScreenState extends State<HomeScreen> {
                     },
                   ),
 
-                  // Add SafeBottomPadding at the end of the SingleChildScrollView content
                   SafeBottomPadding(
                     extraPadding: 8.0,
                     child: SizedBox(
                       height: 16,
-                    ), // Smaller SizedBox instead of the const SizedBox(height: 24)
+                    ),
                   ),
                 ],
               ),
             ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildQuickAccessCard({
-    required BuildContext context,
-    required IconData icon,
-    required String title,
-    required VoidCallback onTap,
-  }) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      elevation: 4,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(16),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Icon(icon, color: Colors.green, size: 36),
-              const SizedBox(height: 8),
-              Text(
-                title,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).textTheme.bodyLarge?.color,
-                ),
-              ),
-            ],
           ),
         ),
       ),

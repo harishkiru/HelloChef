@@ -7,7 +7,7 @@ import 'package:src/components/common/safe_bottom_padding.dart';
 import 'package:src/components/common/gamification_widget.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
-  final String videoUrl; // pass asset path like "assets/videos/video.mp4"
+  final String videoUrl;
   final LessonItem lessonItem;
 
   const VideoPlayerScreen({
@@ -114,10 +114,7 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color:
-                        isDarkMode
-                            ? Colors.green.shade300
-                            : Colors.green.shade800,
+                    color: isDarkMode ? Colors.green.shade300 : Colors.green.shade800,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -129,7 +126,7 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
                     color: Theme.of(context).textTheme.bodyMedium?.color,
                   ),
                 ),
-                const Spacer(),
+                const SizedBox(height: 24),
                 SafeBottomPadding(
                   extraPadding: 16.0,
                   child: Container(

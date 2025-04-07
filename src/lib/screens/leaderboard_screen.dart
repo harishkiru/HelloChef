@@ -51,7 +51,6 @@ class LeaderboardScreenState extends State<LeaderboardScreen> {
           
           return Column(
             children: [
-              // Leaderboard header
               Container(
                 color: isDarkMode ? const Color(0xFF1A3020) : Colors.green.shade50,
                 padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
@@ -101,8 +100,7 @@ class LeaderboardScreenState extends State<LeaderboardScreen> {
                   ],
                 ),
               ),
-              
-              // Leaderboard list
+
               Expanded(
                 child: ListView.builder(
                   itemCount: leaderboardData.length,
@@ -113,9 +111,7 @@ class LeaderboardScreenState extends State<LeaderboardScreen> {
                     return Card(
                       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       elevation: isCurrentUser ? 3 : 1,
-                      color: isCurrentUser 
-                          ? (isDarkMode ? Colors.green.shade900.withOpacity(0.3) : Colors.green.shade50) 
-                          : null,
+                      color: isCurrentUser ? (isDarkMode ? Colors.green.shade900.withOpacity(0.3) : Colors.green.shade50) : null,
                       child: ListTile(
                         onTap: () => _showUserDetails(context, user),
                         leading: Container(
@@ -215,21 +211,21 @@ class LeaderboardScreenState extends State<LeaderboardScreen> {
     );
   }
   
-  // Helper method to get color for position ranking
+  // helper method to get color for position ranking
   Color _getPositionColor(int position, bool isDarkMode) {
     switch (position) {
-      case 0: // 1st place - Gold
+      case 0:
         return Colors.amber[700]!;
-      case 1: // 2nd place - Silver
+      case 1:
         return Colors.grey[400]!;
-      case 2: // 3rd place - Bronze
+      case 2:
         return Colors.brown[400]!;
-      default: // Everyone else
+      default:
         return isDarkMode ? Colors.grey[700]! : Colors.grey[500]!;
     }
   }
   
-  // Show detailed user info with badges
+  // show detailed user info with badges
   void _showUserDetails(BuildContext context, Map<String, dynamic> user) async {
     final userId = user['id'];
     final firstName = user['firstName'];
@@ -238,7 +234,6 @@ class LeaderboardScreenState extends State<LeaderboardScreen> {
     final xp = user['xp'];
     final isCurrentUser = user['isCurrentUser'] ?? false;
     
-    // Show loading dialog
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -247,15 +242,12 @@ class LeaderboardScreenState extends State<LeaderboardScreen> {
       ),
     );
     
-    // Fetch badges for this user
     final badges = await DBHelper.instance().getUserBadgesById(userId);
-    
-    // Close loading dialog
+
     if (context.mounted) Navigator.of(context).pop();
     
     if (!context.mounted) return;
-    
-    // Show user details dialog
+
     showDialog(
       context: context,
       builder: (context) {
@@ -271,7 +263,6 @@ class LeaderboardScreenState extends State<LeaderboardScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // Header with user info
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -381,15 +372,13 @@ class LeaderboardScreenState extends State<LeaderboardScreen> {
                     ],
                   ),
                 ),
-                
-                // Badges section
+
                 Flexible(
                   child: Container(
                     padding: const EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Badge header
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -414,7 +403,6 @@ class LeaderboardScreenState extends State<LeaderboardScreen> {
                         const Divider(),
                         const SizedBox(height: 8),
                         
-                        // Badge grid
                         Expanded(
                           child: badges.isEmpty
                               ? Center(
@@ -509,7 +497,6 @@ class LeaderboardScreenState extends State<LeaderboardScreen> {
                   ),
                 ),
                 
-                // Actions
                 Container(
                   padding: const EdgeInsets.all(12),
                   child: TextButton(
@@ -533,7 +520,7 @@ class LeaderboardScreenState extends State<LeaderboardScreen> {
     );
   }
   
-  // Show badge details
+  // show badge details
   void _showBadgeDetails(BuildContext context, Map<String, dynamic> badge) {
     final bool isUnlocked = badge['unlocked'] as bool;
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
@@ -549,7 +536,6 @@ class LeaderboardScreenState extends State<LeaderboardScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Badge status header
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(vertical: 12),
@@ -577,7 +563,6 @@ class LeaderboardScreenState extends State<LeaderboardScreen> {
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
-                    // Badge image
                     Container(
                       width: 80,
                       height: 80,
@@ -603,7 +588,6 @@ class LeaderboardScreenState extends State<LeaderboardScreen> {
                     
                     const SizedBox(height: 16),
                     
-                    // Badge name
                     Text(
                       badge['name'] ?? 'Unknown Badge',
                       style: TextStyle(
@@ -614,8 +598,7 @@ class LeaderboardScreenState extends State<LeaderboardScreen> {
                     ),
                     
                     const SizedBox(height: 8),
-                    
-                    // Badge description
+
                     Text(
                       badge['description'] ?? 'No description available',
                       textAlign: TextAlign.center,
@@ -643,7 +626,7 @@ class LeaderboardScreenState extends State<LeaderboardScreen> {
     );
   }
   
-  // Helper to build badge images
+  // helper to build badge images
   Widget _buildBadgeImage(String imageUrl) {
     if (imageUrl.startsWith('http')) {
       return Image.network(

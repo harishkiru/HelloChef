@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../practice_simulation/game_screen.dart';
 import 'practice_tile.dart';
 import 'package:src/components/common/safe_bottom_padding.dart';
@@ -151,10 +150,7 @@ class RecipeDetailScreen extends StatelessWidget {
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16,
-                                          color:
-                                              isDarkMode
-                                                  ? Colors.green[300]
-                                                  : Colors.green[800],
+                                          color: isDarkMode ? Colors.green[300] : Colors.green[800],
                                         ),
                                       ),
                                       TextSpan(text: stepText),
@@ -203,10 +199,7 @@ class RecipeDetailScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color:
-                isDarkMode
-                    ? Colors.black.withOpacity(0.3)
-                    : Colors.black.withOpacity(0.1),
+            color: isDarkMode ? Colors.black.withOpacity(0.3) : Colors.black.withOpacity(0.1),
             blurRadius: 8,
             spreadRadius: 1,
             offset: Offset(0, 3),

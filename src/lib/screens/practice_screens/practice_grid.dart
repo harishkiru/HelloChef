@@ -22,10 +22,10 @@ class PracticeGrid extends StatelessWidget {
     return GridView.builder(
       padding: EdgeInsets.all(16),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2, // Two items per row
+        crossAxisCount: 2,
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
-        childAspectRatio: 0.8, // Adjusted for the new flex ratio
+        childAspectRatio: 0.8,
       ),
       itemCount: items.length,
       itemBuilder: (context, index) {

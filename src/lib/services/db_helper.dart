@@ -7,24 +7,19 @@ import 'package:src/classes/level.dart';
 import 'dart:async';
 
 class DBHelper {
-  // Create a singleton instance of DBHelper
   static final DBHelper _instance = DBHelper._internal();
   factory DBHelper.instance() => _instance;
   DBHelper._internal();
 
-  final supabase = Supabase.instance.client; // Supabase client instance
+  final supabase = Supabase.instance.client;
 
-  // SQLite Database instance
   static Database? _sqliteDatabase;
 
-  // Cached user details
   Map<String, dynamic>? _cachedUserDetails;
 
-  // Stream controller for profile updates
   static final StreamController<void> _profileUpdateController = StreamController<void>.broadcast();
   static Stream<void> get profileUpdates => _profileUpdateController.stream;
 
-  // Initialize SQLite Database
   Future<Database> get sqliteDatabase async {
     if (_sqliteDatabase != null) return _sqliteDatabase!;
 
@@ -32,20 +27,18 @@ class DBHelper {
     return _sqliteDatabase!;
   }
 
-  // Initialize SQLite Database
   Future<Database> _initSQLiteDB() async {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, 'hellochef.db');
 
     return await openDatabase(
       path,
-      version: 4, // Incremented version for migration
+      version: 4,
       onCreate: _createDB,
       onUpgrade: _upgradeDB,
     );
   }
 
-  // Create the SQLite Database
   Future _createDB(Database db, int version) async {
     try {
       await db.execute('''
@@ -67,7 +60,6 @@ class DBHelper {
         )
       ''');
 
-      // Create Levels table
       await db.execute('''
         CREATE TABLE Levels (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -79,7 +71,6 @@ class DBHelper {
         )
       ''');
 
-      // Create Sections table
       await db.execute('''
         CREATE TABLE Sections (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -93,7 +84,6 @@ class DBHelper {
         )
       ''');
 
-      // Create Lessons table
       await db.execute('''
         CREATE TABLE Lessons (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -110,7 +100,6 @@ class DBHelper {
         )
       ''');
 
-      // Create Quizzes table
       await db.execute('''
         CREATE TABLE Quizzes (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -119,7 +108,6 @@ class DBHelper {
         )
       ''');
 
-      // Create QuizQuestions table
       await db.execute('''
         CREATE TABLE QuizQuestions (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -133,7 +121,6 @@ class DBHelper {
         )
       ''');
 
-      // Create InteractiveButtons table
       await db.execute('''
         CREATE TABLE InteractiveButtons (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -148,7 +135,6 @@ class DBHelper {
         )
       ''');
 
-      // Create FirstRun table
       await db.execute('''
         CREATE TABLE FirstRun (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -162,7 +148,6 @@ class DBHelper {
     }
   }
 
-  // Upgrade the SQLite Database
   Future _upgradeDB(Database db, int oldVersion, int newVersion) async {
     if (oldVersion < 4) {
       try {
@@ -174,7 +159,6 @@ class DBHelper {
           )
         ''');
 
-        // Create Levels table
         await db.execute('''
         CREATE TABLE IF NOT EXISTS Levels (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -186,7 +170,6 @@ class DBHelper {
         )
       ''');
 
-        // Create Sections table
         await db.execute('''
         CREATE TABLE IF NOT EXISTS Sections (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -200,7 +183,6 @@ class DBHelper {
         )
       ''');
 
-        // Create Lessons table
         await db.execute('''
         CREATE TABLE IF NOT EXISTS Lessons (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -217,7 +199,6 @@ class DBHelper {
         )
       ''');
 
-        // Create Quizzes table
         await db.execute('''
         CREATE TABLE IF NOT EXISTS Quizzes (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -226,7 +207,6 @@ class DBHelper {
         )
       ''');
 
-        // Create QuizQuestions table
         await db.execute('''
         CREATE TABLE IF NOT EXISTS QuizQuestions (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -240,7 +220,6 @@ class DBHelper {
         )
       ''');
 
-        // Create InteractiveButtons table
         await db.execute('''
         CREATE TABLE IF NOT EXISTS InteractiveButtons (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -255,7 +234,6 @@ class DBHelper {
         )
       ''');
 
-        // Create FirstRun table
         await db.execute('''
         CREATE TABLE IF NOT EXISTS FirstRun (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -270,21 +248,17 @@ class DBHelper {
   }
 
   // ********** Credentials Operations with SQLite **********
-  // Save user credentials to SQLite
   Future<void> saveCredentials(String username, String password) async {
     final db = await sqliteDatabase;
 
-    // Clear existing credentials (one user at a time)
     await db.delete('credentials');
 
-    // Insert new credentials
     await db.insert('credentials', {
       'username': username,
       'password': password,
     });
   }
 
-  // Fetch user credentials from SQLite
   Future<Map<String, String>?> getCredentials() async {
     final db = await sqliteDatabase;
     final result = await db.query('credentials', limit: 1);
@@ -298,20 +272,17 @@ class DBHelper {
     return null;
   }
 
-  // Delete user credentials from SQLite
   Future<void> deleteCredentials() async {
     final db = await sqliteDatabase;
     await db.delete('credentials');
   }
 
-  // Close the database
   Future close() async {
     final db = await sqliteDatabase;
     db.close();
   }
 
   // ********** Lessons SQlite Operations **********
-
   Future<Progress> getCurrentLevelProgress() async {
     final db = await sqliteDatabase;
     final currentLevel = await db.query(
@@ -390,7 +361,6 @@ class DBHelper {
     final db = await sqliteDatabase;
 
     try {
-      // Check if key tables exist
       final tables = await db.rawQuery(
         "SELECT name FROM sqlite_master WHERE type='table' AND name='FirstRun'",
       );
@@ -407,7 +377,6 @@ class DBHelper {
     }
   }
 
-  // Fetch all levels from SQLite
   Future<List<Map<String, dynamic>>> getAllLevels() async {
     final db = await sqliteDatabase;
     final result = await db.query('Levels');
@@ -487,7 +456,6 @@ class DBHelper {
   Future<void> addCompletedLessonToSection(int lessonId) async {
     final db = await sqliteDatabase;
 
-    // Get the sectionId of the completed lesson
     final lesson = await db.query(
       'Lessons',
       where: 'id = ?',
@@ -497,13 +465,11 @@ class DBHelper {
     if (lesson.isNotEmpty) {
       final sectionId = lesson.first['sectionId'] as int;
 
-      // Update the completedLessons count in the Sections table
       await db.rawUpdate(
         'UPDATE Sections SET completedLessons = completedLessons + 1 WHERE id = ?',
         [sectionId],
       );
 
-      // Check if the level is completed
       final section = await db.query(
         'Sections',
         where: 'id = ?',
@@ -520,14 +486,12 @@ class DBHelper {
   Future<void> checkIfLevelCompleted(int levelId) async {
     final db = await sqliteDatabase;
 
-    // Get the total number of sections in the level
     final sections = await db.query(
       'Sections',
       where: 'levelId = ?',
       whereArgs: [levelId],
     );
 
-    // Get the number of completed sections
     final completedSections = await db.rawQuery(
       'SELECT COUNT(*) as count FROM Sections WHERE levelId = ? AND completedLessons = totalLessons',
       [levelId],
@@ -535,7 +499,6 @@ class DBHelper {
 
     if (completedSections.isNotEmpty &&
         completedSections.first['count'] == sections.length) {
-      // Update the level as completed
       await db.update(
         'Levels',
         {'isCompleted': 1},
@@ -603,7 +566,7 @@ class DBHelper {
   Future<bool> checkIfPerfectQuizUnlocked() async {
     final db = await sqliteDatabase;
 
-    // Get the number of perfect quizzes completed if the number of total quizzes completed is no greater then the number of perfect quizzes completed return true
+    // get the number of perfect quizzes completed if the number of total quizzes completed is no greater then the number of perfect quizzes completed return true
     final result = await db.rawQuery(
       'SELECT quizesCompleted, perfectQuizesCompleted FROM badges WHERE defaultBadge = ?',
       [1],
@@ -621,7 +584,7 @@ class DBHelper {
   Future<bool> checkIfHelloChefBadgeUnlocked() async {
     final db = await sqliteDatabase;
 
-    // Get the number of lessons completed and compare to the total number of lessons which is 37
+    // get the number of lessons completed and compare to the total number of lessons which is 34
     final result = await db.rawQuery(
       'SELECT totalLessonsCompleted FROM badges WHERE defaultBadge = ?',
       [1],
@@ -629,7 +592,7 @@ class DBHelper {
     if (result.isNotEmpty) {
       final totalLessonsCompleted =
           result.first['totalLessonsCompleted'] as int;
-      return totalLessonsCompleted == 37;
+      return totalLessonsCompleted == 34;
     }
     return false;
   }
@@ -651,12 +614,10 @@ class DBHelper {
 
   // ********** Supabase User Operations **********
   Future<Map<String, dynamic>?> getUserDetails({bool refresh = false}) async {
-    // Clear cache if refresh is requested
     if (refresh) {
       _cachedUserDetails = null;
     }
     
-    // Return cached data if present and no refresh requested
     if (_cachedUserDetails != null && !refresh) {
       return _cachedUserDetails;
     }
@@ -666,7 +627,7 @@ class DBHelper {
       final response =
           await supabase
               .from('users')
-              .select('first_name, last_name, pfp_path') // Added pfp_path
+              .select('first_name, last_name, pfp_path')
               .eq('auth_id', user.id)
               .maybeSingle();
 
@@ -677,12 +638,9 @@ class DBHelper {
     }
   }
 
-  // Add this method to clear cached user details
   void clearCachedUserDetails() {
     _cachedUserDetails = null;
   }
-
-  // Add this method to DBHelper class
 
   Future<void> updateUserProfilePicture(String path) async {
     final user = supabase.auth.currentUser;
@@ -692,10 +650,8 @@ class DBHelper {
           .update({'pfp_path': path})
           .eq('auth_id', user.id);
       
-      // Clear cached user details to ensure we get the updated profile picture
       _cachedUserDetails = null;
       
-      // Notify all listeners that the profile was updated
       _profileUpdateController.add(null);
     } else {
       throw Exception('User not authenticated');
@@ -703,11 +659,9 @@ class DBHelper {
   }
 
   // ********* Supabase XP and Badge Operations **********
-
   Future<void> addBadge(int id) async {
     final user = supabase.auth.currentUser;
 
-    // get the user ID from the users table
     final userResponse =
         await supabase
             .from('users')
@@ -715,18 +669,15 @@ class DBHelper {
             .eq('auth_id', user!.id)
             .maybeSingle();
 
-    if (user != null) {
-      final response = await supabase.from('user_badges').insert({
-        'badge_id': id, // Default badge ID
-        'user_id': userResponse!['id'],
-      });
-    }
+    await supabase.from('user_badges').insert({
+      'badge_id': id,
+      'user_id': userResponse!['id'],
+    });
   }
 
   Future<Map<String, dynamic>> updateUserXP(int xp) async {
     final user = supabase.auth.currentUser;
     if (user != null) {
-      // Fetch the current XP of the user
       final response =
           await supabase
               .from('users')
@@ -738,11 +689,9 @@ class DBHelper {
       }
       final currentXP = response['xp'] as int? ?? 0;
 
-      // Update the XP in the database
       final newXP = currentXP + xp;
       await supabase.from('users').update({'xp': newXP}).eq('auth_id', user.id);
 
-      //Fetch the current user rank
       final rankResponse =
           await supabase
               .from('users')
@@ -752,7 +701,6 @@ class DBHelper {
 
       final rank = rankResponse?['user_rank'] as int? ?? 0;
 
-      // Fetch the next rank above the current rank
       final nextRankResponse =
           await supabase
               .from('ranks')
@@ -765,7 +713,6 @@ class DBHelper {
       if (nextRankResponse != null) {
         final nextRankXP = nextRankResponse['xp_required'] as int? ?? 0;
         if (newXP >= nextRankXP) {
-          // Update the user rank in the database
           await supabase
               .from('users')
               .update({'user_rank': nextRankResponse['id']})
@@ -773,11 +720,9 @@ class DBHelper {
 
           return {'xp': newXP, 'rank': nextRankResponse['id']};
         } else {
-          // User is not eligible for a rank up yet
           return {'xp': newXP, 'rank': -1};
         }
       } else {
-        // No next rank found, user is at the highest rank
         return {'xp': newXP, 'rank': -1};
       }
     } else {
@@ -785,11 +730,9 @@ class DBHelper {
     }
   }
 
-  // Get user XP and rank information
   Future<Map<String, dynamic>> getUserXpAndRank() async {
     final user = supabase.auth.currentUser;
     if (user != null) {
-      // Get user's current XP and rank
       final userResponse =
           await supabase
               .from('users')
@@ -811,7 +754,6 @@ class DBHelper {
       final currentXP = userResponse['xp'] as int? ?? 0;
       final currentRank = userResponse['user_rank'] as int? ?? 0;
 
-      // Get information about the current rank
       final currentRankResponse =
           await supabase
               .from('ranks')
@@ -819,7 +761,6 @@ class DBHelper {
               .eq('id', currentRank)
               .maybeSingle();
 
-      // Get information about the next rank
       final nextRankResponse =
           await supabase
               .from('ranks')
@@ -834,12 +775,10 @@ class DBHelper {
       final int xpForNextRank = nextRankResponse?['xp_required'] as int? ?? 100;
       final int nextRank = nextRankResponse?['id'] as int? ?? (currentRank + 1);
 
-      // Calculate progress to next rank
       double progress = 0.0;
       if (xpForNextRank > xpForCurrentRank) {
         progress =
             (currentXP - xpForCurrentRank) / (xpForNextRank - xpForCurrentRank);
-        // Ensure progress is between 0 and 1
         progress = progress.clamp(0.0, 1.0);
       }
 
@@ -856,21 +795,14 @@ class DBHelper {
     }
   }
 
-  // Get user badges
   Future<List<Map<String, dynamic>>> getAllBadgesWithUnlockStatus() async {
     final user = supabase.auth.currentUser;
     if (user != null) {
-      // First get all badges
       final allBadges = await supabase
           .from('badges')
           .select('id, badge_name, badge_image_url, badge_description')
           .order('id');
 
-      if (allBadges == null) {
-        return [];
-      }
-
-      // Get the user's ID from the users table
       final userResponse =
           await supabase
               .from('users')
@@ -879,7 +811,6 @@ class DBHelper {
               .maybeSingle();
 
       if (userResponse == null) {
-        // Return all badges as locked if user is not found
         return allBadges.map<Map<String, dynamic>>((badge) {
           return {
             'id': badge['id'],
@@ -893,21 +824,15 @@ class DBHelper {
 
       final userId = userResponse['id'];
 
-      // Get the user's unlocked badges
       final userBadges = await supabase
           .from('user_badges')
           .select('badge_id')
           .eq('user_id', userId);
-
-      // Create a set of unlocked badge IDs for quick lookup
+  
       final Set<int> unlockedBadgeIds =
-          userBadges != null
-              ? userBadges.map<int>((item) => item['badge_id'] as int).toSet()
-              : {};
-
-      print("Unlocked badge IDs: $unlockedBadgeIds"); // Debug
-
-      // Map all badges with unlock status
+          userBadges.map<int>((item) => item['badge_id'] as int).toSet();
+  
+      // map all badges with unlock status
       return allBadges.map<Map<String, dynamic>>((badge) {
         final badgeId = badge['id'] as int;
         final isUnlocked = unlockedBadgeIds.contains(badgeId);
@@ -926,32 +851,22 @@ class DBHelper {
   }
 
   Future<List<Map<String, dynamic>>> getLeaderboardData() async {
-    // Get current user
     final currentUser = supabase.auth.currentUser;
 
-    // Get all users ordered by XP (descending)
     final usersData = await supabase
         .from('users')
-        .select('id, auth_id, first_name, last_name, xp, user_rank, pfp_path')  // Added pfp_path
+        .select('id, auth_id, first_name, last_name, xp, user_rank, pfp_path')
         .order('xp', ascending: false);
 
-    if (usersData == null || usersData.isEmpty) {
-      return [];
-    }
-
-    // Get all user_badges
     final allBadges = await supabase.from('user_badges').select('user_id');
 
-    // Count badges per user
     Map<String, int> badgeCounts = {};
-    if (allBadges != null) {
-      for (var badge in allBadges) {
-        final userId = badge['user_id'];
-        badgeCounts[userId] = (badgeCounts[userId] ?? 0) + 1;
-      }
+    for (var badge in allBadges) {
+      final userId = badge['user_id'];
+      badgeCounts[userId] = (badgeCounts[userId] ?? 0) + 1;
     }
 
-    // Create leaderboard data
+    // create leaderboard data
     List<Map<String, dynamic>> leaderboardData =
         usersData.map<Map<String, dynamic>>((userData) {
           final userId = userData['id'];
@@ -961,11 +876,9 @@ class DBHelper {
             'lastName': userData['last_name'],
             'xp': userData['xp'],
             'rank': userData['user_rank'],
-            'pfpPath': userData['pfp_path'],  // Include pfp_path in the returned data
+            'pfpPath': userData['pfp_path'],
             'badgeCount': badgeCounts[userId] ?? 0,
-            // Check if this is the current user
-            'isCurrentUser':
-                currentUser != null && userData['auth_id'] == currentUser.id,
+            'isCurrentUser': currentUser != null && userData['auth_id'] == currentUser.id,
           };
         }).toList();
 
@@ -973,29 +886,20 @@ class DBHelper {
   }
 
   Future<List<Map<String, dynamic>>> getUserBadgesById(String userId) async {
-    // Get all badges
     final allBadges = await supabase
         .from('badges')
         .select('id, badge_name, badge_image_url, badge_description')
         .order('id');
 
-    if (allBadges == null) {
-      return [];
-    }
-
-    // Get the user's unlocked badges
     final userBadges = await supabase
         .from('user_badges')
         .select('badge_id')
         .eq('user_id', userId);
 
-    // Create a set of unlocked badge IDs for quick lookup
     final Set<int> unlockedBadgeIds =
-        userBadges != null
-            ? userBadges.map<int>((item) => item['badge_id'] as int).toSet()
-            : {};
+        userBadges.map<int>((item) => item['badge_id'] as int).toSet();
 
-    // Map all badges with unlock status
+    // map all badges with unlock status
     return allBadges.map<Map<String, dynamic>>((badge) {
       final badgeId = badge['id'] as int;
       final isUnlocked = unlockedBadgeIds.contains(badgeId);

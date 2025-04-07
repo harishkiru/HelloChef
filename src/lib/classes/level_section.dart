@@ -5,6 +5,7 @@ class LevelSection {
   final String imagePath;
   int completedLessons;
   final int totalLessons;
+  
   LevelSection({
     required this.id,
     required this.title,

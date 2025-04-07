@@ -4,9 +4,9 @@ import 'package:src/components/authentication_components/button.dart';
 import 'package:src/components/authentication_components/constant.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:src/services/db_helper.dart';
-import 'package:src/components/common/safe_bottom_padding.dart'; // Add this import
-import 'package:google_sign_in/google_sign_in.dart'; // Add this import
-import 'package:flutter_dotenv/flutter_dotenv.dart'; // Add this import
+import 'package:src/components/common/safe_bottom_padding.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -16,15 +16,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // Initialize controllers for email and password
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool isLoading = false;
 
-  // Initialize the database helper
   final dbHelper = DBHelper.instance();
 
-  // Auto-fill credentials if stored in local database
+  // auto-fill credentials if stored in local database
   void _autoFillCredentials() async {
     final credentials = await dbHelper.getCredentials();
     if (credentials != null) {
@@ -35,12 +33,12 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  // Save credentials to local database after successful login
+  // save credentials to local database after successful login
   Future<void> _saveCredentials(String email, String password) async {
     await dbHelper.saveCredentials(email, password);
   }
 
-  // Handle user login
+  // handle user login
   Future<void> _handleLogin() async {
     setState(() {
       isLoading = true;
@@ -52,18 +50,16 @@ class _LoginPageState extends State<LoginPage> {
         password: _passwordController.text.trim(),
       );
 
-      // Save credentials locally
       await _saveCredentials(
         _emailController.text.trim(),
         _passwordController.text.trim(),
       );
 
-      // Navigate to home screen
       if (mounted) {
         Navigator.pushReplacementNamed(
           context,
           '/home',
-        ); // Changed from pushNamed to pushReplacementNamed
+        );
       }
     } on AuthException {
       if (!mounted) return;
@@ -108,9 +104,7 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     try {
-      // Initialize with your web client ID
       final GoogleSignIn googleSignIn = GoogleSignIn(
-        // Add this line - use your Web client ID here
         serverClientId: dotenv.env['GOOGLE_CLIENT_ID'],
         scopes: ['email', 'profile'],
       );
@@ -124,19 +118,7 @@ class _LoginPageState extends State<LoginPage> {
         return;
       }
 
-      // Print full user details for debugging
-      print(
-        "Google user data: ${googleUser.displayName}, ${googleUser.email}, ${googleUser.id}",
-      );
-
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
-
-      // Print auth tokens for debugging
-      print(
-        "Access token: ${googleAuth.accessToken != null ? 'Present' : 'Missing'}",
-      );
-      print("ID token: ${googleAuth.idToken != null ? 'Present' : 'Missing'}");
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
       if (googleAuth.idToken == null) {
         throw Exception("Failed to get ID token from Google");
@@ -152,30 +134,26 @@ class _LoginPageState extends State<LoginPage> {
         final user = res.session!.user;
 
         try {
-          // Check if user exists in your custom users table
           await client.from('users').select().eq('auth_id', user.id).single();
 
-          // User exists, navigate to home
           if (mounted) {
             Navigator.pushReplacementNamed(context, '/home');
           }
         } catch (e) {
           print("User not found in custom table, creating entry: $e");
-          // User doesn't exist in custom table, create entry
           String firstName = '';
           String lastName = '';
 
-          // Better name splitting logic
+          // better name splitting logic
           if (googleUser.displayName != null) {
             final nameParts = googleUser.displayName!.trim().split(' ');
             if (nameParts.length > 1) {
-              // If there are multiple parts, first part is firstName, rest is lastName
+              // if there are multiple parts, first part is firstName, rest is lastName
               firstName = nameParts.first;
               lastName = nameParts
                   .skip(1)
-                  .join(' '); // Join all remaining parts for lastName
+                  .join(' ');
             } else if (nameParts.length == 1) {
-              // If only one part, use it as firstName
               firstName = nameParts.first;
               lastName = '';
             }
@@ -225,17 +203,15 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    _autoFillCredentials(); // Attempt to auto-fill credentials on load
+    _autoFillCredentials();
   }
 
   @override
   Widget build(BuildContext context) {
-    // Get the screen height in logical pixels
     final screenHeight = MediaQuery.of(context).size.height;
     double scaleFactor = 1.0;
     double logosize = 150.0;
 
-    // Apply scaling for screens under 600 logical pixels
     if (screenHeight < 650) {
       scaleFactor = 0.98;
       logosize = 120.0;
@@ -252,7 +228,7 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: screenHeight * 0.1), // Add some top padding
+                  SizedBox(height: screenHeight * 0.1),
                   Icon(Icons.kitchen, size: logosize, color: Colors.green),
                   const Text(
                     'Hello Chef',
@@ -289,7 +265,7 @@ class _LoginPageState extends State<LoginPage> {
                     icon: Image.asset(
                       'assets/google_logo.png',
                       height: 24,
-                    ), // Add this image to your assets
+                    ),
                     label: const Text('Sign in with Google'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
@@ -298,11 +274,10 @@ class _LoginPageState extends State<LoginPage> {
                       minimumSize: const Size(double.infinity, 50),
                     ),
                   ),
-                  // Wrap the TextButton in SafeBottomPadding
                   SafeBottomPadding(
                     extraPadding:
                         screenHeight *
-                        0.05, // Dynamic padding based on screen height
+                        0.05,
                     child: TextButton(
                       onPressed: () {
                         Navigator.pushNamed(context, '/signup');
@@ -313,7 +288,6 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-                  // Remove the fixed SizedBox at the bottom
                 ],
               ),
             ),

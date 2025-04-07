@@ -24,7 +24,7 @@ class _UserProfileIconState extends State<UserProfileIcon> {
     super.initState();
     _refreshUserDetails();
     
-    // Listen for profile updates
+    // listen for profile updates
     _profileSubscription = DBHelper.profileUpdates.listen((_) {
       if (mounted) {
         setState(() {
@@ -71,7 +71,7 @@ class _UserProfileIconState extends State<UserProfileIcon> {
                 child: pfpPath != null && pfpPath.toString().isNotEmpty
                   ? Image.asset(
                       pfpPath.toString(),
-                      fit: BoxFit.cover, // This ensures image fills the circle completely
+                      fit: BoxFit.cover,
                       width: 40,
                       height: 40,
                     )
@@ -117,7 +117,7 @@ class UserProfileDrawer extends StatelessWidget {
             child: DrawerHeader(
               decoration: const BoxDecoration(color: Colors.green),
               child: FutureBuilder<Map<String, dynamic>?>(
-                future: DBHelper.instance().getUserDetails(refresh: true), // Always get fresh data
+                future: DBHelper.instance().getUserDetails(refresh: true), // always get updated data
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(
@@ -136,7 +136,7 @@ class UserProfileDrawer extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Navigator.pop(context); // Close the drawer first
+                            Navigator.pop(context);
                             _showProfilePictureSelector(context);
                           },
                           child: Container(
@@ -171,15 +171,13 @@ class UserProfileDrawer extends StatelessWidget {
             ),
           ),
           
-          // XP and Level Progress
           _buildXpProgressSection(context),
           
-          // Badges Section
           _buildBadgesSection(context),
           
           const Divider(),
           
-          // Dark Mode Toggle
+          // dark mode toggle
           Consumer<ThemeProvider>(
             builder: (context, themeProvider, _) => SwitchListTile(
               secondary: Icon(
@@ -200,7 +198,7 @@ class UserProfileDrawer extends StatelessWidget {
             ),
           ),
           
-          // Leaderboard Option
+          // leaderboard navigation
           ListTile(
             leading: Icon(
               Icons.leaderboard,
@@ -213,7 +211,7 @@ class UserProfileDrawer extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Navigator.pop(context); // Close drawer
+              Navigator.pop(context);
               Navigator.push(
                 context, 
                 MaterialPageRoute(builder: (context) => const LeaderboardScreen()),
@@ -221,7 +219,7 @@ class UserProfileDrawer extends StatelessWidget {
             },
           ),
           
-          // Profile Picture Option
+          // change profile picture option
           ListTile(
             leading: Icon(
               Icons.account_circle,
@@ -234,12 +232,12 @@ class UserProfileDrawer extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Navigator.pop(context); // Close drawer
+              Navigator.pop(context);
               _showProfilePictureSelector(context);
             },
           ),
           
-          // Logout Option
+          // logout button
           ListTile(
             leading: Icon(
               Icons.logout,
@@ -271,9 +269,9 @@ class UserProfileDrawer extends StatelessWidget {
                   actions: [
                     TextButton(
                       onPressed: () async {
-                        // Clear the user details cache first
+                        // clear the user details cache first
                         DBHelper.instance().clearCachedUserDetails();
-                        // Then sign out
+                        // then sign out
                         await Supabase.instance.client.auth.signOut();
                         if (context.mounted) {
                           Navigator.pushNamedAndRemoveUntil(
@@ -301,7 +299,7 @@ class UserProfileDrawer extends StatelessWidget {
             },
           ),
           
-          // Delete Local Data Option
+          // delete local data button
           ListTile(
             leading: Icon(
               Icons.delete,
@@ -339,10 +337,10 @@ class UserProfileDrawer extends StatelessWidget {
                         });
                         await db.ensureTablesExist();
                         
-                        // Clear cached user details
+                        // clear cached user details
                         DBHelper.instance().clearCachedUserDetails();
                         
-                        // Sign out from Supabase before closing the app
+                        // sign out from Supabase before closing the app
                         await Supabase.instance.client.auth.signOut();
                         
                         SystemNavigator.pop();
@@ -369,7 +367,7 @@ class UserProfileDrawer extends StatelessWidget {
     );
   }
 
-  // XP and Level Progress Section
+  // xp and rank progress section
   Widget _buildXpProgressSection(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     
@@ -421,7 +419,7 @@ class UserProfileDrawer extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Rank $currentRank',  // Changed from 'Level $currentRank'
+                        'Rank $currentRank',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -452,7 +450,7 @@ class UserProfileDrawer extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    '$xpNeeded XP until Rank $nextRank',  // Changed from 'Level $nextRank'
+                    '$xpNeeded XP until Rank $nextRank',
                     style: TextStyle(
                       fontSize: 14,
                       color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
@@ -467,7 +465,7 @@ class UserProfileDrawer extends StatelessWidget {
     );
   }
 
-  // Badges Section
+  // badges section
   Widget _buildBadgesSection(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     
@@ -551,7 +549,6 @@ class UserProfileDrawer extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Count of unlocked badges
                       Padding(
                         padding: const EdgeInsets.only(bottom: 12.0),
                         child: Text(
@@ -563,7 +560,6 @@ class UserProfileDrawer extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // Badge grid
                       Wrap(
                         spacing: 12,
                         runSpacing: 12,
@@ -639,7 +635,7 @@ class UserProfileDrawer extends StatelessWidget {
     );
   }
 
-  // Add this method to show badge details popup
+  // show badge details in a dialog
   void _showBadgeDetails(BuildContext context, Map<String, dynamic> badge) {
     final bool isUnlocked = badge['unlocked'] as bool;
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
@@ -655,7 +651,6 @@ class UserProfileDrawer extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Badge status header
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(vertical: 12),
@@ -683,7 +678,6 @@ class UserProfileDrawer extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
-                    // Badge image
                     Container(
                       width: 80,
                       height: 80,
@@ -709,7 +703,6 @@ class UserProfileDrawer extends StatelessWidget {
                     
                     const SizedBox(height: 16),
                     
-                    // Badge name
                     Text(
                       badge['name'] ?? 'Unknown Badge',
                       style: TextStyle(
@@ -721,7 +714,6 @@ class UserProfileDrawer extends StatelessWidget {
                     
                     const SizedBox(height: 8),
                     
-                    // Badge description
                     Text(
                       badge['description'] ?? 'No description available',
                       textAlign: TextAlign.center,
@@ -750,7 +742,6 @@ class UserProfileDrawer extends StatelessWidget {
   }
 
   Widget _buildBadgeImage(String imageUrl) {
-    // Check if the URL starts with 'http' or 'https' (a web URL)
     if (imageUrl.startsWith('http')) {
       return Image.network(
         imageUrl,
@@ -762,7 +753,7 @@ class UserProfileDrawer extends StatelessWidget {
         ),
       );
     } 
-    // If it starts with 'assets/' treat it as an app asset
+
     else if (imageUrl.startsWith('assets/')) {
       return Image.asset(
         imageUrl,
@@ -774,7 +765,7 @@ class UserProfileDrawer extends StatelessWidget {
         ),
       );
     } 
-    // Default fallback
+
     else {
       return Icon(
         Icons.emoji_events,
@@ -784,6 +775,7 @@ class UserProfileDrawer extends StatelessWidget {
     }
   }
 
+  // show profile picture selector dialog
   void _showProfilePictureSelector(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
@@ -811,7 +803,7 @@ class UserProfileDrawer extends StatelessWidget {
                 onTap: () async {
                   final selectedPicture = availablePictures[index];
                   try {
-                    Navigator.pop(context); // Close dialog first
+                    Navigator.pop(context);
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text('Updating profile picture...'),
@@ -821,9 +813,8 @@ class UserProfileDrawer extends StatelessWidget {
                     
                     await DBHelper.instance().updateUserProfilePicture(selectedPicture);
                     
-                    // Force rebuild of all UserProfileIcon instances
+                    // force rebuild of all UserProfileIcon instances
                     if (context.mounted) {
-                      // This rebuilds any ancestors that depend on MediaQuery, including app bar
                       MediaQuery.of(context).removePadding(removeTop: true);
                       
                       ScaffoldMessenger.of(context).showSnackBar(

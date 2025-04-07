@@ -135,10 +135,10 @@ class _LessonItemCardState extends State<LessonItemCard> {
     }
   }
 
-  // Update lesson completion state and notify parent
+  // update lesson completion state and notify parent
   void _markLessonCompleted() async {
     if (widget.lessonItem.isCompleted) {
-      return; // Lesson already completed
+      return;
     }
 
     setState(() {
@@ -159,7 +159,7 @@ class _LessonItemCardState extends State<LessonItemCard> {
       margin: EdgeInsets.symmetric(
         vertical: 10.0,
         horizontal: (widget.isOnHomeScreen ?? false) ? 0 : 30.0,
-      ), // Reduced vertical margin
+      ),
       elevation: 4.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
@@ -177,7 +177,6 @@ class _LessonItemCardState extends State<LessonItemCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Image section (reduced height)
             Container(
               height: screenHeight * 0.15,
               decoration: BoxDecoration(
@@ -206,7 +205,6 @@ class _LessonItemCardState extends State<LessonItemCard> {
                       : null,
             ),
 
-            // Content section with green background
             Stack(
               children: [
                 Container(
@@ -249,7 +247,6 @@ class _LessonItemCardState extends State<LessonItemCard> {
                   ),
                 ),
 
-                // Completion status indicator in bottom right corner
                 Positioned(
                   bottom: 8.0,
                   right: 8.0,
@@ -258,9 +255,9 @@ class _LessonItemCardState extends State<LessonItemCard> {
                     child: Icon(
                       widget.lessonItem.isCompleted
                           ? Icons
-                              .check_circle // Checkmark in circle for completed
+                              .check_circle
                           : Icons
-                              .circle_outlined, // Just a circle for incomplete
+                              .circle_outlined,
                       color: Colors.white,
                       size: 30.0,
                     ),

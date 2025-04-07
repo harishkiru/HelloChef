@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'game_screen.dart';
-import 'demo_game.dart';
 
 class StartMenuScreen extends StatelessWidget {
   const StartMenuScreen({super.key});
@@ -93,11 +92,6 @@ class StartMenuScreen extends StatelessWidget {
                     elevation: 3,
                   ),
                   onPressed: () {
-                    final game = CookingGameApp.getGameInstance(
-                      "Kung Pao Chicken",
-                      (points, total) => null,
-                      () {},
-                    );
                     Navigator.push(
                       context,
                       MaterialPageRoute(

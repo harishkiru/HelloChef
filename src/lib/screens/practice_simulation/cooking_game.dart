@@ -43,7 +43,7 @@ class CookingGame extends FlameGame {
         return Sprite(image);
       }
     } catch (e) {
-      print("❌ Failed to preload image for $ingredient: $e");
+      print("Failed to preload image for $ingredient: $e");
     }
 
     return await Sprite.load('simulation_images/default.png');

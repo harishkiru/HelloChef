@@ -126,7 +126,7 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
                     color: Theme.of(context).textTheme.bodyMedium?.color,
                   ),
                 ),
-                const Spacer(),
+                const SizedBox(height: 24),
                 SafeBottomPadding(
                   extraPadding: 16.0,
                   child: Container(

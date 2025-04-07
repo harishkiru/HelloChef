@@ -685,29 +685,6 @@ class _GamificationWidgetState extends State<GamificationWidget>
 
     return Stack(
       children: [
-        Align(
-          alignment: Alignment.topCenter,
-          child: ConfettiWidget(
-            confettiController: _confettiController,
-            blastDirectionality: BlastDirectionality.explosive,
-            numberOfParticles: 300,
-            gravity: 0.2,
-            minBlastForce: 100,
-            maxBlastForce: 500,
-            colors: const [
-              Color.fromARGB(255, 255, 0, 0),
-              Color.fromARGB(255, 255, 128, 0),
-              Color.fromARGB(255, 255, 255, 0),
-              Color.fromARGB(255, 0, 255, 0), 
-              Color.fromARGB(255, 0, 128, 255),
-              Color.fromARGB(255, 0, 0, 255), 
-              Color.fromARGB(255, 128, 0, 255),
-              Color.fromARGB(255, 255, 0, 255),
-              Color.fromARGB(255, 255, 20, 147),
-              Color.fromARGB(255, 0, 255, 255),
-            ],
-          ),
-        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: SizedBox(

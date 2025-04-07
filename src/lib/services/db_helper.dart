@@ -584,7 +584,7 @@ class DBHelper {
   Future<bool> checkIfHelloChefBadgeUnlocked() async {
     final db = await sqliteDatabase;
 
-    // get the number of lessons completed and compare to the total number of lessons which is 37
+    // get the number of lessons completed and compare to the total number of lessons which is 34
     final result = await db.rawQuery(
       'SELECT totalLessonsCompleted FROM badges WHERE defaultBadge = ?',
       [1],
@@ -592,7 +592,7 @@ class DBHelper {
     if (result.isNotEmpty) {
       final totalLessonsCompleted =
           result.first['totalLessonsCompleted'] as int;
-      return totalLessonsCompleted == 37;
+      return totalLessonsCompleted == 34;
     }
     return false;
   }

@@ -71,6 +71,8 @@ Earn experience points as you complete lessons and challenges.
 
 ![XP Gain](assets/gainingxp.gif) <!-- Replace with XP gain demo -->
 
+![Rank up](assets/rankingup.gif) <!-- Replace with XP gain demo -->
+
 ### 🎖️ Earn Badges
 Unlock badges as you hit milestones and improve your skills.
 

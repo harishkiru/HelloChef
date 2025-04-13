@@ -26,6 +26,14 @@ Explore a clean and intuitive interface with tabs for:
 
 ---
 
+## 🖼️ Interact with Infographics
+
+Explore interactive diagrams and images to better understand cooking techniques and safety.
+
+![Interactive Image](assets/completingimages.gif) <!-- Replace with image interaction demo -->
+
+---
+
 ## 🎥 Watch Step-by-Step Cooking Videos
 
 Each lesson includes a narrated walkthrough video to guide you through foundational skills.
@@ -39,14 +47,6 @@ Each lesson includes a narrated walkthrough video to guide you through foundatio
 Test your knowledge with interactive quizzes. Receive **instant feedback** to reinforce learning.
 
 ![Quiz Example](assets/completingquizes.gif) <!-- Replace with quiz screen GIF -->
-
----
-
-## 🖼️ Interact with Infographics
-
-Explore interactive diagrams and images to better understand cooking techniques and safety.
-
-![Interactive Image](assets/completingimages.gif) <!-- Replace with image interaction demo -->
 
 ---
 
